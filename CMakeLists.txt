@@ -3,7 +3,9 @@ project(jogo-tecprog)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(jogo main.cpp)
+file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.cpp")
+
+add_executable(jogo main.cpp ${SOURCES})
 
 include_directories (include c:/SFML/include cmake_modules)
 
