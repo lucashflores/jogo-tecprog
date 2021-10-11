@@ -1,48 +1,93 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "GraphicManager.h"
-
-
+#include "EventManager.h"
+#include "Animation.h"
+#include "InputManager.h"
 
 int main()
 {
+
     GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
 
+    EventManager* eventInstance = EventManager::getInstance();
+    eventInstance->setGraphicManagerInstance(instance);
+
+    InputManager* inputInstance = InputManager::getInstance();
+    eventInstance->setInputManagerInstance(inputInstance);
+
     sf::RectangleShape sprite(sf::Vector2f (100.f, 100.f));
-    sf::Texture* texture = instance->loadTexture("d:/repositories/jogo-tecprog/assets/biker.png");
-    sprite.setTexture(texture);
+    sf::Texture* player = instance->loadTexture("./assets/biker.png");
+    sprite.setTexture(player);
     sf::IntRect rectSprite(0, 0, 48 ,48);
     sprite.setTextureRect(rectSprite);
 
-    sf::Texture* backgroundtex = instance->loadTexture("d:/repositories/jogo-tecprog/assets/background.png");
+    sf::Texture* player_left = instance->loadTexture("./assets/biker_idle_left.png");
+    sf::IntRect rectSpriteLeft(144, 0, 48, 48);
+
+    sf::Texture* playerRun = instance->loadTexture("./assets/biker_run.png");
+    sf::Texture* playerRunLeft = instance->loadTexture("./assets/biker_run_left.png");
+    Animation* animation = new Animation(playerRun, sf::Vector2u(6, 1), 0.2f);
+    Animation* animationl = new Animation(playerRun, sf::Vector2u(6, 1), 0.2f);
+
+    sf::Texture* backgroundtex = instance->loadTexture("./assets/background.png");
     sf::RectangleShape background(sf::Vector2f(1280.f, 720.f));
     background.setTexture(backgroundtex);
 
-    float velocity = 0.2f;
+    float dt;
+    sf::Clock clock;
 
     while (instance->isWindowOpen())
     {
+
         sf::Event event;
-        while (window->pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                instance->closeWindow();
+
+        eventInstance->PollEvents(event);
 
 
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        float velocity = SPEED;
+        if (inputInstance->isKeyDown(sf::Keyboard::S))
             sprite.move(sf::Vector2f(0.f, velocity));
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        else if (inputInstance->isKeyDown(sf::Keyboard::W))
             sprite.move(sf::Vector2f(0.f, -velocity));
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        else if (inputInstance->isKeyDown(sf::Keyboard::A))
             sprite.move(sf::Vector2f(-velocity, 0.f));
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        else if (inputInstance->isKeyDown(sf::Keyboard::D))
             sprite.move(sf::Vector2f(velocity, 0.f));
 
 
-        instance->centerView(sprite.getPosition());
+        dt = clock.restart().asSeconds();
+        if (inputInstance->anyKeyPressed()) {
+            animation->animationUpdate(dt);
+            if (inputInstance->getKeyPressed() == sf::Keyboard::A) {
+                sprite.setTexture(playerRunLeft);
+                sprite.setTextureRect(animation->uvRect);
+            }
+            else {
+                sprite.setTexture(playerRun);
+                sprite.setTextureRect(animation->uvRect);
+            }
+
+        }
+        else {
+            if (inputInstance->getKeyPressed() == sf::Keyboard::A) {
+                sprite.setTexture(player_left);
+                sprite.setTextureRect(rectSprite);
+            }
+
+            else {
+                sprite.setTexture(player);
+                sprite.setTextureRect(rectSpriteLeft);
+            }
+        }
+
+
+
+
         instance->clear();
+        instance->centerView(sprite.getPosition());
+        //background.setPosition(sprite.getPosition() - sf::Vector2f((window->getSize().x)/2, (window->getSize().y)/2));
         instance->render(&background);
         instance->render(&sprite);
         instance->display();

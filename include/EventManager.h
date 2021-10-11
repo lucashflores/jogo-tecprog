@@ -1,8 +1,22 @@
-//
-// Created by Lucas on 27/09/2021.
-//
+#pragma once
 
-#ifndef JOGO_TECPROG_EVENTMANAGER_H
-#define JOGO_TECPROG_EVENTMANAGER_H
+#include "stdafx.h"
+#include "GraphicManager.h"
+#include "InputManager.h"
 
-#endif //JOGO_TECPROG_EVENTMANAGER_H
+class EventManager {
+private:
+    GraphicManager* pGraphicManager;
+    sf::RenderWindow* window;
+    InputManager* pInputManager;
+
+    static EventManager* instance;
+    EventManager();
+public:
+    ~EventManager();
+    static EventManager* getInstance();
+    void setGraphicManagerInstance(GraphicManager* instance);
+    void setInputManagerInstance(InputManager* instance);
+    void setWindow(sf::RenderWindow* pWindow);
+    void PollEvents(sf::Event event);
+};

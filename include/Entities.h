@@ -2,7 +2,11 @@
 
 class Entities {
 protected:
-    unsigned int life;
-
+    float velocity;
+    unsigned char life;
+public:
+    Entities(float v, unsigned char l);
+    virtual ~Entities();
+    virtual void move() = 0;
 };
 
