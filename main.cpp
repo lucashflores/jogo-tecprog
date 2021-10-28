@@ -26,7 +26,7 @@ int main()
     sf::Texture* player_left = instance->loadTexture("./assets/biker_idle_left.png");
     sf::IntRect rectSpriteLeft(144, 0, 48, 48);
 
-    sf::Texture* playerRun = instance->loadTexture("./assets/biker_run.png");
+    sf::Texture* playerRun = instance->loadTexture("./assets/biker_running.png");
     sf::Texture* playerRunLeft = instance->loadTexture("./assets/biker_run_left.png");
     Animation* animation = new Animation(playerRun, sf::Vector2u(6, 1), 0.2f);
     Animation* animationl = new Animation(playerRun, sf::Vector2u(6, 1), 0.2f);
