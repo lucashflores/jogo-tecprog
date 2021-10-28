@@ -1,4 +1,5 @@
-#include "GraphicManager.h"
+#include "Managers/GraphicManager.h"
+using namespace Managers;
 
 GraphicManager* GraphicManager::instance = NULL;
 

@@ -1,4 +1,5 @@
-#include "InputManager.h"
+#include "Managers/InputManager.h"
+using namespace Managers;
 
 InputManager* InputManager::instance = NULL;
 

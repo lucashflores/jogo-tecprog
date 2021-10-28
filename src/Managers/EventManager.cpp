@@ -1,4 +1,5 @@
-#include "EventManager.h"
+#include "Managers/EventManager.h"
+using namespace Managers;
 
 EventManager* EventManager::instance = NULL;
 

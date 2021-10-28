@@ -1,20 +1,20 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "GraphicManager.h"
-#include "EventManager.h"
+#include "Managers/GraphicManager.h"
+#include "Managers/EventManager.h"
 #include "Animation.h"
-#include "InputManager.h"
+#include "Managers/InputManager.h"
 
 int main()
 {
 
-    GraphicManager* instance = GraphicManager::getInstance();
+    Managers::GraphicManager* instance = Managers::GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
 
-    EventManager* eventInstance = EventManager::getInstance();
+    Managers::EventManager* eventInstance = Managers::EventManager::getInstance();
     eventInstance->setGraphicManagerInstance(instance);
 
-    InputManager* inputInstance = InputManager::getInstance();
+    Managers::InputManager* inputInstance = Managers::InputManager::getInstance();
     eventInstance->setInputManagerInstance(inputInstance);
 
     sf::RectangleShape sprite(sf::Vector2f (100.f, 100.f));
