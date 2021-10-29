@@ -16,9 +16,7 @@ int main() {
     Managers::InputManager *inputInstance = Managers::InputManager::getInstance();
     eventInstance->setInputManagerInstance(inputInstance);
 
-    Entities::Player* player = new Entities::Player(sf::RectangleShape(sf::Vector2f(100.f, 100.f)),
-                                instance->loadTexture(PLAYER1_IDLE_TEXTURE_PATH),
-                                sf::Vector2f(0, 0), sf::Vector2f(SPEED, 0));
+    Entities::Player* player = new Entities::Player(true);
     player->setGraphicManager(instance);
     player->setEventManager(eventInstance);
     player->setInputManager(inputInstance);

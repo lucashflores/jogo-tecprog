@@ -29,7 +29,6 @@ namespace Managers {
 
         sf::Keyboard::Key getKeyReleased();
 
-        bool anyKeyPressed();
     };
 
 }

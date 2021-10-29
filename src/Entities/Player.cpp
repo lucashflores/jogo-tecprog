@@ -1,12 +1,16 @@
 #include "Entities/Player.h"
 using namespace Entities;
 
-Player::Player(sf::RectangleShape shape, sf::Texture *text, sf::Vector2f pos, sf::Vector2f v): Entity(shape, text, pos, v) {
-    animation = new Animation(texture, &body, sf::Vector2u(4, 1), 0.2f);
-    controls.push_back(sf::Keyboard::W);
+Player::Player(bool isPlayerOne): Character(100, 10, sf::Vector2f(VELOCITY_X, VELOCITY_Y)) {
+    if (isPlayerOne) {
+        body.setTexture(pGraphicM->loadTexture(PLAYER1_IDLE_TEXTURE));
+        body.setTextureRect(sf::IntRect (0, 0, 48 ,48));
+    }
     controls.push_back(sf::Keyboard::A);
-    controls.push_back(sf::Keyboard::D);
     controls.push_back(sf::Keyboard::S);
+    controls.push_back(sf::Keyboard::W);
+    controls.push_back(sf::Keyboard::D);
+    animation = NULL;
 }
 
 Player::~Player() {
@@ -20,7 +24,7 @@ void Player::setInputManager(Managers::InputManager *pIM) {
         pInputManager = pIM;
 }
 
-bool Player::isWalking() {
+bool Player::isWalking() const{
     for (auto it = controls.begin(); it != controls.end(); ++it) {
         if (pInputManager->isKeyDown(*it)) {
 
@@ -30,7 +34,7 @@ bool Player::isWalking() {
     return false;
 }
 
-bool Player::isFacingLeft() {
+bool Player::isFacingLeft() const{
     if (pInputManager->getKeyReleased() == sf::Keyboard::A)
         return true;
     else
@@ -50,5 +54,6 @@ void Player::move() {
 }
 
 void Player::update(float dt) {
-
+    pGraphicM->render(&body);
+    move();
 }

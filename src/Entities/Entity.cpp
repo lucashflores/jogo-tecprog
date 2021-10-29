@@ -1,25 +1,24 @@
 #include "Entities/Entity.h"
 using namespace Entities;
 
-Entity::Entity(sf::RectangleShape shape, sf::Texture *text, sf::Vector2f pos, sf::Vector2f v) {
-    body = shape;
+Entity::Entity(sf::RectangleShape shape, sf::Vector2f pos): body(shape), position(pos) {
+
+}
+
+Entity::~Entity() {
+    texture = NULL;
+}
+
+sf::Vector2f Entity::getPosition() const {
+    return position;
+}
+
+void Entity::setTexture(sf::Texture *text) {
     if (text) {
         texture = text;
         body.setTexture(text);
         body.setTextureRect(sf::IntRect (0, 0, 48, 48));
     }
-    position = pos;
-    velocity = v;
-    animation = NULL;
-}
-
-Entity::~Entity() {
-    texture = NULL;
-    animation = NULL;
-}
-
-sf::Vector2f Entity::getPosition() {
-    return position;
 }
 
 void Entity::setGraphicManager(Managers::GraphicManager *pGM) {

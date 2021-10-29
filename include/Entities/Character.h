@@ -8,9 +8,16 @@ namespace Entities {
     protected:
         Animation *animation;
         sf::Vector2f velocity;
+        unsigned char life;
+        unsigned char damage;
     public:
-        Character(sf::Vector2f v);
+        Character(unsigned char l, unsigned char d, sf::Vector2f v);
         virtual ~Character();
+        void setAnimation(Animation* pAnimation);
+        void setLife(unsigned char l);
+        unsigned char getLife() const;
+        void setDamage(unsigned char d);
+        unsigned char getDamage() const;
 
     };
 }

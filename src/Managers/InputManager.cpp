@@ -45,10 +45,4 @@ sf::Keyboard::Key InputManager::getKeyReleased() {
     return keyReleased;
 }
 
-bool InputManager::anyKeyPressed() {
-    for (std::map<sf::Keyboard::Key, bool>::iterator it=keysDown.begin(); it != keysDown.end(); ++it) {
-        if (it->second)
-            return true;
-    }
-    return false;
-}
+
