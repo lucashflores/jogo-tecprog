@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "Managers/GraphicManager.h"
+#include "Managers/InputManager.h"
 
 namespace Managers {
 

@@ -1,19 +1,28 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "Managers/GraphicManager.h"
 
 class Animation {
-public:
-    Animation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
-    ~Animation();
-    sf::IntRect uvRect;
-
-    void animationUpdate(float dt);
-
 private:
+    Managers::GraphicManager* pGraphicM;
+
+    sf::RectangleShape* body;
+    sf::Texture* texture;
+
     sf::Vector2u imageCount;
     sf::Vector2u currentImage;
+    sf::IntRect uvRect;
 
     float totalTime;
     float switchTime;
+
+public:
+    Animation(sf::Texture* text, sf::RectangleShape* pBody, sf::Vector2u imageCnt, float switchT);
+    ~Animation();
+    void setGraphicManager(Managers::GraphicManager* pGM);
+    void setTexture(const char* path);
+    void setImageCount(sf::Vector2u imgCnt);
+    void animationUpdate(float dt);
+
+
 };
