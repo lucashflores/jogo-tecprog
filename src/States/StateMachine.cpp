@@ -11,7 +11,7 @@ StateMachine::~StateMachine() {
     currentState = NULL;
     State* paux = NULL;
     for (auto it = stateList.begin(); it != stateList.end(); ++it)
-        paux = (*it->second);
+        paux = (it->second);
         if (paux)
             delete paux;
         paux = NULL;

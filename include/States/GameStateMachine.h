@@ -6,7 +6,6 @@
 
 namespace States {
 
-
     class GameStateMachine: public StateMachine {
     private:
         Managers::GraphicManager* pGraphicM;
@@ -22,4 +21,5 @@ namespace States {
         Managers::EventManager* getEventManager();
         Managers::InputManager* getInputManager();
     };
+
 }
