@@ -26,9 +26,3 @@ void Entity::setGraphicManager(Managers::GraphicManager *pGM) {
         pGraphicM = pGM;
 }
 
-
-void Entity::setEventManager(Managers::EventManager *pEM) {
-    if (pEM)
-        pEventM = pEM;
-}
-

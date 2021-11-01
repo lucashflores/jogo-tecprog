@@ -7,6 +7,7 @@ namespace Entities {
     class Character: public Entity {
     protected:
         Animation *animation;
+        Animation *animationl;
         sf::Vector2f velocity;
         unsigned char life;
         unsigned char damage;

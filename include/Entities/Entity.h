@@ -24,7 +24,6 @@ namespace Entities {
 
         void setGraphicManager(Managers::GraphicManager *pGM);
 
-        void setEventManager(Managers::EventManager *pEM);
     };
 
 }

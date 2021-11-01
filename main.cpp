@@ -18,8 +18,8 @@ int main() {
 
     Entities::Player* player = new Entities::Player(true);
     player->setGraphicManager(instance);
-    player->setEventManager(eventInstance);
     player->setInputManager(inputInstance);
+    player->setAnimation();
 
     sf::Texture *backgroundtex = instance->loadTexture("./assets/background.png");
     sf::RectangleShape background(sf::Vector2f(1280.f, 720.f));

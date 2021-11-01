@@ -27,7 +27,7 @@ void Animation::setGraphicManager(Managers::GraphicManager *pGM) {
 
 void Animation::setTexture(const char *path) {
     texture = pGraphicM->loadTexture(path);
-    body->setTexture(texture);
+    currentImage.x = 0;
 }
 
 void Animation::setImageCount(sf::Vector2u imgCnt) {
@@ -47,6 +47,8 @@ void Animation::animationUpdate(float dt) {
         currentImage.x = 0;
 
     uvRect.left = currentImage.x * uvRect.width;
+    if (body->getTexture() != texture)
+        body->setTexture(texture);
     body->setTextureRect(uvRect);
 
 
