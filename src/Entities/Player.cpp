@@ -1,31 +1,24 @@
 #include "Entities/Player.h"
+#include "PlayerControl.h"
 using namespace Entities;
 
-Player::Player(bool isPlayerOne): Character(100, 10, sf::Vector2f(VELOCITY_X, VELOCITY_Y)) {
+Player::Player(bool isPlayerOne): Character(isPlayerOne? Id::player1 : Id::player2,100, 10, sf::Vector2f(0.f, 0.f)) {
+    playerControl = new PlayerControl(isPlayerOne);
     if (isPlayerOne) {
         texture = pGraphicM->loadTexture(PLAYER1_IDLE_TEXTURE);
         body.setTexture(texture);
         body.setTextureRect(sf::IntRect (0, 0, 48 ,48));
-        controls.push_back(sf::Keyboard::A);
-        controls.push_back(sf::Keyboard::S);
-        controls.push_back(sf::Keyboard::W);
-        controls.push_back(sf::Keyboard::D);
     }
-
+    setAnimation();
 }
 
 Player::~Player() {
-    pInputManager = NULL;
     if (animation)
         delete animation;
     if (animationl)
         delete animationl;
 }
 
-void Player::setInputManager(Managers::InputManager *pIM) {
-    if (pIM)
-        pInputManager = pIM;
-}
 
 void Player::setAnimation() {
     animation = new Animation(pGraphicM->loadTexture(PLAYER1_RUNNING_TEXTURE_PATH), &body, sf::Vector2u(6, 1), 0.2f);
@@ -35,33 +28,28 @@ void Player::setAnimation() {
 }
 
 bool Player::isWalking() const{
-    for (auto it = controls.begin(); it != controls.end(); ++it) {
-        if (pInputManager->isKeyDown(*it)) {
-
-            return true;
-        }
-    }
-    return false;
+    return playerControl->isPlayerWalking();
 }
 
 bool Player::isFacingLeft() const{
-    if (pInputManager->getKeyPressed() == sf::Keyboard::A)
-        return true;
-    else
-        return false;
+    return playerControl->isPlayerFacingLeft();
 }
 
-void Player::move() {
-    if (pInputManager->isKeyDown(controls[0]))
-        body.move(sf::Vector2f(-velocity.x, 0.f));
-    else if (pInputManager->isKeyDown(controls[1]))
-        body.move(sf::Vector2f(0.f, velocity.x));
-    else if (pInputManager->isKeyDown(controls[2]))
-        body.move(sf::Vector2f(0.f, -velocity.x));
-    else if (pInputManager->isKeyDown(controls[3]))
-        body.move(sf::Vector2f(velocity.x, 0.f));
+void Player::setIsOnGround(bool isOnGround) {
+    isPlayerOnGround = isOnGround;
+}
 
-    position = body.getPosition();
+const bool Player::getIsOnGround() const {
+    return isPlayerOnGround;
+}
+
+void Player::collide(Entity* pE) {
+    if (pE) {
+        if (pE->getId() == Id::obstacle) {
+            setPosition(sf::Vector2f(getPosition().x, pE->getHitBox().top - 48.f));
+        }
+
+    }
 }
 
 void Player::update(float dt) {
@@ -80,7 +68,8 @@ void Player::update(float dt) {
             body.setTextureRect(sf::IntRect(0, 0, 48, 48));
     }
 
-    pGraphicM->render(&body);
-    move();
+    playerControl->movePlayer(this);
+    move(velocity);
+    //move(sf::Vector2f(0.f, velocity.y + (GRAVITY * dt)));
     pGraphicM->centerView(getPosition());
 }

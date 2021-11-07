@@ -32,7 +32,7 @@ namespace Managers {
 
         void centerView(sf::Vector2f pos);
 
-        sf::Texture *loadTexture(const char *path);
+        sf::Texture* loadTexture(const char *path);
     };
 
 }

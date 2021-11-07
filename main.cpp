@@ -4,11 +4,16 @@
 #include "Animation.h"
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
+#include "Entities/Obstacle.h"
+#include "Stages/PlatformMaker.h"
+#include "Entities/EntityList.h"
+#include "Managers/CollisionManager.h"
+#include "Entities/Background.h"
+#include "Id.h"
 
 int main() {
 
     Managers::GraphicManager *instance = Managers::GraphicManager::getInstance();
-    sf::RenderWindow* window = instance->getWindow();
 
     Managers::EventManager *eventInstance = Managers::EventManager::getInstance();
     eventInstance->setGraphicManagerInstance(instance);
@@ -16,14 +21,18 @@ int main() {
     Managers::InputManager *inputInstance = Managers::InputManager::getInstance();
     eventInstance->setInputManagerInstance(inputInstance);
 
-    Entities::Player* player = new Entities::Player(true);
-    player->setGraphicManager(instance);
-    player->setInputManager(inputInstance);
-    player->setAnimation();
+    Entities::EntityList* pEntityList = Entities::EntityList::getInstance();
 
-    sf::Texture *backgroundtex = instance->loadTexture("./assets/background.png");
-    sf::RectangleShape background(sf::Vector2f(1280.f, 720.f));
-    background.setTexture(backgroundtex);
+    Managers::CollisionManager* pCollisionManager = Managers::CollisionManager::getInstance();
+
+    Entities::Background* background = new Entities::Background(Id::background1);
+
+    Entities::Player* player = new Entities::Player(true);
+
+    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker();
+    platformMaker->makePlatform(sf::Vector2f(0.f, 100.f), 10);
+    platformMaker->makePlatform(sf::Vector2f(400.f, 150.f), 8);
+
 
     float dt;
     sf::Clock clock;
@@ -34,40 +43,17 @@ int main() {
 
         eventInstance->PollEvents(event);
 
-
         dt = clock.restart().asSeconds();
 
-        /*
-        if (inputInstance->anyKeyPressed()) {
-            animation->animationUpdate(dt);
-            if (inputInstance->getKeyPressed() == sf::Keyboard::A) {
-                sprite.setTexture(playerRunLeft);
-                sprite.setTextureRect(animation->uvRect);
-            }
-            else {
-                sprite.setTexture(playerRun);
-                sprite.setTextureRect(animation->uvRect);
-            }
+        if (dt > 0.0167)
+            dt = 0.0167;
 
-        }
-
-        else {
-            if (inputInstance->getKeyPressed() == sf::Keyboard::A) {
-                sprite.setTexture(player_left);
-                sprite.setTextureRect(rectSprite);
-            }
-
-            else {
-                sprite.setTexture(player);
-                sprite.setTextureRect(rectSpriteLeft);
-            }
-        }
-        */
 
         instance->clear();
-        //background.setPosition(player->getPosition() - sf::Vector2f((window->getSize().x)/2, (window->getSize().y)/2));
-        instance->render(&background);
         player->update(dt);
+        background->update(player->getPosition());
+        pCollisionManager->collideAllEntities();
+        pEntityList->renderAllEntities();
         instance->display();
 
     }
