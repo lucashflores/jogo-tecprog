@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.cpp")
 
-add_executable(jogo main.cpp ${SOURCES})
+add_executable(jogo main.cpp ${SOURCES} src/Entities/Enemy.cpp include/Entities/Enemy.h)
 
 include_directories (include c:/SFML/include cmake_modules)
 
