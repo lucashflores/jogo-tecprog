@@ -3,6 +3,7 @@
 #include "Managers/GraphicManager.h"
 #include "Managers/EventManager.h"
 #include "Id.h"
+#include "Coordinates/VectorFloat.h"
 
 
 
@@ -13,14 +14,15 @@ namespace Entities {
     class Entity {
     protected:
         Id::ids id;
+        Animation* sprite;
         Managers::GraphicManager *pGraphicM;
-        Managers::EventManager *pEventM;
         sf::RectangleShape body;
         sf::Texture *texture;
-        sf::Vector2f position;
+        Coordinates::VectorFloat position;
         EntityList* pEntityList;
+        Coordinates::VectorFloat hitBox;
     public:
-        Entity(Id::ids i, sf::RectangleShape shape, sf::Vector2f pos);
+        Entity(Id::ids i, sf::RectangleShape shape, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos);
 
         virtual ~Entity();
 
@@ -34,13 +36,11 @@ namespace Entities {
 
         void setTextureRect(sf::IntRect rect);
 
-        void setGraphicManager(Managers::GraphicManager *pGM);
-
-        virtual sf::FloatRect getHitBox();
+        Coordinates::VectorFloat getHitBox();
 
         virtual void collide(Entity* pE) = 0;
 
-        void move(sf::Vector2f p);
+        void move(Coordinates::VectorFloat pos);
 
         void render();
     };

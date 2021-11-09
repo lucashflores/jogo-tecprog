@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Entities/Obstacle.h"
-#include "Entities/EntityList.h"
+#include "EntityList.h"
+
 
 namespace Stages {
     class PlatformMaker {
@@ -10,7 +11,7 @@ namespace Stages {
 
     public:
         PlatformMaker();
-        void makePlatform(sf::Vector2f initialPos, unsigned int size);
+        void makePlatform(Coordinates::VectorFloat initialPos, unsigned int size);
         ~PlatformMaker();
     };
 }

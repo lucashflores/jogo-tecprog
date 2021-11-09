@@ -14,6 +14,8 @@ Animation::Animation(sf::Texture* text, sf::RectangleShape* pBody, sf::Vector2u 
     uvRect.width = texture->getSize().x/float(imageCount.x);
     uvRect.height = texture->getSize().y/float(imageCount.y);
 
+    setGraphicManager(Managers::GraphicManager::getInstance());
+
 }
 
 Animation::~Animation() {

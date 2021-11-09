@@ -10,24 +10,13 @@ EventManager *EventManager::getInstance() {
 }
 
 EventManager::EventManager() {
-
+    pGraphicManager = Managers::GraphicManager::getInstance();
+    pInputManager = Managers::InputManager::getInstance();
+    window = pGraphicManager->getWindow();
 }
 
 EventManager::~EventManager() {
 
-}
-
-void EventManager::setGraphicManagerInstance(GraphicManager *instance) {
-    pGraphicManager = instance;
-    setWindow(pGraphicManager->getWindow());
-}
-
-void EventManager::setWindow(sf::RenderWindow *pWindow) {
-    window = pWindow;
-}
-
-void EventManager::setInputManagerInstance(InputManager *instance) {
-    pInputManager = instance;
 }
 
 void EventManager::PollEvents(sf::Event event) {
@@ -38,7 +27,6 @@ void EventManager::PollEvents(sf::Event event) {
             pInputManager->handleKeyPressed(event.key.code);
         if (event.type == sf::Event::KeyReleased)
             pInputManager->handleKeyReleased(event.key.code);
-
     }
 }
 

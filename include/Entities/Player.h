@@ -3,7 +3,9 @@
 
 #define PLAYER1_IDLE_TEXTURE "../assets/biker_idle.png"
 #define PLAYER1_RUNNING_TEXTURE_PATH "../assets/biker_run.png"
-#define PLAYER1_RUNNING_LEFT_TEXTURE_PATH "../assets/biker_run_left.png"
+
+#define VELOCITY_X 0.2f
+#define VELOCITY_Y 0.8f
 
 #include "Entities/Character.h"
 #include "Managers/InputManager.h"
@@ -16,21 +18,19 @@ namespace Entities {
     private:
         PlayerControl* playerControl;
         bool isPlayerOne;
-        bool isPlayerOnGround;
+        bool isOnGround;
     public:
         Player(bool isPlayerOne=true);
 
         ~Player();
 
-        void setAnimation();
-
-        bool isWalking() const;
-
-        bool isFacingLeft() const;
-
         void setIsOnGround(bool isOnGround);
 
         const bool getIsOnGround() const;
+
+        void walk(bool left);
+
+        void jump();
 
         void collide(Entity* pE);
 

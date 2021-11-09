@@ -4,12 +4,12 @@ using namespace Entities;
 Character::Character(Id::ids id, unsigned char l, unsigned char d, sf::Vector2f v): life(l), damage(d), velocity(v),
 Entity(id, sf::RectangleShape(sf::Vector2f (48.f, 48.f)), sf::Vector2f(0.f, 0.f)) {
     animation = NULL;
-    animationl = NULL;
+    isWalking = false;
+    isFacingLeft = false;
 }
 
 Character::~Character() {
     animation = NULL;
-    animationl = NULL;
 }
 
 void Character::setVelocity(sf::Vector2f v) {
@@ -39,6 +39,15 @@ void Character::setDamage(unsigned char d) {
 unsigned char Character::getDamage() const {
     return damage;
 }
+
+void Character::setIsFacingLeft(bool facingLeft) {
+    isFacingLeft = facingLeft;
+}
+
+void Character::setIsWalking(bool walking) {
+    isWalking = walking;
+}
+
 
 
 

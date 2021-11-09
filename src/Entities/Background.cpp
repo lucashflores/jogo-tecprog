@@ -17,5 +17,5 @@ void Background::collide(Entity* pE) {
 }
 
 void Background::update(sf::Vector2f pos) {
-    setPosition(pos - sf::Vector2f(((pGraphicM->getWindow())->getSize().x)/2, ((pGraphicM->getWindow())->getSize().y)/2));
+    setPosition(pos);
 }

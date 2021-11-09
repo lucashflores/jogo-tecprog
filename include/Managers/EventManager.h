@@ -21,11 +21,6 @@ namespace Managers {
 
         static EventManager *getInstance();
 
-        void setGraphicManagerInstance(GraphicManager *instance);
-
-        void setInputManagerInstance(InputManager *instance);
-
-        void setWindow(sf::RenderWindow *pWindow);
 
         void PollEvents(sf::Event event);
     };

@@ -1,12 +1,14 @@
 #include "PlayerControl.h"
+#include "Entities/Player.h"
 
-PlayerControl::PlayerControl(bool isPlayerOne): controls() {
+PlayerControl::PlayerControl(Entities::Player* p): controls() {
     pInputManager = Managers::InputManager::getInstance();
-    if (isPlayerOne) {
-        controls["left"] = sf::Keyboard::A;
-        controls["right"] = sf::Keyboard::D;
-        controls["up"] = sf::Keyboard::W;
-        controls["down"] = sf::Keyboard::S;
+    if (p)
+        player = p;
+    if (player->getId() == Id::player1) {
+        controls["left"] = "A";
+        controls["right"] = "D";
+        controls["jump"] = "W";
     }
 }
 
@@ -14,37 +16,33 @@ PlayerControl::~PlayerControl() {
     pInputManager = NULL;
 }
 
-const bool PlayerControl::isPlayerWalking() {
-    for (auto it = controls.begin(); it != controls.end(); ++it) {
-        if (pInputManager->isKeyDown(it->second)) {
-            return true;
-        }
-    }
-    return false;
-}
+void PlayerControl::notify() {
 
-const bool PlayerControl::isPlayerFacingLeft() {
+    //Is facing left?
     if (pInputManager->isKeyDown(controls.at("left")) && !pInputManager->isKeyDown(controls.at("right")))
-        return true;
+        player->setIsFacingLeft(true);
     else if (pInputManager->isKeyDown(controls.at("right")) && !pInputManager->isKeyDown(controls.at("left")))
-        return false;
+        player->setIsFacingLeft(false);
     else {
-        if (pInputManager->getKeyPressed() == controls.at("left"))
-            return true;
+        if (pInputManager->wasKeyPressed(controls.at("left")))
+            player->setIsFacingLeft(true);
         else
-            return false;
+            player->setIsFacingLeft(false);
     }
-}
 
-void PlayerControl::movePlayer(Entities::Player* player) {
-    if (pInputManager->isKeyDown(controls.at("left")))
-        player->setVelocity(sf::Vector2f(-VELOCITY_X, 0.f));
-    else if (pInputManager->isKeyDown(controls.at("up")))
-        player->setVelocity(sf::Vector2f(0.f, -VELOCITY_X));
-    else if (pInputManager->isKeyDown(controls.at("right")))
-        player->setVelocity(sf::Vector2f(VELOCITY_X, 0.f));
-    else if (pInputManager->isKeyDown(controls.at("down")))
-        player->setVelocity(sf::Vector2f(0.f, VELOCITY_X));
+    //Is walking?
+    if (pInputManager->isKeyDown(controls.at("left")) || pInputManager->isKeyDown(controls.at("right"))) {
+        player->setIsWalking(true);
+        if (pInputManager->isKeyDown(controls.at("left")))
+            player->walk(true);
+        else
+            player->walk(false);
+    }
     else
-        player->setVelocity(sf::Vector2f(0.f, 0.f));
+        player->setIsWalking(false);
+
+    //Jump
+    if (pInputManager->wasKeyPressed(controls.at("jump")))
+        player->jump();
+
 }

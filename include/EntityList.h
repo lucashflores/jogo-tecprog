@@ -1,13 +1,12 @@
 #pragma once
 
-#include "Entity.h"
+#include "Entities/Entity.h"
 #include <list>
 
 namespace Entities {
     class EntityList {
     private:
         std::list<Entity*> entityList;
-        std::list<Entity*>::iterator it;
         static EntityList* instance;
         EntityList();
     public:
@@ -16,9 +15,7 @@ namespace Entities {
         void addEntity(Entity* pE);
         std::list<Entity*>::iterator begin();
         std::list<Entity*>::iterator end();
-        std::list<Entity*>::iterator current();
-        void next();
-        void removeEntity();
+        void removeEntity(Entity* pE);
         void renderAllEntities();
     };
 }
