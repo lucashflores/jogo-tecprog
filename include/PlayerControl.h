@@ -1,15 +1,23 @@
 #include "Entities/Player.h"
 
-#define VELOCITY_X 0.2f
-#define VELOCITY_Y 0.0f
+#define PLAYER1_LEFT "A"
+#define PLAYER1_RIGHT "D"
+#define PLAYER1_JUMP "W"
+#define PLAYER1_ATTACK "Space"
+
+namespace  Entities {
+    class Player;
+}
+
 class PlayerControl {
 private:
-    Managers::InputManager *pInputManager;
-    std::map<std::string, sf::Keyboard::Key> controls;
+    Managers::InputManager* pInputManager;
+    std::map<std::string, std::string> controls;
+    Entities::Player* player;
 public:
-    PlayerControl(bool isPlayerOne);
+    PlayerControl(Entities::Player* p);
+
     ~PlayerControl();
-    const bool isPlayerWalking();
-    const bool isPlayerFacingLeft();
-    void movePlayer(Entities::Player* player);
+
+    void notify();
 };

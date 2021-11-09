@@ -1,12 +1,15 @@
 #include "Entities/Entity.h"
-#include "Entities/EntityList.h"
+#include "EntityList.h"
 using namespace Entities;
 
-Entity::Entity(Id::ids i, sf::RectangleShape shape, sf::Vector2f pos): id(i), body(shape), position(pos) {
+Entity::Entity(Id::ids i, sf::RectangleShape shape, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos):
+id(i), body(shape), hitBox(hit), position(pos) {
+    position = pos;
     pEntityList = EntityList::getInstance();
     body.setPosition(pos);
+    body.setOrigin(body.getSize().x/2, body.getSize().y/2);
     pEntityList->addEntity(this);
-    setGraphicManager(Managers::GraphicManager::getInstance());
+    pGraphicM = Managers::GraphicManager::getInstance();
 }
 
 
@@ -14,7 +17,6 @@ Entity::Entity(Id::ids i, sf::RectangleShape shape, sf::Vector2f pos): id(i), bo
 Entity::~Entity() {
     texture = NULL;
     pGraphicM = NULL;
-    pEventM = NULL;
 }
 
 Id::ids Entity::getId() {
@@ -42,17 +44,14 @@ void Entity::setTextureRect(sf::IntRect rect) {
     body.setTextureRect(rect);
 }
 
-void Entity::setGraphicManager(Managers::GraphicManager *pGM) {
-    if (pGM)
-        pGraphicM = pGM;
-}
 
 sf::FloatRect Entity::getHitBox() {
-    return body.getGlobalBounds();
+    sf::FloatRect rect = body.getGlobalBounds();
+    return rect;
 }
 
-void Entity::move(sf::Vector2f p) {
-    body.move(p);
+void Entity::move(sf::Vector2f pos) {
+    body.move(pos);
     position= body.getPosition();
 }
 

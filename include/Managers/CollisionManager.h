@@ -1,20 +1,20 @@
 #pragma once
 
-#include "Entities/EntityList.h"
+#include "EntityList.h"
 
 namespace Managers {
 
     class CollisionManager {
     private:
-        Entities::EntityList *pEntityList;
+        Entities::EntityList* pEntityList;
 
         CollisionManager();
 
-        static CollisionManager *instance;
+        static CollisionManager* instance;
     public:
         ~CollisionManager();
 
-        static CollisionManager *getInstance();
+        static CollisionManager* getInstance();
 
         void collideAllEntities();
     };

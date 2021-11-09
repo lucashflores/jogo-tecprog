@@ -1,4 +1,4 @@
-#include "Entities/EntityList.h"
+#include "EntityList.h"
 using namespace Entities;
 
 EntityList* EntityList::instance = NULL;
@@ -28,12 +28,21 @@ void EntityList::addEntity(Entity* pE) {
         entityList.push_back(pE);
 }
 
-void EntityList::removeEntity() {
+void EntityList::removeEntity(Entity* pE) {
+    Entity* paux = NULL;
+    for (auto it = entityList.begin(); it != entityList.end(); it++) {
+        paux = (*it);
+        if (paux) {
+            if (paux == pE) {
+                delete paux;
+            }
+        }
+        paux = NULL;
+    }
 
 }
 
 std::list<Entity *>::iterator EntityList::begin() {
-    it = entityList.begin();
     return entityList.begin();
 }
 
@@ -41,13 +50,6 @@ std::list<Entity *>::iterator EntityList::end() {
     return entityList.end();
 }
 
-std::list<Entity *>::iterator EntityList::current() {
-    return it;
-}
-
-void EntityList::next() {
-    it++;
-}
 
 void EntityList::renderAllEntities() {
     Entity* pE = NULL;

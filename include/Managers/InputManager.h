@@ -7,6 +7,8 @@ namespace Managers {
 
     class InputManager {
     private:
+        std::map<std::string, sf::Keyboard::Key> keyMap;
+
         sf::Keyboard::Key keyPressed;
         std::map<sf::Keyboard::Key, bool> keysDown;
         sf::Keyboard::Key keyReleased;
@@ -17,17 +19,19 @@ namespace Managers {
     public:
         ~InputManager();
 
+        sf::Keyboard::Key getKey(std::string key);
+
         static InputManager *getInstance();
 
         void handleKeyPressed(sf::Keyboard::Key key);
 
         void handleKeyReleased(sf::Keyboard::Key key);
 
-        sf::Keyboard::Key getKeyPressed();
+        bool wasKeyPressed(std::string key);
 
-        bool isKeyDown(sf::Keyboard::Key key);
+        bool isKeyDown(std::string key);
 
-        sf::Keyboard::Key getKeyReleased();
+        bool wasKeyReleased(std::string key);
 
     };
 
