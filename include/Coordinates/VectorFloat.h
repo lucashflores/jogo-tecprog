@@ -9,8 +9,8 @@ namespace Coordinates {
     public:
         VectorFloat(float x, float y);
         ~VectorFloat();
-        float getX();
-        float getY();
+        float getX() const;
+        float getY() const;
         void setX(float f);
         void setY(float f);
     };

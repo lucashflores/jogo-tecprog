@@ -1,28 +1,26 @@
 #pragma once
 
 #include "Entity.h"
-#include "Animation.h"
 
 namespace Entities {
 
     class Character: public Entity {
     protected:
-        Animation *animation;
-        sf::Vector2f velocity;
+        Coordinates::VectorFloat velocity;
         unsigned char life;
         unsigned char damage;
         bool isFacingLeft;
         bool isWalking;
     public:
-        Character(Id::ids id, unsigned char l, unsigned char d, sf::Vector2f v);
+        Character(Id::ids id, unsigned char l, unsigned char d, Coordinates::VectorFloat v);
 
         virtual ~Character();
 
         void setAnimation(Animation* pAnimation);
 
-        void setVelocity(sf::Vector2f v);
+        void setVelocity(Coordinates::VectorFloat v);
 
-        sf::Vector2f getVelocity() const;
+        Coordinates::VectorFloat getVelocity() const;
 
         void setLife(unsigned char l);
 

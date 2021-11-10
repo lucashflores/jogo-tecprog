@@ -7,7 +7,7 @@ private:
     Managers::GraphicManager* pGraphicM;
 
     sf::RectangleShape body;
-    sf::Texture texture;
+    sf::Texture* texture;
 
     sf::Vector2u imageCount;
     sf::Vector2u currentImage;

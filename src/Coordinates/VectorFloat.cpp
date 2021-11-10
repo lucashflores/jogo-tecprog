@@ -12,11 +12,11 @@ void VectorFloat::setY(float f) {
     y = f;
 }
 
-float VectorFloat::getX() {
+float VectorFloat::getX() const {
     return x;
 }
 
-float VectorFloat::getY() {
+float VectorFloat::getY() const {
     return y;
 }
 

@@ -1,22 +1,23 @@
 #include "Entities/Character.h"
 using namespace Entities;
 
-Character::Character(Id::ids id, unsigned char l, unsigned char d, sf::Vector2f v): life(l), damage(d), velocity(v),
-Entity(id, sf::RectangleShape(sf::Vector2f (48.f, 48.f)), sf::Vector2f(0.f, 0.f)) {
-    animation = NULL;
+Character::Character(Id::ids id, unsigned char l, unsigned char d, Coordinates::VectorFloat v):
+life(l), damage(d), velocity(v),
+Entity(id, sf::RectangleShape(sf::Vector2f (48.f, 48.f)),
+   Coordinates::VectorFloat(32.f, 16.f), Coordinates::VectorFloat(0.f, 0.f))
+{
     isWalking = false;
     isFacingLeft = false;
 }
 
 Character::~Character() {
-    animation = NULL;
 }
 
-void Character::setVelocity(sf::Vector2f v) {
+void Character::setVelocity(Coordinates::VectorFloat v) {
     velocity = v;
 }
 
-sf::Vector2f Character::getVelocity() const {
+Coordinates::VectorFloat Character::getVelocity() const {
     return velocity;
 }
 

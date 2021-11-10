@@ -1,10 +1,13 @@
 #include "Animation.h"
 
-Animation::Animation(sf::Texture* text, sf::RectangleShape* pBody, sf::Vector2u imageCnt, float switchT)
+Animation::Animation(const char* pathSpriteSheet, sf::RectangleShape shape, sf::Vector2u imageCnt, float switchT)
 {
-    texture = text;
+    setGraphicManager(Managers::GraphicManager::getInstance());
 
-    body = pBody;
+    body = shape;
+    texture = pGraphicM->loadTexture(pathSpriteSheet);
+
+    body.setOrigin(sf::Vector2f(shape.getSize().x / 2, shape.getSize().y / 2));
 
     this->imageCount = imageCnt;
     this->switchTime = switchT;
@@ -13,8 +16,6 @@ Animation::Animation(sf::Texture* text, sf::RectangleShape* pBody, sf::Vector2u 
 
     uvRect.width = texture->getSize().x/float(imageCount.x);
     uvRect.height = texture->getSize().y/float(imageCount.y);
-
-    setGraphicManager(Managers::GraphicManager::getInstance());
 
 }
 

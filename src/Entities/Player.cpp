@@ -2,20 +2,18 @@
 #include "PlayerControl.h"
 using namespace Entities;
 
-Player::Player(bool isPlayerOne): Character(isPlayerOne? Id::player1 : Id::player2,100, 10, sf::Vector2f(0.f, 0.f)) {
+Player::Player(bool isPlayerOne): Character(isPlayerOne? Id::player1 : Id::player2,100, 10, Coordinates::VectorFloat(0.f, 0.f)) {
     playerControl = new PlayerControl(this);
     isOnGround = false;
     if (isPlayerOne) {
         texture = pGraphicM->loadTexture(PLAYER1_IDLE_TEXTURE);
         body.setTexture(texture);
         body.setTextureRect(sf::IntRect (0, 0, 48 ,48));
-        animation = new Animation(pGraphicM->loadTexture(PLAYER1_RUNNING_TEXTURE_PATH), &body, sf::Vector2u(6, 1), 0.2f);
     }
 }
 
 Player::~Player() {
-    if (animation)
-        delete animation;
+
 }
 
 void Player::setIsOnGround(bool iOG) {
@@ -37,19 +35,9 @@ void Player::walk(bool left) {
 
 void Player::jump() {
     if (isOnGround) {
-        setVelocity(sf::Vector2f (0.f, -VELOCITY_Y));
+        setVelocity(Coordinates::VectorFloat (0.f, -VELOCITY_Y));
         setIsOnGround(false);
     }
-}
-
-sf::FloatRect Player::getHitBox() {
-    sf::FloatRect rect = body.getGlobalBounds();
-    /*
-    rect.top -= 16.f;
-    rect.width -= 16.f;
-    rect.height = 32.f;
-     */
-    return rect;
 }
 
 void Player::collide(Entity* pE) {
@@ -91,7 +79,7 @@ void Player::collide(Entity* pE) {
 void Player::update(float dt) {
     body.setTexture(texture);
     if (isWalking)
-        animation->animationUpdate(dt);
+        sprite->animationUpdate(dt);
     else {
         body.setTextureRect(sf::IntRect(0, 0, 48, 48));
         velocity.x = 0.f;
