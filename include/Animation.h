@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Managers/GraphicManager.h"
+#include "Coordinates/VectorFloat.h"
 
 class Animation {
 private:
@@ -8,6 +9,8 @@ private:
 
     sf::RectangleShape body;
     sf::Texture* texture;
+
+    int currentRow;
 
     sf::Vector2u imageCount;
     sf::Vector2u currentImage;
@@ -17,12 +20,14 @@ private:
     float switchTime;
 
 public:
-    Animation(const char* pathSpriteSheet, sf::RectangleShape shape, sf::Vector2u imageCnt, float switchT);
+    Animation(std::string pathSpriteSheet, Coordinates::VectorFloat size, sf::Vector2u imageCnt, float switchT);
     ~Animation();
     void setGraphicManager(Managers::GraphicManager* pGM);
-    void setTexture(const char* path);
+    void render();
+    void centerViewHere(); // MUDAR!!!!
     void setImageCount(sf::Vector2u imgCnt);
-    void animationUpdate(int row, bool facingLeft, sf::Vector2f position, float dt);
+    void animationUpdate(int row, bool facingLeft, float dt);
+    Coordinates::VectorFloat changePosition(Coordinates::VectorFloat position);
 
 
 };

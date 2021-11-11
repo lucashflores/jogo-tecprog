@@ -1,10 +1,9 @@
 #include "Entities/Character.h"
 using namespace Entities;
 
-Character::Character(Id::ids id, unsigned char l, unsigned char d, Coordinates::VectorFloat v):
-life(l), damage(d), velocity(v),
-Entity(id, sf::RectangleShape(sf::Vector2f (48.f, 48.f)),
-   Coordinates::VectorFloat(32.f, 16.f), Coordinates::VectorFloat(0.f, 0.f))
+Character::Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::VectorFloat size, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos):
+life(l), damage(d), velocity(Coordinates::VectorFloat(0.f, 0.f)),
+Entity(i, size, hit, pos)
 {
     isWalking = false;
     isFacingLeft = false;
@@ -21,23 +20,23 @@ Coordinates::VectorFloat Character::getVelocity() const {
     return velocity;
 }
 
-void Character::setLife(unsigned char l) {
+void Character::setLife(unsigned int l) {
     if (l < 0)
         l = 0;
     life = l;
 }
 
-unsigned char Character::getLife() const {
+unsigned int Character::getLife() const {
     return life;
 }
 
-void Character::setDamage(unsigned char d) {
+void Character::setDamage(unsigned int d) {
     if (d < 0)
         d = 0;
     damage = d;
 }
 
-unsigned char Character::getDamage() const {
+unsigned int Character::getDamage() const {
     return damage;
 }
 

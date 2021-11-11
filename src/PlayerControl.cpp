@@ -18,21 +18,8 @@ PlayerControl::~PlayerControl() {
 
 void PlayerControl::notify() {
 
-    //Is facing left?
-    if (pInputManager->isKeyDown(controls.at("left")) && !pInputManager->isKeyDown(controls.at("right")))
-        player->setIsFacingLeft(true);
-    else if (pInputManager->isKeyDown(controls.at("right")) && !pInputManager->isKeyDown(controls.at("left")))
-        player->setIsFacingLeft(false);
-    else {
-        if (pInputManager->wasKeyPressed(controls.at("left")))
-            player->setIsFacingLeft(true);
-        else
-            player->setIsFacingLeft(false);
-    }
-
     //Is walking?
     if (pInputManager->isKeyDown(controls.at("left")) || pInputManager->isKeyDown(controls.at("right"))) {
-        player->setIsWalking(true);
         if (pInputManager->isKeyDown(controls.at("left")))
             player->walk(true);
         else

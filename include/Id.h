@@ -7,11 +7,13 @@ public:
         null = 0,
         player1 = 1,
         player2 = 2,
-        obstacle = 3,
-        background1 = 4,
-        background2 = 5,
-        enemy1 = 6,
-        enemy2 = 7,
-        enemy3 = 8
+        enemy1 = 10,
+        enemy2 = 20,
+        enemy3 = 30,
+        tile1 = 100,
+        tile2 = 200,
+        background1 = 1000,
+        background2 = 2000,
+
     };
 };

@@ -1,13 +1,15 @@
 #include "Animation.h"
 
-Animation::Animation(const char* pathSpriteSheet, sf::RectangleShape shape, sf::Vector2u imageCnt, float switchT)
+Animation::Animation(std::string pathSpriteSheet, Coordinates::VectorFloat size, sf::Vector2u imageCnt, float switchT)
 {
     setGraphicManager(Managers::GraphicManager::getInstance());
 
-    body = shape;
+    body = sf::RectangleShape(sf::Vector2f(size.getX(), size.getY()));
     texture = pGraphicM->loadTexture(pathSpriteSheet);
 
-    body.setOrigin(sf::Vector2f(shape.getSize().x / 2, shape.getSize().y / 2));
+    body.setTexture(texture);
+
+    body.setOrigin(sf::Vector2f(body.getSize().x / 2, body.getSize().y / 2));
 
     this->imageCount = imageCnt;
     this->switchTime = switchT;
@@ -16,6 +18,8 @@ Animation::Animation(const char* pathSpriteSheet, sf::RectangleShape shape, sf::
 
     uvRect.width = texture->getSize().x/float(imageCount.x);
     uvRect.height = texture->getSize().y/float(imageCount.y);
+
+    //body.setTextureRect(sf::IntRect(0, 0, uvRect.width, uvRect.height));
 
 }
 
@@ -28,17 +32,25 @@ void Animation::setGraphicManager(Managers::GraphicManager *pGM) {
         pGraphicM = pGM;
 }
 
-void Animation::setTexture(const char *path) {
-    texture = pGraphicM->loadTexture(path);
-    currentImage.x = 0;
+void Animation::render() {
+    pGraphicM->render(&body);
+}
+
+void Animation::centerViewHere() {
+    pGraphicM->centerView(body.getPosition());
 }
 
 void Animation::setImageCount(sf::Vector2u imgCnt) {
     imageCount = imgCnt;
 }
 
-void Animation::animationUpdate(float dt) {
+void Animation::animationUpdate(int row, bool facingLeft, float dt) {
+
     totalTime += dt;
+
+    if (currentImage.x == imageCount.x || (row != currentRow))
+        currentImage.x = 0;
+
 
     if (totalTime >= switchTime)
     {
@@ -46,13 +58,20 @@ void Animation::animationUpdate(float dt) {
         currentImage.x++;
     }
 
-    if (currentImage.x == imageCount.x)
-        currentImage.x = 0;
-
+    uvRect.top = row * uvRect.height;
     uvRect.left = currentImage.x * uvRect.width;
-    if (body->getTexture() != texture)
-        body->setTexture(texture);
-    body->setTextureRect(uvRect);
 
+    body.setTextureRect(uvRect);
 
+    if (facingLeft)
+        body.setScale({-1, 1});
+    else
+        body.setScale({1, 1});
+
+    currentRow = row;
+}
+
+Coordinates::VectorFloat Animation::changePosition(Coordinates::VectorFloat position) {
+    body.setPosition(position.getX(), position.getY());
+    return Coordinates::VectorFloat(body.getPosition().x, body.getPosition().y);
 }

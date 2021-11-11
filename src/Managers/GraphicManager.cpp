@@ -50,7 +50,7 @@ void GraphicManager::centerView(sf::Vector2f pos) {
     window->setView(view);
 }
 
-sf::Texture* GraphicManager::loadTexture(const char *path) {
+sf::Texture* GraphicManager::loadTexture(std::string path) {
     sf::Texture* texture = new sf::Texture();
     texture->loadFromFile(path);
     return texture;

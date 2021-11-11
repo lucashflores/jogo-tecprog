@@ -24,12 +24,7 @@ void CollisionManager::collideAllEntities() {
         for (auto it2 = pEntityList->begin(); it2 != pEntityList->end(); it2++) {
             pE = (*it);
             pE2 = (*it2);
-            if (pE && pE2) {
-                if (pE->getHitBox().intersects(pE2->getHitBox())) {
-                    pE->collide(pE2);
-                    pE2->collide(pE);
-                }
-            }
+
             pE = NULL;
             pE2 = NULL;
         }

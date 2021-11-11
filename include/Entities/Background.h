@@ -4,11 +4,10 @@
 
 namespace Entities {
 
-    class Background: public Entity {
+    class Background: public Ent {
     public:
         Background(Id::ids id);
         ~Background();
-        void collide(Entity* pE);
-        void update(sf::Vector2f pos);
+        void update(Coordinates::VectorFloat pos); // CONFERIR DEPOIS!!!!
     };
 }

@@ -12,7 +12,7 @@ namespace Entities {
         bool isFacingLeft;
         bool isWalking;
     public:
-        Character(Id::ids id, unsigned char l, unsigned char d, Coordinates::VectorFloat v);
+        Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::VectorFloat size, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos);
 
         virtual ~Character();
 
@@ -22,13 +22,13 @@ namespace Entities {
 
         Coordinates::VectorFloat getVelocity() const;
 
-        void setLife(unsigned char l);
+        void setLife(unsigned int l);
 
-        unsigned char getLife() const;
+        unsigned int getLife() const;
 
-        void setDamage(unsigned char d);
+        void setDamage(unsigned int d);
 
-        unsigned char getDamage() const;
+        unsigned int getDamage() const;
 
         void setIsFacingLeft(bool facingLeft);
 

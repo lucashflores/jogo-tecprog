@@ -2,14 +2,13 @@
 #include "PlayerControl.h"
 using namespace Entities;
 
-Player::Player(bool isPlayerOne): Character(isPlayerOne? Id::player1 : Id::player2,100, 10, Coordinates::VectorFloat(0.f, 0.f)) {
+Player::Player(bool isPlayerOne):
+Character(isPlayerOne? Id::player1 : Id::player2,100, 10,
+          Coordinates::VectorFloat(48.f, 48.f),
+          Coordinates::VectorFloat(16.f, 32.f),
+          Coordinates::VectorFloat(0.f, 0.f)) {
     playerControl = new PlayerControl(this);
     isOnGround = false;
-    if (isPlayerOne) {
-        texture = pGraphicM->loadTexture(PLAYER1_IDLE_TEXTURE);
-        body.setTexture(texture);
-        body.setTextureRect(sf::IntRect (0, 0, 48 ,48));
-    }
 }
 
 Player::~Player() {
@@ -25,12 +24,18 @@ const bool Player::getIsOnGround() const {
 }
 
 void Player::walk(bool left) {
-    if (left)
-        velocity.x = -VELOCITY_X;
-    else
-       velocity.x = VELOCITY_X;
-    if (!isOnGround)
-        velocity.x /= 1.5f;
+    setIsWalking(true);
+
+    if (left) {
+        velocity.setX(-VELOCITY_X);
+        setIsFacingLeft(true);
+    }
+
+
+    else {
+        velocity.setX(VELOCITY_X);
+        setIsFacingLeft(false);
+    }
 }
 
 void Player::jump() {
@@ -42,33 +47,7 @@ void Player::jump() {
 
 void Player::collide(Entity* pE) {
     if (pE) {
-        if (pE->getId() == Id::obstacle) {
-            if (((pE->getHitBox().top - 24.f) - getPosition().y) < (getPosition().y - (pE->getHitBox().top + 8.f)))
-                setPosition(sf::Vector2f(getPosition().x, pE->getHitBox().top - 24.f));
-            else {
-                setPosition(sf::Vector2f(getPosition().x, pE->getHitBox().top + 8.f));
-                velocity.y = 0;
-            }
-
-            setIsOnGround(true);
-
-            /*
-            else if (getPosition().y >= (pE->getHitBox().top - 12.f)) {
-                move(sf::Vector2f(0.f, VELOCITY_Y));
-                setIsOnGround(false);
-            }
-            */
-
-
-            /*
-            else {
-                if (isFacingLeft)
-                    setPosition(sf::Vector2f(pE->getHitBox().left + pE->getHitBox().width, getPosition().y));
-                else
-                    setPosition(sf::Vector2f(pE->getHitBox().left - 16.f, getPosition().y));
-            }
-            */
-
+        if (pE->getId() == Id::tile1) {
         }
         else
             setIsOnGround(false);
@@ -76,26 +55,20 @@ void Player::collide(Entity* pE) {
     }
 }
 
+
 void Player::update(float dt) {
-    body.setTexture(texture);
-    if (isWalking)
-        sprite->animationUpdate(dt);
-    else {
-        body.setTextureRect(sf::IntRect(0, 0, 48, 48));
-        velocity.x = 0.f;
-    }
-
-    if (!isOnGround) {
-        velocity.y += GRAVITY * dt;
-    }
-
-
-    if (isFacingLeft)
-        body.setScale(-1, 1);
-    else
-        body.setScale(1, 1);
-
     playerControl->notify();
-    move(sf::Vector2f(velocity.x, velocity.y + (GRAVITY*dt)));
-    pGraphicM->centerView(getPosition());
+
+    if (isWalking) {
+        sprite->animationUpdate(1, isFacingLeft, dt);
+    }
+    else {
+        sprite->animationUpdate(0, isFacingLeft, dt);
+        velocity.setX(velocity.getX() * 0.8f);
+    }
+
+
+    Coordinates::VectorFloat pos = Coordinates::VectorFloat(position.getX() + velocity.getX(), position.getY() + velocity.getY());
+    position = sprite->changePosition(pos);
+    sprite->centerViewHere();
 }

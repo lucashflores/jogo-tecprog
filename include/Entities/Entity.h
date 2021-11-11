@@ -12,24 +12,23 @@ namespace Entities {
 
     class Entity: public Ent {
     protected:
-        Id::ids id;
         Coordinates::VectorFloat position;
         EntityList* pEntityList;
         Coordinates::VectorFloat hitBox;
     public:
-        Entity(Coordinates::VectorFloat hit, Coordinates::VectorFloat pos);
+        Entity(Id::ids i, Coordinates::VectorFloat size, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos);
 
         virtual ~Entity();
 
         void setPosition(Coordinates::VectorFloat pos);
 
-        Coordinates::VectorFloat getPosition() const;
+        const Coordinates::VectorFloat getPosition() const;
 
-        Coordinates::VectorFloat getHitBox();
+        const Coordinates::VectorFloat getHitBox() const;
 
         virtual void collide(Entity* pE) = 0;
 
-        void move(Coordinates::VectorFloat pos);
+        virtual void update(float dt) = 0;
     };
 
 }

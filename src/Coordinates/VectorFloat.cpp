@@ -4,6 +4,8 @@ using namespace Coordinates;
 VectorFloat::VectorFloat(float x, float y): x(x), y(y) {
 }
 
+VectorFloat::~VectorFloat() {}
+
 void VectorFloat::setX(float f) {
     x = f;
 }

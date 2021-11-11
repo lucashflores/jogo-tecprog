@@ -10,6 +10,7 @@
 #include "Managers/CollisionManager.h"
 #include "Entities/Background.h"
 #include "Id.h"
+#include "Coordinates/VectorFloat.h"
 
 int main() {
 
@@ -25,10 +26,10 @@ int main() {
 
     Entities::Player* player = new Entities::Player(true);
 
-    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker();
-    platformMaker->makePlatform(sf::Vector2f(0.f, 400.f), 10);
-    platformMaker->makePlatform(sf::Vector2f(64.f, 300.f), 8);
 
+    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker();
+    platformMaker->makePlatform(Id::tile1, Coordinates::VectorFloat(0.f, 50.f), 10);
+    platformMaker->makePlatform(Id::tile1 ,Coordinates::VectorFloat(320.f, 100.f), 8);
 
 
     float dt;
@@ -50,6 +51,7 @@ int main() {
         player->update(dt);
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
+        background->render();
         pEntityList->renderAllEntities();
         instance->display();
 

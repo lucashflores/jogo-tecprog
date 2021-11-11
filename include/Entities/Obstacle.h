@@ -6,12 +6,12 @@ namespace Entities {
 
     class Obstacle : public Entity {
     private:
-        unsigned char damage;
+        unsigned int damage;
     public:
-        Obstacle(sf::Vector2f pos, unsigned char d = 0);
-        ~Obstacle();
-        sf::FloatRect getHitBox();
-        void collide(Entity* pE);
+        Obstacle(Id::ids i, Coordinates::VectorFloat size, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos, unsigned int d = 0);
+        virtual ~Obstacle();
+        virtual void collide(Entity* pE) = 0;
+        void update(float dt);
     };
 
 

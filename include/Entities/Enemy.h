@@ -11,7 +11,7 @@ namespace Entities {
         bool isCommited;
 
     public:
-        Enemy(Id::ids IdEnemy, unsigned char life, unsigned char dmg, sf::Vector2f v1);
+        Enemy(Id::ids idEnemy, unsigned char life, unsigned char dmg, Coordinates::VectorFloat size, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos);
         ~Enemy();
     };
 
