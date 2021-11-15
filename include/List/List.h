@@ -21,7 +21,7 @@ namespace List {
             void setInfo(Node<NODETYPE>* pInfoIn) {this->pInfo = pInfoIn;}
             Node<NODETYPE>* getNext() {return pNext;}
             Node<NODETYPE>* getPrev() {return pPrev;}
-            Node<NODETYPE>* getInfo() {return pInfo;}
+            NODETYPE* getInfo() {return pInfo;}
         };
 
         Node<LISTTYPE>* pFirst;

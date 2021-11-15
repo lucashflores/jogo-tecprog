@@ -19,7 +19,7 @@ Animation::Animation(std::string pathSpriteSheet, Coordinates::VectorFloat size,
     uvRect.width = texture->getSize().x/float(imageCount.x);
     uvRect.height = texture->getSize().y/float(imageCount.y);
 
-    //body.setTextureRect(sf::IntRect(0, 0, uvRect.width, uvRect.height));
+    body.setTextureRect(sf::IntRect(0, 0, uvRect.width, uvRect.height));
 
 }
 

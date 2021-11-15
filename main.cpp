@@ -1,4 +1,6 @@
 #include <iostream>
+#include <Entities/Enemy.h>
+#include <Entities/SmokerEnemy.h>
 #include "Managers/GraphicManager.h"
 #include "Managers/EventManager.h"
 #include "Animation.h"
@@ -26,6 +28,9 @@ int main() {
 
     Entities::Player* player = new Entities::Player(true);
 
+    Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::VectorFloat(0.f, 0.f));
+    smoker->setPlayer(player);
+
 
     Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker();
     platformMaker->makePlatform(Id::tile1, Coordinates::VectorFloat(0.f, 50.f), 10);
@@ -49,6 +54,7 @@ int main() {
 
         instance->clear();
         player->update(dt);
+        smoker->update(dt);
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
         background->render();
