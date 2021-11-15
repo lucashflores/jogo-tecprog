@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Managers/GraphicManager.h"
-#include "Coordinates/VectorFloat.h"
+#include "Coordinates/VectorTemplate.h"
 
 class Animation {
 private:
@@ -20,14 +20,22 @@ private:
     float switchTime;
 
 public:
-    Animation(std::string pathSpriteSheet, Coordinates::VectorFloat size, sf::Vector2u imageCnt, float switchT);
+    Animation(std::string pathSpriteSheet, Coordinates::Vector<float> size, Coordinates::Vector<unsigned int> imageCnt, float switchT);
+
     ~Animation();
+
     void setGraphicManager(Managers::GraphicManager* pGM);
+
     void render();
+
     void centerViewHere(); // MUDAR!!!!
+
     void setImageCount(sf::Vector2u imgCnt);
+
     void animationUpdate(int row, bool facingLeft, float dt);
-    Coordinates::VectorFloat changePosition(Coordinates::VectorFloat position);
+
+    Coordinates::Vector<float> changePosition(Coordinates::Vector<float> position);
+
 
 
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "stdafx.h"
+#include "Defines/stdafx.h"
 #include "Managers/GraphicManager.h"
 #include "Managers/InputManager.h"
 

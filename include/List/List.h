@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 namespace List {
 
@@ -14,14 +15,16 @@ namespace List {
             NODETYPE* pInfo;
 
         public:
-            Node(){}
-            ~Node(){}
-            void setNext(Node<NODETYPE>* pNextIn) {this->pNext = pNextIn;}
-            void setPrev(Node<NODETYPE>* pPrevIn) {this->pPrev = pPrevIn;}
-            void setInfo(Node<NODETYPE>* pInfoIn) {this->pInfo = pInfoIn;}
+            Node<NODETYPE>(){}
+            ~Node<NODETYPE>(){}
+            void setNext(Node<NODETYPE>* pNextIn) {
+                pNext = pNextIn;
+            }
+            void setPrev(Node<NODETYPE>* pPrevIn) {pPrev = pPrevIn;}
+            void setInfo(NODETYPE* pInfoIn) {pInfo = pInfoIn;}
             Node<NODETYPE>* getNext() {return pNext;}
             Node<NODETYPE>* getPrev() {return pPrev;}
-            Node<NODETYPE>* getInfo() {return pInfo;}
+            NODETYPE* getInfo() {return pInfo;}
         };
 
         Node<LISTTYPE>* pFirst;
@@ -36,6 +39,7 @@ namespace List {
         void pushNode(Node<LISTTYPE>* pNode);
         void pushInfo(LISTTYPE* pInfo);
         LISTTYPE* pull();
+        void removeInfo(LISTTYPE* pInfo);
         LISTTYPE* getFirst();
         LISTTYPE* getLast();
         int getSize();
@@ -88,6 +92,7 @@ namespace List {
             else{
                 pLast->setNext(pNode);
                 pNode->setPrev(pLast);
+                pNode->setNext(NULL);
                 pLast = pNode;
             }
             listSize++;
@@ -106,21 +111,22 @@ namespace List {
             pushNode(pAux);
         }
         else{
-            std::cout<<"ERROR: Trying to add a NULL object on List<LISTTYPE>::pushInfo method. Operation not succeeded."<<std::endl;
+            std::cout << "ERROR: Trying to add a NULL object on List<LISTTYPE>::pushInfo method. Operation not succeeded." << std::endl;
         }
     }
 
     template <class LISTTYPE>
     LISTTYPE* List<LISTTYPE>::pull(){
         if(pLast) {
-            LISTTYPE* pAux = NULL;
-            pAux = pLast->getInfo();
+            LISTTYPE* info = NULL;
+            info = pLast->getInfo();
 
             delete (pLast->getInfo());
-            delete (pLast);
+            pLast = pLast->getPrev();
+            delete(pLast->getNext());
             listSize--;
 
-            return pAux;
+            return info;
         }
         else {
             std::cout<<"ERROR: Trying to pull a empty list on List<LISTTYPE>::pull method. Cannot perform operation."<<std::endl;
@@ -128,9 +134,26 @@ namespace List {
     }
 
     template <class LISTTYPE>
+    void List<LISTTYPE>::removeInfo(LISTTYPE* pInfo){
+        Node<LISTTYPE>* paux = NULL;
+        paux = pFirst;
+        while (paux != pLast || paux->getInfo() != pInfo) {
+            paux = paux->getNext();
+        }
+        if (paux->getInfo() == pInfo) {
+            Node<LISTTYPE>* paux2 = paux->getPrev();
+            delete paux->getInfo();
+            paux2->setNext(paux->getNext());
+            delete paux;
+            listSize--;
+        }
+        paux = NULL;
+    }
+
+    template <class LISTTYPE>
     LISTTYPE* List<LISTTYPE>::getFirst() {
         if(pFirst)
-            return pFirst;
+            return pFirst->getInfo();
         else
             std::cout<<"ERROR: Trying to get a element on empty list on List<LISTTYPE>::getFirst method. Cannot perform operation."<<std::endl;
     }
@@ -138,7 +161,7 @@ namespace List {
     template <class LISTTYPE>
     LISTTYPE* List<LISTTYPE>::getLast() {
         if(pLast)
-            return pLast;
+            return pLast->getInfo();
         else
             std::cout<<"ERROR: Trying to get a element on empty list on List<LISTTYPE>::getLast method. Cannot perform operation."<<std::endl;
     }
@@ -150,11 +173,13 @@ namespace List {
 
     template <class LISTTYPE>
     LISTTYPE* List<LISTTYPE>::operator[](int pos) {
-        if(pos<listSize || pos>0) {
-            Node<LISTTYPE>* pAux;
+        if(pos<listSize || pos>=0) {
+            Node<LISTTYPE>* pAux = NULL;
+            pAux = pFirst;
 
             for (int i = 0; i < pos; i++) {
-                pAux = pAux->getNext();
+                if (pAux)
+                    pAux = pAux->getNext();
             }
 
             if (pAux == NULL) {
