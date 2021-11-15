@@ -5,7 +5,7 @@ using namespace Managers;
 CollisionManager* CollisionManager::instance = NULL;
 
 CollisionManager::CollisionManager() {
-    pEntityList = EntityList::getInstance();
+
 }
 
 CollisionManager::~CollisionManager() {
@@ -16,6 +16,11 @@ CollisionManager *CollisionManager::getInstance() {
     if (!instance)
         instance = new CollisionManager();
     return instance;
+}
+
+void CollisionManager::setEntityList(EntityList *pEL) {
+    if (pEL)
+        pEntityList = pEL;
 }
 
 void CollisionManager::collideAllEntities() {

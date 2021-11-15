@@ -14,6 +14,8 @@ namespace Managers {
     public:
         ~CollisionManager();
 
+        void setEntityList(EntityList* pEL);
+
         static CollisionManager* getInstance();
 
         void collideAllEntities();

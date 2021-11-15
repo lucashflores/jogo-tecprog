@@ -9,7 +9,7 @@ namespace Stages {
     private:
         EntityList* pEntityList;
     public:
-        PlatformMaker();
+        PlatformMaker(EntityList* pEL);
         void makePlatform(Id::ids obstacleId, Coordinates::Vector<float> initialPos, unsigned int size);
         ~PlatformMaker();
     };

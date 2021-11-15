@@ -3,7 +3,6 @@
 
 #include "Ent.h"
 
-class EntityList;
 
 namespace Entities {
 
@@ -11,7 +10,6 @@ namespace Entities {
     class Entity: public Ent {
     protected:
         Coordinates::Vector<float> position;
-        EntityList* pEntityList;
         Coordinates::Vector<float> hitBox;
     public:
         Entity(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);

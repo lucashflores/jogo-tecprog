@@ -1,6 +1,5 @@
 #include "EntityList.h"
 
-EntityList* EntityList::instance = NULL;
 
 EntityList::EntityList(): entityList() {
 }
@@ -15,12 +14,6 @@ EntityList::~EntityList() {
     }
 
     entityList.clear();
-}
-
-EntityList* EntityList::getInstance() {
-    if (instance == NULL)
-        instance = new EntityList();
-    return instance;
 }
 
 int EntityList::getSize() {

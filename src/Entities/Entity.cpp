@@ -5,8 +5,6 @@ using namespace Entities;
 Entity::Entity(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos):
 Ent(i, size, pos), hitBox(hit), position(pos) {
     position = pos;
-    pEntityList = EntityList::getInstance();
-    pEntityList->addEntity(this);
 }
 
 

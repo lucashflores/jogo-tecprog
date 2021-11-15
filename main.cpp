@@ -18,16 +18,21 @@ int main() {
 
     Managers::EventManager *eventInstance = Managers::EventManager::getInstance();
 
-    EntityList* pEntityList = EntityList::getInstance();
-
     Managers::CollisionManager* pCollisionManager = Managers::CollisionManager::getInstance();
+
+    EntityList* entityList = new EntityList();
+
+    pCollisionManager->setEntityList(entityList);
 
     Entities::Background* background = new Entities::Background(Id::background1);
 
+
     Entities::Player* player = new Entities::Player(true);
+    entityList->addEntity(player);
 
 
-    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker();
+
+    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);
     platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 100.f), 10);
     platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
 
@@ -52,7 +57,7 @@ int main() {
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
         background->render();
-        pEntityList->renderAllEntities();
+        entityList->renderAllEntities();
         instance->display();
 
     }
