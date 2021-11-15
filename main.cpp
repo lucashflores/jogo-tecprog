@@ -33,8 +33,9 @@ int main() {
     entityList->addEntity(player);
 
 
-    Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::VectorFloat(0.f, 0.f));
+    Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(0.f, 0.f));
     smoker->setPlayer(player);
+    entityList->addEntity(smoker);
 
 
     Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);

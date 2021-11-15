@@ -11,7 +11,7 @@ namespace Entities {
 
 
     public:
-        SmokerEnemy(Coordinates::VectorFloat pos);
+        SmokerEnemy(Coordinates::Vector<float> pos);
 
         ~SmokerEnemy() override;
 
@@ -19,7 +19,7 @@ namespace Entities {
 
         void idle();
 
-        void collide(Entity* pE, Coordinates::VectorFloat Collision);
+        void collide(Entity* pE, Coordinates::Vector<float> Collision);
 
         void update(float dt) override;
     };
