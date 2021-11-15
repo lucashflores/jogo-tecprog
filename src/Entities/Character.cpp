@@ -7,6 +7,7 @@ Entity(i, size, hit, pos)
 {
     isWalking = false;
     isFacingLeft = false;
+    isOnGround = false;
 }
 
 Character::~Character() {
@@ -46,6 +47,10 @@ void Character::setIsFacingLeft(bool facingLeft) {
 
 void Character::setIsWalking(bool walking) {
     isWalking = walking;
+}
+
+void Character::setIsOnGround(bool iOG) {
+    isOnGround = iOG;
 }
 
 

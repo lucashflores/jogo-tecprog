@@ -11,6 +11,7 @@ namespace Entities {
         unsigned char damage;
         bool isFacingLeft;
         bool isWalking;
+        bool isOnGround;
     public:
         Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
@@ -33,6 +34,8 @@ namespace Entities {
         void setIsFacingLeft(bool facingLeft);
 
         void setIsWalking(bool walking);
+
+        void setIsOnGround(bool isOnGround);
 
         virtual void collide(Entity* pE, Coordinates::Vector<float> collision)=0;
 

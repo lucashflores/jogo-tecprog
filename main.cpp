@@ -39,7 +39,7 @@ int main() {
 
 
     Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);
-    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 100.f), 10);
+    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 150.f), 10);
     platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
 
 

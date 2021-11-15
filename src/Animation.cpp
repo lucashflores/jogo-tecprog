@@ -73,7 +73,6 @@ void Animation::animationUpdate(int row, bool facingLeft, float dt) {
     currentRow = row;
 }
 
-Coordinates::Vector<float> Animation::changePosition(Coordinates::Vector<float> position) {
+void Animation::changePosition(Coordinates::Vector<float> position) {
     body.setPosition(position.getX(), position.getY());
-    return Coordinates::Vector<float>(body.getPosition().x, body.getPosition().y);
 }

@@ -11,11 +11,11 @@ SmokerEnemy::~SmokerEnemy() = default;
 void SmokerEnemy::walk() {
 
     if (target->getPosition().getX() - this->getPosition().getX() >= 0){
-        velocity.setX(0.01);
+        velocity.setX(0.025);
         setIsFacingLeft(false);
     }
     else {
-        velocity.setX(-0.01);
+        velocity.setX(-0.025);
         setIsFacingLeft(true);
     }
 
@@ -28,10 +28,25 @@ void SmokerEnemy::idle(){
 
 }
 
-void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> Collision) {
+void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
-        if (pE->getId() == Id::tile1) {
+        if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2) {
+            if (collision.getX() > collision.getY()) {
+                if (getPosition().getY() > pE->getPosition().getY())
+                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
+                else
+                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
+                setIsOnGround(true);
+            }
+            else {
+                if (getPosition().getX() < pE->getPosition().getX())
+                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
+                else
+                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
+            }
         }
+        else
+            setIsOnGround(false);
     }
 }
 
@@ -49,6 +64,11 @@ void SmokerEnemy::update(float dt){
         velocity.setX(velocity.getX() * 0.1f);
     }
 
-    Coordinates::Vector<float> pos = Coordinates::Vector<float>(position.getX() + velocity.getX(), position.getY() + velocity.getY());
-    position = sprite->changePosition(pos);
+    if (!isOnGround)
+        velocity.setY(getVelocity().getY() + (GRAVITY * dt));
+    else
+        velocity.setY(0.f);
+
+    setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX(), getPosition().getY() + getVelocity().getY()));
+    sprite->changePosition(position);
 }

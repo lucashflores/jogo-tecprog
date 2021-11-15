@@ -19,7 +19,7 @@ namespace Entities {
 
         void idle();
 
-        void collide(Entity* pE, Coordinates::Vector<float> Collision);
+        void collide(Entity* pE, Coordinates::Vector<float> collision);
 
         void update(float dt) override;
     };
