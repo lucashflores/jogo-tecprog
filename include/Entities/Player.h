@@ -6,6 +6,7 @@
 
 #define VELOCITY_X 0.2f
 #define VELOCITY_Y 0.8f
+#define GRAVITY 2.f
 
 #include "Entities/Character.h"
 #include "Managers/InputManager.h"
@@ -32,7 +33,9 @@ namespace Entities {
 
         void jump();
 
-        void collide(Entity* pE);
+        void down();
+
+        void collide(Entity* pE, Coordinates::Vector<float> collision);
 
         void update(float dt);
     };

@@ -8,6 +8,6 @@ namespace Entities {
     public:
         Background(Id::ids id);
         ~Background();
-        void update(Coordinates::VectorFloat pos); // CONFERIR DEPOIS!!!!
+        void update(Coordinates::Vector<float> pos); // CONFERIR DEPOIS!!!!
     };
 }

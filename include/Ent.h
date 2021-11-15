@@ -9,7 +9,7 @@ protected:
     const Id::ids id;
     Animation* sprite;
 public:
-    Ent(Id::ids i, Coordinates::VectorFloat size, Coordinates::VectorFloat pos);
+    Ent(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> pos);
     virtual ~Ent();
     const Id::ids getId() const;
     void render();
