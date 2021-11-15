@@ -12,7 +12,7 @@
 #include "Managers/CollisionManager.h"
 #include "Entities/Background.h"
 #include "Id.h"
-#include "Coordinates/VectorFloat.h"
+#include "Coordinates/VectorTemplate.h"
 
 int main() {
 
@@ -20,21 +20,26 @@ int main() {
 
     Managers::EventManager *eventInstance = Managers::EventManager::getInstance();
 
-    Entities::EntityList* pEntityList = Entities::EntityList::getInstance();
-
     Managers::CollisionManager* pCollisionManager = Managers::CollisionManager::getInstance();
+
+    EntityList* entityList = new EntityList();
+
+    pCollisionManager->setEntityList(entityList);
 
     Entities::Background* background = new Entities::Background(Id::background1);
 
+
     Entities::Player* player = new Entities::Player(true);
+    entityList->addEntity(player);
+
 
     Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::VectorFloat(0.f, 0.f));
     smoker->setPlayer(player);
 
 
-    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker();
-    platformMaker->makePlatform(Id::tile1, Coordinates::VectorFloat(0.f, 50.f), 10);
-    platformMaker->makePlatform(Id::tile1 ,Coordinates::VectorFloat(320.f, 100.f), 8);
+    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);
+    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 100.f), 10);
+    platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
 
 
     float dt;
@@ -58,7 +63,7 @@ int main() {
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
         background->render();
-        pEntityList->renderAllEntities();
+        entityList->renderAllEntities();
         instance->display();
 
     }

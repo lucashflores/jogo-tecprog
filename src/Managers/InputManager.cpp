@@ -12,6 +12,7 @@ InputManager *InputManager::getInstance() {
 InputManager::InputManager() {
     keyMap["A"] = sf::Keyboard::A;
     keyMap["D"] = sf::Keyboard::D;
+    keyMap["S"] = sf::Keyboard::S;
     keyMap["W"] = sf::Keyboard::W;
     keyMap["Space"] = sf::Keyboard::Space;
 

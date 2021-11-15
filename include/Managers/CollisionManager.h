@@ -6,13 +6,15 @@ namespace Managers {
 
     class CollisionManager {
     private:
-        Entities::EntityList* pEntityList;
+        EntityList* pEntityList;
 
         CollisionManager();
 
         static CollisionManager* instance;
     public:
         ~CollisionManager();
+
+        void setEntityList(EntityList* pEL);
 
         static CollisionManager* getInstance();
 

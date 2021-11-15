@@ -1,8 +1,8 @@
 #include "Entities/Character.h"
 using namespace Entities;
 
-Character::Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::VectorFloat size, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos):
-life(l), damage(d), velocity(Coordinates::VectorFloat(0.f, 0.f)),
+Character::Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos):
+life(l), damage(d), velocity(Coordinates::Vector<float>(0.f, 0.f)),
 Entity(i, size, hit, pos)
 {
     isWalking = false;
@@ -12,11 +12,11 @@ Entity(i, size, hit, pos)
 Character::~Character() {
 }
 
-void Character::setVelocity(Coordinates::VectorFloat v) {
+void Character::setVelocity(Coordinates::Vector<float> v) {
     velocity = v;
 }
 
-Coordinates::VectorFloat Character::getVelocity() const {
+Coordinates::Vector<float> Character::getVelocity() const {
     return velocity;
 }
 

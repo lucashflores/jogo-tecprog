@@ -1,6 +1,5 @@
 #pragma once
 
-
 class Id {
 public:
     enum ids {
@@ -12,8 +11,9 @@ public:
         enemy3 = 30,
         tile1 = 100,
         tile2 = 200,
+        oilTile = 300,
+        fire = 400,
         background1 = 1000,
         background2 = 2000,
-
     };
 };
