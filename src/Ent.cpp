@@ -33,8 +33,8 @@ Ent::Ent(const Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<f
             path = TILE_TEXTURE_PATH;
             break;
         case Id::enemy1:
-            imageCntX = 6;
-            imageCntY = 3;
+            imageCnt.setX(6);
+            imageCnt.setY(3);
             path = ENEMY_TEXTURE_PATH;
             break;
         default:

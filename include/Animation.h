@@ -34,7 +34,7 @@ public:
 
     void animationUpdate(int row, bool facingLeft, float dt);
 
-    Coordinates::Vector<float> changePosition(Coordinates::Vector<float> position);
+    void changePosition(Coordinates::Vector<float> position);
 
 
 

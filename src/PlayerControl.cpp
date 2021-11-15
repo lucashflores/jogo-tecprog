@@ -8,7 +8,6 @@ PlayerControl::PlayerControl(Entities::Player* p): controls() {
     if (player->getId() == Id::player1) {
         controls["left"] = "A";
         controls["right"] = "D";
-        controls["down"] = "S";
         controls["jump"] = "W";
     }
 }
@@ -27,15 +26,13 @@ void PlayerControl::notify() {
         else
             player->walk(false);
     }
-
-    //Jump
-    else if (pInputManager->isKeyDown(controls.at("down")))
-        player->down();
-
-    else if (pInputManager->isKeyDown(controls.at("jump")))
-        player->jump();
     else
         player->setIsWalking(false);
+
+    //Jump
+    if (pInputManager->wasKeyPressed(controls.at("jump")))
+        player->jump();
+
 
 
 }

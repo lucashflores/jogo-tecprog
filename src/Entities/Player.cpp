@@ -6,21 +6,13 @@ Player::Player(bool isPlayerOne):
 Character(isPlayerOne? Id::player1 : Id::player2,100, 10,
           Coordinates::Vector<float>(48.f, 48.f),
           Coordinates::Vector<float>(16.f, 32.f),
-          Coordinates::Vector<float>(0.f, 100.f)) {
+          Coordinates::Vector<float>(0.f, 84.f)) {
     playerControl = new PlayerControl(this);
     isOnGround = false;
 }
 
 Player::~Player() {
 
-}
-
-void Player::setIsOnGround(bool iOG) {
-    isOnGround = iOG;
-}
-
-const bool Player::getIsOnGround() const {
-    return isOnGround;
 }
 
 void Player::walk(bool left) {
@@ -36,27 +28,27 @@ void Player::walk(bool left) {
         velocity.setX(VELOCITY_X);
         setIsFacingLeft(false);
     }
+
+    if (!isOnGround)
+        velocity.setX(getVelocity().getX() / 1.5f);
 }
 
 void Player::jump() {
-
-    setVelocity(Coordinates::Vector<float> (0.f, -VELOCITY_X));
-
-}
-
-void Player::down() {
-    setVelocity(Coordinates::Vector<float>(0.f, VELOCITY_X));
+    if (isOnGround) {
+        setVelocity(Coordinates::Vector<float> (0.f, -VELOCITY_Y));
+        setIsOnGround(false);
+    }
 }
 
 void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
         if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2) {
-            setIsOnGround(true);
             if (collision.getX() > collision.getY()) {
                 if (getPosition().getY() > pE->getPosition().getY())
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
                 else
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
+                setIsOnGround(true);
             }
             else {
                 if (getPosition().getX() < pE->getPosition().getX())
@@ -64,7 +56,6 @@ void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
                 else
                     setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
             }
-            //sprite->changePosition(position);
         }
         else
             setIsOnGround(false);
@@ -82,11 +73,15 @@ void Player::update(float dt) {
     else {
         sprite->animationUpdate(0, isFacingLeft, dt);
         velocity.setX(velocity.getX() * 0.8f);
-        velocity.setY(velocity.getY() * 0.8f);
     }
 
+    if (!isOnGround)
+        velocity.setY(velocity.getY() + (GRAVITY * dt));
+    else
+        velocity.setY(0.f);
 
-    Coordinates::Vector<float> pos = Coordinates::Vector<float>(position.getX() + velocity.getX(), position.getY() + velocity.getY());
-    position = sprite->changePosition(pos);
+    setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX(),
+                                           getPosition().getY() + getVelocity().getY()));
+    sprite->changePosition(position);
     sprite->centerViewHere();
 }

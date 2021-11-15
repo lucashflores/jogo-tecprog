@@ -33,12 +33,13 @@ int main() {
     entityList->addEntity(player);
 
 
-    Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::VectorFloat(0.f, 0.f));
+    Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(0.f, 0.f));
     smoker->setPlayer(player);
+    entityList->addEntity(smoker);
 
 
     Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);
-    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 100.f), 10);
+    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 150.f), 10);
     platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
 
 

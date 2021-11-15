@@ -2,7 +2,7 @@
 
 
 #include "Ent.h"
-
+#include "Defines/stdafx.h"
 
 namespace Entities {
 
