@@ -3,8 +3,8 @@ using namespace Entities;
 
 #include "Id.h"
 
-SmokerEnemy::SmokerEnemy(Coordinates::VectorFloat pos)
-    : Enemy(Id::enemy1, 20, 5, Coordinates::VectorFloat(48.f, 48.f), Coordinates::VectorFloat(16.f, 32.f), pos, 120.0) {}
+SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos)
+    : Enemy(Id::enemy1, 20, 5, Coordinates::Vector<float>(48.f, 48.f), Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {}
 
 SmokerEnemy::~SmokerEnemy() = default;
 
@@ -28,7 +28,7 @@ void SmokerEnemy::idle(){
 
 }
 
-void SmokerEnemy::collide(Entity* pE, Coordinates::VectorFloat Collision) {
+void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> Collision) {
     if (pE) {
         if (pE->getId() == Id::tile1) {
         }
@@ -49,6 +49,6 @@ void SmokerEnemy::update(float dt){
         velocity.setX(velocity.getX() * 0.1f);
     }
 
-    Coordinates::VectorFloat pos = Coordinates::VectorFloat(position.getX() + velocity.getX(), position.getY() + velocity.getY());
+    Coordinates::Vector<float> pos = Coordinates::Vector<float>(position.getX() + velocity.getX(), position.getY() + velocity.getY());
     position = sprite->changePosition(pos);
 }
