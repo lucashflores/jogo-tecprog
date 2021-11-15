@@ -57,18 +57,18 @@ Player* Enemy::chooseTarget() {
     else
         setTarget(player1);
 
-    /*
-    if(target = player1) {
+
+    if(target == player1) {
         if (distP1 < view_range)
             isCommitted = true;
         else
             isCommitted = false;
     }
-    else if(target = player2) {
+    else if(target == player2) {
         if (distP2 < view_range)
             isCommitted = true;
         else
             isCommitted = false;
     }
-    */
+
 }

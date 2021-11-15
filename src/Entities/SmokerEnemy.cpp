@@ -4,18 +4,18 @@ using namespace Entities;
 #include "Id.h"
 
 SmokerEnemy::SmokerEnemy(Coordinates::VectorFloat pos)
-    : Enemy(Id::enemy1, 20, 5, Coordinates::VectorFloat(48.f, 48.f), Coordinates::VectorFloat(16.f, 32.f), pos, 200.0) {}
+    : Enemy(Id::enemy1, 20, 5, Coordinates::VectorFloat(48.f, 48.f), Coordinates::VectorFloat(16.f, 32.f), pos, 120.0) {}
 
 SmokerEnemy::~SmokerEnemy() = default;
 
 void SmokerEnemy::walk() {
 
     if (target->getPosition().getX() - this->getPosition().getX() >= 0){
-        velocity.setX(0.4);
+        velocity.setX(0.01);
         setIsFacingLeft(false);
     }
     else {
-        velocity.setX(-0.4);
+        velocity.setX(-0.01);
         setIsFacingLeft(true);
     }
 
@@ -23,17 +23,8 @@ void SmokerEnemy::walk() {
 }
 
 void SmokerEnemy::idle(){
-    // TODO: andar para um lado durante um tempo, parar e andar apara o outro lado
+    setIsWalking(false);
 
-    velocity.setX(0.3);
-    setIsFacingLeft(false);
-
-    velocity.setX(0.0);
-
-    velocity.setX(-0.3);
-    setIsFacingLeft(true);
-
-    velocity.setX(0.0);
 
 }
 
@@ -50,14 +41,14 @@ void SmokerEnemy::update(float dt){
 
     (isCommitted) ? walk(): idle();
 
-    //isWalking=true;
-    //walk();
-
     if (isWalking) {
         sprite->animationUpdate(2, isFacingLeft, dt);
     }
     else {
         sprite->animationUpdate(0, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.2f);
+        velocity.setX(velocity.getX() * 0.1f);
     }
+
+    Coordinates::VectorFloat pos = Coordinates::VectorFloat(position.getX() + velocity.getX(), position.getY() + velocity.getY());
+    position = sprite->changePosition(pos);
 }
