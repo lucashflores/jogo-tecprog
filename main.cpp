@@ -10,7 +10,7 @@
 #include "Managers/CollisionManager.h"
 #include "Entities/Background.h"
 #include "Id.h"
-#include "Coordinates/VectorFloat.h"
+#include "Coordinates/VectorTemplate.h"
 
 int main() {
 
@@ -18,7 +18,7 @@ int main() {
 
     Managers::EventManager *eventInstance = Managers::EventManager::getInstance();
 
-    Entities::EntityList* pEntityList = Entities::EntityList::getInstance();
+    EntityList* pEntityList = EntityList::getInstance();
 
     Managers::CollisionManager* pCollisionManager = Managers::CollisionManager::getInstance();
 
@@ -28,8 +28,8 @@ int main() {
 
 
     Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker();
-    platformMaker->makePlatform(Id::tile1, Coordinates::VectorFloat(0.f, 50.f), 10);
-    platformMaker->makePlatform(Id::tile1 ,Coordinates::VectorFloat(320.f, 100.f), 8);
+    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 100.f), 10);
+    platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
 
 
     float dt;

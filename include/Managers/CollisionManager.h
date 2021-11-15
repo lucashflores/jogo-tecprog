@@ -6,7 +6,7 @@ namespace Managers {
 
     class CollisionManager {
     private:
-        Entities::EntityList* pEntityList;
+        EntityList* pEntityList;
 
         CollisionManager();
 

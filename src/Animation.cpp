@@ -1,6 +1,6 @@
 #include "Animation.h"
 
-Animation::Animation(std::string pathSpriteSheet, Coordinates::VectorFloat size, sf::Vector2u imageCnt, float switchT)
+Animation::Animation(std::string pathSpriteSheet, Coordinates::Vector<float> size, Coordinates::Vector<unsigned int> imageCnt, float switchT)
 {
     setGraphicManager(Managers::GraphicManager::getInstance());
 
@@ -9,9 +9,11 @@ Animation::Animation(std::string pathSpriteSheet, Coordinates::VectorFloat size,
 
     body.setTexture(texture);
 
-    body.setOrigin(sf::Vector2f(body.getSize().x / 2, body.getSize().y / 2));
+    body.setOrigin(sf::Vector2f(body.getSize().x / 2.f, body.getSize().y / 2.f));
 
-    this->imageCount = imageCnt;
+
+    imageCount.x = imageCnt.getX();
+    imageCount.y = imageCnt.getY();
     this->switchTime = switchT;
     totalTime = 0.0f;
     currentImage.x = 0;
@@ -19,7 +21,6 @@ Animation::Animation(std::string pathSpriteSheet, Coordinates::VectorFloat size,
     uvRect.width = texture->getSize().x/float(imageCount.x);
     uvRect.height = texture->getSize().y/float(imageCount.y);
 
-    //body.setTextureRect(sf::IntRect(0, 0, uvRect.width, uvRect.height));
 
 }
 
@@ -39,6 +40,7 @@ void Animation::render() {
 void Animation::centerViewHere() {
     pGraphicM->centerView(body.getPosition());
 }
+
 
 void Animation::setImageCount(sf::Vector2u imgCnt) {
     imageCount = imgCnt;
@@ -71,7 +73,7 @@ void Animation::animationUpdate(int row, bool facingLeft, float dt) {
     currentRow = row;
 }
 
-Coordinates::VectorFloat Animation::changePosition(Coordinates::VectorFloat position) {
+Coordinates::Vector<float> Animation::changePosition(Coordinates::Vector<float> position) {
     body.setPosition(position.getX(), position.getY());
-    return Coordinates::VectorFloat(body.getPosition().x, body.getPosition().y);
+    return Coordinates::Vector<float>(body.getPosition().x, body.getPosition().y);
 }

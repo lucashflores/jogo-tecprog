@@ -2,7 +2,7 @@
 #include "EntityList.h"
 using namespace Entities;
 
-Entity::Entity(Id::ids i, Coordinates::VectorFloat size, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos):
+Entity::Entity(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos):
 Ent(i, size, pos), hitBox(hit), position(pos) {
     position = pos;
     pEntityList = EntityList::getInstance();
@@ -15,14 +15,15 @@ Entity::~Entity() {
 }
 
 
-void Entity::setPosition(Coordinates::VectorFloat pos) {
-    pos = sprite->changePosition(pos);
+void Entity::setPosition(Coordinates::Vector<float> pos) {
+    position = pos;
 }
 
-const Coordinates::VectorFloat Entity::getPosition() const {
+
+const Coordinates::Vector<float> Entity::getPosition() const {
     return position;
 }
 
-const Coordinates::VectorFloat Entity::getHitBox() const {
+const Coordinates::Vector<float> Entity::getHitBox() const {
     return hitBox;
 }

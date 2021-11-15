@@ -6,21 +6,21 @@ namespace Entities {
 
     class Character: public Entity {
     protected:
-        Coordinates::VectorFloat velocity;
+        Coordinates::Vector<float> velocity;
         unsigned char life;
         unsigned char damage;
         bool isFacingLeft;
         bool isWalking;
     public:
-        Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::VectorFloat size, Coordinates::VectorFloat hit, Coordinates::VectorFloat pos);
+        Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
         virtual ~Character();
 
         void setAnimation(Animation* pAnimation);
 
-        void setVelocity(Coordinates::VectorFloat v);
+        void setVelocity(Coordinates::Vector<float> v);
 
-        Coordinates::VectorFloat getVelocity() const;
+        Coordinates::Vector<float> getVelocity() const;
 
         void setLife(unsigned int l);
 
@@ -34,7 +34,7 @@ namespace Entities {
 
         void setIsWalking(bool walking);
 
-        virtual void collide(Entity* pE)=0;
+        virtual void collide(Entity* pE, Coordinates::Vector<float> collision)=0;
 
         virtual void update(float dt) = 0;
     };
