@@ -28,7 +28,7 @@ void SmokerEnemy::idle(){
 
 }
 
-void SmokerEnemy::collide(Entity* pE) {
+void SmokerEnemy::collide(Entity* pE, Coordinates::VectorFloat Collision) {
     if (pE) {
         if (pE->getId() == Id::tile1) {
         }
