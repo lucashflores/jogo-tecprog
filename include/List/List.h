@@ -36,10 +36,6 @@ namespace List {
         ~List();
 
         void clear();
-        //void pushNode(Node<LISTTYPE>* pNode);
-        //void pushInfo(const LISTTYPE& pNode);
-        //LISTTYPE* pull();
-        //void removeInfo(LISTTYPE &pInfo);
 
         void pushBack(const LISTTYPE& newElement);
         void pushFront(const LISTTYPE& newElement);
@@ -96,76 +92,6 @@ namespace List {
         pLast = NULL;
 
     }
-
-    /*
-    template <class LISTTYPE>
-    void List<LISTTYPE>::pushNode(Node<LISTTYPE>* pNode) {
-        if(pNode){
-            if(pFirst){
-                pFirst = pNode;
-                pLast = pNode;
-            }
-            else{
-                pLast->setNext(pNode);
-                pNode->setPrev(pLast);
-                pNode->setNext(NULL);
-                pLast = pNode;
-            }
-            listSize++;
-        }
-        else{
-            std::cout<<"ERROR: Trying to add a NULL node on List<LISTTYPE>::pushNode method. Insert not succeeded."<<std::endl;
-        }
-    }
-
-    template<class LISTTYPE>
-    void List<LISTTYPE>::pushInfo(const LISTTYPE& pNode) {
-        if(Info){
-            Node<LISTTYPE>* pAux = NULL;
-            pAux = new Node<LISTTYPE>();
-            pAux->setInfo(Info);
-            pushNode(pAux);
-        }
-        else{
-            std::cout << "ERROR: Trying to add a NULL object on List<LISTTYPE>::pushInfo method. Operation not succeeded." << std::endl;
-        }
-    }
-
-    template <class LISTTYPE>
-    LISTTYPE* List<LISTTYPE>::pull(){
-        if(pLast) {
-            LISTTYPE* info = NULL;
-            info = pLast->getInfo();
-
-            delete (pLast->getInfo());
-            pLast = pLast->getPrev();
-            delete(pLast->getNext());
-            listSize--;
-
-            return info;
-        }
-        else {
-            std::cout<<"ERROR: Trying to pull a empty list on List<LISTTYPE>::pull method. Cannot perform operation."<<std::endl;
-        }
-    }
-
-    template <class LISTTYPE>
-    void List<LISTTYPE>::removeInfo(LISTTYPE &pInfo){
-        Node<LISTTYPE>* paux = NULL;
-        paux = pFirst;
-        while (paux != pLast || paux->getInfo() != pInfo) {
-            paux = paux->getNext();
-        }
-        if (paux->getInfo() == pInfo) {
-            Node<LISTTYPE>* paux2 = paux->getPrev();
-            delete paux2->getInfo();
-            paux->setNext(paux->getNext());
-            delete paux;
-            listSize--;
-        }
-        paux = NULL;
-    }
-    */
 
     template <typename LISTTYPE>
     void List<LISTTYPE>::pushBack(const LISTTYPE& Info) {
