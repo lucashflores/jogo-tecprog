@@ -5,7 +5,7 @@
 #define PLAYER1_RUNNING_TEXTURE_PATH "../assets/biker_run.png"
 
 #define VELOCITY_X 0.2f
-#define VELOCITY_Y 0.4f
+#define VELOCITY_Y 0.35f
 
 #include "Entities/Character.h"
 #include "Managers/InputManager.h"

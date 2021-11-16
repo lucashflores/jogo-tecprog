@@ -1,8 +1,17 @@
-//
-// Created by Lucas on 16/11/2021.
-//
+#pragma once
 
-#ifndef JOGO_TECPROG_STAGEBUILDER_H
-#define JOGO_TECPROG_STAGEBUILDER_H
+#include "EntityList.h"
+#include "EnemySpawner.h"
+#include "ObstacleBuilder.h"
+#include "PlatformMaker.h"
 
-#endif //JOGO_TECPROG_STAGEBUILDER_H
+namespace Stages {
+    class StageBuilder {
+    private:
+        EntityList* pEntityList;
+    public:
+        StageBuilder(EntityList* pEL);
+        ~StageBuilder();
+        void buildStage(std::string stageInstructionsPath);
+    };
+}

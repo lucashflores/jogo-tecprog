@@ -1,8 +1,9 @@
-//
-// Created by Lucas on 16/11/2021.
-//
+#pragma once
 
-#ifndef JOGO_TECPROG_INSTRUCTIONSTRANSLATOR_H
-#define JOGO_TECPROG_INSTRUCTIONSTRANSLATOR_H
+#include <ifstream>
 
-#endif //JOGO_TECPROG_INSTRUCTIONSTRANSLATOR_H
+namespace Stages {
+    class InstructionsTranslator {
+
+    };
+}
