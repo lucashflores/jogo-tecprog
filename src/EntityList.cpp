@@ -6,7 +6,7 @@ EntityList::EntityList(): entityList() {
 
 EntityList::~EntityList() {
     Entities::Entity* pE = NULL;
-    for (auto it = entityList.begin(); it != entityList.end(); it++) {
+    for (iterator it = entityList.begin(); it != entityList.end(); it++) {
         pE = (*it);
         if (pE)
             delete pE;
@@ -14,22 +14,23 @@ EntityList::~EntityList() {
     }
 
     entityList.clear();
+
 }
 
 int EntityList::getSize() {
-    return entityList.size();
+    return entityList.getSize();
 }
 
 void EntityList::addEntity(Entities::Entity* pE) {
-    entityList.push_back(pE);
+    entityList.pushBack(pE);
 }
 
 void EntityList::removeEntity(Entities::Entity* pE) {
-    //entityList.removeInfo(pE);
+    entityList.removeElement(pE);
     return;
 }
 
-Entities::Entity *EntityList::operator[](int pos) {
+Entities::Entity* EntityList::operator[](int pos) {
     return entityList[pos];
 }
 

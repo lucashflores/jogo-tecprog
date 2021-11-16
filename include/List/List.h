@@ -7,24 +7,23 @@ namespace List {
 
     class List {
     private:
+
         template <class NODETYPE>
         class Node {
         private:
             Node<NODETYPE>* pNext;
             Node<NODETYPE>* pPrev;
-            NODETYPE* pInfo;
+            NODETYPE Info;
 
         public:
-            Node<NODETYPE>(){}
-            ~Node<NODETYPE>(){}
-            void setNext(Node<NODETYPE>* pNextIn) {
-                pNext = pNextIn;
-            }
+            Node<NODETYPE>() {pNext = NULL; pPrev = NULL;}
+            ~Node<NODETYPE>() {pNext = NULL; pPrev = NULL;}
+            void setNext(Node<NODETYPE>* pNextIn) {pNext = pNextIn;}
             void setPrev(Node<NODETYPE>* pPrevIn) {pPrev = pPrevIn;}
-            void setInfo(NODETYPE* pInfoIn) {pInfo = pInfoIn;}
+            void setInfo(const NODETYPE& pInfoIn) {Info = pInfoIn;}
             Node<NODETYPE>* getNext() {return pNext;}
             Node<NODETYPE>* getPrev() {return pPrev;}
-            NODETYPE* getInfo() {return pInfo;}
+            NODETYPE& getInfo() {return Info;}
         };
 
         Node<LISTTYPE>* pFirst;
@@ -35,55 +34,72 @@ namespace List {
     public:
         List();
         ~List();
+
         void clear();
-        void pushNode(Node<LISTTYPE>* pNode);
-        void pushInfo(LISTTYPE* pInfo);
-        LISTTYPE* pull();
-        void removeInfo(LISTTYPE* pInfo);
+        //void pushNode(Node<LISTTYPE>* pNode);
+        //void pushInfo(const LISTTYPE& pNode);
+        //LISTTYPE* pull();
+        //void removeInfo(LISTTYPE &pInfo);
+
+        void pushBack(const LISTTYPE& newElement);
+        void pushFront(const LISTTYPE& newElement);
+        void removeElement(const LISTTYPE& element);
+
         LISTTYPE* getFirst();
         LISTTYPE* getLast();
         int getSize();
-        LISTTYPE* operator[](int pos);
+        LISTTYPE operator[](int pos);
 
+        class iterator {
+        private:
+            Node<LISTTYPE>* element;
+            iterator(Node<LISTTYPE>* el){element = el;}
+        public:
+            iterator(const iterator& other){element = other.element;}
+            ~iterator(){element = NULL;}
+            LISTTYPE& operator*(){return element->getInfo();}
+            bool operator==(const iterator& other) {return element == other.element;}
+            bool operator!=(const iterator& other) {return !(*this == other);}
+            iterator& operator++() {if (element != NULL) element = element->getNext(); return *this;}
+            iterator operator++(int) {Node<LISTTYPE>* ret = element; if (element != NULL)element = element->getNext(); return iterator(ret);}
+
+            friend class List;
+        };
+
+        iterator begin() {return iterator(pFirst);}
+        iterator end() {return iterator(pLast);}
     };
 
 
     template <class LISTTYPE>
-    List<LISTTYPE>::List(){
+    List<LISTTYPE>::List() {
         pFirst = NULL;
         pLast = NULL;
         listSize = 0;
     }
 
-    template <class LISTTYPE>
-    List<LISTTYPE>::~List(){
-
+    template <class LISTTYPE>   List<LISTTYPE>::~List() {
+        clear();
     }
 
     template <class LISTTYPE>
     void List<LISTTYPE>::clear() {
 
-        Node <LISTTYPE>* aux1 = NULL;
-        Node <LISTTYPE>* aux2 = NULL;
-
-        aux1 = pFirst;
-        aux2 = aux1;
-
-        while(aux1){
-            delete (aux1->getInfo());
-            aux2 = aux1->getNext();
-            delete (aux1);
-            aux1 = aux2;
+        while (pFirst != NULL) {
+            Node<LISTTYPE>* aux = pFirst->getNext();
+            delete (aux->getInfo());
+            delete pFirst;
+            pFirst = aux;
             listSize--;
         }
-
         pFirst = NULL;
         pLast = NULL;
 
     }
 
+    /*
     template <class LISTTYPE>
-    void List<LISTTYPE>::pushNode(Node <LISTTYPE>* pNode) {
+    void List<LISTTYPE>::pushNode(Node<LISTTYPE>* pNode) {
         if(pNode){
             if(pFirst){
                 pFirst = pNode;
@@ -103,11 +119,11 @@ namespace List {
     }
 
     template<class LISTTYPE>
-    void List<LISTTYPE>::pushInfo(LISTTYPE* pInfo) {
-        if(pInfo){
+    void List<LISTTYPE>::pushInfo(const LISTTYPE& pNode) {
+        if(Info){
             Node<LISTTYPE>* pAux = NULL;
             pAux = new Node<LISTTYPE>();
-            pAux->setInfo(pInfo);
+            pAux->setInfo(Info);
             pushNode(pAux);
         }
         else{
@@ -134,7 +150,7 @@ namespace List {
     }
 
     template <class LISTTYPE>
-    void List<LISTTYPE>::removeInfo(LISTTYPE* pInfo){
+    void List<LISTTYPE>::removeInfo(LISTTYPE &pInfo){
         Node<LISTTYPE>* paux = NULL;
         paux = pFirst;
         while (paux != pLast || paux->getInfo() != pInfo) {
@@ -142,12 +158,85 @@ namespace List {
         }
         if (paux->getInfo() == pInfo) {
             Node<LISTTYPE>* paux2 = paux->getPrev();
-            delete paux->getInfo();
-            paux2->setNext(paux->getNext());
+            delete paux2->getInfo();
+            paux->setNext(paux->getNext());
             delete paux;
             listSize--;
         }
         paux = NULL;
+    }
+    */
+
+    template <typename LISTTYPE>
+    void List<LISTTYPE>::pushBack(const LISTTYPE& Info) {
+        if(Info) {
+            if (pFirst == nullptr) {
+                Node<LISTTYPE>* aux = new Node<LISTTYPE>();
+                aux->setInfo(Info);
+                pFirst = aux;
+                pLast = aux;
+            } else {
+                Node<LISTTYPE>* aux = new Node<LISTTYPE>();
+                aux->setInfo(Info);
+                pLast->setNext(aux);
+                aux->setPrev(pLast);
+                pLast = aux;
+            }
+            listSize++;
+        }
+        else {
+            std::cout << "ERROR: Trying to add a NULL object on List<LISTTYPE>::pushFront method. Operation not succeeded." << std::endl;
+        }
+    }
+
+    template <typename LISTTYPE>
+    void List<LISTTYPE>::pushFront(const LISTTYPE& Info) {
+        if(Info) {
+            if (pFirst == nullptr) {
+                Node<LISTTYPE>* aux = new Node<LISTTYPE>();
+                aux->setInfo(Info);
+                pFirst = aux;
+                pLast = aux;
+            } else {
+                Node<LISTTYPE>* aux = new Node<LISTTYPE>();
+                aux->setInfo(Info);
+                pFirst->setPrev(aux);
+                aux->setNext(pFirst);
+                pFirst = aux;
+            }
+            listSize++;
+        }
+        else
+            std::cout << "ERROR: Trying to add a NULL object on List<LISTTYPE>::pushFront method. Operation not succeeded." << std::endl;
+    }
+
+    template <typename LISTTYPE>
+    void List<LISTTYPE>::removeElement(const LISTTYPE& element) {
+        if (pFirst == NULL) {
+            return;
+        }
+        else {
+            Node<LISTTYPE>* aux = pFirst;
+            while (aux != NULL && aux->getInfo() != element) {
+                aux = aux->getNext();
+            }
+
+            if (aux == NULL)
+                return;
+
+            if (aux->getPrev() != NULL)
+                aux->getPrev()->setNext(aux->getNext());
+            else
+                pFirst = aux->getNext();
+
+            if (aux->getNext() != NULL)
+                aux->getNext()->setPrev(aux->getPrev());
+            else
+                pLast = aux->getPrev();
+
+            delete aux;
+            listSize--;
+        }
     }
 
     template <class LISTTYPE>
@@ -172,7 +261,7 @@ namespace List {
     }
 
     template <class LISTTYPE>
-    LISTTYPE* List<LISTTYPE>::operator[](int pos) {
+    LISTTYPE List<LISTTYPE>::operator[](int pos) {
         if(pos<listSize || pos>=0) {
             Node<LISTTYPE>* pAux = NULL;
             pAux = pFirst;

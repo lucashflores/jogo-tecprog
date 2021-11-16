@@ -6,13 +6,21 @@
 
 class EntityList {
 private:
-    std::vector<Entities::Entity*> entityList;
+    List::List<Entities::Entity*> entityList;
 public:
+    using iterator = List::List<Entities::Entity*>::iterator;
     EntityList();
     ~EntityList();
+
     int getSize();
+
     Entities::Entity* operator[](int pos);
+
     void addEntity(Entities::Entity* pE);
     void removeEntity(Entities::Entity* pE);
+
     void renderAllEntities();
+
+    iterator begin();
+    iterator end();
 };
