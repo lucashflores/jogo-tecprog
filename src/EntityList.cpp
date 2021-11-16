@@ -46,4 +46,21 @@ void EntityList::renderAllEntities() {
     pE = NULL;
 }
 
+void EntityList::updateAllEntities(float dt) {
+    Entities::Entity* pE = NULL;
+    int size = getSize();
+    for (int i = 0; i < size; i++) {
+        pE = entityList[i];
+        pE->update(dt);
+        pE = NULL;
+    }
+    pE = NULL;
+}
 
+EntityList::iterator EntityList::begin() {
+    return entityList.begin();
+}
+
+EntityList::iterator EntityList::end() {
+    return entityList.end();
+}

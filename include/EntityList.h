@@ -21,6 +21,8 @@ public:
 
     void renderAllEntities();
 
+    void updateAllEntities(float dt);
+
     iterator begin();
     iterator end();
 };
