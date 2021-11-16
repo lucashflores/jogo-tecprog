@@ -47,6 +47,7 @@ namespace List {
         LISTTYPE operator[](int pos);
 
         class iterator {
+            friend class List;
         private:
             Node<LISTTYPE>* element;
             iterator(Node<LISTTYPE>* el){element = el;}
@@ -58,8 +59,6 @@ namespace List {
             bool operator!=(const iterator& other) {return !(*this == other);}
             iterator& operator++() {if (element != NULL) element = element->getNext(); return *this;}
             iterator operator++(int) {Node<LISTTYPE>* ret = element; if (element != NULL)element = element->getNext(); return iterator(ret);}
-
-            friend class List;
         };
 
         iterator begin() {return iterator(pFirst);}
