@@ -18,9 +18,11 @@ void EnemySpawner::spawnSmokerEnemy(Coordinates::Vector<float> pos) {
     smoker = NULL;
 }
 
+/*
 void EnemySpawner::spawnDogEnemy(Coordinates::Vector<float> pos) {
     Entities::DogEnemy* dog = NULL;
     dog = new Entities::DogEnemy(pos);
     pEntityList->addEntity(static_cast<Entities::Entity*>(dog));
     dog = NULL;
 }
+ */

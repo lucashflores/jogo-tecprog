@@ -7,7 +7,7 @@
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
 #include "Entities/Obstacle.h"
-#include "Stages/PlatformMaker.h"
+#include "Stages/TileMaker.h"
 #include "EntityList.h"
 #include "Managers/CollisionManager.h"
 #include "Entities/Background.h"
@@ -28,19 +28,24 @@ int main() {
 
     Entities::Background* background = new Entities::Background(Id::background1);
 
-
     Entities::Player* player = new Entities::Player(true);
-    entityList->addEntity(player);
-
+    entityList->addEntity(static_cast<Entities::Entity*>(player));
 
     Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(0.f, 0.f));
     smoker->setPlayer(player);
-    entityList->addEntity(smoker);
+    entityList->addEntity(static_cast<Entities::Entity*>(smoker));
 
-
-    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);
+    Stages::TileMaker* platformMaker = new Stages::TileMaker(entityList);
     platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 150.f), 10);
     platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
+    platformMaker->makeWall(Id::tile1 ,Coordinates::Vector<float>(0.f, 150.f), 8);
+    platformMaker->makeTileBackgroud(Id::tile4, Coordinates::Vector<float>(320.f, 36.f), 8, 3);
+
+
+
+
+
+
 
 
     float dt;
@@ -59,12 +64,11 @@ int main() {
 
 
         instance->clear();
-        player->update(dt);
-        smoker->update(dt);
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
         background->render();
         entityList->renderAllEntities();
+        entityList->updateAllEntities(dt);
         instance->display();
 
     }

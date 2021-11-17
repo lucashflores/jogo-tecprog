@@ -32,6 +32,21 @@ Ent::Ent(const Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<f
             imageCnt.setY(1);
             path = TILE_TEXTURE_PATH;
             break;
+        case Id::tile2:
+            imageCnt.setX(1);
+            imageCnt.setY(1);
+            path = TILE_TEXTURE_PATH;
+            break;
+        case Id::tile3:
+            imageCnt.setX(1);
+            imageCnt.setY(1);
+            path = TILE_TEXTURE_PATH;
+            break;
+        case Id::tile4:
+            imageCnt.setX(1);
+            imageCnt.setY(1);
+            path = TILE4_TEXTURE_PATH;
+            break;
         case Id::enemy1:
             imageCnt.setX(6);
             imageCnt.setY(3);

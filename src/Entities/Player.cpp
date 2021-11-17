@@ -47,20 +47,23 @@ void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
                 if (getPosition().getY() > pE->getPosition().getY())
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
                 else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
+                    setPosition(
+                            Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
                 setIsOnGround(true);
-            }
-            else {
+            } else {
                 if (getPosition().getX() < pE->getPosition().getX())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
+                    setPosition(
+                            Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
                 else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
+                    setPosition(
+                            Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
             }
+            return ;
         }
+        else if (pE->getId() == Id::tile4) {return;}
         else
             setIsOnGround(false);
     }
-
 }
 
 

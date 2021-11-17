@@ -11,6 +11,8 @@ public:
         enemy3 = 30,
         tile1 = 100,
         tile2 = 200,
+        tile3 = 300,
+        tile4 = 400,
         oilTile = 300,
         fire = 400,
         box = 500,

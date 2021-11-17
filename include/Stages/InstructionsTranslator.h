@@ -4,6 +4,9 @@
 
 namespace Stages {
     class InstructionsTranslator {
-
+    public:
+        InstructionsTranslator();
+        ~InstructionsTranslator();
+        void translateAllInstructions(std::string instructionsPath);
     };
 }

@@ -12,8 +12,8 @@ namespace Stages {
     public:
         ObstacleBuilder(EntityList* pEL);
         ~ObstacleBuilder();
-        void buildBox(Coordinates::Vector<float> pos;
+        void buildBox(Coordinates::Vector<float> pos);
         void buildOilTile(Coordinates::Vector<float> pos);
-        void buildFire(Coordinates::Vector<float> pos)
+        void buildFire(Coordinates::Vector<float> pos);
     };
 }

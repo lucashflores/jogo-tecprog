@@ -1,0 +1,18 @@
+#define TILE1_BOTTOM "../../assets/tiles/tile1Bottom"
+#define TILE1_BOTTOM_CORNER_LEFT "../../assets/tiles/tile1BottomCornerLeft"
+#define TILE1_BOTTOM_CORNER_RIGHT "../../assets/tiles/tile1BottomCornerRight"
+#define TILE1_TOP "../../assets/tiles/tile1Top"
+#define TILE1_TOP_CORNER_LEFT "../../assets/tiles/tile1TopCornerLeft"
+#define TILE1_TOP_CORNER_RIGHT "../../assets/tiles/tile1TopCornerLeft"
+#define TILE1_WALL_LEFT "../../assets/tiles/tile1WallLeft"
+#define TILE1_WALL_RIGHT "../../assets/tiles/tile1WallRight"
+
+#define TILE2_BOTTOM "../../assets/tiles/tile2Bottom"
+#define TILE2_BOTTOM_CORNER_LEFT "../../assets/tiles/tile2BottomCornerLeft"
+#define TILE2_BOTTOM_CORNER_RIGHT "../../assets/tiles/tile2BottomCornerRight"
+#define TILE2_TOP "../../assets/tiles/tile2Top"
+#define TILE2_TOP_CORNER_LEFT "../../assets/tiles/tile2TopCornerLeft"
+#define TILE2_TOP_CORNER_RIGHT "../../assets/tiles/tile2TopCornerLeft"
+#define TILE2_WALL_LEFT "../../assets/tiles/tile2WallLeft"
+#define TILE2_WALL_RIGHT "../../assets/tiles/tile2WallRight"
+

@@ -2,7 +2,7 @@
 
 #include "EntityList.h"
 #include "Entities/SmokerEnemy.h"
-#include "Entities/DogEnemy.h"
+//#include "Entities/DogEnemy.h"
 
 
 namespace Stages {
