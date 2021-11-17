@@ -7,5 +7,6 @@ namespace Entities {
         Fire(Coordinates::Vector<float> pos);
         ~Fire();
         void collide(Entity* pE, Coordinates::Vector<float> collision);
+        void update(float dt);
     };
 }

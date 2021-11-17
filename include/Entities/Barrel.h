@@ -4,10 +4,10 @@
 
 namespace Entities {
 
-    class Box: public Obstacle {
+    class Barrel: public Obstacle {
     public:
-        Box(Coordinates::Vector<float> pos);
-        ~Box();
+        Barrel(Coordinates::Vector<float> pos);
+        ~Barrel();
         void collide(Entity* pE, Coordinates::Vector<float> collision);
     };
 

@@ -30,7 +30,7 @@ void SmokerEnemy::idle(){
 
 void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
-        if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2) {
+        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
             if (collision.getX() > collision.getY()) {
                 if (getPosition().getY() > pE->getPosition().getY())
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));

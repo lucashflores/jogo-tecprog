@@ -2,7 +2,7 @@
 using namespace Entities;
 
 Fire::Fire(Coordinates::Vector<float> pos):
-Obstacle(Id::fire, Coordinates::Vector<float>(32.f, 32.f), pos, 5) {
+Obstacle(Id::fire, Coordinates::Vector<float>(32.f, 32.f), Coordinates::Vector<float>(32.f, 32.f), pos, 5) {
 
 }
 
@@ -12,5 +12,9 @@ Fire::~Fire() {
 
 void Fire::collide(Entity *pE, Coordinates::Vector<float> collision) {
     return;
+}
+
+void Fire::update(float dt) {
+    sprite->animationUpdate(0, false, dt);
 }
 

@@ -8,11 +8,13 @@
 #include "Entities/Player.h"
 #include "Entities/Obstacle.h"
 #include "Stages/TileMaker.h"
+#include "Stages/ObstacleBuilder.h"
 #include "EntityList.h"
 #include "Managers/CollisionManager.h"
 #include "Entities/Background.h"
 #include "Id.h"
 #include "Coordinates/VectorTemplate.h"
+#include "Stages/InstructionsTranslator.h"
 
 int main() {
 
@@ -35,16 +37,11 @@ int main() {
     smoker->setPlayer(player);
     entityList->addEntity(static_cast<Entities::Entity*>(smoker));
 
-    Stages::TileMaker* platformMaker = new Stages::TileMaker(entityList);
-    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 150.f), 10);
-    platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
-    platformMaker->makeWall(Id::tile1 ,Coordinates::Vector<float>(0.f, 150.f), 8);
-    platformMaker->makeTileBackgroud(Id::tile4, Coordinates::Vector<float>(320.f, 36.f), 8, 3);
-
-
-
-
-
+    Stages::ObstacleBuilder* obstacleBuilder = new Stages::ObstacleBuilder(entityList);
+    obstacleBuilder->buildBarrel(Coordinates::Vector<float>(96.f, 121.f));
+    obstacleBuilder->buildOilTile(Coordinates::Vector<float>(576.f, 100.f));
+    obstacleBuilder->buildFire(Coordinates::Vector<float>(64.f, 118.f));
+    obstacleBuilder->buildSign(Coordinates::Vector<float>(128.f, 118.f));
 
 
 

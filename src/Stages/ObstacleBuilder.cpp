@@ -12,11 +12,11 @@ ObstacleBuilder::~ObstacleBuilder() {
     pEntityList = NULL;
 }
 
-void ObstacleBuilder::buildBox(Coordinates::Vector<float> pos) {
-    Entities::Box* box = NULL;
-    box = new Entities::Box(pos);
-    pEntityList->addEntity(static_cast<Entities::Entity*>(box));
-    box = NULL;
+void ObstacleBuilder::buildBarrel(Coordinates::Vector<float> pos) {
+    Entities::Barrel* barrel = NULL;
+    barrel = new Entities::Barrel(pos);
+    pEntityList->addEntity(static_cast<Entities::Entity*>(barrel));
+    barrel = NULL;
 }
 
 void ObstacleBuilder::buildOilTile(Coordinates::Vector<float> pos) {
@@ -32,3 +32,11 @@ void ObstacleBuilder::buildFire(Coordinates::Vector<float> pos) {
     pEntityList->addEntity(static_cast<Entities::Entity*>(fire));
     fire = NULL;
 }
+
+void ObstacleBuilder::buildSign(Coordinates::Vector<float> pos) {
+    Entities::Sign* sign = NULL;
+    sign = new Entities::Sign(pos);
+    pEntityList->addEntity(static_cast<Entities::Entity*>(sign));
+    sign = NULL;
+}
+

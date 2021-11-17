@@ -8,11 +8,14 @@ namespace Stages {
     class TileMaker {
     private:
         EntityList* pEntityList;
+        int stage;
     public:
         TileMaker(EntityList* pEL);
         ~TileMaker();
-        void makePlatform(Id::ids tileId, Coordinates::Vector<float> initialPos, unsigned int size);
-        void makeWall(Id::ids tileId, Coordinates::Vector<float> initialPos, unsigned int size);
-        void makeTileBackgroud(Id::ids tileId, Coordinates::Vector<float> initialPos, unsigned int sizeX, unsigned int sizeY);
+        void setStage(int stg);
+        void makePlatform(Coordinates::Vector<float> initialPos, unsigned int size);
+        void makeRoof(Coordinates::Vector<float> initialPos, unsigned int size);
+        void makeWall(Coordinates::Vector<float> initialPos, unsigned int size, bool right);
+        void makeTileBackground(Coordinates::Vector<float> initialPos, Coordinates::Vector<unsigned int> size);
     };
 }
