@@ -2,8 +2,8 @@
 #include "EntityList.h"
 using namespace Entities;
 
-Entity::Entity(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos):
-Ent(i, size, pos), hitBox(hit), position(pos) {
+Entity::Entity(Id::ids i, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos):
+Ent(i), hitBox(hit), position(pos) {
     position = pos;
 }
 

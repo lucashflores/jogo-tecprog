@@ -19,6 +19,10 @@ namespace Entities {
 
         void idle();
 
+        void attack(Character* pChar);
+
+        void initializeSprite();
+
         void collide(Entity* pE, Coordinates::Vector<float> collision);
 
         void update(float dt) override;

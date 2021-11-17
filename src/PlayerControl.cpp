@@ -9,6 +9,7 @@ PlayerControl::PlayerControl(Entities::Player* p): controls() {
         controls["left"] = "A";
         controls["right"] = "D";
         controls["jump"] = "W";
+        controls["attack"] = "Space";
     }
 }
 
@@ -32,6 +33,9 @@ void PlayerControl::notify() {
     //Jump
     if (pInputManager->wasKeyPressed(controls.at("jump")))
         player->jump();
+
+    if (pInputManager->wasKeyPressed(controls.at("attack")))
+        player->setIsAttacking(true);
 
 
 

@@ -9,10 +9,12 @@ namespace Entities {
 
     class Entity: public Ent {
     protected:
+
         Coordinates::Vector<float> position;
         Coordinates::Vector<float> hitBox;
+
     public:
-        Entity(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
+        Entity(Id::ids i, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
         virtual ~Entity();
 

@@ -5,10 +5,8 @@
 using namespace Entities;
 
 Enemy::Enemy(Id::ids idEnemy, unsigned char life, unsigned char dmg,
-             Coordinates::Vector<float> size,
-             Coordinates::Vector<float> hit,
-             Coordinates::Vector<float> pos,float view_rng):
-Character(idEnemy, life, dmg, size, hit, pos), isCommitted(false), view_range(view_rng) {
+             Coordinates::Vector<float> hit, Coordinates::Vector<float> pos, float view_rng):
+Character(idEnemy, life, dmg, hit, pos), isCommitted(false), view_range(view_rng) {
     player1 = NULL;
     player2 = NULL;
     target = NULL;

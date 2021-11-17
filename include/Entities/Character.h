@@ -7,13 +7,14 @@ namespace Entities {
     class Character: public Entity {
     protected:
         Coordinates::Vector<float> velocity;
-        unsigned char life;
-        unsigned char damage;
+        int life;
+        int damage;
         bool isFacingLeft;
         bool isWalking;
         bool isOnGround;
+        bool isAttacking;
     public:
-        Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
+        Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
         virtual ~Character();
 
@@ -25,17 +26,23 @@ namespace Entities {
 
         void setLife(unsigned int l);
 
-        unsigned int getLife() const;
+        int getLife() const;
 
         void setDamage(unsigned int d);
 
-        unsigned int getDamage() const;
+        int getDamage() const;
+
+        void eliminate();
 
         void setIsFacingLeft(bool facingLeft);
 
         void setIsWalking(bool walking);
 
         void setIsOnGround(bool isOnGround);
+
+        void setIsAttacking(bool attacking);
+
+        virtual void attack(Character* pChar) = 0;
 
         virtual void collide(Entity* pE, Coordinates::Vector<float> collision)=0;
 

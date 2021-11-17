@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Entities/Enemy.h>
 #include <Entities/SmokerEnemy.h>
+#include <Entities/DogEnemy.h>
 #include "Managers/GraphicManager.h"
 #include "Managers/EventManager.h"
 #include "Animation.h"
@@ -37,11 +38,14 @@ int main() {
     smoker->setPlayer(player);
     entityList->addEntity(smoker);
 
+    Entities::DogEnemy* dog1 = new Entities::DogEnemy(Coordinates::Vector<float>(500.f, 0.f));
+    dog1->setPlayer(player);
+    entityList->addEntity(dog1);
+
 
     Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);
-    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 150.f), 10);
-    platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
-
+    platformMaker->makePlatform(Id::tile2, Coordinates::Vector<float>(0.f, 150.f), 10);
+    platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 40);
 
     float dt;
     sf::Clock clock;
@@ -59,8 +63,7 @@ int main() {
 
 
         instance->clear();
-        player->update(dt);
-        smoker->update(dt);
+        entityList->updateAllEntities(dt);
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
         background->render();

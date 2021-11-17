@@ -27,9 +27,13 @@ namespace Entities {
 
         void jump();
 
+        void attack(Character* pChar) override;
+
+        void initializeSprite();
+
         void collide(Entity* pE, Coordinates::Vector<float> collision);
 
-        void update(float dt);
+        void update(float dt) override;
     };
 
 }

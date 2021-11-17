@@ -3,8 +3,9 @@ using namespace Entities;
 
 #include "Id.h"
 
-SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos)
-    : Enemy(Id::enemy1, 20, 5, Coordinates::Vector<float>(48.f, 48.f), Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {}
+SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::enemy1, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+    initializeSprite();
+}
 
 SmokerEnemy::~SmokerEnemy() = default;
 
@@ -74,3 +75,13 @@ void SmokerEnemy::update(float dt){
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
 }
+
+void SmokerEnemy::attack(Character* pChar) {
+    return;
+}
+
+void SmokerEnemy::initializeSprite() {
+    Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 3);
+    Coordinates::Vector<float> size= Coordinates::Vector<float>(48.f, 48.f);
+    sprite = new Animation(ENEMY1_TEXTURE_PATH, size, imageCnt,0.25f);
+    sprite->changePosition(position);}
