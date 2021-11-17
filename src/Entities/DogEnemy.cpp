@@ -1,34 +1,51 @@
-#include "Entities/SmokerEnemy.h"
+#include "Entities/DogEnemy.h"
 using namespace Entities;
 
 #include "Id.h"
 
-SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos)
-    : Enemy(Id::enemy1, 20, 5, Coordinates::Vector<float>(48.f, 48.f), Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {}
+DogEnemy::DogEnemy(Coordinates::Vector<float> pos)
+    : Enemy(Id::enemy2, 20, 5, Coordinates::Vector<float>(40.f, 40.f), Coordinates::Vector<float>(23.0f, 23.0f), pos, 270.0) {}
 
-SmokerEnemy::~SmokerEnemy() = default;
+DogEnemy::~DogEnemy() = default;
 
-void SmokerEnemy::walk(float dt) {
+void DogEnemy::walk(float dt) {
 
     if (target->getPosition().getX() - this->getPosition().getX() >= 0){
-        velocity.setX(25.f);
+        if(isFacingLeft){
+            if(getVelocity().getX() < 0)
+                velocity.setX(getVelocity().getX() + DOG_CHANGEDIRECTIONDRAGRATE * dt);
+            else
+                velocity.setX(0);
+        }
+        if(getVelocity().getX() < DOG_TERMINALVELOCITY)
+            velocity.setX(getVelocity().getX() + DOG_ACCELERATION * dt );
+        else
+            velocity.setX(DOG_TERMINALVELOCITY);
         setIsFacingLeft(false);
     }
     else {
-        velocity.setX(-25.0f);
+        if(!isFacingLeft){
+            if(getVelocity().getX() > 0)
+                velocity.setX(getVelocity().getX() - DOG_CHANGEDIRECTIONDRAGRATE * dt);
+            else
+                velocity.setX(0);
+        }
+        if(getVelocity().getX() > -DOG_TERMINALVELOCITY)
+            velocity.setX(getVelocity().getX() - DOG_ACCELERATION * dt );
+        else
+            velocity.setX(-DOG_TERMINALVELOCITY);
         setIsFacingLeft(true);
     }
 
     setIsWalking(true);
 }
 
-void SmokerEnemy::idle(){
+void DogEnemy::idle(){
+
     setIsWalking(false);
-
-
 }
 
-void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
+void DogEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
         if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2 || pE->getId() == Id::tile3 || pE->getId() == Id::tile4) {
             if (collision.getX() > collision.getY()) {
@@ -50,18 +67,18 @@ void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     }
 }
 
-void SmokerEnemy::update(float dt){
+void DogEnemy::update(float dt){
 
     chooseTarget();
 
     (isCommitted) ? walk(dt): idle();
 
     if (isWalking) {
-        sprite->animationUpdate(2, isFacingLeft, dt);
+        sprite->animationUpdate(4, isFacingLeft, dt);
     }
     else {
         sprite->animationUpdate(0, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.99f);
+        velocity.setX(velocity.getX() * DOG_STOPDRAGRATE);
     }
 
     if (!isOnGround)
@@ -70,6 +87,7 @@ void SmokerEnemy::update(float dt){
         velocity.setY(0.f);
         setIsOnGround(false);
     }
+
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);

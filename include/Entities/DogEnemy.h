@@ -1,19 +1,23 @@
 #pragma once
 
+#define DOG_TERMINALVELOCITY 150.f
+#define DOG_ACCELERATION 200.f
+#define DOG_STOPDRAGRATE 0.996f
+#define DOG_CHANGEDIRECTIONDRAGRATE 2200.f
 
 #include "Entities/Enemy.h"
 
 namespace Entities {
 
 
-    class SmokerEnemy : public Enemy {
+    class DogEnemy : public Enemy {
     private:
 
 
     public:
-        SmokerEnemy(Coordinates::Vector<float> pos);
+        DogEnemy(Coordinates::Vector<float> pos);
 
-        ~SmokerEnemy() override;
+        ~DogEnemy() override;
 
         void walk(float dt);
 

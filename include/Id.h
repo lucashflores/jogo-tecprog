@@ -14,6 +14,8 @@ public:
         oilTile = 300,
         fire = 400,
         box = 500,
+        tile3 = 600,
+        tile4 = 700,
         background1 = 1000,
         background2 = 2000,
     };
