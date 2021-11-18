@@ -16,12 +16,14 @@ namespace Entities {
         Player* target;
 
     public:
-        Enemy(Id::ids idEnemy, unsigned char life, unsigned char dmg, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos, float view_rng);
+        Enemy(Id::ids idEnemy, unsigned int life, unsigned int dmg, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos, float view_rng);
         ~Enemy() override;
 
         void setPlayer(Player* player);
 
         void setTarget(Player* tg);
+
+        double getTargetDist();
 
         Player* chooseTarget();
     };

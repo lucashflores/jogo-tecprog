@@ -4,7 +4,7 @@ using namespace Entities;
 #include <iostream>
 
 Player::Player(bool isPlayerOne):
-Character(isPlayerOne? Id::player1 : Id::player2,100, 10,
+Character(isPlayerOne? Id::player1 : Id::player2,5000, 10,
           Coordinates::Vector<float>(16.f, 32.f),
           Coordinates::Vector<float>(0.f, 84.f)) {
     playerControl = new PlayerControl(this);
@@ -80,6 +80,21 @@ void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
     }
 }
 
+void Player::initializeSprite() {
+
+    Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 8);
+    Coordinates::Vector<float> size= Coordinates::Vector<float>(48.f, 48.f);
+
+    if(getId() == Id::player1){
+        sprite = new Animation(PLAYER1_TEXTURE_PATH, size, imageCnt,0.10f);
+    }
+    else if(getId() == Id::player2) {
+        sprite = new Animation(PLAYER2_TEXTURE_PATH, size, imageCnt, 0.10f);
+    }
+
+    sprite->changePosition(position);
+
+}
 
 void Player::update(float dt) {
     playerControl->notify();
@@ -116,20 +131,4 @@ void Player::update(float dt) {
                                            getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
     sprite->centerViewHere();
-}
-
-void Player::initializeSprite() {
-
-    Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 8);
-    Coordinates::Vector<float> size= Coordinates::Vector<float>(48.f, 48.f);
-
-    if(getId() == Id::player1){
-        sprite = new Animation(PLAYER1_TEXTURE_PATH, size, imageCnt,0.10f);
-    }
-    else if(getId() == Id::player2) {
-        sprite = new Animation(PLAYER2_TEXTURE_PATH, size, imageCnt, 0.10f);
-    }
-
-    sprite->changePosition(position);
-
 }

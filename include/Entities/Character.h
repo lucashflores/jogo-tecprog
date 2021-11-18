@@ -6,6 +6,7 @@ namespace Entities {
 
     class Character: public Entity {
     protected:
+
         Coordinates::Vector<float> velocity;
         int life;
         int damage;
@@ -13,6 +14,8 @@ namespace Entities {
         bool isWalking;
         bool isOnGround;
         bool isAttacking;
+        float attackTimer;
+
     public:
         Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 

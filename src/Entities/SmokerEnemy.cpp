@@ -2,6 +2,7 @@
 using namespace Entities;
 
 #include "Id.h"
+#include <iostream>
 
 SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::enemy1, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
     initializeSprite();
@@ -29,6 +30,19 @@ void SmokerEnemy::idle(){
 
 }
 
+void SmokerEnemy::attack(Character* pChar) {
+
+    if ((pChar->getLife() - damage) > 0) {
+        pChar->setLife(pChar->getLife() - damage);
+        std::cout << "Deu dano!" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
+    } else {
+        pChar->eliminate();
+        std::cout << "Player Eliminado" << std::endl;
+    }
+
+    attackTimer = 0;
+}
+
 void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
         if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2 || pE->getId() == Id::tile3 || pE->getId() == Id::tile4) {
@@ -51,18 +65,43 @@ void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     }
 }
 
+void SmokerEnemy::initializeSprite() {
+    Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 3);
+    Coordinates::Vector<float> size= Coordinates::Vector<float>(48.f, 48.f);
+    sprite = new Animation(ENEMY1_TEXTURE_PATH, size, imageCnt,0.25f);
+    sprite->changePosition(position);
+}
+
 void SmokerEnemy::update(float dt){
 
     chooseTarget();
 
+    // Vai ficar andando ou parado? Seta o movimento que vai fazer
     (isCommitted) ? walk(dt): idle();
 
-    if (isWalking) {
+    // Vai morder?
+
+    if (getTargetDist() < 30.f && attackTimer < 1.5f) {
+        attackTimer = attackTimer + dt;
+        if(attackTimer > 0.f)
+            setIsAttacking(true);
+
+    } else {
+
+        if(isAttacking && attackTimer > 1.5f) attack(target);
+        setIsAttacking(false);
+        attackTimer = 0;
+    }
+
+    if (isAttacking) {
+        sprite->animationUpdate(1, isFacingLeft, dt);
+    }
+    else if(isWalking) {
         sprite->animationUpdate(2, isFacingLeft, dt);
     }
     else {
         sprite->animationUpdate(0, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.99f);
+        velocity.setX(velocity.getX() * 0.996f);
     }
 
     if (!isOnGround)
@@ -72,16 +111,7 @@ void SmokerEnemy::update(float dt){
         setIsOnGround(false);
     }
 
+
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
 }
-
-void SmokerEnemy::attack(Character* pChar) {
-    return;
-}
-
-void SmokerEnemy::initializeSprite() {
-    Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 3);
-    Coordinates::Vector<float> size= Coordinates::Vector<float>(48.f, 48.f);
-    sprite = new Animation(ENEMY1_TEXTURE_PATH, size, imageCnt,0.25f);
-    sprite->changePosition(position);}

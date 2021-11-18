@@ -1,9 +1,9 @@
 #pragma once
 
-#define DOG_TERMINALVELOCITY 150.f
-#define DOG_ACCELERATION 220.f
+#define DOG_TERMINALVELOCITY 180.f
+#define DOG_ACCELERATION 350.f
 #define DOG_STOPDRAGRATE 0.996f
-#define DOG_CHANGEDIRECTIONDRAGRATE 2600.f
+#define DOG_CHANGEDIRECTIONDRAGRATE 8600.f
 
 #include "Entities/Enemy.h"
 
@@ -13,6 +13,7 @@ namespace Entities {
     class DogEnemy : public Enemy {
     private:
 
+        float idleTimer;
 
     public:
         DogEnemy(Coordinates::Vector<float> pos);
@@ -21,9 +22,9 @@ namespace Entities {
 
         void walk(float dt);
 
-        void idle();
+        void idle(float dt);
 
-        void attack(Character* pChar) override;
+        void attack(Character* pChar);
 
         void initializeSprite();
 

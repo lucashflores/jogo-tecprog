@@ -9,7 +9,6 @@ namespace Entities {
     class SmokerEnemy : public Enemy {
     private:
 
-
     public:
         SmokerEnemy(Coordinates::Vector<float> pos);
 

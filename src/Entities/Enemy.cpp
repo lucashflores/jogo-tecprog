@@ -4,7 +4,7 @@
 
 using namespace Entities;
 
-Enemy::Enemy(Id::ids idEnemy, unsigned char life, unsigned char dmg,
+Enemy::Enemy(Id::ids idEnemy, unsigned int life, unsigned int dmg,
              Coordinates::Vector<float> hit, Coordinates::Vector<float> pos, float view_rng):
 Character(idEnemy, life, dmg, hit, pos), isCommitted(false), view_range(view_rng) {
     player1 = NULL;
@@ -69,4 +69,15 @@ Player* Enemy::chooseTarget() {
             isCommitted = false;
     }
 
+}
+
+double Enemy::getTargetDist() {
+    if(target) {
+        return abs(sqrt(pow(target->getPosition().getX() - getPosition().getX(), 2) +
+                pow(target->getPosition().getY() - getPosition().getY(), 2)));
+    }
+    else
+        std::cout <<"Enemy cannot get Target distance, target is NULL"<< std::endl;
+
+    return -1;
 }
