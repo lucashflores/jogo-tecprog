@@ -18,6 +18,7 @@ namespace Entities {
     private:
         PlayerControl* playerControl;
         bool isPlayerOne;
+
     public:
         Player(bool isPlayerOne=true);
 

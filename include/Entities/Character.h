@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity.h"
+#include "Entities/Entity.h"
 
 namespace Entities {
 
@@ -27,6 +27,8 @@ namespace Entities {
 
         Coordinates::Vector<float> getVelocity() const;
 
+        void eliminate();
+
         void setLife(unsigned int l);
 
         int getLife() const;
@@ -34,8 +36,6 @@ namespace Entities {
         void setDamage(unsigned int d);
 
         int getDamage() const;
-
-        void eliminate();
 
         void setIsFacingLeft(bool facingLeft);
 
@@ -50,5 +50,7 @@ namespace Entities {
         virtual void collide(Entity* pE, Coordinates::Vector<float> collision)=0;
 
         virtual void update(float dt) = 0;
+
+
     };
 }

@@ -4,7 +4,7 @@ using namespace Entities;
 #include <iostream>
 
 Player::Player(bool isPlayerOne):
-Character(isPlayerOne? Id::player1 : Id::player2,5000, 10,
+Character(isPlayerOne? Id::player1 : Id::player2,50, 10,
           Coordinates::Vector<float>(16.f, 32.f),
           Coordinates::Vector<float>(0.f, 84.f)) {
     playerControl = new PlayerControl(this);
@@ -55,12 +55,16 @@ void Player::attack(Character* pChar) {
 void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
         if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2 || pE->getId() == Id::tile3 || pE->getId() == Id::tile4) {
+
             if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY())
+                if (getPosition().getY() > pE->getPosition().getY()) {
+                    setVelocity(Coordinates::Vector<float>(getVelocity().getX(), 0.f));
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                else
+                } else{
+                    setIsOnGround(true);
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                setIsOnGround(true);
+                }
+
             }
             else {
                 if (getPosition().getX() < pE->getPosition().getX()) {
@@ -71,10 +75,9 @@ void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
                     setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
             }
         }
+        else if (pE->getId() == Id::projectile){return;}
+
         else {
-            if (isAttacking) {
-                attack(dynamic_cast<Character*>(pE));
-            }
             setIsOnGround(false);
         }
     }
@@ -110,11 +113,11 @@ void Player::update(float dt) {
     }
     else if(isAttacking && !isWalking){
         sprite->animationUpdate(2, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.992f);
+        velocity.setX(velocity.getX() * 0.98f);
     }
     else {
         sprite->animationUpdate(0, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.992f);
+        velocity.setX(velocity.getX() * 0.98f);
     }
 
     if (!isOnGround) {

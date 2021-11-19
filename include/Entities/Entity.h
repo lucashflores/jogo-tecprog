@@ -6,12 +6,13 @@
 
 namespace Entities {
 
-
     class Entity: public Ent {
     protected:
 
         Coordinates::Vector<float> position;
         Coordinates::Vector<float> hitBox;
+
+        bool isAlive;
 
     public:
         Entity(Id::ids i, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
@@ -23,6 +24,10 @@ namespace Entities {
         const Coordinates::Vector<float> getPosition() const;
 
         const Coordinates::Vector<float> getHitBox() const;
+
+        virtual void eliminate();
+
+        bool getIsAlive();
 
         virtual void collide(Entity* pE, Coordinates::Vector<float> collision) = 0;
 

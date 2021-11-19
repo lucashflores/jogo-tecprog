@@ -13,11 +13,11 @@ SmokerEnemy::~SmokerEnemy() = default;
 void SmokerEnemy::walk(float dt) {
 
     if (target->getPosition().getX() - this->getPosition().getX() >= 0){
-        velocity.setX(25.f);
+        velocity.setX(45.f);
         setIsFacingLeft(false);
     }
     else {
-        velocity.setX(-25.0f);
+        velocity.setX(-45.0f);
         setIsFacingLeft(true);
     }
 
@@ -26,8 +26,6 @@ void SmokerEnemy::walk(float dt) {
 
 void SmokerEnemy::idle(){
     setIsWalking(false);
-
-
 }
 
 void SmokerEnemy::attack(Character* pChar) {
@@ -60,6 +58,7 @@ void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
                     setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
             }
         }
+        else if (pE->getId() == Id::projectile){return;}
         else
             setIsOnGround(false);
     }
@@ -81,14 +80,14 @@ void SmokerEnemy::update(float dt){
 
     // Vai morder?
 
-    if (getTargetDist() < 30.f && attackTimer < 1.5f) {
-        attackTimer = attackTimer + dt;
+    if (getTargetDist() < 30.f && attackTimer < 0.5f) {
+        attackTimer += dt;
         if(attackTimer > 0.f)
             setIsAttacking(true);
 
     } else {
 
-        if(isAttacking && attackTimer > 1.5f) attack(target);
+        if(isAttacking && attackTimer > 0.5f) attack(target);
         setIsAttacking(false);
         attackTimer = 0;
     }
