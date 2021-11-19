@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EntityList.h"
+#include <math.h>
 
 namespace Managers {
 

@@ -5,7 +5,7 @@
 namespace Entities {
 
     class Obstacle : public Entity {
-    private:
+    protected:
         unsigned int damage;
     public:
         Obstacle(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos, unsigned int d = 0);

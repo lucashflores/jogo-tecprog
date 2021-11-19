@@ -1,18 +1,20 @@
 #pragma once
 
-#include "Entities/Tile.h"
 #include "EntityList.h"
-
+#include "Entities/Tile.h"
 
 namespace Stages {
-    class TileMaker {
+
+    class TileInstructionsReader;
+
+    class TileFactory {
     private:
-        EntityList* pEntityList;
         int stage;
+        EntityList* pEntityList;
     public:
-        TileMaker(EntityList* pEL);
-        ~TileMaker();
-        void setStage(int stg);
+        TileFactory(int stg, EntityList* pEL);
+        ~TileFactory();
+        void readAndExecuteInstructions(std::string instructionsPath);
         void makePlatform(Coordinates::Vector<float> initialPos, unsigned int size);
         void makeRoof(Coordinates::Vector<float> initialPos, unsigned int size);
         void makeWall(Coordinates::Vector<float> initialPos, unsigned int size, bool right);

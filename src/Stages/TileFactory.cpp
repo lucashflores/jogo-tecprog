@@ -1,26 +1,24 @@
-#include "Stages/TileMaker.h"
+#include "Stages/TileFactory.h"
+#include "Stages/TileInstructionsReader.h"
 using namespace Stages;
 
-#include "Defines/tileafx.h"
-
-TileMaker::TileMaker(EntityList* pEL) {
-    pEntityList = NULL;
+TileFactory::TileFactory(int stg, EntityList* pEL): stage(stg) {
     if (pEL)
         pEntityList = pEL;
-
 }
 
-TileMaker::~TileMaker() {
+TileFactory::~TileFactory() {
     pEntityList = NULL;
 }
 
-void TileMaker::setStage(int stg) {
-    stage = stg;
-    if (stage != 1 && stage != 2)
-        stage = 1;
+void TileFactory::readAndExecuteInstructions(std::string instructionsPath) {
+    TileInstructionsReader* instructionsReader = new TileInstructionsReader(this);
+    instructionsReader->readInstructions(instructionsPath);
+    if (instructionsReader)
+        delete instructionsReader;
 }
 
-void TileMaker::makePlatform(Coordinates::Vector<float> initialPos, unsigned int size) {
+void TileFactory::makePlatform(Coordinates::Vector<float> initialPos, unsigned int size) {
     Coordinates::Vector<float> currentPos = initialPos;
     Entities::Tile* pT = NULL;
     Id::ids tileId = stage == 1? Id::tile1Bottom : Id::tile2Bottom;
@@ -32,7 +30,7 @@ void TileMaker::makePlatform(Coordinates::Vector<float> initialPos, unsigned int
     }
 }
 
-void TileMaker::makeRoof(Coordinates::Vector<float> initialPos, unsigned int size) {
+void TileFactory::makeRoof(Coordinates::Vector<float> initialPos, unsigned int size) {
     Coordinates::Vector<float> currentPos = initialPos;
     Entities::Tile* pT = NULL;
     Id::ids tileId = stage == 1? Id::tile1Top : Id::tile2Top;
@@ -44,7 +42,7 @@ void TileMaker::makeRoof(Coordinates::Vector<float> initialPos, unsigned int siz
     }
 }
 
-void TileMaker::makeWall(Coordinates::Vector<float> initialPos, unsigned int size, bool right) {
+void TileFactory::makeWall(Coordinates::Vector<float> initialPos, unsigned int size, bool right) {
     Coordinates::Vector<float> currentPos = initialPos;
     Entities::Tile* pT = NULL;
     if (right) {
@@ -83,7 +81,7 @@ void TileMaker::makeWall(Coordinates::Vector<float> initialPos, unsigned int siz
     }
 }
 
-void TileMaker::makeTileBackground(Coordinates::Vector<float> initialPos,
+void TileFactory::makeTileBackground(Coordinates::Vector<float> initialPos,
                                   Coordinates::Vector<unsigned int> size) {
     Id::ids tileId = stage == 1? Id::tile1Background : Id::tile2Background;
     Coordinates::Vector<float> currentPos = initialPos;

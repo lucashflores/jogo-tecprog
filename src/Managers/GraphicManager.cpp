@@ -45,8 +45,8 @@ void GraphicManager::closeWindow() {
     window->close();
 }
 
-void GraphicManager::centerView(sf::Vector2f pos) {
-    view.setCenter(pos);
+void GraphicManager::centerView(Coordinates::Vector<float> pos) {
+    view.setCenter(sf::Vector2f (pos.getX(), pos.getY()));
     window->setView(view);
 }
 

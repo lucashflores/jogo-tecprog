@@ -37,15 +37,6 @@ void Animation::render() {
     pGraphicM->render(&body);
 }
 
-void Animation::centerViewHere() {
-    pGraphicM->centerView(body.getPosition());
-}
-
-
-void Animation::setImageCount(sf::Vector2u imgCnt) {
-    imageCount = imgCnt;
-}
-
 void Animation::animationUpdate(int row, bool facingLeft, float dt) {
 
     totalTime += dt;

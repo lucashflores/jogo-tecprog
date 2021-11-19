@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "IManager.h"
 #include <string.h>
 
 namespace Managers {
@@ -31,7 +31,7 @@ namespace Managers {
 
         void closeWindow();
 
-        void centerView(sf::Vector2f pos);
+        void centerView(Coordinates::Vector<float> pos);
 
         sf::Texture* loadTexture(std::string path);
     };

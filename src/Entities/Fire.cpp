@@ -14,7 +14,3 @@ void Fire::collide(Entity *pE, Coordinates::Vector<float> collision) {
     return;
 }
 
-void Fire::update(float dt) {
-    sprite->animationUpdate(0, false, dt);
-}
-

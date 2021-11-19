@@ -86,5 +86,4 @@ void Player::update(float dt) {
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX(),
                                            getPosition().getY() + getVelocity().getY()));
     sprite->changePosition(position);
-    sprite->centerViewHere();
 }

@@ -1,9 +1,9 @@
 platform: builder entity positionX positionY size
 wall: builder entity positionX positionY size 
 backgroundWall: builder entity positionX positionY sizeX sizeY
-objects: builder entity positionX positionY
+objects: builder entity positionX positionY chance(0-1)
 wall: builder entity positionX positionY 0/1(right)
-enemies: builder entity positionX positionY
+enemies: builder entity positionX positionY chance(0-1)
 
 Builders:
 T - tileMaker
@@ -28,6 +28,8 @@ Entities:
    S - smokerEnemy
    D - dogEnemy
    B - bossEnemy
+
+
 
 
 positionY and positionY - float
