@@ -1,19 +1,23 @@
 #pragma once
 
-#include "Entity.h"
+#include "Entities/Entity.h"
 
 namespace Entities {
 
     class Character: public Entity {
     protected:
+
         Coordinates::Vector<float> velocity;
-        unsigned char life;
-        unsigned char damage;
+        int life;
+        int damage;
         bool isFacingLeft;
         bool isWalking;
         bool isOnGround;
+        bool isAttacking;
+        float attackTimer;
+
     public:
-        Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
+        Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
         virtual ~Character();
 
@@ -23,13 +27,15 @@ namespace Entities {
 
         Coordinates::Vector<float> getVelocity() const;
 
+        void eliminate();
+
         void setLife(unsigned int l);
 
-        unsigned int getLife() const;
+        int getLife() const;
 
         void setDamage(unsigned int d);
 
-        unsigned int getDamage() const;
+        int getDamage() const;
 
         void setIsFacingLeft(bool facingLeft);
 
@@ -37,8 +43,14 @@ namespace Entities {
 
         void setIsOnGround(bool isOnGround);
 
+        void setIsAttacking(bool attacking);
+
+        virtual void attack(Character* pChar) = 0;
+
         virtual void collide(Entity* pE, Coordinates::Vector<float> collision)=0;
 
         virtual void update(float dt) = 0;
+
+
     };
 }

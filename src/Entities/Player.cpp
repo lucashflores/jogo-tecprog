@@ -1,14 +1,15 @@
 #include "Entities/Player.h"
 #include "PlayerControl.h"
 using namespace Entities;
+#include <iostream>
 
 Player::Player(bool isPlayerOne):
-Character(isPlayerOne? Id::player1 : Id::player2,100, 10,
-          Coordinates::Vector<float>(48.f, 48.f),
+Character(isPlayerOne? Id::player1 : Id::player2,50, 10,
           Coordinates::Vector<float>(16.f, 32.f),
           Coordinates::Vector<float>(0.f, 84.f)) {
     playerControl = new PlayerControl(this);
     isOnGround = false;
+    initializeSprite();
 }
 
 Player::~Player() {
@@ -40,48 +41,97 @@ void Player::jump() {
     }
 }
 
-void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-        if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2) {
-            if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                setIsOnGround(true);
-            }
-            else {
-                if (getPosition().getX() < pE->getPosition().getX())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
-            }
-        }
-        else
-            setIsOnGround(false);
+void Player::attack(Character* pChar) {
+    if ((pChar->getLife() - damage) > 0) {
+        pChar->setLife(pChar->getLife() - damage);
+        std::cout << "Deu dano!" << std::endl << " Vida inimigo: " << pChar->getLife() << std::endl;
+    } else {
+        pChar->eliminate();
+        std::cout << "Inimigo Eliminado" << std::endl;
     }
 
 }
 
+void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
+    if (pE) {
+        if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2 || pE->getId() == Id::tile3 || pE->getId() == Id::tile4) {
+
+            if (collision.getX() > collision.getY()) {
+                if (getPosition().getY() > pE->getPosition().getY()) {
+                    setVelocity(Coordinates::Vector<float>(getVelocity().getX(), 0.f));
+                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
+                } else{
+                    setIsOnGround(true);
+                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
+                }
+
+            }
+            else {
+                if (getPosition().getX() < pE->getPosition().getX()) {
+                    setPosition(
+                            Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
+                }
+                else
+                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
+            }
+        }
+        else if (pE->getId() == Id::projectile){return;}
+
+        else {
+            setIsOnGround(false);
+        }
+    }
+}
+
+void Player::initializeSprite() {
+
+    Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 8);
+    Coordinates::Vector<float> size= Coordinates::Vector<float>(48.f, 48.f);
+
+    if(getId() == Id::player1){
+        sprite = new Animation(PLAYER1_TEXTURE_PATH, size, imageCnt,0.10f);
+    }
+    else if(getId() == Id::player2) {
+        sprite = new Animation(PLAYER2_TEXTURE_PATH, size, imageCnt, 0.10f);
+    }
+
+    sprite->changePosition(position);
+
+}
 
 void Player::update(float dt) {
     playerControl->notify();
 
-    if (isWalking) {
+    //if(isAttacking)
+        //std::cout << "Atacando" << std::endl;
+
+    if (isAttacking && isWalking) {
+        sprite->animationUpdate(3, isFacingLeft, dt);
+    }
+    else if(isWalking){
         sprite->animationUpdate(1, isFacingLeft, dt);
+    }
+    else if(isAttacking && !isWalking){
+        sprite->animationUpdate(2, isFacingLeft, dt);
+        velocity.setX(velocity.getX() * 0.98f);
     }
     else {
         sprite->animationUpdate(0, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.8f);
+        velocity.setX(velocity.getX() * 0.98f);
     }
 
-    if (!isOnGround)
+    if (!isOnGround) {
         velocity.setY(velocity.getY() + (GRAVITY * dt));
-    else
+    }
+    else {
         velocity.setY(0.f);
+        setIsOnGround(false);
+    }
 
-    setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX(),
-                                           getPosition().getY() + getVelocity().getY()));
+    setIsAttacking(false);
+
+    setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt,
+                                           getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
     sprite->centerViewHere();
 }

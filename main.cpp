@@ -1,6 +1,9 @@
 #include <iostream>
 #include <Entities/Enemy.h>
 #include <Entities/SmokerEnemy.h>
+#include <Entities/DogEnemy.h>
+#include "Entities/PunkBoss.h"
+#include "Entities/Projectile.h"
 #include "Managers/GraphicManager.h"
 #include "Managers/EventManager.h"
 #include "Animation.h"
@@ -29,19 +32,31 @@ int main() {
     Entities::Background* background = new Entities::Background(Id::background1);
 
 
+    Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(700.f, 0.f));
+    entityList->addEntity(smoker);
+
+    Entities::DogEnemy* dog1 = new Entities::DogEnemy(Coordinates::Vector<float>(900.f, 0.f));
+    entityList->addEntity(dog1);
+
+    Entities::PunkBoss* boss = new Entities::PunkBoss(Coordinates::Vector<float>(100.f, 0.f));
+    entityList->addEntity(boss);
+    boss->setEntityList(entityList);
+
     Entities::Player* player = new Entities::Player(true);
     entityList->addEntity(player);
 
+    Entities::Projectile* fireball = new Entities::Projectile(Coordinates::Vector<float>(0.f, 0.f), false);
+    entityList->addEntity(fireball);
 
-    Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(0.f, 0.f));
     smoker->setPlayer(player);
-    entityList->addEntity(smoker);
-
+    dog1->setPlayer(player);
+    boss->setPlayer(player);
 
     Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);
-    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 150.f), 10);
-    platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 100.f), 8);
-
+    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 150.f), 25);
+    platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 66.f), 40);
+    platformMaker->makePlatform(Id::tile3 ,Coordinates::Vector<float>(315.f, 198.f), 50);
+    platformMaker->makePlatform(Id::tile3 ,Coordinates::Vector<float>(315.f, 280.f), 50);
 
     float dt;
     sf::Clock clock;
@@ -59,8 +74,8 @@ int main() {
 
 
         instance->clear();
-        player->update(dt);
-        smoker->update(dt);
+        entityList->updateAllEntities(dt);
+        //fireball->update(dt);
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
         background->render();

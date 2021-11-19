@@ -27,7 +27,6 @@ void EntityList::addEntity(Entities::Entity* pE) {
 
 void EntityList::removeEntity(Entities::Entity* pE) {
     entityList.removeElement(pE);
-    return;
 }
 
 Entities::Entity* EntityList::operator[](int pos) {
@@ -39,9 +38,11 @@ void EntityList::renderAllEntities() {
     Entities::Entity* pE = NULL;
     int size = getSize();
     for (int i = 0; i < size; i++) {
-        pE = entityList[i];
-        pE->render();
-        pE = NULL;
+        if(entityList[i]->getIsAlive()) {
+            pE = entityList[i];
+            pE->render();
+            pE = NULL;
+        }
     }
     pE = NULL;
 }
@@ -50,9 +51,11 @@ void EntityList::updateAllEntities(float dt) {
     Entities::Entity* pE = NULL;
     int size = getSize();
     for (int i = 0; i < size; i++) {
-        pE = entityList[i];
-        pE->update(dt);
-        pE = NULL;
+        if(entityList[i]->getIsAlive()) {
+            pE = entityList[i];
+            pE->update(dt);
+            pE = NULL;
+        }
     }
     pE = NULL;
 }

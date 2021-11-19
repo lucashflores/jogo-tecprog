@@ -1,13 +1,14 @@
 #include "Entities/Character.h"
 using namespace Entities;
 
-Character::Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos):
+Character::Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos):
 life(l), damage(d), velocity(Coordinates::Vector<float>(0.f, 0.f)),
-Entity(i, size, hit, pos)
+Entity(i, hit, pos)
 {
     isWalking = false;
     isFacingLeft = false;
     isOnGround = false;
+    isAttacking = false;
 }
 
 Character::~Character() {
@@ -27,7 +28,7 @@ void Character::setLife(unsigned int l) {
     life = l;
 }
 
-unsigned int Character::getLife() const {
+int Character::getLife() const {
     return life;
 }
 
@@ -37,8 +38,12 @@ void Character::setDamage(unsigned int d) {
     damage = d;
 }
 
-unsigned int Character::getDamage() const {
+int Character::getDamage() const {
     return damage;
+}
+
+void Character::eliminate() {
+    life = 0;
 }
 
 void Character::setIsFacingLeft(bool facingLeft) {
@@ -53,6 +58,6 @@ void Character::setIsOnGround(bool iOG) {
     isOnGround = iOG;
 }
 
-
-
-
+void Character::setIsAttacking(bool attacking) {
+    isAttacking = attacking;
+}
