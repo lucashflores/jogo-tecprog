@@ -1,10 +1,10 @@
 #include "Ent.h"
 
-Ent::Ent(const Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> pos): id(i) {
-}
+
+Ent::Ent(const Id::ids i): id(i) { }
 
 Ent::~Ent() {
-    if (sprite)
+    if(sprite)
         delete sprite;
 }
 

@@ -31,6 +31,8 @@ public:
         fire = 400,
         barrel = 500,
         sign = 600,
+        projectile = 99,
+
         background1 = 1000,
         background2 = 2000,
     };

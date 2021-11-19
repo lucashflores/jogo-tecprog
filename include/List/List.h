@@ -37,8 +37,8 @@ namespace List {
 
         void clear();
 
-        void pushBack(const LISTTYPE& newElement);
-        void pushFront(const LISTTYPE& newElement);
+        void pushBack(const LISTTYPE& Info);
+        void pushFront(const LISTTYPE& Info);
         void removeElement(const LISTTYPE& element);
 
         LISTTYPE* getFirst();

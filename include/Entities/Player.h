@@ -1,7 +1,12 @@
 #pragma once
 
-#define VELOCITY_X 0.2f
-#define VELOCITY_Y 0.35f
+
+#define PLAYER1_IDLE_TEXTURE "../assets/biker_idle.png"
+#define PLAYER1_RUNNING_TEXTURE_PATH "../assets/biker_run.png"
+
+#define VELOCITY_X 200.0f
+#define VELOCITY_Y 380.0f
+
 
 #include "Entities/Character.h"
 #include "Managers/InputManager.h"
@@ -14,6 +19,7 @@ namespace Entities {
     private:
         PlayerControl* playerControl;
         bool isPlayerOne;
+
     public:
         Player(bool isPlayerOne=true);
 
@@ -23,9 +29,13 @@ namespace Entities {
 
         void jump();
 
+        void attack(Character* pChar) override;
+
+        void initializeSprite();
+
         void collide(Entity* pE, Coordinates::Vector<float> collision);
 
-        void update(float dt);
+        void update(float dt) override;
     };
 
 }

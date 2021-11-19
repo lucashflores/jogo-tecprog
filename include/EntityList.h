@@ -6,7 +6,9 @@
 
 class EntityList {
 private:
+
     List::List<Entities::Entity*> entityList;
+
 public:
     using iterator = List::List<Entities::Entity*>::iterator;
     EntityList();

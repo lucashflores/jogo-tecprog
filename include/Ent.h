@@ -7,11 +7,15 @@
 
 class Ent {
 protected:
+
     const Id::ids id;
     Animation* sprite;
+
 public:
-    Ent(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> pos);
+    Ent(Id::ids i);
     virtual ~Ent();
     const Id::ids getId() const;
+
+    virtual void initializeSprite() = 0;
     void render();
 };
