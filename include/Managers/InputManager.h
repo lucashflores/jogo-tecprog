@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "IManager.h"
 #include <map>
 
 namespace Managers {

@@ -54,8 +54,7 @@ void Player::attack(Character* pChar) {
 
 void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
-        if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2 || pE->getId() == Id::tile3 || pE->getId() == Id::tile4) {
-
+        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom || pE->getId() == Id::oilTile) {
             if (collision.getX() > collision.getY()) {
                 if (getPosition().getY() > pE->getPosition().getY()) {
                     setVelocity(Coordinates::Vector<float>(getVelocity().getX(), 0.f));
@@ -72,11 +71,13 @@ void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
                             Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
                 }
                 else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
+                    setPosition(
+                            Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
             }
+            return ;
         }
+        else if (pE->getId() == Id::tile1Background) {return;}
         else if (pE->getId() == Id::projectile){return;}
-
         else {
             setIsOnGround(false);
         }
@@ -133,5 +134,4 @@ void Player::update(float dt) {
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt,
                                            getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
-    sprite->centerViewHere();
 }

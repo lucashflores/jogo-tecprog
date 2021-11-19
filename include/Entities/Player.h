@@ -7,6 +7,7 @@
 #define VELOCITY_X 200.0f
 #define VELOCITY_Y 380.0f
 
+
 #include "Entities/Character.h"
 #include "Managers/InputManager.h"
 

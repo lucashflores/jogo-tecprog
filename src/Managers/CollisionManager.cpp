@@ -1,11 +1,9 @@
 #include "Managers/CollisionManager.h"
-#include <math.h>
 using namespace Managers;
 
 CollisionManager* CollisionManager::instance = NULL;
 
 CollisionManager::CollisionManager() {
-
 }
 
 CollisionManager::~CollisionManager() {

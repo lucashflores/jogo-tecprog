@@ -37,12 +37,10 @@ Entities::Entity* EntityList::operator[](int pos) {
 void EntityList::renderAllEntities() {
     Entities::Entity* pE = NULL;
     int size = getSize();
-    for (int i = 0; i < size; i++) {
-        if(entityList[i]->getIsAlive()) {
-            pE = entityList[i];
-            pE->render();
-            pE = NULL;
-        }
+    for (int i = size - 1; i >= 0; i--) {
+        pE = entityList[i];
+        pE->render();
+        pE = NULL;
     }
     pE = NULL;
 }

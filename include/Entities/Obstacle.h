@@ -5,10 +5,10 @@
 namespace Entities {
 
     class Obstacle : public Entity {
-    private:
+    protected:
         unsigned int damage;
     public:
-        Obstacle(Id::ids i, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos, unsigned int d = 0);
+        Obstacle(Id::ids i, Coordinates::Vector<float> size, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos, unsigned int d = 0);
         virtual ~Obstacle();
         virtual void collide(Entity* pE, Coordinates::Vector<float> collision) = 0;
         void initializeSprite() override;

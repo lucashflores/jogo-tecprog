@@ -2,7 +2,7 @@
 using namespace Entities;
 
 Fire::Fire(Coordinates::Vector<float> pos):
-Obstacle(Id::fire, Coordinates::Vector<float>(32.f, 32.f), pos, 5) {
+Obstacle(Id::fire, Coordinates::Vector<float>(32.f, 32.f), Coordinates::Vector<float>(32.f, 32.f), pos, 5) {
 
 }
 

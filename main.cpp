@@ -10,12 +10,13 @@
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
 #include "Entities/Obstacle.h"
-#include "Stages/PlatformMaker.h"
+#include "Stages/TileFactory.h"
+#include "Stages/ObstacleFactory.h"
 #include "EntityList.h"
 #include "Managers/CollisionManager.h"
 #include "Entities/Background.h"
 #include "Id.h"
-#include "Coordinates/VectorTemplate.h"
+#include "Coordinates/MathVector.h"
 
 int main() {
 
@@ -74,12 +75,14 @@ int main() {
 
 
         instance->clear();
+
         entityList->updateAllEntities(dt);
         //fireball->update(dt);
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
         background->render();
         entityList->renderAllEntities();
+        entityList->updateAllEntities(dt);
         instance->display();
 
     }

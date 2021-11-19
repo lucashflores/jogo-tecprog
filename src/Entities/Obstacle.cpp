@@ -34,7 +34,7 @@ void Obstacle::initializeSprite() {
 }
 
 void Obstacle::update(float dt) {
-    return;
+    sprite->animationUpdate(0, false ,dt);
 }
 
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Managers/GraphicManager.h"
-#include "Coordinates/VectorTemplate.h"
+#include "Coordinates/MathVector.h"
 
 class Animation {
 private:
@@ -29,8 +29,6 @@ public:
     void render();
 
     void centerViewHere(); // MUDAR!!!!
-
-    void setImageCount(sf::Vector2u imgCnt);
 
     void animationUpdate(int row, bool facingLeft, float dt);
 

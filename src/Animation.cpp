@@ -37,6 +37,7 @@ void Animation::render() {
     pGraphicM->render(&body);
 }
 
+
 void Animation::centerViewHere() {
     pGraphicM->centerView(body.getPosition() - sf::Vector2f(0.0f, -70.f));
 }

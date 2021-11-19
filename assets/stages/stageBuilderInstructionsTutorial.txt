@@ -1,0 +1,36 @@
+platform: builder entity positionX positionY size
+wall: builder entity positionX positionY size 
+backgroundWall: builder entity positionX positionY sizeX sizeY
+objects: builder entity positionX positionY chance(0-1)
+wall: builder entity positionX positionY 0/1(right)
+enemies: builder entity positionX positionY chance(0-1)
+
+Builders:
+T - tileMaker
+O - objectBuilder
+E - enemySpawner
+
+Entities:
+
+   T:
+   G - ground
+   R - roof
+   W - wall
+   B - Background
+
+   O:
+   F - fire
+   B - barrel
+   S - sign
+   O - oilTile
+
+   E:
+   S - smokerEnemy
+   D - dogEnemy
+   B - bossEnemy
+
+
+
+
+positionY and positionY - float
+size, sizeX and sizeY - unsigned int

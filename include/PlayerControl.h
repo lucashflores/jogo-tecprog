@@ -13,8 +13,6 @@ private:
     Entities::Player* player;
 public:
     PlayerControl(Entities::Player* p);
-
     ~PlayerControl();
-
     void notify();
 };
