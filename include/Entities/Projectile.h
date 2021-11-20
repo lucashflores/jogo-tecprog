@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entities/Entity.h"
+#define FIREBALL_TEXTURE_PATH "../assets/fireball.png"
 
 namespace Entities {
 

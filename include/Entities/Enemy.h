@@ -3,6 +3,7 @@
 
 #include "Entities/Player.h"
 #include "Entities/Character.h"
+#include "Defines/enemyafx.h"
 
 namespace Entities {
 

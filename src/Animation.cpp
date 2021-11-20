@@ -14,7 +14,7 @@ Animation::Animation(std::string pathSpriteSheet, Coordinates::Vector<float> siz
 
     imageCount.x = imageCnt.getX();
     imageCount.y = imageCnt.getY();
-    this->switchTime = switchT;
+    switchTime = switchT;
     totalTime = 0.0f;
     currentImage.x = 0;
 
@@ -39,13 +39,9 @@ void Animation::render() {
 
 
 void Animation::centerViewHere() {
-    pGraphicM->centerView(body.getPosition() - sf::Vector2f(0.0f, -70.f));
+    pGraphicM->centerView(Coordinates::Vector<float>(body.getPosition().x, body.getPosition().y) - Coordinates::Vector<float>(0.0f, -70.f));
 }
 
-
-void Animation::setImageCount(sf::Vector2u imgCnt) {
-    imageCount = imgCnt;
-}
 
 void Animation::animationUpdate(int row, bool facingLeft, float dt) {
 

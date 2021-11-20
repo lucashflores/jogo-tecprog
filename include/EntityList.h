@@ -20,9 +20,10 @@ public:
 
     void addEntity(Entities::Entity* pE);
     void removeEntity(Entities::Entity* pE);
+    void removeAndDeleteEntity(Entities::Entity* pE);
 
     void renderAllEntities();
-
+    void removeNeutralizedEntities();
     void updateAllEntities(float dt);
 
     iterator begin();

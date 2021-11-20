@@ -25,5 +25,6 @@ namespace Stages {
         void renderEntities();
         void centerView();
         void collideEntities();
+        void removedNeutralizedEntities();
     };
 }

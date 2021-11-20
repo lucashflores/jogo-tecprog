@@ -67,7 +67,7 @@ void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
 void SmokerEnemy::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 3);
     Coordinates::Vector<float> size= Coordinates::Vector<float>(48.f, 48.f);
-    sprite = new Animation(ENEMY1_TEXTURE_PATH, size, imageCnt,0.25f);
+    sprite = new Animation(SMOKER_TEXTURE_PATH, size, imageCnt,0.25f);
     sprite->changePosition(position);
 }
 

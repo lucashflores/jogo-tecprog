@@ -1,6 +1,6 @@
 #pragma once
 
-#define GRAVITY 0.6f
+#define GRAVITY 800.f
 
 
 

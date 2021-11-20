@@ -53,11 +53,11 @@ int main() {
     dog1->setPlayer(player);
     boss->setPlayer(player);
 
-    Stages::PlatformMaker* platformMaker = new Stages::PlatformMaker(entityList);
-    platformMaker->makePlatform(Id::tile1, Coordinates::Vector<float>(0.f, 150.f), 25);
-    platformMaker->makePlatform(Id::tile1 ,Coordinates::Vector<float>(320.f, 66.f), 40);
-    platformMaker->makePlatform(Id::tile3 ,Coordinates::Vector<float>(315.f, 198.f), 50);
-    platformMaker->makePlatform(Id::tile3 ,Coordinates::Vector<float>(315.f, 280.f), 50);
+    Stages::TileFactory* platformMaker = new Stages::TileFactory(1, entityList);
+    platformMaker->makePlatform(Coordinates::Vector<float>(0.f, 150.f), 25);
+    platformMaker->makePlatform(Coordinates::Vector<float>(320.f, 66.f), 40);
+    //platformMaker->makePlatform(Coordinates::Vector<float>(315.f, 198.f), 50);
+    //platformMaker->makePlatform(Coordinates::Vector<float>(315.f, 280.f), 50);
 
     float dt;
     sf::Clock clock;
@@ -70,21 +70,18 @@ int main() {
 
         dt = clock.restart().asSeconds();
 
-        if (dt > 0.0167)
-            dt = 0.0167;
+        if (dt > 0.0100)
+            dt = 0.0100;
 
 
-        instance->clear();
-
+        entityList->removeNeutralizedEntities();
         entityList->updateAllEntities(dt);
-        //fireball->update(dt);
         background->update(player->getPosition());
         pCollisionManager->collideAllEntities();
+        instance->clear();
         background->render();
         entityList->renderAllEntities();
-        entityList->updateAllEntities(dt);
         instance->display();
-
     }
 
     return 0;

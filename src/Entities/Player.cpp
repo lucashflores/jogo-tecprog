@@ -114,11 +114,11 @@ void Player::update(float dt) {
     }
     else if(isAttacking && !isWalking){
         sprite->animationUpdate(2, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.98f);
+        velocity.setX(velocity.getX() * 0.85f);
     }
     else {
         sprite->animationUpdate(0, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.98f);
+        velocity.setX(velocity.getX() * 0.85f);
     }
 
     if (!isOnGround) {
@@ -134,4 +134,5 @@ void Player::update(float dt) {
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt,
                                            getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
+    sprite->centerViewHere();
 }

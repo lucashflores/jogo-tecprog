@@ -40,6 +40,7 @@ namespace List {
         void pushBack(const LISTTYPE& Info);
         void pushFront(const LISTTYPE& Info);
         void removeElement(const LISTTYPE& element);
+        void removeAndDeleteElement(const LISTTYPE& element);
 
         LISTTYPE* getFirst();
         LISTTYPE* getLast();
@@ -136,7 +137,37 @@ namespace List {
     }
 
     template <typename LISTTYPE>
-    void List<LISTTYPE>::removeElement(const LISTTYPE& element) {
+    void List<LISTTYPE>::removeAndDeleteElement(const LISTTYPE &element) {
+        if (pFirst == NULL) {
+            return;
+        }
+        else {
+            Node<LISTTYPE>* aux = pFirst;
+            while (aux != NULL && aux->getInfo() != element) {
+                aux = aux->getNext();
+            }
+
+            if (aux == NULL)
+                return;
+
+            if (aux->getPrev() != NULL)
+                aux->getPrev()->setNext(aux->getNext());
+            else
+                pFirst = aux->getNext();
+
+            if (aux->getNext() != NULL)
+                aux->getNext()->setPrev(aux->getPrev());
+            else
+                pLast = aux->getPrev();
+
+            delete aux->getInfo();
+            delete aux;
+            listSize--;
+        }
+    }
+
+    template <typename LISTTYPE>
+    void List<LISTTYPE>::removeElement(const LISTTYPE &element) {
         if (pFirst == NULL) {
             return;
         }

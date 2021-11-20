@@ -9,7 +9,7 @@
 namespace Stages {
     class Stage1Factory: public StageFactory {
     private:
-        void makeStage();
+        void makeStage(Entities::Player* player1, Entities::Player* player2);
     public:
         Stage1Factory();
         ~Stage1Factory();

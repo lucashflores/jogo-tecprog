@@ -17,7 +17,7 @@ namespace Stages {
         ObstacleFactory* obstacleFactory;
         TileFactory* tileFactory;
         int stage;
-        virtual void makeStage() = 0;
+        virtual void makeStage(Entities::Player* player1, Entities::Player* player2) = 0;
         virtual void makeTiles(std::string tilesInstructionsPath) = 0;
         virtual void makeEnemies(std::string enemiesInstructionsPath) = 0;
         virtual void makeObstacles(std::string obstaclesInstructionsPath) = 0;

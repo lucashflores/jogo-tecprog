@@ -10,6 +10,8 @@ isStageDone(false), entityList(pEL), player1(p1), player2(p2)
 }
 
 Stage::~Stage() {
+    entityList->removeEntity(player1);
+    entityList->removeEntity(player2);
     player1 = NULL;
     player2 = NULL;
     if (entityList)
@@ -25,16 +27,10 @@ unsigned int Stage::getScore() {
 }
 
 void Stage::renderEntities() {
-    player1->render();
-    if (player2)
-        player2->render();
     entityList->renderAllEntities();
 }
 
 void Stage::updateEntities(float dt) {
-    player1->update(dt);
-    if (player2)
-        player2->update(dt);
     entityList->updateAllEntities(dt);
 }
 
@@ -63,6 +59,7 @@ void Stage::collideEntities() {
 }
 
 void Stage::exec(float dt) {
+    removedNeutralizedEntities();
     updateEntities(dt);
     collideEntities();
     renderEntities();
@@ -77,4 +74,15 @@ void Stage::exec(float dt) {
     }
 
 
+}
+
+void Stage::removedNeutralizedEntities() {
+    Entities::Entity* pE = NULL;
+    for (int i = 0; i < entityList->getSize(); i++) {
+        pE = entityList->operator[](i);
+        if (pE) {
+            if (!pE->getIsAlive())
+                entityList->removeAndDeleteEntity(pE);
+        }
+    }
 }

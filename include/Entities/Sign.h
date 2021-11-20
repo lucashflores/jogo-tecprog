@@ -7,5 +7,6 @@ namespace Entities {
         Sign(Coordinates::Vector<float> pos);
         ~Sign();
         void collide(Entity* pE, Coordinates::Vector<float> collision);
+        void initializeSprite();
     };
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Defines/objectsafx.h"
-#include "TEXTURE_PATHS.h"
 #include "Animation.h"
 #include "Id.h"
 

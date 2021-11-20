@@ -35,7 +35,7 @@ void Entities::PunkBoss::attack(Character* pChar) {
 void Entities::PunkBoss::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(8, 12);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(96.f, 96.f);
-    sprite = new Animation(BOSS_TEXTURE_PATH, size, imageCnt,0.2f);
+    sprite = new Animation(PUNK_TEXTURE_PATH, size, imageCnt,0.2f);
     sprite->changePosition(position);
 }
 
@@ -49,7 +49,7 @@ void Entities::PunkBoss::collide(Entity* pE, Coordinates::Vector<float> collisio
     if (pE) {
 
         // If is a tile
-        if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2 || pE->getId() == Id::tile3 || pE->getId() == Id::tile4) {
+        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
             if (collision.getX() > collision.getY()) {
                 if (getPosition().getY() > pE->getPosition().getY())
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));

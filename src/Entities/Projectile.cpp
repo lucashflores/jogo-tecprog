@@ -28,8 +28,7 @@ void Projectile::initializeSprite() {
 void Projectile::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
 
-        // TODO - Se colidir com parede - deve ser eliminado
-        if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2 || pE->getId() == Id::tile3 || pE->getId() == Id::tile4)
+        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom)
             if (getPosition().getY() > pE->getPosition().getY())
                 setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
             else
@@ -47,5 +46,5 @@ void Projectile::update(float dt) {
     setPosition(Coordinates::Vector<float>(getPosition().getX() + velocity.getX()*dt,getPosition().getY()+ velocity.getY()*dt));
     sprite->changePosition(position);
     timer += dt;
-    if(timer>15.f){eliminate(); std::cout << "Tchau projétil" << std::endl;}
+    if(timer>5.f){eliminate(); std::cout << "Tchau projétil" << std::endl;}
 }

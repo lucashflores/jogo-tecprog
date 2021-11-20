@@ -29,9 +29,14 @@ void EntityList::removeEntity(Entities::Entity* pE) {
     entityList.removeElement(pE);
 }
 
+void EntityList::removeAndDeleteEntity(Entities::Entity *pE) {
+    entityList.removeAndDeleteElement(pE);
+}
+
 Entities::Entity* EntityList::operator[](int pos) {
     return entityList[pos];
 }
+
 
 
 void EntityList::renderAllEntities() {
@@ -43,6 +48,18 @@ void EntityList::renderAllEntities() {
         pE = NULL;
     }
     pE = NULL;
+}
+
+void EntityList::removeNeutralizedEntities() {
+    Entities::Entity* pE = NULL;
+    for (int i = 0; i < getSize(); i++) {
+        pE = operator[](i);
+        if (pE) {
+            if (!pE->getIsAlive())
+                removeEntity(pE);
+        }
+        pE = NULL;
+    }
 }
 
 void EntityList::updateAllEntities(float dt) {

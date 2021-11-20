@@ -6,10 +6,16 @@ PlayerControl::PlayerControl(Entities::Player* p): controls() {
     if (p)
         player = p;
     if (player->getId() == Id::player1) {
-        controls["left"] = "A";
-        controls["right"] = "D";
-        controls["jump"] = "W";
-        controls["attack"] = "Space";
+        controls["left"] = PLAYER1_LEFT;
+        controls["right"] = PLAYER1_RIGHT;
+        controls["jump"] = PLAYER1_JUMP;
+        controls["attack"] = PLAYER1_ATTACK;
+    }
+    else {
+        controls["left"] = PLAYER2_LEFT;
+        controls["right"] = PLAYER2_RIGHT;
+        controls["jump"] = PLAYER2_JUMP;
+        controls["attack"] = PLAYER2_ATTACK;
     }
 }
 

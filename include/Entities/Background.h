@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "Defines/backgroundafx.h"
 
 namespace Entities {
 

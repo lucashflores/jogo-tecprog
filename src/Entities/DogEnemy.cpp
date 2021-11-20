@@ -65,7 +65,7 @@ void DogEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
 
         // If is a tile
-        if (pE->getId() == Id::tile1 || pE->getId() == Id::tile2 || pE->getId() == Id::tile3 || pE->getId() == Id::tile4) {
+        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
             if (collision.getX() > collision.getY()) {
                 if (getPosition().getY() > pE->getPosition().getY())
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
@@ -89,7 +89,7 @@ void DogEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
 void DogEnemy::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 5);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(40.f, 40.f);
-    sprite = new Animation(ENEMY2_TEXTURE_PATH, size, imageCnt,0.10f);
+    sprite = new Animation(DOG_TEXTURE_PATH, size, imageCnt,0.10f);
     sprite->changePosition(position);
 }
 
