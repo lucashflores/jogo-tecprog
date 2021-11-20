@@ -52,6 +52,7 @@ void Player::attack(Character* pChar) {
 
 }
 
+/* TODO: remover se funcionar
 void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
         if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom || pE->getId() == Id::oilTile) {
@@ -59,20 +60,15 @@ void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
                 if (getPosition().getY() > pE->getPosition().getY()) {
                     setVelocity(Coordinates::Vector<float>(getVelocity().getX(), 0.f));
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                } else{
+                }
+                else {
                     setIsOnGround(true);
                     setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
                 }
 
             }
             else {
-                if (getPosition().getX() < pE->getPosition().getX()) {
-                    setPosition(
-                            Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                }
-                else
-                    setPosition(
-                            Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
+
             }
             return ;
         }
@@ -83,6 +79,7 @@ void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
         }
     }
 }
+*/
 
 void Player::initializeSprite() {
 

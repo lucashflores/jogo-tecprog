@@ -11,7 +11,6 @@ namespace Entities {
 
         Coordinates::Vector<float> velocity;
         bool isFacingLeft;
-
         float timer;
 
     public:
@@ -20,9 +19,11 @@ namespace Entities {
 
         ~Projectile() override;
 
+        unsigned int getDamage();
+
         void initializeSprite() override;
 
-        void collide(Entity* pE, Coordinates::Vector<float> collision) override;
+        //void collide(Entity* pE, Coordinates::Vector<float> collision) override;
 
         void update(float dt) override;
     };

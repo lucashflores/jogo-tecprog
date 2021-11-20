@@ -5,7 +5,7 @@
 using namespace Entities;
 
 PunkBoss::PunkBoss(Coordinates::Vector<float> pos)
-    : Enemy(Id::enemy3, 20, 5, Coordinates::Vector<float>(32.0f, 64.0f), pos, 300.0) {
+    : Enemy(Id::punk, 20, 5, Coordinates::Vector<float>(32.0f, 64.0f), pos, 300.0) {
     initializeSprite();
     attackTimer = 0;
     isAttacking = false;
@@ -44,7 +44,7 @@ void PunkBoss::setEntityList(EntityList* EL) {
         bossEntityList = EL;
 }
 
-
+/* TODO: remover se funcionar
 void Entities::PunkBoss::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
 
@@ -74,6 +74,7 @@ void Entities::PunkBoss::collide(Entity* pE, Coordinates::Vector<float> collisio
         }
     }
 }
+ */
 
 void Entities::PunkBoss::update(float dt) {
 

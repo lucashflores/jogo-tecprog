@@ -23,7 +23,7 @@ namespace Entities {
 
         void setEntityList(EntityList* EL);
 
-        void collide(Entity* pE, Coordinates::Vector<float> collision) override;
+        //void collide(Entity* pE, Coordinates::Vector<float> collision) override;
 
         void update(float dt) override;
 

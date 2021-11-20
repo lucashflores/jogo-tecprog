@@ -4,7 +4,7 @@ using namespace Entities;
 #include "Id.h"
 #include <iostream>
 
-SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::enemy1, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::smoker, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
     initializeSprite();
 }
 
@@ -41,6 +41,7 @@ void SmokerEnemy::attack(Character* pChar) {
     attackTimer = 0;
 }
 
+/* TODO: remover se funcionar
 void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
         if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
@@ -63,6 +64,7 @@ void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
             setIsOnGround(false);
     }
 }
+*/
 
 void SmokerEnemy::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 3);
