@@ -27,7 +27,7 @@ void EnemyFactory::makeSmokerEnemy(Coordinates::Vector<float> pos) {
     smoker = NULL;
 }
 
-/*
+
 
 void EnemyFactory::makeDogEnemy(Coordinates::Vector<float> pos) {
     Entities::DogEnemy* dog = NULL;
@@ -36,4 +36,10 @@ void EnemyFactory::makeDogEnemy(Coordinates::Vector<float> pos) {
     dog = NULL;
 }
 
- */
+void EnemyFactory::makeBoss(Coordinates::Vector<float> pos) {
+    Entities::PunkBoss* punk = NULL;
+    punk = new Entities::PunkBoss(pos);
+    pEntityList->addEntity(static_cast<Entities::Entity*>(punk));
+    punk = NULL;
+}
+

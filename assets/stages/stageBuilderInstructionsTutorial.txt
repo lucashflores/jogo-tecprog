@@ -1,5 +1,5 @@
-platform: builder entity positionX positionY size
-wall: builder entity positionX positionY size 
+platform: builder entity positionX positionY size chance
+wall: builder entity positionX positionY size chance
 backgroundWall: builder entity positionX positionY sizeX sizeY
 objects: builder entity positionX positionY chance(0-1)
 wall: builder entity positionX positionY 0/1(right)
