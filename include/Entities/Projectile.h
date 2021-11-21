@@ -19,8 +19,6 @@ namespace Entities {
 
         ~Projectile() override;
 
-        unsigned int getDamage();
-
         void initializeSprite() override;
 
         //void collide(Entity* pE, Coordinates::Vector<float> collision) override;

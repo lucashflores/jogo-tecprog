@@ -1,13 +1,16 @@
 #pragma once
 
-
+#include "Entities/Smoke.h"
 #include "Entities/Enemy.h"
+#include "EntityList.h"
 
 namespace Entities {
 
 
     class SmokerEnemy : public Enemy {
     private:
+
+        EntityList* smokerEntityList;
 
     public:
         SmokerEnemy(Coordinates::Vector<float> pos);
@@ -21,6 +24,8 @@ namespace Entities {
         void attack(Character* pChar);
 
         void initializeSprite();
+
+        void setEntityList(EntityList* EL);
 
         //void collide(Entity* pE, Coordinates::Vector<float> collision);
 

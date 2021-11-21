@@ -1,6 +1,5 @@
 #include "Entities/SmokerEnemy.h"
 using namespace Entities;
-
 #include "Id.h"
 #include <iostream>
 
@@ -31,14 +30,23 @@ void SmokerEnemy::idle(){
 void SmokerEnemy::attack(Character* pChar) {
 
     if ((pChar->getLife() - damage) > 0) {
-        pChar->setLife(pChar->getLife() - damage);
-        std::cout << "Deu dano!" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
+        //pChar->setLife(pChar->getLife() - damage);
+        float offset = 25;
+        (isFacingLeft)?(offset=offset):(offset=-offset);
+        Entities::Smoke* smoke = new Entities::Smoke(position- Coordinates::Vector<float>(offset,0.f));
+        smokerEntityList->addEntity(smoke);
+        std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
         pChar->eliminate();
         std::cout << "Player Eliminado" << std::endl;
     }
 
     attackTimer = 0;
+}
+
+void SmokerEnemy::setEntityList(EntityList* EL) {
+    if(EL)
+        smokerEntityList = EL;
 }
 
 /* TODO: remover se funcionar
@@ -82,9 +90,9 @@ void SmokerEnemy::update(float dt){
 
     // Vai morder?
 
-    if (getTargetDist() < 30.f && attackTimer < 0.5f) {
+    if (getTargetDist() < 55.f && attackTimer < 0.5f) {
         attackTimer += dt;
-        if(attackTimer > 0.f)
+        if(attackTimer > 0.2f)
             setIsAttacking(true);
 
     } else {

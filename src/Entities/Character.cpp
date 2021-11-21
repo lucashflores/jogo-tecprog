@@ -24,7 +24,7 @@ Coordinates::Vector<float> Character::getVelocity() const {
 }
 
 void Character::setLife(unsigned int l) {
-    if (l < 0)
+    if (life <= 0)
         l = 0;
     life = l;
 }

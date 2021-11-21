@@ -19,9 +19,6 @@ Projectile::~Projectile() {
 
 }
 
-unsigned int Projectile::getDamage(){
-    return damage;
-}
 
 void Projectile::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);

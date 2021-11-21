@@ -11,6 +11,7 @@ public:
         dog = 20,
         punk = 30,
 
+        smoke = 88,
         projectile = 99,
 
         tile1Bottom = 100,
