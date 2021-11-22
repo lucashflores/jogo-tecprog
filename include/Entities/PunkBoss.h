@@ -26,7 +26,5 @@ namespace Entities {
         //void collide(Entity* pE, Coordinates::Vector<float> collision) override;
 
         void update(float dt) override;
-
-
     };
 }

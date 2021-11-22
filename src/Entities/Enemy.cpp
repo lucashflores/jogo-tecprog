@@ -36,7 +36,7 @@ void Enemy::setTarget(Player* tg){
     target = tg;
 }
 
-Player* Enemy::chooseTarget() {
+void Enemy::chooseTarget() {
     double distP1 = 20000, distP2 = 20000;
 
     if (player1)

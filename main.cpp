@@ -36,6 +36,9 @@ int main() {
     Entities::Player* player = new Entities::Player(true);
     entityList->addEntity(player);
 
+    Entities::Smoke* smoke = new Entities::Smoke(Coordinates::Vector<float>(320.f, 50.f));
+    entityList->addEntity(smoke);
+
     Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(700.f, 0.f));
     entityList->addEntity(smoker);
     smoker->setEntityList(entityList);

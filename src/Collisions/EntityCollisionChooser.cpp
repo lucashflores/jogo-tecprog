@@ -13,9 +13,16 @@ EntityCollisionChooser::~EntityCollisionChooser() {
 
 void EntityCollisionChooser::collisionChooser(Entities::Entity *pE1, Entities::Entity *pE2,
                                               Coordinates::Vector<float> collision) {
-    if (pE2->getId() == Id::projectile || pE2->getId() == Id::smoke) {
+    if (pE2->getId() == Id::projectile) {
         if (pE1->getId() == Id::player1 || pE1->getId() == Id::player2) {
             entityCollisions->projectileCollision(pE1, pE2, collision);
+        }
+        else
+            return;
+    }
+    else if (pE2->getId() == Id::smoke) {
+        if (pE1->getId() == Id::player1 || pE1->getId() == Id::player2) {
+            entityCollisions->smokeCollision(pE1, pE2, collision);
         }
         else
             return;

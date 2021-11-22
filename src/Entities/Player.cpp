@@ -4,7 +4,7 @@ using namespace Entities;
 #include <iostream>
 
 Player::Player(bool isPlayerOne):
-Character(isPlayerOne? Id::player1 : Id::player2,50, 10,
+Character(isPlayerOne? Id::player1 : Id::player2,1000, 10,
           Coordinates::Vector<float>(16.f, 32.f),
           Coordinates::Vector<float>(0.f, 84.f)) {
     playerControl = new PlayerControl(this);

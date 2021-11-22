@@ -1,4 +1,5 @@
 #include "Entities/Entity.h"
+#include <fstream>
 
 using namespace Entities;
 
@@ -41,3 +42,10 @@ const Coordinates::Vector<float> Entity::getHitBox() const {
     return hitBox;
 }
 
+void Entity::save(){
+
+}
+
+void Entity::restore(){
+
+}

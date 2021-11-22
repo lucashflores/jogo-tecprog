@@ -26,6 +26,6 @@ namespace Entities {
 
         double getTargetDist();
 
-        Player* chooseTarget();
+        void chooseTarget();
     };
 }
