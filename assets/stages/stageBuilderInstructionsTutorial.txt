@@ -1,30 +1,22 @@
-platform: builder entity positionX positionY size chance
-wall: builder entity positionX positionY size chance
-backgroundWall: builder entity positionX positionY sizeX sizeY
+platform: builder entity positionX positionY size
+wall: builder entity positionX positionY size
 objects: builder entity positionX positionY chance(0-1)
-wall: builder entity positionX positionY 0/1(right)
 enemies: builder entity positionX positionY chance(0-1)
-
-Builders:
-T - tileMaker
-O - objectBuilder
-E - enemySpawner
 
 Entities:
 
-   T:
-   G - ground
-   R - roof
+   Tiles:
+   P - platform
    W - wall
-   B - Background
+   
 
-   O:
+   Obstacles:
    F - fire
    B - barrel
    S - sign
    O - oilTile
 
-   E:
+   Enemies:
    S - smokerEnemy
    D - dogEnemy
    B - bossEnemy

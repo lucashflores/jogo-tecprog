@@ -2,30 +2,37 @@
 using namespace Stages;
 
 Stage2Factory::Stage2Factory(): StageFactory(2) {
-
+    tileInstructionsReader = new TileInstructionsReader(2, entityList);
 }
 
-Stage2Factory::~Stage2Factory() {}
+Stage2Factory::~Stage2Factory() {
+    if (enemyInstructionsReader)
+        delete enemyInstructionsReader;
+    if (obstacleInstructionsReader)
+        delete obstacleInstructionsReader;
+    if (tileInstructionsReader)
+        delete tileInstructionsReader;
+}
 
 void Stage2Factory::makeTiles(std::string tilesInstructionsPath) {
-    tileFactory->readAndExecuteInstructions(tilesInstructionsPath);
+    tileInstructionsReader->readInstructions(tilesInstructionsPath);
 }
 
 void Stage2Factory::makeObstacles(std::string obstaclesInstructionsPath) {
-    obstacleFactory->readAndExecuteInstructions(obstaclesInstructionsPath);
+    obstacleInstructionsReader->readInstructions(obstaclesInstructionsPath);
 }
 
 void Stage2Factory::makeEnemies(std::string enemiesInstructionsPath) {
-    enemyFactory->readAndExecuteInstructions(enemiesInstructionsPath);
+    enemyInstructionsReader->readInstructions(enemiesInstructionsPath);
 }
 
 void Stage2Factory::makeStage(Entities::Player* player1, Entities::Player* player2) {
     entityList->addEntity(player1);
     if (player2)
         entityList->addEntity(player2);
-    makeTiles(TILES_INSTRUCTIONS_PATH);
-    makeObstacles(OBSTACLES_INSTRUCTIONS_PATH);
-    makeEnemies(ENEMIES_INSTRUCTIONS_PATH);
+    makeTiles(TILES2_INSTRUCTIONS_PATH);
+    makeObstacles(OBSTACLES2_INSTRUCTIONS_PATH);
+    makeEnemies(ENEMIES2_INSTRUCTIONS_PATH);
 }
 
 Stage* Stage2Factory::requestStage(Entities::Player* player1, Entities::Player* player2) {

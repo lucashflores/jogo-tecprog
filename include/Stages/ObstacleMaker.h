@@ -7,15 +7,13 @@
 #include "Entities/Sign.h"
 
 namespace Stages {
-    class ObstacleInstructionsReader;
 
-    class ObstacleFactory {
+    class ObstacleMaker {
     private:
         EntityList* pEntityList;
     public:
-        ObstacleFactory(EntityList* pEL);
-        ~ObstacleFactory();
-        void readAndExecuteInstructions(std::string instructionsPath);
+        ObstacleMaker(EntityList* pEL);
+        ~ObstacleMaker();
         void makeBarrel(Coordinates::Vector<float> pos);
         void makeOilTile(Coordinates::Vector<float> pos);
         void makeFire(Coordinates::Vector<float> pos);

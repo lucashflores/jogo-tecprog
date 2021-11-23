@@ -1,16 +1,16 @@
-#include "Collisions/ObstacleCollisionChooser.h"
+#include "Collisions/ObstacleCollisionManager.h"
 using namespace Collisions;
 
-ObstacleCollisionChooser::ObstacleCollisionChooser() : ICollisionChooser() {
-    obstacleCollisions = new ObstacleCollisions();
+ObstacleCollisionManager::ObstacleCollisionManager() : ICollisionChooser() {
+    obstacleCollisions = new ObstacleCollisionDealer();
 }
 
-ObstacleCollisionChooser::~ObstacleCollisionChooser() {
+ObstacleCollisionManager::~ObstacleCollisionManager() {
     if (obstacleCollisions)
         delete obstacleCollisions;
 }
 
-void ObstacleCollisionChooser::collisionChooser(Entities::Entity *pE1, Entities::Entity *pE2,
+void ObstacleCollisionManager::collisionChooser(Entities::Entity *pE1, Entities::Entity *pE2,
                                                 Coordinates::Vector<float> collision) {
     if (pE2->getId() == Id::oilTile)
         obstacleCollisions->oilTileCollision(pE1, pE2, collision);
@@ -24,7 +24,7 @@ void ObstacleCollisionChooser::collisionChooser(Entities::Entity *pE1, Entities:
         return ;
 }
 
-void ObstacleCollisionChooser::doCollision(Entities::Entity *pE1, Entities::Entity *pE2,
+void ObstacleCollisionManager::doCollision(Entities::Entity *pE1, Entities::Entity *pE2,
                                            Coordinates::Vector<float> collision) {
     collisionChooser(pE1, pE2, collision);
 }

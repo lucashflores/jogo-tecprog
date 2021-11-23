@@ -35,6 +35,8 @@ namespace Entities {
 
         bool getIsAlive();
 
+        void save();
+
         //virtual void collide(Entity* pE, Coordinates::Vector<float> collision) = 0;
 
         virtual void update(float dt) = 0;

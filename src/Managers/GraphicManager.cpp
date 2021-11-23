@@ -29,6 +29,10 @@ void GraphicManager:: render(sf::RectangleShape* body) {
     window->draw(*body);
 }
 
+void GraphicManager::render(sf::Text* text) {
+    window->draw(*text);
+}
+
 void GraphicManager::display() {
     window->display();
 }
@@ -54,4 +58,10 @@ sf::Texture* GraphicManager::loadTexture(std::string path) {
     sf::Texture* texture = new sf::Texture();
     texture->loadFromFile(path);
     return texture;
+}
+
+sf::Font *GraphicManager::loadFont(std::string path) {
+    sf::Font* font = new sf::Font();
+    font->loadFromFile(path);
+    return font;
 }

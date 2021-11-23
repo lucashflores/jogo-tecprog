@@ -29,7 +29,8 @@ void CollisionManager::collideAllEntities() {
     Entities::Entity* pE2 = NULL;
     int size = pEntityList->getSize();
     for (int i = 0; i < size; i++) {
-        for (int j = i+1; j < size; j++) {
+        for (int j = i + 1; j < size; j++) {
+
             pE = pEntityList->operator[](i);
             pE2 = pEntityList->operator[](j);
             //pE2 = (*pEntityList)[j];

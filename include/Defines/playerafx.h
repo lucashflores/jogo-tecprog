@@ -10,8 +10,8 @@
 #define PLAYER1_ATTACK "Space"
 
 #define PLAYER2_TEXTURE_PATH "../assets/spriteSheets/players/cyborg.png"
-#define PLAYER2_LEFT "LControl"
-#define PLAYER2_RIGHT "RControl"
-#define PLAYER2_JUMP "UpControl"
-#define PLAYER2_ATTACK "Not decided"
+#define PLAYER2_LEFT "Left"
+#define PLAYER2_RIGHT "Right"
+#define PLAYER2_JUMP "Up"
+#define PLAYER2_ATTACK "L"
 

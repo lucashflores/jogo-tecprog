@@ -1,15 +1,15 @@
 #pragma once
 #include "ICollisionChooser.h"
-#include "ObstacleCollisions.h"
+#include "EntityCollisionDealer.h"
 
 namespace Collisions {
-    class ObstacleCollisionChooser: ICollisionChooser {
+    class EntityCollisionManager: ICollisionChooser {
     private:
         void collisionChooser(Entities::Entity* pE1, Entities::Entity* pE2, Coordinates::Vector<float> collision);
-        ObstacleCollisions* obstacleCollisions;
+        EntityCollisionDealer* entityCollisions;
     public:
-        ObstacleCollisionChooser();
-        ~ObstacleCollisionChooser();
+        EntityCollisionManager();
+        ~EntityCollisionManager();
         void doCollision(Entities::Entity* pE1, Entities::Entity* pE2, Coordinates::Vector<float> collision);
     };
 }

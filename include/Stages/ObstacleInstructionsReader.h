@@ -1,15 +1,15 @@
 #pragma once
 
-#include "ObstacleFactory.h"
+#include "ObstacleMaker.h"
 #include "InstructionsReader.h"
 
 namespace Stages {
 
     class ObstacleInstructionsReader: public InstructionsReader  {
     private:
-        ObstacleFactory* pObstacleFactory;
+        ObstacleMaker* pObstacleMaker;
     public:
-        ObstacleInstructionsReader(ObstacleFactory* pOF);
+        ObstacleInstructionsReader(EntityList* pEL);
         ~ObstacleInstructionsReader();
         void executeInstructions();
     };

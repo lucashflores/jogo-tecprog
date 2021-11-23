@@ -11,15 +11,17 @@
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
 #include "Entities/Obstacle.h"
-#include "Stages/TileFactory.h"
-#include "Stages/ObstacleFactory.h"
+#include "Stages/TileInstructionsReader.h"
+#include "Stages/ObstacleInstructionsReader.h"
+#include "Stages/EnemyInstructionsReader.h"
 #include "EntityList.h"
 #include "Managers/CollisionManager.h"
-#include "Entities/Background.h"
+#include "Background.h"
 #include "Id.h"
 #include "Coordinates/MathVector.h"
 
 int main() {
+    srand(time(NULL));
 
     Managers::GraphicManager *instance = Managers::GraphicManager::getInstance();
 
@@ -31,7 +33,7 @@ int main() {
 
     pCollisionManager->setEntityList(entityList);
 
-    Entities::Background* background = new Entities::Background(Id::background1);
+    Background* background = new Background(Id::background1);
 
     Entities::Player* player = new Entities::Player(true);
     entityList->addEntity(player);
@@ -41,6 +43,12 @@ int main() {
     entityList->addEntity(smoke);
     */
 
+    /*
+    Entities::Smoke* smoke = new Entities::Smoke(Coordinates::Vector<float>(320.f, 50.f));
+    entityList->addEntity(smoke);
+    */
+
+    /*
     Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(700.f, 0.f));
     entityList->addEntity(smoker);
     smoker->setEntityList(entityList);
@@ -48,19 +56,41 @@ int main() {
     Entities::DogEnemy* dog1 = new Entities::DogEnemy(Coordinates::Vector<float>(900.f, 0.f));
     entityList->addEntity(dog1);
 
+
     Entities::PunkBoss* boss = new Entities::PunkBoss(Coordinates::Vector<float>(100.f, 0.f));
     entityList->addEntity(boss);
     boss->setEntityList(entityList);
+    */
 
-    smoker->setPlayer(player);
-    dog1->setPlayer(player);
-    boss->setPlayer(player);
+    Entities::Player* player = new Entities::Player(true);
+    entityList->addEntity(player);
 
-    Stages::TileFactory* platformMaker = new Stages::TileFactory(1, entityList);
-    platformMaker->makePlatform(Coordinates::Vector<float>(0.f, 150.f), 25);
-    platformMaker->makePlatform(Coordinates::Vector<float>(320.f, 66.f), 40);
-    //platformMaker->makePlatform(Coordinates::Vector<float>(315.f, 198.f), 50);
-    //platformMaker->makePlatform(Coordinates::Vector<float>(315.f, 280.f), 50);
+    /*
+    Entities::Player* player2 = new Entities::Player(false);
+    entityList->addEntity(player2);
+    */
+
+
+    /*
+    Entities::Projectile* fireball = new Entities::Projectile(Coordinates::Vector<float>(0.f, 0.f), false);
+    entityList->addEntity(fireball);
+    */
+
+    //smoker->setPlayer(player);
+    //dog1->setPlayer(player);
+    //boss->setPlayer(player);
+
+
+
+    Stages::TileInstructionsReader* tileFactory = new Stages::TileInstructionsReader(1, entityList);
+    tileFactory->readInstructions("../assets/stages/stage1/tileInstructions.txt");
+
+    Stages::ObstacleInstructionsReader* obstacleFactory = new Stages::ObstacleInstructionsReader(entityList);
+    obstacleFactory->readInstructions("../assets/stages/stage1/obstacleInstructions.txt");
+
+    Stages::EnemyInstructionsReader* enemyInstructionsReader = new Stages::EnemyInstructionsReader(entityList);
+    enemyInstructionsReader->readInstructions("../assets/stages/stage1/enemyInstructions.txt");
+
 
     float dt;
     sf::Clock clock;

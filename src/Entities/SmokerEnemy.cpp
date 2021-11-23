@@ -49,30 +49,6 @@ void SmokerEnemy::setEntityList(EntityList* EL) {
         smokerEntityList = EL;
 }
 
-/* TODO: remover se funcionar
-void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
-            if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                setIsOnGround(true);
-            }
-            else {
-                if (getPosition().getX() < pE->getPosition().getX())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
-            }
-        }
-        else if (pE->getId() == Id::projectile){return;}
-        else
-            setIsOnGround(false);
-    }
-}
-*/
 
 void SmokerEnemy::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 3);
@@ -89,17 +65,16 @@ void SmokerEnemy::update(float dt){
     (isCommitted) ? walk(dt): idle();
 
     // Vai morder?
-
-    if (getTargetDist() < 55.f && attackTimer < 0.5f) {
-        attackTimer += dt;
-        if(attackTimer > 0.2f)
-            setIsAttacking(true);
-
-    } else {
-
-        if(isAttacking && attackTimer > 0.5f) attack(target);
-        setIsAttacking(false);
-        attackTimer = 0;
+    if (target) {
+        if (getTargetDist() < 55.f && attackTimer < 0.5f) {
+            attackTimer += dt;
+            if(attackTimer > 0.2f)
+                setIsAttacking(true);
+        } else {
+            if (isAttacking && attackTimer > 0.5f) attack(target);
+            setIsAttacking(false);
+            attackTimer = 0;
+        }
     }
 
     if (isAttacking) {
