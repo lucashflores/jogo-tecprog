@@ -134,3 +134,19 @@ void Entities::PunkBoss::update(float dt) {
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
 }
+
+void PunkBoss::savePunkBossInfo(std::ofstream& out) const{
+
+}
+
+void PunkBoss::restorePunkBossInfo(std::ifstream& in) {
+
+}
+
+void PunkBoss::savePunkBoss(std::ofstream& out) const{
+
+}
+
+void PunkBoss::restorePunkBoss(std::ifstream& in) {
+
+}

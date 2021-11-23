@@ -134,3 +134,29 @@ void Player::update(float dt) {
     sprite->changePosition(position);
     sprite->centerViewHere();
 }
+
+void Player::saveEntity(std::ofstream& out) {
+    saveEntityInfo(out);
+    out <<
+        isPlayerOne << " " <<
+        isFacingLeft << " " <<
+        attackTimer << " " <<
+        life;
+}
+
+void Player::restoreEntity(std::ifstream& in) {
+
+    try {
+        restoreEntity(in);
+
+        in >>
+            isPlayerOne >>
+            isFacingLeft >>
+            attackTimer >>
+            life;
+    }
+
+    catch (std::invalid_argument e) {
+        std::cerr << "Error: Could not load player!" << std::endl;
+    }
+}

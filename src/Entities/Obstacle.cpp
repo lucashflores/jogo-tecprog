@@ -17,3 +17,17 @@ void Obstacle::update(float dt) {
 unsigned int Obstacle::getDamage() {
     return damage;
 }
+
+void Obstacle::saveEntity(std::ofstream& out) {
+    saveEntityInfo(out);
+}
+
+void Obstacle::restoreEntity(std::ifstream& in) {
+    try{
+        restoreEntity(in);
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load Projectile!" << std::endl;
+    }
+}

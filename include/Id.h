@@ -42,4 +42,9 @@ public:
         background1 = 1000,
         background2 = 2000,
     };
+
+    Id::ids enumOfIndex(int i) {
+        ids castEnum = static_cast<ids>(i);
+        return castEnum;
+    }
 };

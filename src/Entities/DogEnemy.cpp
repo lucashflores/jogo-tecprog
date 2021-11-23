@@ -110,3 +110,11 @@ void DogEnemy::update(float dt){
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
 }
+
+void DogEnemy::saveDogEnemyInfo() {
+
+}
+
+void DogEnemy::restoreDogEnemyInfo() {
+
+}

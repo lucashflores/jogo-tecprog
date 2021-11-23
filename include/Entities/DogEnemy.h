@@ -29,6 +29,10 @@ namespace Entities {
         void initializeSprite();
 
         void update(float dt) override;
+
+        void saveDogEnemyInfo();
+
+        void restoreDogEnemyInfo();
     };
 
 }

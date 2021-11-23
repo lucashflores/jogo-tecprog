@@ -26,5 +26,13 @@ namespace Entities {
         //void collide(Entity* pE, Coordinates::Vector<float> collision) override;
 
         void update(float dt) override;
+
+        void savePunkBossInfo(std::ofstream& out) const;
+
+        void restorePunkBossInfo(std::ifstream& in);
+
+        virtual void savePunkBoss(std::ofstream& out) const;
+
+        virtual void restorePunkBoss(std::ifstream& in);
     };
 }

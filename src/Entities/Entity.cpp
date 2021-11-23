@@ -1,5 +1,4 @@
 #include "Entities/Entity.h"
-#include <fstream>
 
 using namespace Entities;
 
@@ -42,10 +41,44 @@ const Coordinates::Vector<float> Entity::getHitBox() const {
     return hitBox;
 }
 
-void Entity::save(){
+void Entity::saveEntityInfo(std::ofstream& out) const {
+    out <<  (int)getId()           << " " <<
+            getHitBox().getX()     << " " <<
+            getHitBox().getY()     << " " <<
+            getPosition().getX()   << " " <<
+            getPosition().getX()   << " " <<
+            getDamage()            << " ";
+}
+
+const bool Entity::restoreEntityInfo(std::ifstream& in) {
+    int i;
+    float positionX, positionY, hitBoxX, hitBoxY;
+
+    try {
+        in >>
+            i >>
+            hitBoxX >>
+            hitBoxY >>
+            positionX >>
+            positionY >>
+            damage;
+    }
+    catch(std::invalid_argument e){
+        std::cerr << "Error: Could not load entity info!" << std::endl;
+        return false;
+    }
+
+    Id::ids identifier = static_cast<Id::ids>(i);
+    hitBox.setX(hitBoxX);
+    hitBox.setY(hitBoxY);
+    position.setX(positionX);
+    position.setY(positionY);
+}
+
+void Entity::saveEntity(std::ofstream& out) const {
 
 }
 
-void Entity::restore(){
+void Entity::restoreEntity(std::ifstream& in) {
 
 }

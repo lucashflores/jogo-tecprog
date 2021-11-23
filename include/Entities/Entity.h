@@ -39,9 +39,13 @@ namespace Entities {
 
         virtual void update(float dt) = 0;
 
-        void save();
+        void saveEntityInfo(std::ofstream& out) const;
 
-        void restore();
+        const bool restoreEntityInfo(std::ifstream& in);
+
+        virtual void saveEntity(std::ofstream& out) const;
+
+        virtual void restoreEntity(std::ifstream& in);
     };
 
 }

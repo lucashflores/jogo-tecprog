@@ -81,3 +81,19 @@ double Enemy::getTargetDist() {
 
     return -1;
 }
+
+void Enemy::saveEnemyInfo(std::ofstream& out) const {
+
+}
+
+void Enemy::restoreEnemyInfo(std::ifstream& in) {
+
+}
+
+void Enemy::saveEnemy(std::ofstream& out) const {
+
+}
+
+void Enemy::restoreEnemy(std::ifstream& in) {
+
+}
