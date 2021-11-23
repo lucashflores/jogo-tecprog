@@ -4,6 +4,7 @@
 #include <Entities/DogEnemy.h>
 #include "Entities/PunkBoss.h"
 #include "Entities/Projectile.h"
+#include "Entities/Smoke.h"
 #include "Managers/GraphicManager.h"
 #include "Managers/EventManager.h"
 #include "Animation.h"
@@ -34,11 +35,23 @@ int main() {
 
     Background* background = new Background(Id::background1);
 
+    Entities::Player* player = new Entities::Player(true);
+    entityList->addEntity(player);
+
+    /*
+    Entities::Smoke* smoke = new Entities::Smoke(Coordinates::Vector<float>(320.f, 50.f));
+    entityList->addEntity(smoke);
+    */
+
+    /*
+    Entities::Smoke* smoke = new Entities::Smoke(Coordinates::Vector<float>(320.f, 50.f));
+    entityList->addEntity(smoke);
+    */
 
     /*
     Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(700.f, 0.f));
     entityList->addEntity(smoker);
-
+    smoker->setEntityList(entityList);
 
     Entities::DogEnemy* dog1 = new Entities::DogEnemy(Coordinates::Vector<float>(900.f, 0.f));
     entityList->addEntity(dog1);
@@ -48,7 +61,6 @@ int main() {
     entityList->addEntity(boss);
     boss->setEntityList(entityList);
     */
-
 
     Entities::Player* player = new Entities::Player(true);
     entityList->addEntity(player);

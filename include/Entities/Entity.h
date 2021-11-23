@@ -40,6 +40,14 @@ namespace Entities {
         //virtual void collide(Entity* pE, Coordinates::Vector<float> collision) = 0;
 
         virtual void update(float dt) = 0;
+
+        void saveEntityInfo(std::ofstream& out) const;
+
+        const bool restoreEntityInfo(std::ifstream& in);
+
+        virtual void saveEntity(std::ofstream& out) const;
+
+        virtual void restoreEntity(std::ifstream& in);
     };
 
 }

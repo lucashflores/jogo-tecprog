@@ -9,7 +9,6 @@
 #define PLAYER1_JUMP "W"
 #define PLAYER1_ATTACK "Space"
 
-
 #define PLAYER2_TEXTURE_PATH "../assets/spriteSheets/players/cyborg.png"
 #define PLAYER2_LEFT "Left"
 #define PLAYER2_RIGHT "Right"

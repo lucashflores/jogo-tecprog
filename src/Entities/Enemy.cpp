@@ -36,7 +36,7 @@ void Enemy::setTarget(Player* tg){
     target = tg;
 }
 
-Player* Enemy::chooseTarget() {
+void Enemy::chooseTarget() {
     double distP1 = 20000, distP2 = 20000;
 
     if (player1)
@@ -80,4 +80,20 @@ double Enemy::getTargetDist() {
         std::cout <<"Enemy cannot get Target distance, target is NULL"<< std::endl;
 
     return -1;
+}
+
+void Enemy::saveEnemyInfo(std::ofstream& out) const {
+
+}
+
+void Enemy::restoreEnemyInfo(std::ifstream& in) {
+
+}
+
+void Enemy::saveEnemy(std::ofstream& out) const {
+
+}
+
+void Enemy::restoreEnemy(std::ifstream& in) {
+
 }

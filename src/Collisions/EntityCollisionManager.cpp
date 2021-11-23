@@ -20,6 +20,13 @@ void EntityCollisionManager::collisionChooser(Entities::Entity *pE1, Entities::E
         else
             return;
     }
+    else if (pE2->getId() == Id::smoke) {
+        if (pE1->getId() == Id::player1 || pE1->getId() == Id::player2) {
+            entityCollisions->smokeCollision(pE1, pE2, collision);
+        }
+        else
+            return;
+    }
     else if (pE2->getId() == Id::dog || pE2->getId() == Id::smoker || pE2->getId() == Id::punk){
         if (pE1->getId() == Id::player1 || pE1->getId() == Id::player2) {
             entityCollisions->enemyCollision(pE1, pE2, collision);

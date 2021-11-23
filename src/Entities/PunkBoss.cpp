@@ -5,7 +5,7 @@
 using namespace Entities;
 
 PunkBoss::PunkBoss(Coordinates::Vector<float> pos)
-    : Enemy(Id::punk, 20, 5, Coordinates::Vector<float>(32.0f, 64.0f), pos, 300.0) {
+    : Enemy(Id::punk, 20, 5, Coordinates::Vector<float>(32.0f, 64.0f), pos, 600.0) {
     initializeSprite();
     attackTimer = 0;
     isAttacking = false;
@@ -27,9 +27,9 @@ void Entities::PunkBoss::attack(Character* pChar) {
 
     srand(time(NULL));
     float yrand = rand() % 30;
-    Coordinates::Vector<float> offset = (isFacingLeft)?(Coordinates::Vector<float>(35.f,0.f)):(Coordinates::Vector<float>(-35.f,yrand- 15));
-    Entities::Projectile* attackProjectile = new Entities::Projectile((position - offset), isFacingLeft);
-    bossEntityList->addEntity(attackProjectile);
+    Coordinates::Vector<float> offset = (this->isFacingLeft)?(Coordinates::Vector<float>(35.f,0.f)):(Coordinates::Vector<float>(-35.f,yrand- 15));
+    Entities::Projectile* attackProjectile = new Entities::Projectile((this->position - offset), this->isFacingLeft);
+    this->bossEntityList->addEntity(attackProjectile);
 }
 
 void Entities::PunkBoss::initializeSprite() {
@@ -133,4 +133,30 @@ void Entities::PunkBoss::update(float dt) {
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
+}
+
+void PunkBoss::saveEntity(std::ofstream& out){
+    saveEntityInfo(out);
+
+    out <<
+        isFacingLeft<< " " <<
+        view_range<< " " <<
+        attackTimer<< " " <<
+        life;
+}
+
+void PunkBoss::restoreEntity(std::ifstream& in) {
+    try{
+        restoreEntity(in);
+
+        in >>
+           isFacingLeft >>
+           view_range >>
+           attackTimer >>
+           life;
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load SmokerEnemy!" << std::endl;
+    }
 }

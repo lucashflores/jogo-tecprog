@@ -14,3 +14,19 @@ void Sign::initializeSprite() {
     sprite = new Animation(SIGN_TEXTURE_PATH, size, imageCnt, 1.f);
     sprite->changePosition(position);
 }
+
+void Sign::saveEntity(std::ofstream& out) {
+    saveEntityInfo(out);
+}
+
+void Sign::restoreEntity(std::ifstream& in) {
+    float velocityX, velocityY;
+
+    try{
+        restoreEntity(in);
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load Projectile!" << std::endl;
+    }
+}

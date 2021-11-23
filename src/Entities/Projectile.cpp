@@ -1,5 +1,6 @@
 #include "Entities/Projectile.h"
 #include <iostream>
+#include <fstream>
 
 using namespace Entities;
 
@@ -19,9 +20,6 @@ Projectile::~Projectile() {
 
 }
 
-unsigned int Projectile::getDamage(){
-    return damage;
-}
 
 void Projectile::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
@@ -54,4 +52,32 @@ void Projectile::update(float dt) {
     sprite->changePosition(position);
     timer += dt;
     if(timer>5.f){eliminate(); std::cout << "Tchau projétil" << std::endl;}
+}
+
+void Projectile::saveEntity(std::ofstream& out){
+    saveEntityInfo(out);
+
+    out <<
+        isFacingLeft << " " <<
+        velocity.getX() << " " <<
+        velocity.getY();
+}
+
+void Projectile::restoreEntity(std::ifstream& in) {
+    float velocityX, velocityY;
+
+    try{
+        restoreEntity(in);
+
+        in >>
+           isFacingLeft>>
+           velocityX>>
+           velocityY;
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load Projectile!" << std::endl;
+    }
+
+    velocity = Coordinates::Vector<float>(velocityX, velocityY);
 }

@@ -11,6 +11,7 @@ public:
         dog = 20,
         punk = 30,
 
+        smoke = 88,
         projectile = 99,
 
         tile1 = 100,
@@ -26,4 +27,9 @@ public:
         menuBackground = 3000,
         button = 4000,
     };
+
+    Id::ids enumOfIndex(int i) {
+        ids castEnum = static_cast<ids>(i);
+        return castEnum;
+    }
 };
