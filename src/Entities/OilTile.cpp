@@ -6,8 +6,6 @@ OilTile::OilTile(Coordinates::Vector<float> pos): Tile(Id::oilTile, pos) {
 }
 
 OilTile::~OilTile() {}
-<<<<<<< HEAD
-=======
 
 void OilTile::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
@@ -34,4 +32,3 @@ void OilTile::restoreEntity(std::ifstream& in) {
         std::cerr << "Error: Could not load Projectile!" << std::endl;
     }
 }
->>>>>>> 765ea23d113b3e3f487d8ce05effd29b43c74d28

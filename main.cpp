@@ -44,10 +44,14 @@ int main() {
     */
 
     /*
+    Entities::Smoke* smoke = new Entities::Smoke(Coordinates::Vector<float>(320.f, 50.f));
+    entityList->addEntity(smoke);
+    */
+
+    /*
     Entities::SmokerEnemy* smoker = new Entities::SmokerEnemy(Coordinates::Vector<float>(700.f, 0.f));
     entityList->addEntity(smoker);
     smoker->setEntityList(entityList);
-
 
     Entities::DogEnemy* dog1 = new Entities::DogEnemy(Coordinates::Vector<float>(900.f, 0.f));
     entityList->addEntity(dog1);
@@ -58,8 +62,6 @@ int main() {
     boss->setEntityList(entityList);
     */
 
-
-<<<<<<< HEAD
     Entities::Player* player = new Entities::Player(true);
     entityList->addEntity(player);
 
@@ -88,11 +90,6 @@ int main() {
 
     Stages::EnemyInstructionsReader* enemyInstructionsReader = new Stages::EnemyInstructionsReader(entityList);
     enemyInstructionsReader->readInstructions("../assets/stages/stage1/enemyInstructions.txt");
-=======
-    smoker->setPlayer(player);
-    dog1->setPlayer(player);
-    boss->setPlayer(player);
->>>>>>> 765ea23d113b3e3f487d8ce05effd29b43c74d28
 
 
     float dt;

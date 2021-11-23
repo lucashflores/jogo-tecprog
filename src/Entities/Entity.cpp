@@ -41,13 +41,6 @@ const Coordinates::Vector<float> Entity::getHitBox() const {
     return hitBox;
 }
 
-<<<<<<< HEAD
-void Entity::save() {
-    //Serializer.serialize(this)
-    //
-}
-
-=======
 void Entity::saveEntityInfo(std::ofstream& out) const {
     out <<  (int)getId()           << " " <<
             getHitBox().getX()     << " " <<
@@ -89,4 +82,3 @@ void Entity::saveEntity(std::ofstream& out) const {
 void Entity::restoreEntity(std::ifstream& in) {
 
 }
->>>>>>> 765ea23d113b3e3f487d8ce05effd29b43c74d28
