@@ -30,9 +30,9 @@ namespace Entities {
 
         void update(float dt) override;
 
-        void saveDogEnemyInfo();
+        void saveEntity(std::ofstream& out);
 
-        void restoreDogEnemyInfo();
+        void restoreEntity(std::ifstream& in);
     };
 
 }

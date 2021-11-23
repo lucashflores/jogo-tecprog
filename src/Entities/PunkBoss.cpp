@@ -135,18 +135,28 @@ void Entities::PunkBoss::update(float dt) {
     sprite->changePosition(position);
 }
 
-void PunkBoss::savePunkBossInfo(std::ofstream& out) const{
+void PunkBoss::saveEntity(std::ofstream& out){
+    saveEntityInfo(out);
 
+    out <<
+        isFacingLeft<< " " <<
+        view_range<< " " <<
+        attackTimer<< " " <<
+        life;
 }
 
-void PunkBoss::restorePunkBossInfo(std::ifstream& in) {
+void PunkBoss::restoreEntity(std::ifstream& in) {
+    try{
+        restoreEntity(in);
 
-}
+        in >>
+           isFacingLeft >>
+           view_range >>
+           attackTimer >>
+           life;
+    }
 
-void PunkBoss::savePunkBoss(std::ofstream& out) const{
-
-}
-
-void PunkBoss::restorePunkBoss(std::ifstream& in) {
-
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load SmokerEnemy!" << std::endl;
+    }
 }

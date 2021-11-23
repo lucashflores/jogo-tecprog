@@ -27,12 +27,8 @@ namespace Entities {
 
         void update(float dt) override;
 
-        void savePunkBossInfo(std::ofstream& out) const;
+        void saveEntity(std::ofstream& out);
 
-        void restorePunkBossInfo(std::ifstream& in);
-
-        virtual void savePunkBoss(std::ofstream& out) const;
-
-        virtual void restorePunkBoss(std::ifstream& in);
+        void restoreEntity(std::ifstream& in);
     };
 }

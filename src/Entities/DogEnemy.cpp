@@ -111,10 +111,28 @@ void DogEnemy::update(float dt){
     sprite->changePosition(position);
 }
 
-void DogEnemy::saveDogEnemyInfo() {
+void DogEnemy::saveEntity(std::ofstream& out){
+    saveEntityInfo(out);
 
+    out <<
+        isFacingLeft<< " " <<
+        view_range<< " " <<
+        attackTimer<< " " <<
+        life;
 }
 
-void DogEnemy::restoreDogEnemyInfo() {
+void DogEnemy::restoreEntity(std::ifstream& in) {
+    try{
+        restoreEntity(in);
 
+        in >>
+           isFacingLeft >>
+           view_range >>
+           attackTimer >>
+           life;
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load SmokerEnemy!" << std::endl;
+    }
 }
