@@ -2,18 +2,18 @@
 using namespace Collisions;
 
 CollisionChooser::CollisionChooser() {
-    tileCollisionChooser = new TileCollisionChooser();
-    entityCollisionChooser = new EntityCollisionChooser();
-    obstacleCollisionChooser = new ObstacleCollisionChooser();
+    tileCollisionManager = new TileCollisionManager();
+    entityCollisionManager = new EntityCollisionManager();
+    obstacleCollisionManager = new ObstacleCollisionManager();
 }
 
 CollisionChooser::~CollisionChooser() {
-    if (tileCollisionChooser)
-        delete tileCollisionChooser;
-    if (entityCollisionChooser)
-        delete entityCollisionChooser;
-    if (obstacleCollisionChooser)
-        delete obstacleCollisionChooser;
+    if (tileCollisionManager)
+        delete tileCollisionManager;
+    if (entityCollisionManager)
+        delete entityCollisionManager;
+    if (obstacleCollisionManager)
+        delete obstacleCollisionManager;
 }
 
 //Complex operations start - private
@@ -22,21 +22,21 @@ void CollisionChooser::collisionChooser(Entities::Entity* pE1, Entities::Entity*
 {
     if (pE1->getId() == pE2->getId())
         return;
-    else if ( ((int)(pE2->getId()) >= 100) && ((int)(pE2->getId()) <= 208) ){
-        tileCollisionChooser->doCollision(pE1, pE2, collision);
+    else if ( pE2->getId() == Id::tile1 || pE2->getId() == Id::tile2 ) {
+        tileCollisionManager->doCollision(pE1, pE2, collision);
     }
     else if ( ((int)pE2->getId() >= 300) && ((int)(pE2->getId()) <= 600) ){
-        obstacleCollisionChooser->doCollision(pE1, pE2, collision);
+        obstacleCollisionManager->doCollision(pE1, pE2, collision);
     }
     else if( ((int)pE2->getId() >= 1) && ((int)(pE2->getId()) <= 99) ){
-        entityCollisionChooser->doCollision(pE1, pE2, collision);
+        entityCollisionManager->doCollision(pE1, pE2, collision);
     }
     else {
         return ;
     }
 }
 
-//Facade
+
 void CollisionChooser::doCollision(Entities::Entity* pE1, Entities::Entity* pE2, Coordinates::Vector<float> collision) {
     collisionChooser(pE1, pE2, collision);
 }

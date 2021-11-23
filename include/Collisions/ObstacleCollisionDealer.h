@@ -4,10 +4,10 @@
 #include "Entities/Obstacle.h"
 
 namespace Collisions {
-    class ObstacleCollisions {
+    class ObstacleCollisionDealer {
     public:
-        ObstacleCollisions();
-        ~ObstacleCollisions();
+        ObstacleCollisionDealer();
+        ~ObstacleCollisionDealer();
         void barrelCollision(Entities::Entity* pE1, Entities::Entity* pE2, Coordinates::Vector<float> collision);
         void fireCollision(Entities::Entity* pE1, Entities::Entity* pE2, Coordinates::Vector<float> collision);
         void signCollision(Entities::Entity* pE1, Entities::Entity* pE2, Coordinates::Vector<float> collision);

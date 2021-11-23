@@ -1,14 +1,14 @@
 #pragma once
-#include "TileFactory.h"
+#include "TileMaker.h"
 #include "InstructionsReader.h"
 
 namespace Stages {
 
     class TileInstructionsReader: public InstructionsReader {
     private:
-        TileFactory* pTileFactory;
+        TileMaker* pTileMaker;
     public:
-        TileInstructionsReader(TileFactory* pTF);
+        TileInstructionsReader(int stg, EntityList* pEL);
         ~TileInstructionsReader();
         void executeInstructions();
     };

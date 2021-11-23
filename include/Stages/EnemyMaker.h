@@ -7,15 +7,12 @@
 
 
 namespace Stages {
-    class EnemyInstructionsReader;
-
-    class EnemyFactory {
+    class EnemyMaker {
     private:
         EntityList* pEntityList;
     public:
-        EnemyFactory(EntityList *pEL);
-        ~EnemyFactory();
-        void readAndExecuteInstructions(std::string instructionsPath);
+        EnemyMaker(EntityList *pEL);
+        ~EnemyMaker();
         void makeSmokerEnemy(Coordinates::Vector<float> pos);
         void makeDogEnemy(Coordinates::Vector<float> pos);
         void makeBoss(Coordinates::Vector<float> pos);

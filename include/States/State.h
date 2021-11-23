@@ -2,6 +2,8 @@
 
 #include "StateMachine.h"
 #include "State.h"
+#include "Stages/Stage.h"
+#include "Entities/Player.h"
 
 
 namespace States {
@@ -20,9 +22,11 @@ namespace States {
 
         virtual void update(float dt) = 0;
 
-        virtual void handleEvents() = 0;
-
         virtual void render() = 0;
+
+        virtual void reset() = 0;
+
+        virtual void exec() = 0;
     };
 
 }

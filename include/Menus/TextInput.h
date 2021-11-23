@@ -1,0 +1,8 @@
+//
+// Created by Lucas on 23/11/2021.
+//
+
+#ifndef JOGO_TECPROG_TEXTINPUT_H
+#define JOGO_TECPROG_TEXTINPUT_H
+
+#endif //JOGO_TECPROG_TEXTINPUT_H

@@ -1,0 +1,8 @@
+//
+// Created by Lucas on 21/11/2021.
+//
+
+#ifndef JOGO_TECPROG_LOADGAMESTATE_H
+#define JOGO_TECPROG_LOADGAMESTATE_H
+
+#endif //JOGO_TECPROG_LOADGAMESTATE_H

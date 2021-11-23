@@ -41,3 +41,8 @@ const Coordinates::Vector<float> Entity::getHitBox() const {
     return hitBox;
 }
 
+void Entity::save() {
+    //Serializer.serialize(this)
+    //
+}
+

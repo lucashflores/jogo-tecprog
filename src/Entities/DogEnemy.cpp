@@ -76,15 +76,17 @@ void DogEnemy::update(float dt){
     (isCommitted) ? walk(dt): idle(dt);
 
     // Vai morder?
-    if (getTargetDist() < 30.f && attackTimer < 1.2f) {
-        attackTimer = attackTimer + dt;
-        if(attackTimer > 0.2f)
-            setIsAttacking(true);
-    } else {
-        if(isAttacking && attackTimer > 1.2f) attack(target);
+    if (target) {
+        if (getTargetDist() < 30.f && attackTimer < 1.2f) {
+            attackTimer = attackTimer + dt;
+            if (attackTimer > 0.2f)
+                setIsAttacking(true);
+        } else {
+            if (isAttacking && attackTimer > 1.2f) attack(target);
 
-        setIsAttacking(false);
-        attackTimer = 0;
+            setIsAttacking(false);
+            attackTimer = 0;
+        }
     }
 
 

@@ -16,6 +16,13 @@ InputManager::InputManager() {
     keyMap["W"] = sf::Keyboard::W;
     keyMap["Space"] = sf::Keyboard::Space;
 
+    keyMap["Right"] = sf::Keyboard::Right;
+    keyMap["Left"] = sf::Keyboard::Left;
+    keyMap["Up"] = sf::Keyboard::Up;
+    keyMap["L"] = sf::Keyboard::L;
+
+    keyMap["Enter"] = sf::Keyboard::Enter;
+
 
     keysDown[sf::Keyboard::A] = false;
     keysDown[sf::Keyboard::W] = false;

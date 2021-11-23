@@ -1,16 +1,16 @@
 #pragma once
 
 #include "ICollisionChooser.h"
-#include "TileCollisions.h"
+#include "TileCollisionDealer.h"
 
 namespace Collisions {
-    class TileCollisionChooser: ICollisionChooser {
+    class TileCollisionManager: ICollisionChooser {
     private:
         void collisionChooser(Entities::Entity* pE1, Entities::Entity* pE2, Coordinates::Vector<float> collision);
-        TileCollisions* tileCollisions;
+        TileCollisionDealer* tileCollisions;
     public:
-        TileCollisionChooser();
-        ~TileCollisionChooser();
+        TileCollisionManager();
+        ~TileCollisionManager();
         void doCollision(Entities::Entity* pE1, Entities::Entity* pE2, Coordinates::Vector<float> collision);
     };
 }

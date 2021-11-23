@@ -10,23 +10,28 @@ InstructionsReader::~InstructionsReader() {
 }
 
 void InstructionsReader::convertStringToVector(std::string s) {
-    std::string space_delimiter = " ";
-    size_t pos = 0;
-    while ((pos = s.find(space_delimiter)) != std::string::npos) {
-        commands.push_back(s.substr(0, pos));
-        s.erase(0, pos + space_delimiter.length());
+    std::string temp = "";
+    for(int i=0;i<s.length();++i){
+
+        if(s[i]==' '){
+            commands.push_back(temp);
+            temp = "";
+        }
+        else{
+            temp.push_back(s[i]);
+        }
+
     }
+    commands.push_back(temp);
 }
 
 void InstructionsReader::readInstructions(std::string instructionsPath) {
     std::ifstream file(instructionsPath);
-    if (file.is_open()) {
-        std::string line;
-        while (std::getline(file, line)) {
-            convertStringToVector(line);
-            executeInstructions();
-            commands.clear();
-        }
-        file.close();
+    std::string line;
+    while (std::getline(file, line)) {
+        convertStringToVector(line);
+        executeInstructions();
+        commands.clear();
     }
+    file.close();
 }

@@ -6,6 +6,5 @@ namespace Entities {
     public:
         OilTile(Coordinates::Vector<float> pos);
         ~OilTile();
-        void initializeSprite();
     };
 }

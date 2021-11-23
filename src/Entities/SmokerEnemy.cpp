@@ -81,17 +81,18 @@ void SmokerEnemy::update(float dt){
     (isCommitted) ? walk(dt): idle();
 
     // Vai morder?
+    if (target) {
+        if (getTargetDist() < 30.f && attackTimer < 0.5f) {
+            attackTimer += dt;
+            if (attackTimer > 0.f)
+                setIsAttacking(true);
 
-    if (getTargetDist() < 30.f && attackTimer < 0.5f) {
-        attackTimer += dt;
-        if(attackTimer > 0.f)
-            setIsAttacking(true);
+        } else {
 
-    } else {
-
-        if(isAttacking && attackTimer > 0.5f) attack(target);
-        setIsAttacking(false);
-        attackTimer = 0;
+            if (isAttacking && attackTimer > 0.5f) attack(target);
+            setIsAttacking(false);
+            attackTimer = 0;
+        }
     }
 
     if (isAttacking) {

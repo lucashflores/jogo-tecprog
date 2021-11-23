@@ -1,17 +1,17 @@
-#include "Collisions/EntityCollisionChooser.h"
+#include "Collisions/EntityCollisionManager.h"
 using namespace Collisions;
 
 
-EntityCollisionChooser::EntityCollisionChooser(): ICollisionChooser() {
-    entityCollisions = new EntityCollisions();
+EntityCollisionManager::EntityCollisionManager(): ICollisionChooser() {
+    entityCollisions = new EntityCollisionDealer();
 }
 
-EntityCollisionChooser::~EntityCollisionChooser() {
+EntityCollisionManager::~EntityCollisionManager() {
     if (entityCollisions)
         delete entityCollisions;
 }
 
-void EntityCollisionChooser::collisionChooser(Entities::Entity *pE1, Entities::Entity *pE2,
+void EntityCollisionManager::collisionChooser(Entities::Entity *pE1, Entities::Entity *pE2,
                                               Coordinates::Vector<float> collision) {
     if (pE2->getId() == Id::projectile) {
         if (pE1->getId() == Id::player1 || pE1->getId() == Id::player2) {
@@ -35,7 +35,7 @@ void EntityCollisionChooser::collisionChooser(Entities::Entity *pE1, Entities::E
         return;
 }
 
-void EntityCollisionChooser::doCollision(Entities::Entity *pE1, Entities::Entity *pE2,
+void EntityCollisionManager::doCollision(Entities::Entity *pE1, Entities::Entity *pE2,
                                               Coordinates::Vector<float> collision) {
     collisionChooser(pE1, pE2, collision);
 }

@@ -2,7 +2,7 @@
 
 #include "Managers/CollisionManager.h"
 #include "Entities/Player.h"
-#include "Entities/Background.h"
+#include "Background.h"
 
 namespace Stages {
     class Stage {
@@ -12,7 +12,7 @@ namespace Stages {
         EntityList* entityList;
         Entities::Player* player1;
         Entities::Player* player2;
-        Entities::Background* background;
+        Background* background;
         unsigned int score;
         bool isStageDone;
     public:
