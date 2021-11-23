@@ -15,6 +15,16 @@ void Entity::setPosition(Coordinates::Vector<float> pos) {
     position = pos;
 }
 
+void Entity::setDamage(unsigned int dmg) {
+    if (dmg < 0)
+        dmg = 0;
+    damage = dmg;
+}
+
+unsigned int Entity::getDamage() const {
+    return damage;
+}
+
 void Entity::eliminate() {
     isAlive = false;
 }
@@ -29,5 +39,10 @@ const Coordinates::Vector<float> Entity::getPosition() const {
 
 const Coordinates::Vector<float> Entity::getHitBox() const {
     return hitBox;
+}
+
+void Entity::save() {
+    //Serializer.serialize(this)
+    //
 }
 

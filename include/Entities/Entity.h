@@ -14,6 +14,8 @@ namespace Entities {
 
         bool isAlive;
 
+        unsigned int damage;
+
     public:
         Entity(Id::ids i, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
@@ -25,11 +27,17 @@ namespace Entities {
 
         const Coordinates::Vector<float> getHitBox() const;
 
+        void setDamage(unsigned int dmg);
+
+        unsigned int getDamage() const;
+
         virtual void eliminate();
 
         bool getIsAlive();
 
-        virtual void collide(Entity* pE, Coordinates::Vector<float> collision) = 0;
+        void save();
+
+        //virtual void collide(Entity* pE, Coordinates::Vector<float> collision) = 0;
 
         virtual void update(float dt) = 0;
     };

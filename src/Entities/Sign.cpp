@@ -8,8 +8,6 @@ Obstacle(Id::sign, Coordinates::Vector<float>(32.f, 32.f), pos, 0) {
 
 Sign::~Sign() {}
 
-void Sign::collide(Entity *pE, Coordinates::Vector<float> collision) {return ;}
-
 void Sign::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(32.f, 32.f);

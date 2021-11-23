@@ -6,7 +6,5 @@ namespace Entities {
     public:
         OilTile(Coordinates::Vector<float> pos);
         ~OilTile();
-        void collide(Entity* pE, Coordinates::Vector<float> collision);
-        void initializeSprite();
     };
 }

@@ -8,7 +8,6 @@ namespace Entities {
     public:
         Barrel(Coordinates::Vector<float> pos);
         ~Barrel();
-        void collide(Entity* pE, Coordinates::Vector<float> collision);
         void initializeSprite();
     };
 

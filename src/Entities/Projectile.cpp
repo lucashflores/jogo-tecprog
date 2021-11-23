@@ -8,6 +8,7 @@ Projectile::Projectile(Coordinates::Vector<float> pos, bool isFL):
         velocity(0.f,0.f),
         timer(0) {
 
+    setDamage(2);
     isFacingLeft = isFL;
     (isFacingLeft)?(velocity.setX(-200.f)):(velocity.setX(200.f));
     initializeSprite();
@@ -18,6 +19,10 @@ Projectile::~Projectile() {
 
 }
 
+unsigned int Projectile::getDamage(){
+    return damage;
+}
+
 void Projectile::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(20.f, 20.f);
@@ -25,6 +30,7 @@ void Projectile::initializeSprite() {
     sprite->changePosition(position);
 }
 
+/* TODO: remover se funcionar
 void Projectile::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
 
@@ -40,6 +46,7 @@ void Projectile::collide(Entity* pE, Coordinates::Vector<float> collision) {
         }
     }
 }
+*/
 
 void Projectile::update(float dt) {
     sprite->animationUpdate(0, isFacingLeft, dt);

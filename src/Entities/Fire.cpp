@@ -10,10 +10,6 @@ Fire::~Fire() {
 
 }
 
-void Fire::collide(Entity *pE, Coordinates::Vector<float> collision) {
-    return;
-}
-
 void Fire::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(5, 1);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(32.f, 32.f);

@@ -12,28 +12,10 @@ Tile::~Tile() {
 }
 
 void Tile::createTileTextureMap() {
-    tileTextureMap[Id::tile1Bottom] = TILE1_BOTTOM;
-    tileTextureMap[Id::tile1BottomCornerLeft] = TILE1_BOTTOM_CORNER_LEFT;
-    tileTextureMap[Id::tile1BottomCornerRight] = TILE1_BOTTOM_CORNER_RIGHT;
-    tileTextureMap[Id::tile1Top] = TILE1_TOP;
-    tileTextureMap[Id::tile1TopCornerLeft] = TILE1_TOP_CORNER_LEFT;
-    tileTextureMap[Id::tile1TopCornerRight] = TILE1_TOP_CORNER_RIGHT;
-    tileTextureMap[Id::tile1WallLeft] = TILE1_WALL_LEFT;
-    tileTextureMap[Id::tile1WallRight] = TILE1_WALL_RIGHT;
-    tileTextureMap[Id::tile1Background] = TILE1_BACKGROUND;
-    tileTextureMap[Id::tile2Bottom] = TILE2_BOTTOM;
-    tileTextureMap[Id::tile2BottomCornerLeft] = TILE2_BOTTOM_CORNER_LEFT;
-    tileTextureMap[Id::tile2BottomCornerRight] = TILE2_BOTTOM_CORNER_RIGHT;
-    tileTextureMap[Id::tile2Top] = TILE2_TOP;
-    tileTextureMap[Id::tile2TopCornerLeft] = TILE2_TOP_CORNER_LEFT;
-    tileTextureMap[Id::tile2TopCornerRight] = TILE2_TOP_CORNER_RIGHT;
-    tileTextureMap[Id::tile2WallLeft] = TILE2_WALL_LEFT;
-    tileTextureMap[Id::tile2WallRight] = TILE2_WALL_RIGHT;
-    tileTextureMap[Id::tile2Background] = TILE2_BACKGROUND;
-}
+    tileTextureMap[Id::oilTile] = OIL_TILE_TEXTURE_PATH;
+    tileTextureMap[Id::tile1] = TILE1_TEXTURE_PATH;
+    tileTextureMap[Id::tile2] = TILE2_TEXTURE_PATH;
 
-void Tile::collide(Entity *pE, Coordinates::Vector<float> collision) {
-    return;
 }
 
 void Tile::initializeSprite() {

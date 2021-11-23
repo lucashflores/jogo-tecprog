@@ -5,7 +5,7 @@ using namespace Entities;
 #include <iostream>
 
 DogEnemy::DogEnemy(Coordinates::Vector<float> pos)
-    : Enemy(Id::enemy2, 20, 5, Coordinates::Vector<float>(23.0f, 23.0f), pos, 270.0) {
+    : Enemy(Id::dog, 20, 5, Coordinates::Vector<float>(23.0f, 23.0f), pos, 270.0) {
     initializeSprite();
     attackTimer = 0;
     isAttacking = false;
@@ -61,31 +61,6 @@ void DogEnemy::attack(Character* pChar) {
     }
 }
 
-void DogEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-
-        // If is a tile
-        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
-            if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                setIsOnGround(true);
-            }
-            else {
-                if (getPosition().getX() < pE->getPosition().getX())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
-            }
-        }
-        else if (pE->getId() == Id::projectile){return;}
-        else
-            setIsOnGround(false);
-    }
-}
-
 void DogEnemy::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 5);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(40.f, 40.f);
@@ -101,15 +76,17 @@ void DogEnemy::update(float dt){
     (isCommitted) ? walk(dt): idle(dt);
 
     // Vai morder?
-    if (getTargetDist() < 30.f && attackTimer < 1.2f) {
-        attackTimer = attackTimer + dt;
-        if(attackTimer > 0.2f)
-            setIsAttacking(true);
-    } else {
-        if(isAttacking && attackTimer > 1.2f) attack(target);
+    if (target) {
+        if (getTargetDist() < 30.f && attackTimer < 1.2f) {
+            attackTimer = attackTimer + dt;
+            if (attackTimer > 0.2f)
+                setIsAttacking(true);
+        } else {
+            if (isAttacking && attackTimer > 1.2f) attack(target);
 
-        setIsAttacking(false);
-        attackTimer = 0;
+            setIsAttacking(false);
+            attackTimer = 0;
+        }
     }
 
 

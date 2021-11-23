@@ -8,10 +8,6 @@ Obstacle(Id::barrel, Coordinates::Vector<float>(18.f, 26.f), pos, 0) {
 
 Barrel::~Barrel() {}
 
-void Barrel::collide(Entity *pE, Coordinates::Vector<float> collision) {
-    return ;
-}
-
 void Barrel::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(18.f, 26.f);

@@ -28,8 +28,6 @@ namespace Entities {
 
         void initializeSprite();
 
-        void collide(Entity* pE, Coordinates::Vector<float> collision) override;
-
         void update(float dt) override;
     };
 

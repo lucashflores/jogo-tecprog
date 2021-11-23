@@ -22,7 +22,7 @@ namespace Entities {
 
         void initializeSprite();
 
-        void collide(Entity* pE, Coordinates::Vector<float> collision);
+        //void collide(Entity* pE, Coordinates::Vector<float> collision);
 
         void update(float dt) override;
     };

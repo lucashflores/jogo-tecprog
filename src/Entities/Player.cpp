@@ -6,7 +6,7 @@ using namespace Entities;
 Player::Player(bool isPlayerOne):
 Character(isPlayerOne? Id::player1 : Id::player2,50, 10,
           Coordinates::Vector<float>(16.f, 32.f),
-          Coordinates::Vector<float>(0.f, 84.f)) {
+          Coordinates::Vector<float>(150.f, 950.f)) {
     playerControl = new PlayerControl(this);
     isOnGround = false;
     initializeSprite();
@@ -52,38 +52,6 @@ void Player::attack(Character* pChar) {
 
 }
 
-void Player::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom || pE->getId() == Id::oilTile) {
-            if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY()) {
-                    setVelocity(Coordinates::Vector<float>(getVelocity().getX(), 0.f));
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                } else{
-                    setIsOnGround(true);
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                }
-
-            }
-            else {
-                if (getPosition().getX() < pE->getPosition().getX()) {
-                    setPosition(
-                            Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                }
-                else
-                    setPosition(
-                            Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
-            }
-            return ;
-        }
-        else if (pE->getId() == Id::tile1Background) {return;}
-        else if (pE->getId() == Id::projectile){return;}
-        else {
-            setIsOnGround(false);
-        }
-    }
-}
-
 void Player::initializeSprite() {
 
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 8);
@@ -102,9 +70,6 @@ void Player::initializeSprite() {
 
 void Player::update(float dt) {
     playerControl->notify();
-
-    //if(isAttacking)
-        //std::cout << "Atacando" << std::endl;
 
     if (isAttacking && isWalking) {
         sprite->animationUpdate(3, isFacingLeft, dt);
