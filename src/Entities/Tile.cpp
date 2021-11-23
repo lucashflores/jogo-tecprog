@@ -32,10 +32,6 @@ void Tile::createTileTextureMap() {
     tileTextureMap[Id::tile2Background] = TILE2_BACKGROUND;
 }
 
-void Tile::collide(Entity *pE, Coordinates::Vector<float> collision) {
-    return;
-}
-
 void Tile::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(32.f, 32.f);

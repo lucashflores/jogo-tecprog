@@ -9,7 +9,6 @@ namespace Entities {
 
         Coordinates::Vector<float> velocity;
         int life;
-        int damage;
         bool isFacingLeft;
         bool isWalking;
         bool isOnGround;
@@ -33,10 +32,6 @@ namespace Entities {
 
         int getLife() const;
 
-        void setDamage(unsigned int d);
-
-        int getDamage() const;
-
         void setIsFacingLeft(bool facingLeft);
 
         void setIsWalking(bool walking);
@@ -47,10 +42,14 @@ namespace Entities {
 
         virtual void attack(Character* pChar) = 0;
 
-        virtual void collide(Entity* pE, Coordinates::Vector<float> collision)=0;
-
         virtual void update(float dt) = 0;
 
+        void saveCharacterInfo(std::ofstream& out) const;
 
+        void restoreCharacterInfo(std::ifstream& in);
+
+        virtual void saveEntity(std::ofstream& out) const;
+
+        virtual void restoreEntity(std::ifstream& in);
     };
 }

@@ -8,11 +8,25 @@ Obstacle(Id::sign, Coordinates::Vector<float>(32.f, 32.f), pos, 0) {
 
 Sign::~Sign() {}
 
-void Sign::collide(Entity *pE, Coordinates::Vector<float> collision) {return ;}
-
 void Sign::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(32.f, 32.f);
     sprite = new Animation(SIGN_TEXTURE_PATH, size, imageCnt, 1.f);
     sprite->changePosition(position);
+}
+
+void Sign::saveEntity(std::ofstream& out) {
+    saveEntityInfo(out);
+}
+
+void Sign::restoreEntity(std::ifstream& in) {
+    float velocityX, velocityY;
+
+    try{
+        restoreEntity(in);
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load Projectile!" << std::endl;
+    }
 }

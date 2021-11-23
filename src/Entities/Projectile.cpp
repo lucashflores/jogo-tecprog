@@ -1,5 +1,6 @@
 #include "Entities/Projectile.h"
 #include <iostream>
+#include <fstream>
 
 using namespace Entities;
 
@@ -8,6 +9,7 @@ Projectile::Projectile(Coordinates::Vector<float> pos, bool isFL):
         velocity(0.f,0.f),
         timer(0) {
 
+    setDamage(2);
     isFacingLeft = isFL;
     (isFacingLeft)?(velocity.setX(-200.f)):(velocity.setX(200.f));
     initializeSprite();
@@ -18,6 +20,7 @@ Projectile::~Projectile() {
 
 }
 
+
 void Projectile::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(20.f, 20.f);
@@ -25,6 +28,7 @@ void Projectile::initializeSprite() {
     sprite->changePosition(position);
 }
 
+/* TODO: remover se funcionar
 void Projectile::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
 
@@ -40,6 +44,7 @@ void Projectile::collide(Entity* pE, Coordinates::Vector<float> collision) {
         }
     }
 }
+*/
 
 void Projectile::update(float dt) {
     sprite->animationUpdate(0, isFacingLeft, dt);
@@ -47,4 +52,32 @@ void Projectile::update(float dt) {
     sprite->changePosition(position);
     timer += dt;
     if(timer>5.f){eliminate(); std::cout << "Tchau projétil" << std::endl;}
+}
+
+void Projectile::saveEntity(std::ofstream& out){
+    saveEntityInfo(out);
+
+    out <<
+        isFacingLeft << " " <<
+        velocity.getX() << " " <<
+        velocity.getY();
+}
+
+void Projectile::restoreEntity(std::ifstream& in) {
+    float velocityX, velocityY;
+
+    try{
+        restoreEntity(in);
+
+        in >>
+           isFacingLeft>>
+           velocityX>>
+           velocityY;
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load Projectile!" << std::endl;
+    }
+
+    velocity = Coordinates::Vector<float>(velocityX, velocityY);
 }

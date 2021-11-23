@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EntityList.h"
+#include "Collisions/CollisionChooser.h"
 #include <math.h>
 
 namespace Managers {
@@ -8,6 +9,7 @@ namespace Managers {
     class CollisionManager {
     private:
         EntityList* pEntityList;
+        Collisions::CollisionChooser* collisionChooser;
 
         CollisionManager();
 

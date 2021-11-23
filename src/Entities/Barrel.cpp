@@ -8,13 +8,28 @@ Obstacle(Id::barrel, Coordinates::Vector<float>(18.f, 26.f), pos, 0) {
 
 Barrel::~Barrel() {}
 
-void Barrel::collide(Entity *pE, Coordinates::Vector<float> collision) {
-    return ;
-}
-
 void Barrel::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
+
     Coordinates::Vector<float> size = Coordinates::Vector<float>(18.f, 26.f);
+
     sprite = new Animation(BARREL_TEXTURE_PATH, size, imageCnt, 1.f);
+
     sprite->changePosition(position);
+}
+
+void Barrel::saveEntity(std::ofstream& out) {
+    saveEntityInfo(out);
+}
+
+void Barrel::restoreEntity(std::ifstream& in) {
+    float velocityX, velocityY;
+
+    try{
+        restoreEntity(in);
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load Projectile!" << std::endl;
+    }
 }

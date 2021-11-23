@@ -26,6 +26,14 @@ namespace Entities {
 
         double getTargetDist();
 
-        Player* chooseTarget();
+        void chooseTarget();
+
+        void saveEnemyInfo(std::ofstream& out) const;
+
+        void restoreEnemyInfo(std::ifstream& in);
+
+        virtual void saveEnemy(std::ofstream& out) const;
+
+        virtual void restoreEnemy(std::ifstream& in);
     };
 }

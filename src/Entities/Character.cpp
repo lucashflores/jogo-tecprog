@@ -2,9 +2,10 @@
 using namespace Entities;
 
 Character::Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos):
-life(l), damage(d), velocity(Coordinates::Vector<float>(0.f, 0.f)),
+life(l), velocity(Coordinates::Vector<float>(0.f, 0.f)),
 Entity(i, hit, pos)
 {
+    setDamage(d);
     isWalking = false;
     isFacingLeft = false;
     isOnGround = false;
@@ -23,23 +24,13 @@ Coordinates::Vector<float> Character::getVelocity() const {
 }
 
 void Character::setLife(unsigned int l) {
-    if (l < 0)
+    if (life <= 0)
         l = 0;
     life = l;
 }
 
 int Character::getLife() const {
     return life;
-}
-
-void Character::setDamage(unsigned int d) {
-    if (d < 0)
-        d = 0;
-    damage = d;
-}
-
-int Character::getDamage() const {
-    return damage;
 }
 
 void Character::eliminate() {
@@ -60,4 +51,20 @@ void Character::setIsOnGround(bool iOG) {
 
 void Character::setIsAttacking(bool attacking) {
     isAttacking = attacking;
+}
+
+void Character::saveCharacterInfo(std::ofstream& out) const{
+
+}
+
+void Character::restoreCharacterInfo(std::ifstream& in) {
+
+}
+
+void Character::saveEntity(std::ofstream& out) const{
+
+}
+
+void Character::restoreEntity(std::ifstream& in) {
+
 }

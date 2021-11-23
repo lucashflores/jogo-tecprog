@@ -1,10 +1,9 @@
 #include "Entities/SmokerEnemy.h"
 using namespace Entities;
-
 #include "Id.h"
 #include <iostream>
 
-SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::enemy1, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::smoker, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
     initializeSprite();
 }
 
@@ -31,8 +30,12 @@ void SmokerEnemy::idle(){
 void SmokerEnemy::attack(Character* pChar) {
 
     if ((pChar->getLife() - damage) > 0) {
-        pChar->setLife(pChar->getLife() - damage);
-        std::cout << "Deu dano!" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
+        //pChar->setLife(pChar->getLife() - damage);
+        float offset = 25;
+        (isFacingLeft)?(offset=offset):(offset=-offset);
+        Entities::Smoke* smoke = new Entities::Smoke(position- Coordinates::Vector<float>(offset,0.f));
+        smokerEntityList->addEntity(smoke);
+        std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
         pChar->eliminate();
         std::cout << "Player Eliminado" << std::endl;
@@ -41,6 +44,12 @@ void SmokerEnemy::attack(Character* pChar) {
     attackTimer = 0;
 }
 
+void SmokerEnemy::setEntityList(EntityList* EL) {
+    if(EL)
+        smokerEntityList = EL;
+}
+
+/* TODO: remover se funcionar
 void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
     if (pE) {
         if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
@@ -63,6 +72,7 @@ void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
             setIsOnGround(false);
     }
 }
+*/
 
 void SmokerEnemy::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 3);
@@ -80,9 +90,9 @@ void SmokerEnemy::update(float dt){
 
     // Vai morder?
 
-    if (getTargetDist() < 30.f && attackTimer < 0.5f) {
+    if (getTargetDist() < 55.f && attackTimer < 0.5f) {
         attackTimer += dt;
-        if(attackTimer > 0.f)
+        if(attackTimer > 0.2f)
             setIsAttacking(true);
 
     } else {
@@ -113,4 +123,30 @@ void SmokerEnemy::update(float dt){
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
+}
+
+void SmokerEnemy::saveEntity(std::ofstream& out){
+    saveEntityInfo(out);
+
+    out <<
+        isFacingLeft<< " " <<
+        view_range<< " " <<
+        attackTimer<< " " <<
+        life;
+}
+
+void SmokerEnemy::restoreEntity(std::ifstream& in) {
+    try{
+        restoreEntity(in);
+
+        in >>
+           isFacingLeft >>
+           view_range >>
+           attackTimer >>
+           life;
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load SmokerEnemy!" << std::endl;
+    }
 }

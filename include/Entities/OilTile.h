@@ -5,8 +5,13 @@ namespace Entities {
     class OilTile: public Tile {
     public:
         OilTile(Coordinates::Vector<float> pos);
+
         ~OilTile();
-        void collide(Entity* pE, Coordinates::Vector<float> collision);
+
         void initializeSprite();
+
+        void saveEntity(std::ofstream& out);
+
+        void restoreEntity(std::ifstream& in);
     };
 }

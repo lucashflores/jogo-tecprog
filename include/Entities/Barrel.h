@@ -7,9 +7,13 @@ namespace Entities {
     class Barrel: public Obstacle {
     public:
         Barrel(Coordinates::Vector<float> pos);
-        ~Barrel();
-        void collide(Entity* pE, Coordinates::Vector<float> collision);
-        void initializeSprite();
-    };
 
+        ~Barrel();
+
+        void initializeSprite();
+
+        void saveEntity(std::ofstream& out);
+
+        void restoreEntity(std::ifstream& in);
+    };
 }

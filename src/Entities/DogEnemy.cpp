@@ -5,7 +5,7 @@ using namespace Entities;
 #include <iostream>
 
 DogEnemy::DogEnemy(Coordinates::Vector<float> pos)
-    : Enemy(Id::enemy2, 20, 5, Coordinates::Vector<float>(23.0f, 23.0f), pos, 270.0) {
+    : Enemy(Id::dog, 20, 5, Coordinates::Vector<float>(23.0f, 23.0f), pos, 270.0) {
     initializeSprite();
     attackTimer = 0;
     isAttacking = false;
@@ -61,31 +61,6 @@ void DogEnemy::attack(Character* pChar) {
     }
 }
 
-void DogEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-
-        // If is a tile
-        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
-            if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                setIsOnGround(true);
-            }
-            else {
-                if (getPosition().getX() < pE->getPosition().getX())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
-            }
-        }
-        else if (pE->getId() == Id::projectile){return;}
-        else
-            setIsOnGround(false);
-    }
-}
-
 void DogEnemy::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 5);
     Coordinates::Vector<float> size = Coordinates::Vector<float>(40.f, 40.f);
@@ -134,4 +109,30 @@ void DogEnemy::update(float dt){
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
+}
+
+void DogEnemy::saveEntity(std::ofstream& out){
+    saveEntityInfo(out);
+
+    out <<
+        isFacingLeft<< " " <<
+        view_range<< " " <<
+        attackTimer<< " " <<
+        life;
+}
+
+void DogEnemy::restoreEntity(std::ifstream& in) {
+    try{
+        restoreEntity(in);
+
+        in >>
+           isFacingLeft >>
+           view_range >>
+           attackTimer >>
+           life;
+    }
+
+    catch (std::invalid_argument e){
+        std::cerr << "Error: Could not load SmokerEnemy!" << std::endl;
+    }
 }

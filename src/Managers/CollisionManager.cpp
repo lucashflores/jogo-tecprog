@@ -4,10 +4,13 @@ using namespace Managers;
 CollisionManager* CollisionManager::instance = NULL;
 
 CollisionManager::CollisionManager() {
+    collisionChooser = new Collisions::CollisionChooser();
 }
 
 CollisionManager::~CollisionManager() {
     pEntityList = NULL;
+    if (collisionChooser)
+        delete collisionChooser;
 }
 
 CollisionManager *CollisionManager::getInstance() {
@@ -43,9 +46,8 @@ void CollisionManager::collideAllEntities() {
             Coordinates::Vector<float> collision(collideInX, collideInY);
 
             if (collideInY > 0.0f && collideInX > 0.0f) {
-                pE->collide(pE2, collision);
-                pE2->collide(pE, collision);
-                //break;
+                collisionChooser->doCollision(pE, pE2, collision);
+                collisionChooser->doCollision(pE2, pE, collision);
             }
 
             pE = NULL;

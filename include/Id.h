@@ -4,11 +4,16 @@ class Id {
 public:
     enum ids {
         null = 0,
+
         player1 = 1,
         player2 = 2,
-        enemy1 = 10,
-        enemy2 = 20,
-        enemy3 = 30,
+        smoker = 10,
+        dog = 20,
+        punk = 30,
+
+        smoke = 88,
+        projectile = 99,
+
         tile1Bottom = 100,
         tile1BottomCornerLeft = 101,
         tile1BottomCornerRight = 102,
@@ -27,13 +32,19 @@ public:
         tile2WallLeft = 206,
         tile2WallRight = 207,
         tile2Background = 208,
+
         oilTile = 300,
         fire = 400,
         barrel = 500,
         sign = 600,
-        projectile = 99,
+
 
         background1 = 1000,
         background2 = 2000,
     };
+
+    Id::ids enumOfIndex(int i) {
+        ids castEnum = static_cast<ids>(i);
+        return castEnum;
+    }
 };
