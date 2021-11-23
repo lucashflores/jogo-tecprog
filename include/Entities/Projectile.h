@@ -19,12 +19,14 @@ namespace Entities {
 
         ~Projectile() override;
 
-        unsigned int getDamage();
-
         void initializeSprite() override;
 
         //void collide(Entity* pE, Coordinates::Vector<float> collision) override;
 
         void update(float dt) override;
+
+        void saveEntity(std::ofstream& out);
+
+        void restoreEntity(std::ifstream& in);
     };
 }

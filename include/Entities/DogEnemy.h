@@ -29,6 +29,10 @@ namespace Entities {
         void initializeSprite();
 
         void update(float dt) override;
+
+        void saveEntity(std::ofstream& out);
+
+        void restoreEntity(std::ifstream& in);
     };
 
 }

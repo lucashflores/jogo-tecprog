@@ -4,7 +4,7 @@ using namespace Entities;
 #include <iostream>
 
 Player::Player(bool isPlayerOne):
-Character(isPlayerOne? Id::player1 : Id::player2,50, 10,
+Character(isPlayerOne? Id::player1 : Id::player2,1000, 10,
           Coordinates::Vector<float>(16.f, 32.f),
           Coordinates::Vector<float>(150.f, 950.f)) {
     playerControl = new PlayerControl(this);
@@ -76,14 +76,15 @@ void Player::update(float dt) {
     }
     else if(isWalking){
         sprite->animationUpdate(1, isFacingLeft, dt);
+        //setVelocity(Coordinates::Vector<float>(getVelocity().getX() * 0.2f, getVelocity().getY() * 0.99f));
     }
     else if(isAttacking && !isWalking){
         sprite->animationUpdate(2, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.85f);
+        velocity.setX(velocity.getX() * 0.90f);
     }
     else {
         sprite->animationUpdate(0, isFacingLeft, dt);
-        velocity.setX(velocity.getX() * 0.85f);
+        velocity.setX(velocity.getX() * 0.90f);
     }
 
     if (!isOnGround) {
@@ -100,4 +101,30 @@ void Player::update(float dt) {
                                            getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
     sprite->centerViewHere();
+}
+
+void Player::saveEntity(std::ofstream& out) {
+    saveEntityInfo(out);
+    out <<
+        isPlayerOne << " " <<
+        isFacingLeft << " " <<
+        attackTimer << " " <<
+        life;
+}
+
+void Player::restoreEntity(std::ifstream& in) {
+
+    try {
+        restoreEntity(in);
+
+        in >>
+            isPlayerOne >>
+            isFacingLeft >>
+            attackTimer >>
+            life;
+    }
+
+    catch (std::invalid_argument e) {
+        std::cerr << "Error: Could not load player!" << std::endl;
+    }
 }

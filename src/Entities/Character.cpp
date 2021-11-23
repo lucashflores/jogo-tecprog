@@ -24,7 +24,7 @@ Coordinates::Vector<float> Character::getVelocity() const {
 }
 
 void Character::setLife(unsigned int l) {
-    if (l < 0)
+    if (life <= 0)
         l = 0;
     life = l;
 }
@@ -51,4 +51,20 @@ void Character::setIsOnGround(bool iOG) {
 
 void Character::setIsAttacking(bool attacking) {
     isAttacking = attacking;
+}
+
+void Character::saveCharacterInfo(std::ofstream& out) const{
+
+}
+
+void Character::restoreCharacterInfo(std::ifstream& in) {
+
+}
+
+void Character::saveEntity(std::ofstream& out) const{
+
+}
+
+void Character::restoreEntity(std::ifstream& in) {
+
 }
