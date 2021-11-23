@@ -62,8 +62,6 @@ int main() {
     boss->setEntityList(entityList);
     */
 
-    Entities::Player* player = new Entities::Player(true);
-    entityList->addEntity(player);
 
     /*
     Entities::Player* player2 = new Entities::Player(false);
