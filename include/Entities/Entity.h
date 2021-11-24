@@ -43,11 +43,7 @@ namespace Entities {
 
         void saveEntityInfo(std::ofstream& out) const;
 
-        const bool restoreEntityInfo(std::ifstream& in);
-
-        virtual void saveEntity(std::ofstream& out) const;
-
-        virtual void restoreEntity(std::ifstream& in);
+        virtual void saveEntity(std::ofstream& out) const = 0;
     };
 
 }

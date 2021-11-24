@@ -4,27 +4,26 @@
 #include "MenuControl.h"
 #include <vector>
 
-#define FONT_PATH "../assets/font.ttf"
 #define MENU_BACKGROUND "../assets/background.png"
 
 namespace Menus {
 
     class Menu {
-    private:
+    protected:
         std::vector<Button*> buttons;
         Background* background;
         int buttonSelected;
         MenuControl* control;
     public:
         Menu();
-        ~Menu();
+        virtual ~Menu();
         virtual void createButtons() = 0;
         void createBackground();
         void renderItems();
-        void update();
+        void updateButtons();
         void moveUp();
         void moveDown();
-        int select();
+        virtual void select() = 0;
     };
 
 }

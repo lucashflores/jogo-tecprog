@@ -17,16 +17,6 @@ void Fire::initializeSprite() {
     sprite->changePosition(position);
 }
 
-void Fire::saveEntity(std::ofstream& out) {
+void Fire::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
-}
-
-void Fire::restoreEntity(std::ifstream& in) {
-    try{
-        restoreEntity(in);
-    }
-
-    catch (std::invalid_argument e){
-        std::cerr << "Error: Could not load Projectile!" << std::endl;
-    }
 }

@@ -28,12 +28,6 @@ namespace Entities {
 
         void chooseTarget();
 
-        void saveEnemyInfo(std::ofstream& out) const;
-
-        void restoreEnemyInfo(std::ifstream& in);
-
-        virtual void saveEnemy(std::ofstream& out) const;
-
-        virtual void restoreEnemy(std::ifstream& in);
+        virtual void saveEntity(std::ofstream& out) const = 0;
     };
 }

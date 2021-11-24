@@ -1,6 +1,16 @@
 #include "Stages/Stage.h"
 using namespace Stages;
 
+Stage::Stage(EntityList *pEL):
+pGraphicManager(Managers::GraphicManager::getInstance()),
+pCollisionManager(Managers::CollisionManager::getInstance()),
+isStageDone(false), entityList(pEL)
+{
+    pCollisionManager->setEntityList(entityList);
+}
+
+
+
 Stage::Stage(EntityList* pEL, Entities::Player *p1, Entities::Player *p2):
 pGraphicManager(Managers::GraphicManager::getInstance()),
 pCollisionManager(Managers::CollisionManager::getInstance()),
@@ -85,4 +95,77 @@ void Stage::removedNeutralizedEntities() {
                 entityList->removeAndDeleteEntity(pE);
         }
     }
+}
+
+void Stage::save() {
+
+    std::ofstream player1SavesFile (PLAYER1_SAVE_PATH, std::ios::out);
+    std::ofstream player2SavesFile (PLAYER2_SAVE_PATH, std::ios::out);
+    std::ofstream obstacleSavesFile (OBSTACLE_SAVE_PATH, std::ios::out);
+    std::ofstream projectilesSavesFile (PROJECTILE_SAVE_PATH, std::ios::out);
+    std::ofstream enemySavesFile (ENEMY_SAVE_PATH, std::ios::out);
+    std::ofstream stageSavesFile (STAGE_SAVE_PATH, std::ios::out);
+
+
+    if(!player1SavesFile){
+        std::cerr << "Could not open Player1 Saves file" << std::endl;
+        exit(1);
+    }
+    if(!player2SavesFile){
+        std::cerr << "Could not open Player2 Saves file" << std::endl;
+        exit(1);
+    }
+    if(!obstacleSavesFile){
+        std::cerr << "Could not open Obstacle Saves file" << std::endl;
+        exit(1);
+    }
+    if(!projectilesSavesFile){
+        std::cerr << "Could not open Projectile Saves file" << std::endl;
+        exit(1);
+    }
+    if(!enemySavesFile){
+        std::cerr << "Could not open Enemy Saves file" << std::endl;
+        exit(1);
+    }
+    if(!stageSavesFile){
+        std::cerr << "Could not open Stage Saves file" << std::endl;
+        exit(1);
+    }
+
+    std::string num =std::to_string(getStageNumber());
+
+    stageSavesFile <<
+       num << " " <<
+       getScore();
+
+
+
+
+    for (int i = 0; i < entityList->getSize(); i++){
+
+        if ((entityList->operator[](i))->getId() == Id::player1)
+            (entityList->operator[](i)->saveEntity(player1SavesFile));
+        else if ((entityList->operator[](i))->getId() == Id::player2)
+            (entityList->operator[](i)->saveEntity(player2SavesFile));
+        else if (((int)(entityList->operator[](i))->getId()) >= 10 && ((int)(entityList->operator[](i))->getId()) <= 30)
+            (entityList->operator[](i)->saveEntity(enemySavesFile));
+        else if ((entityList->operator[](i))->getId() == Id::projectile || (entityList->operator[](i))->getId() == Id::smoke)
+            (entityList->operator[](i)->saveEntity(projectilesSavesFile));
+        else if (((int)(entityList->operator[](i))->getId()) >= 300 && ((int)(entityList->operator[](i))->getId()) <= 600)
+            (entityList->operator[](i)->saveEntity(obstacleSavesFile));
+    }
+    player1SavesFile.close();
+    player2SavesFile.close();
+    enemySavesFile.close();
+    obstacleSavesFile.close();
+    projectilesSavesFile.close();
+    stageSavesFile.close();
+
+}
+
+int Stage::getStageNumber() {
+    if (background->getId() == Id::background2)
+        return 2;
+    else
+        return 1;
 }

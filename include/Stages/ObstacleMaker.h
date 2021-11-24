@@ -9,14 +9,12 @@
 namespace Stages {
 
     class ObstacleMaker {
-    private:
-        EntityList* pEntityList;
     public:
         ObstacleMaker(EntityList* pEL);
         ~ObstacleMaker();
-        void makeBarrel(Coordinates::Vector<float> pos);
-        void makeOilTile(Coordinates::Vector<float> pos);
-        void makeFire(Coordinates::Vector<float> pos);
-        void makeSign(Coordinates::Vector<float> pos);
+        Entities::Barrel* makeBarrel(Coordinates::Vector<float> pos);
+        Entities::OilTile* makeOilTile(Coordinates::Vector<float> pos);
+        Entities::Fire* makeFire(Coordinates::Vector<float> pos);
+        Entities::Sign* makeSign(Coordinates::Vector<float> pos);
     };
 }

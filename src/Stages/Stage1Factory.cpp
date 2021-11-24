@@ -2,7 +2,6 @@
 using namespace Stages;
 
 Stage1Factory::Stage1Factory(): StageFactory(1) {
-    tileInstructionsReader = new TileInstructionsReader(1, entityList);
 }
 
 Stage1Factory::~Stage1Factory() {
@@ -28,10 +27,14 @@ void Stage1Factory::makeEnemies(std::string enemiesInstructionsPath) {
 
 void Stage1Factory::makeStage(Entities::Player* player1, Entities::Player* player2) {
     entityList->addEntity(player1);
+
     if (player2)
         entityList->addEntity(player2);
+    tileInstructionsReader = new TileInstructionsReader(1, entityList);
     makeTiles(TILES1_INSTRUCTIONS_PATH);
+    obstacleInstructionsReader = new ObstacleInstructionsReader(entityList);
     makeObstacles(OBSTACLES1_INSTRUCTIONS_PATH);
+    enemyInstructionsReader = new EnemyInstructionsReader(entityList, player1, player2);
     makeEnemies(ENEMIES1_INSTRUCTIONS_PATH);
 }
 

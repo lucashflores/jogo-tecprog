@@ -53,18 +53,3 @@ void Character::setIsAttacking(bool attacking) {
     isAttacking = attacking;
 }
 
-void Character::saveCharacterInfo(std::ofstream& out) const{
-
-}
-
-void Character::restoreCharacterInfo(std::ifstream& in) {
-
-}
-
-void Character::saveEntity(std::ofstream& out) const{
-
-}
-
-void Character::restoreEntity(std::ifstream& in) {
-
-}

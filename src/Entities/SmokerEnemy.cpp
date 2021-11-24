@@ -100,28 +100,12 @@ void SmokerEnemy::update(float dt){
     sprite->changePosition(position);
 }
 
-void SmokerEnemy::saveEntity(std::ofstream& out){
+void SmokerEnemy::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
 
     out <<
-        isFacingLeft<< " " <<
-        view_range<< " " <<
-        attackTimer<< " " <<
-        life;
-}
-
-void SmokerEnemy::restoreEntity(std::ifstream& in) {
-    try{
-        restoreEntity(in);
-
-        in >>
-           isFacingLeft >>
-           view_range >>
-           attackTimer >>
-           life;
-    }
-
-    catch (std::invalid_argument e){
-        std::cerr << "Error: Could not load SmokerEnemy!" << std::endl;
-    }
+    getVelocity().getX() << " " <<
+    getVelocity().getY() << " " <<
+    isFacingLeft<< " " <<
+    life;
 }

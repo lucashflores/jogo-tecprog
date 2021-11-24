@@ -48,17 +48,7 @@ unsigned int Smoke::getDamage() {
         return 0;
 }
 
-void Smoke::saveEntity(std::ofstream& out){
+void Smoke::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
 
-}
-
-void Smoke::restoreEntity(std::ifstream& in) {
-    try{
-        restoreEntity(in);
-    }
-
-    catch (std::invalid_argument e){
-        std::cerr << "Error: Could not load Smoke!" << std::endl;
-    }
 }

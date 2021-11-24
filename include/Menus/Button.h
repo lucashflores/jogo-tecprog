@@ -4,6 +4,7 @@
 #include "Managers/GraphicManager.h"
 
 #define BUTTON_PATH "../assets/button.png"
+#define FONT_PATH "../assets/font.ttf"
 
 namespace Menus {
 

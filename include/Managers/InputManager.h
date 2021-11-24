@@ -10,6 +10,7 @@ namespace Managers {
         std::map<std::string, sf::Keyboard::Key> keyMap;
 
         sf::Keyboard::Key keyPressed;
+        sf::Keyboard::Key keyPressedInFrame;
         std::map<sf::Keyboard::Key, bool> keysDown;
         sf::Keyboard::Key keyReleased;
 
@@ -33,6 +34,9 @@ namespace Managers {
 
         bool wasKeyReleased(std::string key);
 
+        bool wasKeyPressedInFrame(std::string key);
+
+        void clearKeyPressedInFrame();
     };
 
 }

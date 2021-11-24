@@ -14,45 +14,38 @@ Menu::~Menu() {
 
 void Menu::createBackground() {
     background = new Background(Id::menuBackground);
+    background->update(Coordinates::Vector<float>(640.f, 360.f));
 }
 
 void Menu::renderItems() {
+    background->render();
     for (int i = 0; i < buttons.size(); i++) {
         buttons[i]->render();
     }
-    background->render();
+
 }
 
 void Menu::moveDown() {
-    if (buttonSelected + 1 > buttons.size() - 1)
-        return ;
-    else {
-        buttons[buttonSelected]->setSelected(false);
-        buttonSelected++;
-        buttons[buttonSelected]->setSelected(true);
-    }
+    buttons[buttonSelected]->setSelected(false);
+    buttonSelected++;
+    if (buttonSelected > buttons.size() - 1)
+        buttonSelected = 0;
+    buttons[buttonSelected]->setSelected(true);
 }
 
 void Menu::moveUp() {
-    if (buttonSelected - 1 < 0)
-        return ;
-    else {
-        buttons[buttonSelected]->setSelected(false);
-        buttonSelected--;
-        buttons[buttonSelected]->setSelected(true);
-    }
+    buttons[buttonSelected]->setSelected(false);
+    buttonSelected--;
+    if (buttonSelected < 0)
+        buttonSelected = buttons.size() - 1;
+    buttons[buttonSelected]->setSelected(true);
 }
 
 
 
-void Menu::update() {
+void Menu::updateButtons() {
     control->notify();
     for (int i = 0; i < buttons.size(); i++) {
         buttons[i]->update();
     }
-    renderItems();
-}
-
-int Menu::select() {
-    return buttonSelected;
 }

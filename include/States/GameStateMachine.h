@@ -3,8 +3,9 @@
 #include "Managers/GraphicManager.h"
 #include "Managers/EventManager.h"
 #include "Managers/InputManager.h"
-#include "Entities/Player.h"
-#include "Stages/Stage.h"
+#include "States/MainMenuState.h"
+#include "States/ExitState.h"
+#include "Stages/StageLoader.h"
 
 namespace States {
 
@@ -37,6 +38,7 @@ namespace States {
         int getCurrentStage() const;
         void setCurrentStage(int num);
 
+        void loadGame();
         void endGame();
         void deleteStage();
         void resetPlayers();
