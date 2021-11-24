@@ -7,6 +7,7 @@ namespace Stages {
 
     class ObstacleInstructionsReader: public InstructionsReader  {
     private:
+        EntityList* entityList;
         ObstacleMaker* pObstacleMaker;
     public:
         ObstacleInstructionsReader(EntityList* pEL);

@@ -13,9 +13,10 @@ namespace States {
         State* currentState;
     public:
         StateMachine();
-        ~StateMachine();
+        virtual ~StateMachine();
         void setCurrentState(std::string stateName);
         State* getCurrentState();
+        void updateCurrentState(float dt);
     };
 
 }

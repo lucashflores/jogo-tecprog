@@ -22,7 +22,7 @@ namespace Managers {
         static EventManager *getInstance();
 
 
-        void PollEvents(sf::Event event);
+        void pollEvents(sf::Event event);
     };
 
 }

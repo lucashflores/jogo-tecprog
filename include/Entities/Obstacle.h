@@ -15,8 +15,6 @@ namespace Entities {
 
         void update(float dt);
 
-        void saveEntity(std::ofstream& out);
-
-        void restoreEntity(std::ifstream& in);
+        void saveEntity(std::ofstream& out) const;
     };
 }

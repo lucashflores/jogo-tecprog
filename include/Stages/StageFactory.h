@@ -6,7 +6,6 @@
 #include "ObstacleInstructionsReader.h"
 #include "TileInstructionsReader.h"
 #include "InstructionsReader.h"
-#include "Entities/Player.h"
 
 namespace Stages {
 

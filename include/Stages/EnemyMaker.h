@@ -8,13 +8,11 @@
 
 namespace Stages {
     class EnemyMaker {
-    private:
-        EntityList* pEntityList;
     public:
-        EnemyMaker(EntityList *pEL);
+        EnemyMaker();
         ~EnemyMaker();
-        void makeSmokerEnemy(Coordinates::Vector<float> pos);
-        void makeDogEnemy(Coordinates::Vector<float> pos);
-        void makeBoss(Coordinates::Vector<float> pos);
+        Entities::SmokerEnemy* makeSmokerEnemy(Coordinates::Vector<float> pos);
+        Entities::DogEnemy* makeDogEnemy(Coordinates::Vector<float> pos);
+        Entities::PunkBoss* makeBoss(Coordinates::Vector<float> pos);
     };
 }

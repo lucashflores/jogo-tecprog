@@ -8,7 +8,6 @@ Character(isPlayerOne? Id::player1 : Id::player2,1000, 10,
           Coordinates::Vector<float>(16.f, 32.f),
           Coordinates::Vector<float>(150.f, 950.f)) {
     playerControl = new PlayerControl(this);
-    isOnGround = false;
     initializeSprite();
 }
 
@@ -103,28 +102,12 @@ void Player::update(float dt) {
     sprite->centerViewHere();
 }
 
-void Player::saveEntity(std::ofstream& out) {
+void Player::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
     out <<
-        isPlayerOne << " " <<
+        getVelocity().getX() << " " <<
+        getVelocity().getY() << " " <<
         isFacingLeft << " " <<
-        attackTimer << " " <<
         life;
 }
 
-void Player::restoreEntity(std::ifstream& in) {
-
-    try {
-        restoreEntity(in);
-
-        in >>
-            isPlayerOne >>
-            isFacingLeft >>
-            attackTimer >>
-            life;
-    }
-
-    catch (std::invalid_argument e) {
-        std::cerr << "Error: Could not load player!" << std::endl;
-    }
-}

@@ -21,6 +21,7 @@ InputManager::InputManager() {
     keyMap["Up"] = sf::Keyboard::Up;
     keyMap["L"] = sf::Keyboard::L;
 
+    keyMap["Down"] = sf::Keyboard::Down;
     keyMap["Enter"] = sf::Keyboard::Enter;
 
 
@@ -41,6 +42,7 @@ sf::Keyboard::Key InputManager::getKey(std::string key) {
 
 void InputManager::handleKeyPressed(sf::Keyboard::Key key) {
     keyPressed = key;
+    keyPressedInFrame = key;
     keysDown[key] = true;
 }
 
@@ -69,4 +71,14 @@ bool InputManager::wasKeyReleased(std::string key) {
     else
         return false;
 }
+
+bool InputManager::wasKeyPressedInFrame(std::string key) {
+    return keyPressedInFrame == keyMap.at(key) ? true : false;
+}
+
+void InputManager::clearKeyPressedInFrame() {
+    keyPressedInFrame = sf::Keyboard::Unknown;
+}
+
+
 

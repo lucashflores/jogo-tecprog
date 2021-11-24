@@ -6,9 +6,12 @@ namespace Stages {
 
     class EnemyInstructionsReader: public InstructionsReader {
     private:
+        EntityList* entityList;
         EnemyMaker* pEnemyMaker;
+        Entities::Player* player1;
+        Entities::Player* player2;
     public:
-        EnemyInstructionsReader(EntityList* pEL);
+        EnemyInstructionsReader(EntityList *pEL, Entities::Player* player1, Entities::Player* player2);
         ~EnemyInstructionsReader();
         void executeInstructions();
     };

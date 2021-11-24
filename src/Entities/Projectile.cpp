@@ -28,24 +28,6 @@ void Projectile::initializeSprite() {
     sprite->changePosition(position);
 }
 
-/* TODO: remover se funcionar
-void Projectile::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-
-        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom)
-            if (getPosition().getY() > pE->getPosition().getY())
-                setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-            else
-                setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-
-        // If is a player
-        if (pE->getId() == Id::player1 || pE->getId() == Id::player2) {
-            eliminate();
-        }
-    }
-}
-*/
-
 void Projectile::update(float dt) {
     sprite->animationUpdate(0, isFacingLeft, dt);
     setPosition(Coordinates::Vector<float>(getPosition().getX() + velocity.getX()*dt,getPosition().getY()+ velocity.getY()*dt));
@@ -54,30 +36,11 @@ void Projectile::update(float dt) {
     if(timer>5.f){eliminate(); std::cout << "Tchau projétil" << std::endl;}
 }
 
-void Projectile::saveEntity(std::ofstream& out){
+void Projectile::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
 
     out <<
         isFacingLeft << " " <<
         velocity.getX() << " " <<
         velocity.getY();
-}
-
-void Projectile::restoreEntity(std::ifstream& in) {
-    float velocityX, velocityY;
-
-    try{
-        restoreEntity(in);
-
-        in >>
-           isFacingLeft>>
-           velocityX>>
-           velocityY;
-    }
-
-    catch (std::invalid_argument e){
-        std::cerr << "Error: Could not load Projectile!" << std::endl;
-    }
-
-    velocity = Coordinates::Vector<float>(velocityX, velocityY);
 }

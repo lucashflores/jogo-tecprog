@@ -10,7 +10,7 @@ StateMachine::StateMachine() {
 StateMachine::~StateMachine() {
     currentState = NULL;
     State* paux = NULL;
-    for (auto it = stateList.begin(); it != stateList.end(); ++it)
+    for (auto it = stateList.begin(); it != stateList.end(); it++)
         paux = (it->second);
         if (paux)
             delete paux;
@@ -20,8 +20,14 @@ StateMachine::~StateMachine() {
 
 void StateMachine::setCurrentState(std::string stateName) {
     currentState = stateList.at(stateName);
+    currentState->reset();
 }
 
 State *StateMachine::getCurrentState() {
     return currentState;
+}
+
+void StateMachine::updateCurrentState(float dt) {
+    if (currentState)
+        currentState->update(dt);
 }

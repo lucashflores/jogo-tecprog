@@ -15,18 +15,6 @@ void Sign::initializeSprite() {
     sprite->changePosition(position);
 }
 
-void Sign::saveEntity(std::ofstream& out) {
+void Sign::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
-}
-
-void Sign::restoreEntity(std::ifstream& in) {
-    float velocityX, velocityY;
-
-    try{
-        restoreEntity(in);
-    }
-
-    catch (std::invalid_argument e){
-        std::cerr << "Error: Could not load Projectile!" << std::endl;
-    }
 }

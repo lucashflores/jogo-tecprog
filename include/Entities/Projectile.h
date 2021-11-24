@@ -21,12 +21,8 @@ namespace Entities {
 
         void initializeSprite() override;
 
-        //void collide(Entity* pE, Coordinates::Vector<float> collision) override;
-
         void update(float dt) override;
 
-        void saveEntity(std::ofstream& out);
-
-        void restoreEntity(std::ifstream& in);
+        void saveEntity(std::ofstream& out) const;
     };
 }

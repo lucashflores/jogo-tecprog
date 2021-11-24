@@ -44,37 +44,6 @@ void PunkBoss::setEntityList(EntityList* EL) {
         bossEntityList = EL;
 }
 
-/* TODO: remover se funcionar
-void Entities::PunkBoss::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-
-        // If is a tile
-        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
-            if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                setIsOnGround(true);
-            }
-            else {
-                if (getPosition().getX() < pE->getPosition().getX())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
-            }
-        }
-        else if (pE->getId() == Id::projectile){return;}
-        else
-            setIsOnGround(false);
-
-        // If is a player
-        if (pE->getId() == Id::player1 || pE->getId() == Id::player2) {
-
-        }
-    }
-}
- */
 
 void Entities::PunkBoss::update(float dt) {
 
@@ -135,28 +104,12 @@ void Entities::PunkBoss::update(float dt) {
     sprite->changePosition(position);
 }
 
-void PunkBoss::saveEntity(std::ofstream& out){
+void PunkBoss::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
 
     out <<
-        isFacingLeft<< " " <<
-        view_range<< " " <<
-        attackTimer<< " " <<
-        life;
-}
-
-void PunkBoss::restoreEntity(std::ifstream& in) {
-    try{
-        restoreEntity(in);
-
-        in >>
-           isFacingLeft >>
-           view_range >>
-           attackTimer >>
-           life;
-    }
-
-    catch (std::invalid_argument e){
-        std::cerr << "Error: Could not load SmokerEnemy!" << std::endl;
-    }
+    getVelocity().getX() << " " <<
+    getVelocity().getY() << " " <<
+    isFacingLeft<< " " <<
+    life;
 }

@@ -22,12 +22,13 @@ void MenuControl::initializeControls() {
 }
 
 void MenuControl::notify() {
-    if (pInputManager->wasKeyPressed("moveUp"))
+    if (pInputManager->wasKeyPressedInFrame(controls.at("moveUp")))
         menu->moveUp();
-    else if (pInputManager->wasKeyPressed("moveDown"))
+    else if (pInputManager->wasKeyPressedInFrame(controls.at("moveDown")))
         menu->moveDown();
-    else if (pInputManager->wasKeyPressed("select"))
+    else if (pInputManager->wasKeyPressedInFrame(controls.at("select")))
         menu->select();
     else
         return ;
+
 }

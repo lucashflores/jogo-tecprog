@@ -9,19 +9,50 @@ GameStateMachine::GameStateMachine() {
     player1 = new Entities::Player(true);
     player2 = new Entities::Player(false);
     currentStage = 1;
+    initializeStates();
+
 }
 
 GameStateMachine::~GameStateMachine() {
-    pGraphicM = NULL;
-    pEventM = NULL;
-    pInputM = NULL;
     pStage = NULL;
     delete player1;
     delete player2;
 }
 
+void GameStateMachine::initializeStates() {
+    try {
+        stateList["MainMenuState"] = new MainMenuState(this);
+        stateList.at("MainMenuState")->setStateMachine(static_cast<StateMachine*>(this));
+        stateList["ExitState"] = new ExitState(this);
+        stateList.at("ExitState")->setStateMachine(static_cast<StateMachine*>(this));
+        currentState = static_cast<State*>(stateList.at("MainMenuState"));
+    }
+    catch (...) {
+        std::cout << "States not loaded!" << std::endl;
+        exit(1);
+    };
+}
+
 void GameStateMachine::exec() {
-    return ;
+    float dt;
+    sf::Clock clock;
+
+    while (pGraphicM->isWindowOpen()) {
+        sf::Event event;
+
+        pEventM->pollEvents(event);
+
+        dt = clock.restart().asSeconds();
+
+        if (dt > 0.0167)
+            dt = 0.0167;
+
+        pGraphicM->clear();
+        updateCurrentState(dt);
+        pInputM->clearKeyPressedInFrame();
+        pGraphicM->display();
+
+    }
 }
 
 void GameStateMachine::save() {
@@ -47,5 +78,18 @@ Entities::Player *GameStateMachine::getPLayer1() {
 
 Entities::Player *GameStateMachine::getPLayer2() {
     return player2;
+}
+
+void GameStateMachine::loadGame() {
+    Stages::StageLoader* stageLoader = new Stages::StageLoader();
+    stageLoader->loadPlayer1(player1);
+    stageLoader->loadPlayer2(player2);
+    setStage(stageLoader->loadStage(player1, player2));
+    currentStage = getStage()->getStageNumber();
+}
+
+void GameStateMachine::endGame() {
+    if (pGraphicM)
+        pGraphicM->closeWindow();
 }
 

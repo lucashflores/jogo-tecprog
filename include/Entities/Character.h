@@ -8,7 +8,7 @@ namespace Entities {
     protected:
 
         Coordinates::Vector<float> velocity;
-        int life;
+        unsigned int life;
         bool isFacingLeft;
         bool isWalking;
         bool isOnGround;
@@ -44,12 +44,6 @@ namespace Entities {
 
         virtual void update(float dt) = 0;
 
-        void saveCharacterInfo(std::ofstream& out) const;
-
-        void restoreCharacterInfo(std::ifstream& in);
-
-        virtual void saveEntity(std::ofstream& out) const;
-
-        virtual void restoreEntity(std::ifstream& in);
+        virtual void saveEntity(std::ofstream& out) const = 0;
     };
 }

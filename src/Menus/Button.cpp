@@ -8,15 +8,18 @@ Button::Button(Coordinates::Vector<float> pos, std::string t): Ent(Id::button), 
     selected = false;
     initializeSprite();
     sprite->changePosition(pos);
+    if (!font)
+        setFont(pGraphicM->loadFont(FONT_PATH));
     text = NULL;
     text = new sf::Text();
     text->setString(t);
     text->setFont(*font);
-    text->setPosition(pos.getX(), pos.getY());
+    text->setPosition(pos.getX() - 10.f, pos.getY());
     text->setFillColor(sf::Color::White);
 }
 Button::~Button() {
-
+    if (text)
+        delete text;
 }
 
 void Button::setFont(sf::Font* f) {
@@ -27,7 +30,7 @@ void Button::setFont(sf::Font* f) {
 }
 
 void Button::initializeSprite() {
-    Coordinates::Vector<float> size = Coordinates::Vector<float>(600.f ,200.f);
+    Coordinates::Vector<float> size = Coordinates::Vector<float>(210.f ,70.f);
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     sprite = new Animation(BUTTON_PATH, size, imageCnt, 1.f);
 }

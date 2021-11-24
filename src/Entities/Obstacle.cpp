@@ -18,16 +18,6 @@ unsigned int Obstacle::getDamage() {
     return damage;
 }
 
-void Obstacle::saveEntity(std::ofstream& out) {
+void Obstacle::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
-}
-
-void Obstacle::restoreEntity(std::ifstream& in) {
-    try{
-        restoreEntity(in);
-    }
-
-    catch (std::invalid_argument e){
-        std::cerr << "Error: Could not load Projectile!" << std::endl;
-    }
 }
