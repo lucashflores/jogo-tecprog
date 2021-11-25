@@ -48,17 +48,6 @@ void EntityList::renderAllEntities() {
     pE = NULL;
 }
 
-void EntityList::removeNeutralizedEntities() {
-    Entities::Entity* pE = NULL;
-    for (int i = 0; i < getSize(); i++) {
-        pE = operator[](i);
-        if (pE) {
-            if (!pE->getIsAlive())
-                removeEntity(pE);
-        }
-        pE = NULL;
-    }
-}
 
 void EntityList::updateAllEntities(float dt) {
     Entities::Entity* pE = NULL;

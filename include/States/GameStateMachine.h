@@ -6,6 +6,11 @@
 #include "States/MainMenuState.h"
 #include "States/ExitState.h"
 #include "Stages/StageLoader.h"
+#include "States/NewGameMenuState.h"
+#include "States/CreatingStage1State.h"
+#include "States/PlayingState.h"
+#include "States/NewStage2MenuState.h"
+#include "States/CreatingStage2State.h"
 
 namespace States {
 
@@ -17,6 +22,7 @@ namespace States {
         Stages::Stage* pStage;
         Entities::Player* player1;
         Entities::Player* player2;
+        bool twoPlayers;
         int currentStage;
         sf::Clock time;
 
@@ -30,6 +36,9 @@ namespace States {
 
         Stages::Stage* getStage() const;
         void setStage(Stages::Stage* pS);
+
+        void setTwoPlayers(bool tp);
+        bool getTwoPlayers() const;
 
         Entities::Player* getPLayer1();
         Entities::Player* getPLayer2();

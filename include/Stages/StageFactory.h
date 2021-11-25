@@ -15,6 +15,7 @@ namespace Stages {
         EnemyInstructionsReader* enemyInstructionsReader;
         ObstacleInstructionsReader* obstacleInstructionsReader;
         TileInstructionsReader* tileInstructionsReader;
+        ProjectileMaker* projectileMaker;
         int stage;
         virtual void makeStage(Entities::Player* player1, Entities::Player* player2) = 0;
         virtual void makeTiles(std::string tilesInstructionsPath) = 0;

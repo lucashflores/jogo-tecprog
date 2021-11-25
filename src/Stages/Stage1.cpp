@@ -9,8 +9,3 @@ Stage(pEL, player1, player2)
 
 Stage1::~Stage1() {
 }
-/*
-int Stage::getStageNumber() {
-    return 1;
-}
- */

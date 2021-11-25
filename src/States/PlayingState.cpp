@@ -1,24 +1,27 @@
-#include "States/PlayingState.h"
+#include "States/GameStateMachine.h"
 using namespace States;
 
-PlayingState::PlayingState(Stages::Stage* pS) {
-    pStage = NULL;
-    setStage(pS);
+PlayingState::PlayingState(GameStateMachine* pGM) {
+    if (pGM)
+        pGameStateMachine = pGM;
 }
 
 PlayingState::~PlayingState() {
-    pStage = NULL;
+    pGameStateMachine = NULL;
 }
 
-void PlayingState::setStage(Stages::Stage *pS) {
-    if (pS)
-        pStage = NULL;
+void PlayingState::update(float dt) {
+    (pGameStateMachine->getStage())->exec(dt);
 }
 
-Stages::Stage *PlayingState::getStage() {
-    return pStage;
+void PlayingState::exec() {
+
 }
 
-void PlayingState::exec(float dt) {
-    pStage->exec(dt);
+void PlayingState::reset() {
+
+}
+
+void PlayingState::render() {
+
 }

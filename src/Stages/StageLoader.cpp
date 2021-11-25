@@ -158,7 +158,7 @@ void StageLoader::loadProjectiles(EntityList *pEL) {
 }
 
 void StageLoader::makeObstacles(EntityList* pEL) {
-    obstacleMaker = new ObstacleMaker(pEL);
+    obstacleMaker = new ObstacleMaker();
     std::string command = commands[0];
     float positionX = std::stof(commands[1]);
     float positionY = std::stof(commands[2]);
@@ -220,16 +220,16 @@ void StageLoader::makeProjectiles(EntityList *pEL) {
     float positionY = std::stof(commands[2]);
     Coordinates::Vector<float> position = Coordinates::Vector<float>(positionX, positionY);
     if (static_cast<Id::ids>(std::stoi(command)) == Id::smoke) {
-        Entities::Smoke* smoke = projectileMaker->makeSmoke(position);
+        Entities::Smoke* smoke = projectileMaker->loadSmoke(position);
         pEL->addEntity(static_cast<Entities::Entity*>(smoke));
     }
     else if (static_cast<Id::ids>(std::stoi(command)) == Id::projectile) {
         int isFacingLeft = std::stoi(commands[3]);
         Entities::Projectile* projectile = NULL;
         if (isFacingLeft)
-            projectile = projectileMaker->makeProjectile(position, true);
+            projectile = projectileMaker->loadProjectile(position, true);
         else
-            projectile = projectileMaker->makeProjectile(position, false);
+            projectile = projectileMaker->loadProjectile(position, false);
         pEL->addEntity(static_cast<Entities::Entity*>(projectile));
     }
 }

@@ -53,3 +53,8 @@ void Character::setIsAttacking(bool attacking) {
     isAttacking = attacking;
 }
 
+void Character::setVelocityCoefficient(float c) {
+    if (c > 0.0f)
+        velocityCoefficient = c;
+}
+

@@ -12,11 +12,11 @@ SmokerEnemy::~SmokerEnemy() = default;
 void SmokerEnemy::walk(float dt) {
 
     if (target->getPosition().getX() - this->getPosition().getX() >= 0){
-        velocity.setX(45.f);
+        velocity.setX(45.f * velocityCoefficient);
         setIsFacingLeft(false);
     }
     else {
-        velocity.setX(-45.0f);
+        velocity.setX(-45.0f * velocityCoefficient);
         setIsFacingLeft(true);
     }
 
@@ -33,8 +33,9 @@ void SmokerEnemy::attack(Character* pChar) {
         //pChar->setLife(pChar->getLife() - damage);
         float offset = 25;
         (isFacingLeft)?(offset=offset):(offset=-offset);
-        Entities::Smoke* smoke = new Entities::Smoke(position- Coordinates::Vector<float>(offset,0.f));
-        smokerEntityList->addEntity(smoke);
+        if (projectileMaker) {
+            projectileMaker->makeSmoke(position- Coordinates::Vector<float>(offset,0.f));
+        }
         std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
         pChar->eliminate();
@@ -44,9 +45,9 @@ void SmokerEnemy::attack(Character* pChar) {
     attackTimer = 0;
 }
 
-void SmokerEnemy::setEntityList(EntityList* EL) {
-    if(EL)
-        smokerEntityList = EL;
+void SmokerEnemy::setProjectileMaker(Stages::ProjectileMaker* pPM) {
+    if(pPM)
+        projectileMaker = pPM;
 }
 
 

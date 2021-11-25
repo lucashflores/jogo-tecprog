@@ -3,6 +3,7 @@
 #include "Managers/CollisionManager.h"
 #include "Entities/Player.h"
 #include "Background.h"
+#include "ProjectileMaker.h"
 
 #define STAGE_SAVE_PATH "../saves/stageSave.txt"
 #define ENEMY_SAVE_PATH "../saves/enemySave.txt"

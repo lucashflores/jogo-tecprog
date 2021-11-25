@@ -2,7 +2,7 @@
 using namespace Stages;
 
 
-ObstacleMaker::ObstacleMaker(EntityList *pEL) {
+ObstacleMaker::ObstacleMaker() {
 }
 
 ObstacleMaker::~ObstacleMaker() {

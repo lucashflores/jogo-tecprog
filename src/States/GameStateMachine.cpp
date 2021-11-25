@@ -6,6 +6,7 @@ GameStateMachine::GameStateMachine() {
     pEventM = Managers::EventManager::getInstance();
     pInputM = Managers::InputManager::getInstance();
     pStage = NULL;
+    twoPlayers = false;
     player1 = new Entities::Player(true);
     player2 = new Entities::Player(false);
     currentStage = 1;
@@ -15,6 +16,8 @@ GameStateMachine::GameStateMachine() {
 
 GameStateMachine::~GameStateMachine() {
     pStage = NULL;
+    if (pStage)
+        delete pStage;
     delete player1;
     delete player2;
 }
@@ -25,6 +28,16 @@ void GameStateMachine::initializeStates() {
         stateList.at("MainMenuState")->setStateMachine(static_cast<StateMachine*>(this));
         stateList["ExitState"] = new ExitState(this);
         stateList.at("ExitState")->setStateMachine(static_cast<StateMachine*>(this));
+        stateList["NewGameMenuState"] = new NewGameMenuState(this);
+        stateList.at("NewGameMenuState")->setStateMachine(static_cast<StateMachine*>(this));
+        stateList["CreatingStage1State"] = new CreatingStage1State(this);
+        stateList.at("CreatingStage1State")->setStateMachine(static_cast<StateMachine*>(this));
+        stateList["PlayingState"] = new PlayingState(this);
+        stateList.at("PlayingState")->setStateMachine(static_cast<StateMachine*>(this));
+        stateList["NewStage2MenuState"] = new NewStage2MenuState(this);
+        stateList.at("NewStage2MenuState")->setStateMachine(static_cast<StateMachine*>(this));
+        stateList["CreatingStage2State"] = new CreatingStage2State(this);
+        stateList.at("CreatingStage2State")->setStateMachine(static_cast<StateMachine*>(this));
         currentState = static_cast<State*>(stateList.at("MainMenuState"));
     }
     catch (...) {
@@ -66,6 +79,7 @@ void GameStateMachine::setCurrentStage(int num) {
 void GameStateMachine::setStage(Stages::Stage *pS) {
     if (pS)
         pStage = pS;
+    setCurrentStage(pStage->getStageNumber());
 }
 
 Stages::Stage *GameStateMachine::getStage() const {
@@ -91,5 +105,13 @@ void GameStateMachine::loadGame() {
 void GameStateMachine::endGame() {
     if (pGraphicM)
         pGraphicM->closeWindow();
+}
+
+void GameStateMachine::setTwoPlayers(bool tp) {
+    twoPlayers = tp;
+}
+
+bool GameStateMachine::getTwoPlayers() const {
+    return twoPlayers;
 }
 

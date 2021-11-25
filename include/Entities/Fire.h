@@ -10,6 +10,8 @@ namespace Entities {
 
         void initializeSprite();
 
+        void update(float dt);
+
         void saveEntity(std::ofstream& out) const;
     };
 }

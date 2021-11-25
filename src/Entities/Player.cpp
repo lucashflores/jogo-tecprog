@@ -19,13 +19,13 @@ void Player::walk(bool left) {
     setIsWalking(true);
 
     if (left) {
-        velocity.setX(-VELOCITY_X);
+        velocity.setX(-VELOCITY_X * velocityCoefficient);
         setIsFacingLeft(true);
     }
 
 
     else {
-        velocity.setX(VELOCITY_X);
+        velocity.setX(VELOCITY_X * velocityCoefficient);
         setIsFacingLeft(false);
     }
 

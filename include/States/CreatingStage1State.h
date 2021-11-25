@@ -1,16 +1,19 @@
 #pragma once
-#include "State.h"
 
+#include "State.h"
+#include "Stages/Stage1Factory.h"
+#include "Stages/Stage.h"
 
 namespace States {
+
     class GameStateMachine;
 
-    class PlayingState: public State {
+    class CreatingStage1State: public State {
     private:
         GameStateMachine* pGameStateMachine;
     public:
-        PlayingState(GameStateMachine* pGM);
-        ~PlayingState();
+        CreatingStage1State(GameStateMachine* pGM);
+        ~CreatingStage1State();
         void update(float dt);
         void render();
         void reset();

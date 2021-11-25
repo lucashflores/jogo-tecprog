@@ -14,8 +14,7 @@ void ObstacleCollisionDealer::oilTileCollision(Entities::Entity *pE1, Entities::
     Entities::Character* pC1 =  static_cast<Entities::Character*>(pE1);
 
     pC1->setIsOnGround(true);
-    pC1->setVelocity(Coordinates::Vector<float>(pC1->getVelocity().getX() * 0.1f, pC1->getVelocity().getY() * 0.991f));
-    pC1->setPosition(Coordinates::Vector<float>(pC1->getPosition().getX(), pC1->getPosition().getY() - collision.getY()));
+    pC1->setVelocityCoefficient(1.f);
 }
 
 void ObstacleCollisionDealer::signCollision(Entities::Entity *pE1, Entities::Entity *pE2, Coordinates::Vector<float> collision) {

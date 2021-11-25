@@ -37,11 +37,13 @@ unsigned int Stage::getScore() {
 }
 
 void Stage::renderEntities() {
+    background->render();
     entityList->renderAllEntities();
 }
 
 void Stage::updateEntities(float dt) {
     entityList->updateAllEntities(dt);
+    centerView();
 }
 
 void Stage::centerView() {
@@ -60,6 +62,7 @@ void Stage::centerView() {
         posX = player1->getPosition().getX();
         posY = player1->getPosition().getY() + 70.f;
     }
+    background->update(Coordinates::Vector<float>(posX, posY));
     pGraphicManager->centerView(Coordinates::Vector<float>(posX, posY));
 }
 
