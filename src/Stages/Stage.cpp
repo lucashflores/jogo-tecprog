@@ -36,6 +36,14 @@ unsigned int Stage::getScore() {
     return score;
 }
 
+bool Stage::getIsStageDone() {
+    return isStageDone;
+}
+
+void Stage::setIsStageDone(bool iSD) {
+    isStageDone = iSD;
+}
+
 void Stage::renderEntities() {
     background->render();
     entityList->renderAllEntities();
@@ -72,17 +80,18 @@ void Stage::collideEntities() {
 }
 
 void Stage::exec(float dt) {
+    pGraphicManager->setViewSize(Coordinates::Vector<float>(640.f, 480.f));
     removedNeutralizedEntities();
     updateEntities(dt);
     collideEntities();
     renderEntities();
     if (player2) {
         if (player1->getPosition().getX() >= 10000.f && player2->getPosition().getX() >= 10000.f)
-            isStageDone = true;
+            setIsStageDone(true);
     }
     else {
         if (player1->getPosition().getX() >= 10000.f) {
-            isStageDone = true;
+            setIsStageDone(true);
         }
     }
 
@@ -94,8 +103,18 @@ void Stage::removedNeutralizedEntities() {
     for (int i = 0; i < entityList->getSize(); i++) {
         pE = entityList->operator[](i);
         if (pE) {
-            if (!pE->getIsAlive())
+            if (!pE->getIsAlive()) {
+                if (pE->getId() == Id::smoker) {
+                    setScore(getScore() + 100);
+                }
+                else if (pE->getId() == Id::dog) {
+                    setScore(getScore() + 250);
+                }
+                else if (pE->getId() == Id::smoker) {
+                    setScore(getScore() + 1000);
+                }
                 entityList->removeAndDeleteEntity(pE);
+            }
         }
     }
 }

@@ -1,8 +1,8 @@
-#include "States/MainMenuState.h"
 #include "States/GameStateMachine.h"
 using namespace States;
 
 MainMenuState::MainMenuState(GameStateMachine* pGM) {
+    pInputManager = Managers::InputManager::getInstance();
     pGameStateMachine = pGM;
     createButtons();
     buttons[buttonSelected]->setSelected(true);
@@ -42,6 +42,7 @@ void MainMenuState::exec() {
 
 void MainMenuState::reset() {
     buttonSelected = 0;
+    pInputManager->clearKeyPressedInFrame();
     updateButtons();
     render();
 }
@@ -58,4 +59,8 @@ void MainMenuState::update(float dt) {
 
 void MainMenuState::select() {
     exec();
+}
+
+void MainMenuState::back() {
+    changeState("ExitState");
 }

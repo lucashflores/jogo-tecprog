@@ -51,3 +51,7 @@ void NewGameMenuState::reset() {
     updateButtons();
     render();
 }
+
+void NewGameMenuState::back() {
+    changeState("MainMenuState");
+}

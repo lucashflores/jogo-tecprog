@@ -2,22 +2,22 @@
 #include "State.h"
 #include "Menus/Menu.h"
 
-
 namespace States {
+
     class GameStateMachine;
 
-    class PlayingState: public State, public Menus::Menu {
+    class LeaderBoardMenuState {
     private:
         GameStateMachine* pGameStateMachine;
-        Managers::InputManager* pInputManager;
+        std::map<std::string, unsigned int> leaderboard;
     public:
-        PlayingState(GameStateMachine* pGM);
-        ~PlayingState();
+        LeaderBoardMenuState(GameStateMachine* pGM);
+        ~LeaderBoardMenuState();
+        void createButtons();
         void update(float dt);
         void render();
         void reset();
         void exec();
-        void createButtons();
         void select();
         void back();
     };

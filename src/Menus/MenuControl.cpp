@@ -19,6 +19,7 @@ void MenuControl::initializeControls() {
     controls["moveUp"] = "Up";
     controls["moveDown"] = "Down";
     controls["select"] = "Enter";
+    controls["esc"] = "Escape";
 }
 
 void MenuControl::notify() {
@@ -28,6 +29,8 @@ void MenuControl::notify() {
         menu->moveDown();
     else if (pInputManager->wasKeyPressedInFrame(controls.at("select")))
         menu->select();
+    else if (pInputManager->wasKeyPressedInFrame(controls.at("esc")))
+        menu->back();
     else
         return ;
 

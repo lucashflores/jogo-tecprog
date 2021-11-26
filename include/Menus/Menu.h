@@ -24,6 +24,7 @@ namespace Menus {
         void moveUp();
         void moveDown();
         virtual void select() = 0;
+        virtual void back() = 0;
     };
 
 }

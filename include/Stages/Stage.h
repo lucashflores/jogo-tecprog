@@ -28,14 +28,25 @@ namespace Stages {
         Stage(EntityList* pEL, Entities::Player* p1, Entities::Player* p2);
         virtual ~Stage();
         virtual int getStageNumber();
+
         unsigned int getScore();
         void setScore(unsigned int scr);
+
+        bool getIsStageDone();
+        void setIsStageDone(bool iSD);
+
         void exec(float dt);
+
         void updateEntities(float dt);
+
         void renderEntities();
+
         void centerView();
+
         void collideEntities();
+
         void removedNeutralizedEntities();
+
         void save();
     };
 }

@@ -11,6 +11,11 @@
 #include "States/PlayingState.h"
 #include "States/NewStage2MenuState.h"
 #include "States/CreatingStage2State.h"
+#include "States/LoadGameState.h"
+#include "States/PauseMenuState.h"
+#include "States/SaveGameState.h"
+#include "States/EndGameMenuState.h"
+#include "States/LeaderBoardMenuState.h"
 
 namespace States {
 
@@ -22,6 +27,8 @@ namespace States {
         Stages::Stage* pStage;
         Entities::Player* player1;
         Entities::Player* player2;
+        std::string name;
+        unsigned int score;
         bool twoPlayers;
         int currentStage;
         sf::Clock time;
@@ -32,7 +39,6 @@ namespace States {
         void initializeStates();
 
         void exec();
-        void save();
 
         Stages::Stage* getStage() const;
         void setStage(Stages::Stage* pS);
@@ -40,12 +46,22 @@ namespace States {
         void setTwoPlayers(bool tp);
         bool getTwoPlayers() const;
 
+        void setName(std::string n);
+        std::string getName();
+
+
         Entities::Player* getPLayer1();
         Entities::Player* getPLayer2();
         bool isTwoPlayersActive() const;
 
+        unsigned int getScore();
+        void setScore(unsigned int scr);
+
         int getCurrentStage() const;
         void setCurrentStage(int num);
+
+        void setGameViewSize(Coordinates::Vector<float> size);
+        void centerGameView(Coordinates::Vector<float> pos);
 
         void loadGame();
         void endGame();

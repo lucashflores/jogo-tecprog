@@ -19,7 +19,7 @@ StateMachine::~StateMachine() {
 }
 
 void StateMachine::setCurrentState(std::string stateName) {
-    currentState = stateList.at(stateName);
+    currentState = static_cast<State*>(stateList.at(stateName));
     currentState->reset();
 }
 

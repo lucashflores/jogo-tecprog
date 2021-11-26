@@ -26,6 +26,7 @@ public:
         background2 = 2000,
         menuBackground = 3000,
         button = 4000,
+        textBox = 5000,
     };
 
     Id::ids enumOfIndex(int i) {

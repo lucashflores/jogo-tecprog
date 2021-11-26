@@ -49,6 +49,12 @@ void GraphicManager::closeWindow() {
     window->close();
 }
 
+void GraphicManager::setViewSize(Coordinates::Vector<float> size) {
+    view.setSize(sf::Vector2f(size.getX(), size.getY()));
+    view.setCenter(sf::Vector2f(size.getX()/2, size.getY()/2));
+    window->setView(view);
+}
+
 void GraphicManager::centerView(Coordinates::Vector<float> pos) {
     view.setCenter(sf::Vector2f (pos.getX(), pos.getY()));
     window->setView(view);
@@ -60,7 +66,7 @@ sf::Texture* GraphicManager::loadTexture(std::string path) {
     return texture;
 }
 
-sf::Font *GraphicManager::loadFont(std::string path) {
+sf::Font* GraphicManager::loadFont(std::string path) {
     sf::Font* font = new sf::Font();
     font->loadFromFile(path);
     return font;

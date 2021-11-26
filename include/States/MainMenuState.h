@@ -10,6 +10,7 @@ namespace States {
     class MainMenuState: public State, public Menus::Menu {
     private:
         GameStateMachine* pGameStateMachine;
+        Managers::InputManager* pInputManager;
     public:
         MainMenuState(GameStateMachine* pGM);
         ~MainMenuState();
@@ -19,5 +20,6 @@ namespace States {
         void reset();
         void exec();
         void select();
+        void back();
     };
 }
