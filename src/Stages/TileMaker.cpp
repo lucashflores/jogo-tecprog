@@ -11,15 +11,9 @@ TileMaker::~TileMaker() {
 }
 
 void TileMaker::makePlatform(Coordinates::Vector<float> initialPos, unsigned int size) {
-    Coordinates::Vector<float> currentPos = initialPos;
-    Entities::Tile* pT = NULL;
     Id::ids tileId = stage == 1? Id::tile1 : Id::tile2;
-    for (int i = 0; i < size; i++) {
-        pT = new Entities::Tile(tileId, currentPos);
-        pEntityList->addEntity(static_cast<Entities::Entity*>(pT));
-        pT = NULL;
-        currentPos.setX(currentPos.getX() + 32.f);
-    }
+    Platform* platform = NULL;
+    platform = new Platform(tileId, initialPos, size, pEntityList);
 }
 
 void TileMaker::makeWall(Coordinates::Vector<float> initialPos, unsigned int size) {

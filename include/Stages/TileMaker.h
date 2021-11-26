@@ -2,6 +2,7 @@
 
 #include "EntityList.h"
 #include "Entities/Tile.h"
+#include "Platform.h"
 
 namespace Stages {
 
