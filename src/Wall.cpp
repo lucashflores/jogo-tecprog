@@ -1,6 +1,6 @@
-#include "Platform.h"
+#include "Wall.h"
 
-Platform::Platform(Id::ids id, Coordinates::Vector<float> pos, int size, EntityList* pEL) {
+Wall::Wall(Id::ids id, Coordinates::Vector<float> pos, int size, EntityList* pEL) {
     if (pEL) {
         pEntityList = pEL;
         Coordinates::Vector<float> currentPos = pos;
@@ -8,16 +8,16 @@ Platform::Platform(Id::ids id, Coordinates::Vector<float> pos, int size, EntityL
 
         for (int i = 0; i < size; i++) {
             pT = new Entities::Tile(id, currentPos);
-            tileList.pushBack(pT);
+            TileList.pushBack(pT);
             pEntityList->addEntity(static_cast<Entities::Entity*>(pT));
             pT = NULL;
-            currentPos.setX(currentPos.getX() + 32.f);
+            currentPos.setY(currentPos.getY() + 32.f);
         }
     }
     else
         pEntityList = NULL;
 }
 
-Platform::~Platform() {
+Wall::~Wall() {
     pEntityList = NULL;
 }

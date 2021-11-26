@@ -5,13 +5,13 @@
 #include "Entities/Tile.h"
 #include "EntityList.h"
 
-    class Platform {
-        private:
+class Platform {
+    private:
 
-            EntityList* pEntityList;
-            List::List<Entities::Tile*> TileList;
+        EntityList* pEntityList;
+        List::List<Entities::Tile*> tileList;
 
-        public:
-            Platform(Id::ids id, Coordinates::Vector<float> pos, int size, EntityList* pEL);
-            ~Platform();
-    };
+    public:
+        Platform(Id::ids id, Coordinates::Vector<float> pos, int size, EntityList* pEL);
+        ~Platform();
+};
