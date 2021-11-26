@@ -3,12 +3,13 @@
 #include "Entities/Enemy.h"
 #include "Entities/Projectile.h"
 #include "EntityList.h"
+#include "Stages/ProjectileMaker.h"
 
 namespace Entities {
 
     class PunkBoss : public Enemy {
     private:
-        EntityList* bossEntityList;
+        Stages::ProjectileMaker* projectileMaker;
 
     public:
         PunkBoss(Coordinates::Vector<float> pos);
@@ -21,7 +22,7 @@ namespace Entities {
 
         void initializeSprite();
 
-        void setEntityList(EntityList* EL);
+        void setProjectileMaker(Stages::ProjectileMaker* pPM);
 
         void update(float dt) override;
 

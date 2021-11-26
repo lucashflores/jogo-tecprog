@@ -5,12 +5,20 @@ EnemyInstructionsReader::EnemyInstructionsReader(EntityList *pEL, Entities::Play
 {
     if (pPM)
         projectileMaker = pPM;
+
     if (p1)
         player1 = p1;
+    else
+        player1 = NULL;
+
     if (p2)
         player2 = p2;
+    else
+        player2 = NULL;
+
     if (pEL)
         entityList = pEL;
+
     pEnemyMaker = new EnemyMaker();
 }
 
@@ -37,14 +45,14 @@ void EnemyInstructionsReader::executeInstructions() {
         if (command == "S") {
             smokerEnemy = pEnemyMaker->makeSmokerEnemy(position);
             smokerEnemy->setProjectileMaker(projectileMaker);
-            enemy = static_cast<Entities::Enemy *>(smokerEnemy);
+            enemy = static_cast<Entities::Enemy*>(smokerEnemy);
         }
         else if (command == "D")
             enemy = static_cast<Entities::Enemy *>(pEnemyMaker->makeDogEnemy(position));
         else if (command == "B") {
             punkBoss = pEnemyMaker->makeBoss(position);
-            //punkBoss
-            enemy = static_cast<Entities::Enemy *>(punkBoss);
+            punkBoss->setProjectileMaker(projectileMaker);
+            enemy = static_cast<Entities::Enemy*>(punkBoss);
         }
     }
     if (enemy) {

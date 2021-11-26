@@ -124,7 +124,7 @@ Stage2* StageLoader::loadStage2(EntityList *pEL, Entities::Player* player1, Enti
 }
 
 void StageLoader::loadObstacles(EntityList* pEL) {
-    std::ifstream file(STAGE_SAVE_PATH);
+    std::ifstream file(OBSTACLE_SAVE_PATH);
     std::string line;
     while (std::getline(file, line)) {
         convertStringToVector(line);
@@ -136,7 +136,7 @@ void StageLoader::loadObstacles(EntityList* pEL) {
 }
 
 void StageLoader::loadEnemies(EntityList* pEL, Entities::Player* player1, Entities::Player* player2) {
-    std::ifstream file(STAGE_SAVE_PATH);
+    std::ifstream file(ENEMY_SAVE_PATH);
     std::string line;
     while (std::getline(file, line)) {
         convertStringToVector(line);
@@ -147,7 +147,7 @@ void StageLoader::loadEnemies(EntityList* pEL, Entities::Player* player1, Entiti
 }
 
 void StageLoader::loadProjectiles(EntityList *pEL) {
-    std::ifstream file(STAGE_SAVE_PATH);
+    std::ifstream file(PROJECTILE_SAVE_PATH);
     std::string line;
     while (std::getline(file, line)) {
         convertStringToVector(line);

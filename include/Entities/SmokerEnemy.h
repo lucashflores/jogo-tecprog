@@ -11,7 +11,6 @@ namespace Entities {
     class SmokerEnemy : public Enemy {
     private:
         Stages::ProjectileMaker* projectileMaker;
-        EntityList* smokerEntityList;
 
     public:
         SmokerEnemy(Coordinates::Vector<float> pos);

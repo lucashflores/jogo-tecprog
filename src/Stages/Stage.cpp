@@ -60,7 +60,7 @@ void Stage::centerView() {
     }
     else {
         posX = player1->getPosition().getX();
-        posY = player1->getPosition().getY() + 70.f;
+        posY = player1->getPosition().getY() - 70.f;
     }
     background->update(Coordinates::Vector<float>(posX, posY));
     pGraphicManager->centerView(Coordinates::Vector<float>(posX, posY));
