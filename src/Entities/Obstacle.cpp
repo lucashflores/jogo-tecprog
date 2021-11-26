@@ -20,4 +20,5 @@ unsigned int Obstacle::getDamage() {
 
 void Obstacle::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
+
 }

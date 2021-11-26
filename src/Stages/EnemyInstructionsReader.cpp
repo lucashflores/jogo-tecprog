@@ -3,6 +3,7 @@ using namespace Stages;
 
 EnemyInstructionsReader::EnemyInstructionsReader(EntityList *pEL, Entities::Player* p1, Entities::Player* p2, ProjectileMaker* pPM)
 {
+    player2 = NULL;
     if (pPM)
         projectileMaker = pPM;
     if (p1)

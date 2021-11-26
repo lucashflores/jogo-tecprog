@@ -16,6 +16,7 @@ pGraphicManager(Managers::GraphicManager::getInstance()),
 pCollisionManager(Managers::CollisionManager::getInstance()),
 isStageDone(false), entityList(pEL), player1(p1), player2(p2)
 {
+    score = 0;
     pCollisionManager->setEntityList(entityList);
 }
 
@@ -57,9 +58,10 @@ void Stage::updateEntities(float dt) {
 void Stage::centerView() {
     float posX = 0.f;
     float posY = 0.f;
+
     if (player2) {
-        posX = player1->getPosition().getX() - player2->getPosition().getX();
-        posY = player1->getPosition().getY() - player2->getPosition().getY();
+        posX = (player1->getPosition().getX() + player2->getPosition().getX()) / 2.f;
+        posY = (player1->getPosition().getY() + player2->getPosition().getY()) / 2.f;
         posY += 70.f;
         if (posX < 0)
             posX = -posX;
@@ -67,6 +69,7 @@ void Stage::centerView() {
             posY = -posY;
     }
     else {
+
         posX = player1->getPosition().getX();
         posY = player1->getPosition().getY() + 70.f;
     }
@@ -86,11 +89,11 @@ void Stage::exec(float dt) {
     collideEntities();
     renderEntities();
     if (player2) {
-        if (player1->getPosition().getX() >= 10000.f && player2->getPosition().getX() >= 10000.f)
+        if (player1->getPosition().getX() >= 2650.f && player2->getPosition().getX() >= 2650.f)
             setIsStageDone(true);
     }
     else {
-        if (player1->getPosition().getX() >= 10000.f) {
+        if (player1->getPosition().getX() >= 2650.f) {
             setIsStageDone(true);
         }
     }
@@ -110,8 +113,9 @@ void Stage::removedNeutralizedEntities() {
                 else if (pE->getId() == Id::dog) {
                     setScore(getScore() + 250);
                 }
-                else if (pE->getId() == Id::smoker) {
+                else if (pE->getId() == Id::punk) {
                     setScore(getScore() + 1000);
+                    setIsStageDone(true);
                 }
                 entityList->removeAndDeleteEntity(pE);
             }
@@ -156,12 +160,16 @@ void Stage::save() {
 
     std::string num =std::to_string(getStageNumber());
 
-    stageSavesFile <<
-       num << " " <<
-       getScore();
-
-
-
+    if (player2) {
+        stageSavesFile <<
+           num << " " <<
+           getScore() << " " << "1";
+    }
+    else {
+        stageSavesFile <<
+           num << " " <<
+           getScore() << " " << "0";
+    }
 
     for (int i = 0; i < entityList->getSize(); i++){
 

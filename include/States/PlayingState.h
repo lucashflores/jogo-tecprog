@@ -1,12 +1,11 @@
 #pragma once
 #include "State.h"
-#include "Menus/Menu.h"
 
 
 namespace States {
     class GameStateMachine;
 
-    class PlayingState: public State, public Menus::Menu {
+    class PlayingState: public State {
     private:
         GameStateMachine* pGameStateMachine;
         Managers::InputManager* pInputManager;

@@ -26,7 +26,9 @@ void EndGameMenuState::render() {
 }
 
 void EndGameMenuState::reset() {
-
+    pGameStateMachine->setGameViewSize(Coordinates::Vector<float>(1280.f, 720.f));
+    pGameStateMachine->centerGameView(Coordinates::Vector<float>(640.f ,360.f));
+    render();
 }
 
 void EndGameMenuState::exec() {

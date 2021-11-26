@@ -58,7 +58,7 @@ void GameStateMachine::initializeStates() {
         stateList["EndGameMenuState"] = new EndGameMenuState(this);
         stateList.at("EndGameMenuState")->setStateMachine(static_cast<StateMachine*>(this));
 
-        currentState = static_cast<State*>(stateList.at("EndGameMenuState"));
+        currentState = static_cast<State*>(stateList.at("MainMenuState"));
     }
     catch (...) {
         std::cout << "States not loaded!" << std::endl;

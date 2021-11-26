@@ -2,6 +2,13 @@
 #include "Stage2Factory.h"
 #include "ProjectileMaker.h"
 
+#define STAGE_SAVE_PATH "../saves/stageSave.txt"
+#define ENEMY_SAVE_PATH "../saves/enemySave.txt"
+#define OBSTACLE_SAVE_PATH "../saves/obstacleSave.txt"
+#define PROJECTILE_SAVE_PATH "../saves/projectileSave.txt"
+#define PLAYER1_SAVE_PATH "../saves/player1Save.txt"
+#define PLAYER2_SAVE_PATH "../saves/player2Save.txt"
+
 namespace Stages {
 
     class StageLoader {

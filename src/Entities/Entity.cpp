@@ -46,7 +46,7 @@ void Entity::saveEntityInfo(std::ofstream& out) const {
 
     out <<  (int)getId()           << " " <<
             getPosition().getX()   << " " <<
-            getPosition().getX()   << " ";
+            getPosition().getY()   << " ";
 }
 
 void Entity::saveEntity(std::ofstream &out) const {

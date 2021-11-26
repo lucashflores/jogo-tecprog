@@ -94,6 +94,9 @@ void Player::update(float dt) {
         setIsOnGround(false);
     }
 
+    if (getPosition().getY() > 1500.f)
+        eliminate();
+
     setIsAttacking(false);
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt,
@@ -108,6 +111,6 @@ void Player::saveEntity(std::ofstream& out) const{
         getVelocity().getX() << " " <<
         getVelocity().getY() << " " <<
         isFacingLeft << " " <<
-        life;
+        life << "\n";
 }
 

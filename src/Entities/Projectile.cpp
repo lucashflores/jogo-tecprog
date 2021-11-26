@@ -42,5 +42,5 @@ void Projectile::saveEntity(std::ofstream& out) const{
     out <<
         isFacingLeft << " " <<
         velocity.getX() << " " <<
-        velocity.getY();
+        velocity.getY() << "\n";
 }
