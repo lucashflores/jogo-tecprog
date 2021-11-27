@@ -2,7 +2,6 @@
 using namespace States;
 
 MainMenuState::MainMenuState(GameStateMachine* pGM) {
-    pInputManager = Managers::InputManager::getInstance();
     pGameStateMachine = pGM;
     createButtons();
     buttons[buttonSelected]->setSelected(true);
@@ -13,16 +12,19 @@ MainMenuState::~MainMenuState() {
 
 void MainMenuState::createButtons() {
     Menus::Button* b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 150.f), "New Game");
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 80.f), "New Game");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 300.f), "Stage2");
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 230.f), "Stage2");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 450.f), "Load Game");
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 380.f), "Load Game");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 600.f), "Exit");
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 530.f), "Leaderboard");
+    buttons.push_back(b);
+    b = NULL;
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 680.f), "Exit");
     buttons.push_back(b);
     b = NULL;
 }
@@ -35,14 +37,15 @@ void MainMenuState::exec() {
     else if (buttonSelected == 2)
         changeState("LoadGameState");
     else if (buttonSelected == 3)
+        changeState("LeaderBoardMenuState");
+    else if (buttonSelected == 4)
         changeState("ExitState");
     else
         return;
 }
 
 void MainMenuState::reset() {
-    buttonSelected = 0;
-    pInputManager->clearKeyPressedInFrame();
+    pGameStateMachine->clearKeyPressedInFrame();
     updateButtons();
     render();
 }

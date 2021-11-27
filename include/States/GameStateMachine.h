@@ -16,6 +16,7 @@
 #include "States/SaveGameState.h"
 #include "States/EndGameMenuState.h"
 #include "States/LeaderBoardMenuState.h"
+#include "States/SavingLeaderBoardState.h"
 
 namespace States {
 
@@ -67,6 +68,8 @@ namespace States {
         void endGame();
         void deleteStage();
         void resetPlayers();
+
+        void clearKeyPressedInFrame();
     };
 
 }

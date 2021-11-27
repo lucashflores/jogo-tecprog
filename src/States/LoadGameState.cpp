@@ -4,6 +4,7 @@ using namespace States;
 LoadGameState::LoadGameState(GameStateMachine *pGM) {
     if (pGM)
         pGameStateMachine = pGM;
+
 }
 
 LoadGameState::~LoadGameState() noexcept {

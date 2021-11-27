@@ -5,13 +5,6 @@ EntityList::EntityList(): entityList() {
 }
 
 EntityList::~EntityList() {
-    Entities::Entity* pE = NULL;
-    for (iterator it = entityList.begin(); it != entityList.end(); it++) {
-        pE = (*it);
-        if (pE)
-            delete pE;
-        pE = NULL;
-    }
 
     entityList.clear();
 

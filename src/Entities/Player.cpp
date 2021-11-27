@@ -114,3 +114,9 @@ void Player::saveEntity(std::ofstream& out) const{
         life << "\n";
 }
 
+void Player::reset() {
+    isAlive = true;
+    setLife(1000);
+    setPosition(Coordinates::Vector<float>(150.f, 950.f));
+}
+

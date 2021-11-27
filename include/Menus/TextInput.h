@@ -1,4 +1,5 @@
 #pragma once
+#include "Text.h"
 #include "TextControl.h"
 #include "Ent.h"
 
@@ -8,12 +9,11 @@
 namespace Menus {
     class TextInput: public Ent {
     private:
-        Managers::GraphicManager* pGraphicM;
         std::string currentText;
-        sf::Text* label;
-        sf::Text* text;
-        sf::Font* font;
+        Text* text;
+        Text* label;
         TextControl* textControl;
+        Coordinates::Vector<float> origin;
     public:
         TextInput(Coordinates::Vector<float> pos, std::string labelText);
         ~TextInput();
@@ -22,5 +22,6 @@ namespace Menus {
         void render();
         void update();
         void erase();
+        void reset();
     };
 }

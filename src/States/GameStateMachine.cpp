@@ -3,6 +3,7 @@ using namespace States;
 
 GameStateMachine::GameStateMachine() {
     pGraphicM = Managers::GraphicManager::getInstance();
+    Animation::setGraphicManager(pGraphicM);
     pEventM = Managers::EventManager::getInstance();
     pInputM = Managers::InputManager::getInstance();
     pStage = NULL;
@@ -58,6 +59,12 @@ void GameStateMachine::initializeStates() {
         stateList["EndGameMenuState"] = new EndGameMenuState(this);
         stateList.at("EndGameMenuState")->setStateMachine(static_cast<StateMachine*>(this));
 
+        stateList["SavingLeaderBoardState"] = new SavingLeaderBoardState(this);
+        stateList.at("SavingLeaderBoardState")->setStateMachine(static_cast<StateMachine*>(this));
+
+        stateList["LeaderBoardMenuState"] = new LeaderBoardMenuState(this);
+        stateList.at("LeaderBoardMenuState")->setStateMachine(static_cast<StateMachine*>(this));
+
         currentState = static_cast<State*>(stateList.at("MainMenuState"));
     }
     catch (...) {
@@ -87,9 +94,6 @@ void GameStateMachine::exec() {
 
     }
 }
-
-
-
 
 void GameStateMachine::setCurrentStage(int num) {
     currentStage = num;
@@ -168,5 +172,9 @@ void GameStateMachine::setScore(unsigned int scr) {
 
 unsigned int GameStateMachine::getScore() {
     return score;
+}
+
+void GameStateMachine::clearKeyPressedInFrame() {
+    pInputM->clearKeyPressedInFrame();
 }
 

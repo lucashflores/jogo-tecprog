@@ -1,19 +1,22 @@
 #pragma once
 #include "State.h"
-#include "Menus/Menu.h"
+#include "Menus/LeaderBoardMenu.h"
+#include <fstream>
+
 
 namespace States {
 
     class GameStateMachine;
 
-    class LeaderBoardMenuState {
+    class LeaderBoardMenuState: public State, public Menus::LeaderBoardMenu {
     private:
         GameStateMachine* pGameStateMachine;
-        std::map<std::string, unsigned int> leaderboard;
+
     public:
         LeaderBoardMenuState(GameStateMachine* pGM);
         ~LeaderBoardMenuState();
-        void createButtons();
+        std::vector<std::string> convertStringToVector(std::string s, std::vector<std::string> commands);
+        void loadLeaderBoard();
         void update(float dt);
         void render();
         void reset();

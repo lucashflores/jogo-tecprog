@@ -11,6 +11,7 @@ namespace States {
     private:
         GameStateMachine* pGameStateMachine;
         Menus::TextInput* textInput;
+        Menus::Text* menuTitle;
     public:
         EndGameMenuState(GameStateMachine* pGM);
         ~EndGameMenuState();
