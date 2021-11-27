@@ -1,7 +1,8 @@
 #include "Ent.h"
 
 
-Ent::Ent(const Id::ids i): id(i) { }
+Ent::Ent(const Id::ids i): id(i) {
+}
 
 Ent::~Ent() {
     if(sprite)

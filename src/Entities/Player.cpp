@@ -19,13 +19,13 @@ void Player::walk(bool left) {
     setIsWalking(true);
 
     if (left) {
-        velocity.setX(-VELOCITY_X);
+        velocity.setX(-VELOCITY_X * velocityCoefficient);
         setIsFacingLeft(true);
     }
 
 
     else {
-        velocity.setX(VELOCITY_X);
+        velocity.setX(VELOCITY_X * velocityCoefficient);
         setIsFacingLeft(false);
     }
 
@@ -94,6 +94,9 @@ void Player::update(float dt) {
         setIsOnGround(false);
     }
 
+    if (getPosition().getY() > 1500.f)
+        eliminate();
+
     setIsAttacking(false);
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt,
@@ -108,6 +111,12 @@ void Player::saveEntity(std::ofstream& out) const{
         getVelocity().getX() << " " <<
         getVelocity().getY() << " " <<
         isFacingLeft << " " <<
-        life;
+        life << "\n";
+}
+
+void Player::reset() {
+    isAlive = true;
+    setLife(1000);
+    setPosition(Coordinates::Vector<float>(150.f, 950.f));
 }
 

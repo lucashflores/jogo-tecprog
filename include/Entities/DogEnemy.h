@@ -1,7 +1,7 @@
 #pragma once
 
 #define DOG_TERMINALVELOCITY 180.f
-#define DOG_ACCELERATION 350.f
+#define DOG_ACCELERATION 300.f
 #define DOG_STOPDRAGRATE 0.996f
 #define DOG_CHANGEDIRECTIONDRAGRATE 8600.f
 
@@ -31,6 +31,7 @@ namespace Entities {
         void update(float dt) override;
 
         void saveEntity(std::ofstream& out) const;
+
     };
 
 }

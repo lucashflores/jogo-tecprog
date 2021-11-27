@@ -20,4 +20,5 @@ void Barrel::initializeSprite() {
 
 void Barrel::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
+    out << "\n";
 }

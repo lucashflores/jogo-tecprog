@@ -1,4 +1,3 @@
-#include "States/MainMenuState.h"
 #include "States/GameStateMachine.h"
 using namespace States;
 
@@ -13,32 +12,32 @@ MainMenuState::~MainMenuState() {
 
 void MainMenuState::createButtons() {
     Menus::Button* b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 50.f), "New Game");
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 300.f), "New Game");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 200.f), "Stage1");
-    buttons.push_back(b);
-    b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 350.f), "Stage2");
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 400.f), "Stage2");
     buttons.push_back(b);
     b = NULL;
     b = new Menus::Button(Coordinates::Vector<float>(640.f, 500.f), "Load Game");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 650.f), "Exit");
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 530.f), "Leaderboard");
+    buttons.push_back(b);
+    b = NULL;
+    b = new Menus::Button(Coordinates::Vector<float>(640.f, 680.f), "Exit");
     buttons.push_back(b);
     b = NULL;
 }
 
 void MainMenuState::exec() {
     if (buttonSelected == 0)
-        changeState("NewGameState");
+        changeState("NewGameMenuState");
     else if (buttonSelected == 1)
-        changeState("NewStage1State");
+        changeState("NewStage2MenuState");
     else if (buttonSelected == 2)
-        changeState("NewStage2State");
-    else if (buttonSelected == 3)
         changeState("LoadGameState");
+    else if (buttonSelected == 3)
+        changeState("LeaderBoardMenuState");
     else if (buttonSelected == 4)
         changeState("ExitState");
     else
@@ -46,7 +45,7 @@ void MainMenuState::exec() {
 }
 
 void MainMenuState::reset() {
-    buttonSelected = 0;
+    pGameStateMachine->clearKeyPressedInFrame();
     updateButtons();
     render();
 }
@@ -63,4 +62,8 @@ void MainMenuState::update(float dt) {
 
 void MainMenuState::select() {
     exec();
+}
+
+void MainMenuState::back() {
+    changeState("ExitState");
 }

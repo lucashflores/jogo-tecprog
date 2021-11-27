@@ -16,6 +16,7 @@ pGraphicManager(Managers::GraphicManager::getInstance()),
 pCollisionManager(Managers::CollisionManager::getInstance()),
 isStageDone(false), entityList(pEL), player1(p1), player2(p2)
 {
+    score = 0;
     pCollisionManager->setEntityList(entityList);
 }
 
@@ -36,20 +37,31 @@ unsigned int Stage::getScore() {
     return score;
 }
 
+bool Stage::getIsStageDone() {
+    return isStageDone;
+}
+
+void Stage::setIsStageDone(bool iSD) {
+    isStageDone = iSD;
+}
+
 void Stage::renderEntities() {
+    background->render();
     entityList->renderAllEntities();
 }
 
 void Stage::updateEntities(float dt) {
     entityList->updateAllEntities(dt);
+    centerView();
 }
 
 void Stage::centerView() {
     float posX = 0.f;
     float posY = 0.f;
+
     if (player2) {
-        posX = player1->getPosition().getX() - player2->getPosition().getX();
-        posY = player1->getPosition().getY() - player2->getPosition().getY();
+        posX = (player1->getPosition().getX() + player2->getPosition().getX()) / 2.f;
+        posY = (player1->getPosition().getY() + player2->getPosition().getY()) / 2.f;
         posY += 70.f;
         if (posX < 0)
             posX = -posX;
@@ -57,9 +69,11 @@ void Stage::centerView() {
             posY = -posY;
     }
     else {
+
         posX = player1->getPosition().getX();
-        posY = player1->getPosition().getY() + 70.f;
+        posY = player1->getPosition().getY() - 10.f;
     }
+    background->update(Coordinates::Vector<float>(posX, posY));
     pGraphicManager->centerView(Coordinates::Vector<float>(posX, posY));
 }
 
@@ -69,17 +83,18 @@ void Stage::collideEntities() {
 }
 
 void Stage::exec(float dt) {
+    pGraphicManager->setViewSize(Coordinates::Vector<float>(640.f, 480.f));
     removedNeutralizedEntities();
     updateEntities(dt);
     collideEntities();
     renderEntities();
     if (player2) {
-        if (player1->getPosition().getX() >= 10000.f && player2->getPosition().getX() >= 10000.f)
-            isStageDone = true;
+        if (player1->getPosition().getX() >= 2650.f && player2->getPosition().getX() >= 2650.f)
+            setIsStageDone(true);
     }
     else {
-        if (player1->getPosition().getX() >= 10000.f) {
-            isStageDone = true;
+        if (player1->getPosition().getX() >= 2650.f) {
+            setIsStageDone(true);
         }
     }
 
@@ -91,8 +106,19 @@ void Stage::removedNeutralizedEntities() {
     for (int i = 0; i < entityList->getSize(); i++) {
         pE = entityList->operator[](i);
         if (pE) {
-            if (!pE->getIsAlive())
+            if (!pE->getIsAlive()) {
+                if (pE->getId() == Id::smoker) {
+                    setScore(getScore() + 100);
+                }
+                else if (pE->getId() == Id::dog) {
+                    setScore(getScore() + 250);
+                }
+                else if (pE->getId() == Id::punk) {
+                    setScore(getScore() + 1000);
+                    setIsStageDone(true);
+                }
                 entityList->removeAndDeleteEntity(pE);
+            }
         }
     }
 }
@@ -134,12 +160,16 @@ void Stage::save() {
 
     std::string num =std::to_string(getStageNumber());
 
-    stageSavesFile <<
-       num << " " <<
-       getScore();
-
-
-
+    if (player2) {
+        stageSavesFile <<
+           num << " " <<
+           getScore() << " " << "1";
+    }
+    else {
+        stageSavesFile <<
+           num << " " <<
+           getScore() << " " << "0";
+    }
 
     for (int i = 0; i < entityList->getSize(); i++){
 

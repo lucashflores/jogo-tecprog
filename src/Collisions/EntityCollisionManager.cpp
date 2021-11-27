@@ -35,7 +35,7 @@ void EntityCollisionManager::collisionChooser(Entities::Entity *pE1, Entities::E
             return;
     }
     else if (pE2->getId() == Id::player1 || pE2->getId() == Id::player2) {
-        if (pE1->getId() == Id::dog || pE1->getId() == Id::smoker || pE1->getId() == Id::punk || pE1->getId() == Id::projectile)
+        if (pE1->getId() == Id::dog || pE1->getId() == Id::smoker || pE1->getId() == Id::projectile)
             entityCollisions->playerCollision(pE1, pE2, collision);
     }
     else

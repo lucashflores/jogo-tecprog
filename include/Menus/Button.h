@@ -1,10 +1,11 @@
 #pragma once
 #include <string>
 #include "Ent.h"
+#include "Text.h"
 #include "Managers/GraphicManager.h"
 
 #define BUTTON_PATH "../assets/button.png"
-#define FONT_PATH "../assets/font.ttf"
+
 
 namespace Menus {
 
@@ -12,12 +13,10 @@ namespace Menus {
     private:
         Managers::GraphicManager* pGraphicM;
         bool selected;
-        sf::Text* text;
-        static sf::Font* font;
+        Text* text;
     public:
         Button(Coordinates::Vector<float> pos, std::string t);
         ~Button();
-        static void setFont(sf::Font* f);
         void initializeSprite();
         void setSelected(bool s);
         bool getSelected() const;

@@ -1,16 +1,27 @@
 #pragma once
 #include "State.h"
-
+#include "Menus/Text.h"
 
 namespace States {
+    class GameStateMachine;
+
     class PlayingState: public State {
     private:
-        Stages::Stage* pStage;
+        GameStateMachine* pGameStateMachine;
+        Managers::InputManager* pInputManager;
+        Menus::Text* life1;
+        Menus::Text* life2;
+        Menus::Text* score;
+
     public:
-        PlayingState(Stages::Stage* pS);
+        PlayingState(GameStateMachine* pGM);
         ~PlayingState();
-        void setStage(Stages::Stage* pS);
-        Stages::Stage* getStage();
-        void exec(float dt);
+        void update(float dt);
+        void render();
+        void reset();
+        void exec();
+        void createButtons();
+        void select();
+        void back();
     };
 }

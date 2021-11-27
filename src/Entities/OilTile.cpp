@@ -19,4 +19,5 @@ void OilTile::initializeSprite() {
 
 void OilTile::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
+    out << "\n";
 }

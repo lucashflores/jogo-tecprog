@@ -13,7 +13,7 @@ namespace Entities {
 
         unsigned int getDamage();
 
-        void update(float dt);
+        virtual void update(float dt);
 
         void saveEntity(std::ofstream& out) const;
     };

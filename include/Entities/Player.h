@@ -34,6 +34,8 @@ namespace Entities {
         void update(float dt) override;
 
         void saveEntity(std::ofstream& out) const;
+
+        void reset();
     };
 
 }

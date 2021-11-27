@@ -2,6 +2,7 @@
 
 #include "Entities/Character.h"
 #include "Entities/Obstacle.h"
+#include "Entities/Fire.h"
 
 namespace Collisions {
     class ObstacleCollisionDealer {

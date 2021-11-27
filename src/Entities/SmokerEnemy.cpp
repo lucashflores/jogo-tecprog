@@ -3,20 +3,23 @@ using namespace Entities;
 #include "Id.h"
 #include <iostream>
 
-SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::smoker, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos):
+    Enemy(Id::smoker, 15, 2, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+
     initializeSprite();
+    projectileMaker = NULL;
 }
 
-SmokerEnemy::~SmokerEnemy() = default;
+SmokerEnemy::~SmokerEnemy() { };
 
 void SmokerEnemy::walk(float dt) {
 
     if (target->getPosition().getX() - this->getPosition().getX() >= 0){
-        velocity.setX(45.f);
+        velocity.setX(45.f * velocityCoefficient);
         setIsFacingLeft(false);
     }
     else {
-        velocity.setX(-45.0f);
+        velocity.setX(-45.0f * velocityCoefficient);
         setIsFacingLeft(true);
     }
 
@@ -33,9 +36,10 @@ void SmokerEnemy::attack(Character* pChar) {
         //pChar->setLife(pChar->getLife() - damage);
         float offset = 25;
         (isFacingLeft)?(offset=offset):(offset=-offset);
-        Entities::Smoke* smoke = new Entities::Smoke(position- Coordinates::Vector<float>(offset,0.f));
-        smokerEntityList->addEntity(smoke);
-        std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
+        if (projectileMaker) {
+            projectileMaker->makeSmoke(position - Coordinates::Vector<float>(offset,0.f));
+        }
+        //std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
         pChar->eliminate();
         std::cout << "Player Eliminado" << std::endl;
@@ -44,9 +48,9 @@ void SmokerEnemy::attack(Character* pChar) {
     attackTimer = 0;
 }
 
-void SmokerEnemy::setEntityList(EntityList* EL) {
-    if(EL)
-        smokerEntityList = EL;
+void SmokerEnemy::setProjectileMaker(Stages::ProjectileMaker* pPM) {
+    if(pPM)
+        projectileMaker = pPM;
 }
 
 
@@ -94,6 +98,9 @@ void SmokerEnemy::update(float dt){
         velocity.setY(0.f);
         setIsOnGround(false);
     }
+
+    if (getPosition().getY() > 1500.f)
+        eliminate();
 
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));

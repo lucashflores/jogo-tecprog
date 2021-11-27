@@ -5,13 +5,6 @@ EntityList::EntityList(): entityList() {
 }
 
 EntityList::~EntityList() {
-    Entities::Entity* pE = NULL;
-    for (iterator it = entityList.begin(); it != entityList.end(); it++) {
-        pE = (*it);
-        if (pE)
-            delete pE;
-        pE = NULL;
-    }
 
     entityList.clear();
 
@@ -48,17 +41,6 @@ void EntityList::renderAllEntities() {
     pE = NULL;
 }
 
-void EntityList::removeNeutralizedEntities() {
-    Entities::Entity* pE = NULL;
-    for (int i = 0; i < getSize(); i++) {
-        pE = operator[](i);
-        if (pE) {
-            if (!pE->getIsAlive())
-                removeEntity(pE);
-        }
-        pE = NULL;
-    }
-}
 
 void EntityList::updateAllEntities(float dt) {
     Entities::Entity* pE = NULL;

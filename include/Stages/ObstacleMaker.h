@@ -10,7 +10,7 @@ namespace Stages {
 
     class ObstacleMaker {
     public:
-        ObstacleMaker(EntityList* pEL);
+        ObstacleMaker();
         ~ObstacleMaker();
         Entities::Barrel* makeBarrel(Coordinates::Vector<float> pos);
         Entities::OilTile* makeOilTile(Coordinates::Vector<float> pos);

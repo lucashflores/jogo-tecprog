@@ -3,14 +3,14 @@
 #include "Entities/Smoke.h"
 #include "Entities/Enemy.h"
 #include "EntityList.h"
+#include "Stages/ProjectileMaker.h"
 
 namespace Entities {
 
 
     class SmokerEnemy : public Enemy {
     private:
-
-        EntityList* smokerEntityList;
+        Stages::ProjectileMaker* projectileMaker;
 
     public:
         SmokerEnemy(Coordinates::Vector<float> pos);
@@ -25,7 +25,7 @@ namespace Entities {
 
         void initializeSprite();
 
-        void setEntityList(EntityList* EL);
+        void setProjectileMaker(Stages::ProjectileMaker* pPM);
 
         //void collide(Entity* pE, Coordinates::Vector<float> collision);
 

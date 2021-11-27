@@ -8,6 +8,7 @@ namespace Entities {
     protected:
 
         Coordinates::Vector<float> velocity;
+        float velocityCoefficient;
         unsigned int life;
         bool isFacingLeft;
         bool isWalking;
@@ -19,6 +20,8 @@ namespace Entities {
         Character(Id::ids i, unsigned int l, unsigned int d, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
         virtual ~Character();
+
+        void setVelocityCoefficient(float c);
 
         void setAnimation(Animation* pAnimation);
 
@@ -39,6 +42,8 @@ namespace Entities {
         void setIsOnGround(bool isOnGround);
 
         void setIsAttacking(bool attacking);
+
+        bool getIsAttacking();
 
         virtual void attack(Character* pChar) = 0;
 

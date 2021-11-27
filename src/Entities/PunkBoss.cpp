@@ -28,8 +28,12 @@ void Entities::PunkBoss::attack(Character* pChar) {
     srand(time(NULL));
     float yrand = rand() % 30;
     Coordinates::Vector<float> offset = (this->isFacingLeft)?(Coordinates::Vector<float>(35.f,0.f)):(Coordinates::Vector<float>(-35.f,yrand- 15));
-    Entities::Projectile* attackProjectile = new Entities::Projectile((this->position - offset), this->isFacingLeft);
-    this->bossEntityList->addEntity(attackProjectile);
+    if(projectileMaker){
+        projectileMaker->makeProjectile((this->position - offset), this->isFacingLeft);
+    }
+    //Entities::Projectile* attackProjectile = new Entities::Projectile((this->position - offset), this->isFacingLeft);
+    //this->bossEntityList->addEntity(attackProjectile);
+
 }
 
 void Entities::PunkBoss::initializeSprite() {
@@ -39,9 +43,9 @@ void Entities::PunkBoss::initializeSprite() {
     sprite->changePosition(position);
 }
 
-void PunkBoss::setEntityList(EntityList* EL) {
-    if(EL)
-        bossEntityList = EL;
+void PunkBoss::setProjectileMaker(Stages::ProjectileMaker* pPM) {
+    if(pPM)
+        projectileMaker = pPM;
 }
 
 
@@ -98,6 +102,9 @@ void Entities::PunkBoss::update(float dt) {
         velocity.setY(0.f);
         setIsOnGround(false);
     }
+
+    if (getPosition().getY() > 1500.f)
+        eliminate();
 
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));

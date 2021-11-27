@@ -35,6 +35,7 @@ int Character::getLife() const {
 
 void Character::eliminate() {
     life = 0;
+    isAlive = false;
 }
 
 void Character::setIsFacingLeft(bool facingLeft) {
@@ -51,5 +52,14 @@ void Character::setIsOnGround(bool iOG) {
 
 void Character::setIsAttacking(bool attacking) {
     isAttacking = attacking;
+}
+
+void Character::setVelocityCoefficient(float c) {
+    if (c > 0.0f)
+        velocityCoefficient = c;
+}
+
+bool Character::getIsAttacking() {
+    return isAttacking;
 }
 

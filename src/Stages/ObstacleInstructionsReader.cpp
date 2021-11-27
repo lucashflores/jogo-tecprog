@@ -5,7 +5,7 @@ ObstacleInstructionsReader::ObstacleInstructionsReader(EntityList *pEL)  {
     if (pEL)
         entityList = pEL;
     pObstacleMaker = NULL;
-    pObstacleMaker = new ObstacleMaker(pEL);
+    pObstacleMaker = new ObstacleMaker();
 }
 
 ObstacleInstructionsReader::~ObstacleInstructionsReader() {
@@ -20,19 +20,20 @@ void ObstacleInstructionsReader::executeInstructions() {
     int chance = (int)((std::stof(commands[3])) * 100);
     int random = rand() % 100 + 1;
     Coordinates::Vector<float> position = Coordinates::Vector<float>(positionX, positionY);
-    Entities::Obstacle* obstacle = NULL;
+    Entities::Entity* obstacle = NULL;
     if (random <= chance) {
         if (command == "B")
-            obstacle = pObstacleMaker->makeBarrel(position);
+            obstacle = static_cast<Entities::Entity*>(pObstacleMaker->makeBarrel(position));
         else if (command == "F")
-            obstacle = pObstacleMaker->makeFire(position);
+            obstacle = static_cast<Entities::Entity*>(pObstacleMaker->makeFire(position));
         else if (command == "S")
-            obstacle = pObstacleMaker->makeSign(position);
+            obstacle = static_cast<Entities::Entity*>(pObstacleMaker->makeSign(position));
         else if (command == "O")
-            obstacle = pObstacleMaker->makeOilTile(position);
+            obstacle = static_cast<Entities::Entity*>(pObstacleMaker->makeOilTile(position));
         else
             return;
-        entityList->addEntity(static_cast<Entities::Entity*>(obstacle));
+        if (obstacle)
+            entityList->addEntity(obstacle);
         obstacle = NULL;
     }
     else

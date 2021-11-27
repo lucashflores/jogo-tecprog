@@ -108,6 +108,9 @@ void DogEnemy::update(float dt){
         setIsOnGround(false);
     }
 
+    if (getPosition().getY() > 1500.f)
+        eliminate();
+
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);

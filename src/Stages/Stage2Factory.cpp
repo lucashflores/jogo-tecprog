@@ -33,7 +33,7 @@ void Stage2Factory::makeStage(Entities::Player* player1, Entities::Player* playe
     makeTiles(TILES2_INSTRUCTIONS_PATH);
     obstacleInstructionsReader = new ObstacleInstructionsReader(entityList);
     makeObstacles(OBSTACLES2_INSTRUCTIONS_PATH);
-    enemyInstructionsReader = new EnemyInstructionsReader(entityList, player1, player2);
+    enemyInstructionsReader = new EnemyInstructionsReader(entityList, player1, player2, projectileMaker);
     makeEnemies(ENEMIES2_INSTRUCTIONS_PATH);
 }
 

@@ -3,8 +3,8 @@
 #include "StageFactory.h"
 #include "Stage2.h"
 #define TILES2_INSTRUCTIONS_PATH "../assets/stages/stage2/tileInstructions.txt"
-#define ENEMIES2_INSTRUCTIONS_PATH "../assets/stages/stage2/enemiesInstructions.txt"
-#define OBSTACLES2_INSTRUCTIONS_PATH "../assets/stages/stage2/obstaclesInstructions.txt"
+#define ENEMIES2_INSTRUCTIONS_PATH "../assets/stages/stage2/enemyInstructions.txt"
+#define OBSTACLES2_INSTRUCTIONS_PATH "../assets/stages/stage2/obstacleInstructions.txt"
 
 namespace Stages {
     class Stage2Factory: public StageFactory {

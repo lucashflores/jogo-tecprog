@@ -1,17 +1,35 @@
 #include "Stages/EnemyInstructionsReader.h"
 using namespace Stages;
 
-EnemyInstructionsReader::EnemyInstructionsReader(EntityList *pEL, Entities::Player* player1, Entities::Player* player2)
+EnemyInstructionsReader::EnemyInstructionsReader(EntityList *pEL, Entities::Player* p1, Entities::Player* p2, ProjectileMaker* pPM)
 {
+    player2 = NULL;
+    if (pPM)
+        projectileMaker = pPM;
+
+    if (p1)
+        player1 = p1;
+    else
+        player1 = NULL;
+
+    if (p2)
+        player2 = p2;
+    else
+        player2 = NULL;
+
     if (pEL)
         entityList = pEL;
-    pEnemyMaker = NULL;
+
     pEnemyMaker = new EnemyMaker();
 }
 
 EnemyInstructionsReader::~EnemyInstructionsReader() {
     if (pEnemyMaker)
         delete pEnemyMaker;
+    projectileMaker = NULL;
+    player1 = NULL;
+    player2 = NULL;
+    entityList = NULL;
 }
 
 void EnemyInstructionsReader::executeInstructions() {
@@ -22,20 +40,31 @@ void EnemyInstructionsReader::executeInstructions() {
     int random = rand() % 100 + 1;
     Coordinates::Vector<float> position = Coordinates::Vector<float>(positionX, positionY);
     Entities::Enemy* enemy = NULL;
+    Entities::SmokerEnemy* smokerEnemy = NULL;
+    Entities::PunkBoss* punkBoss = NULL;
     if (random <= chance) {
-        if (command == "S")
-            enemy = pEnemyMaker->makeSmokerEnemy(position);
+        if (command == "S") {
+            smokerEnemy = pEnemyMaker->makeSmokerEnemy(position);
+            smokerEnemy->setProjectileMaker(projectileMaker);
+            enemy = static_cast<Entities::Enemy*>(smokerEnemy);
+        }
         else if (command == "D")
-            enemy = pEnemyMaker->makeDogEnemy(position);
-        else if (command == "B")
-            enemy = pEnemyMaker->makeBoss(position);
-        else
-            return ;
-        entityList->addEntity(static_cast<Entities::Entity*>(enemy));
-        enemy->setPlayer(player1);
-        enemy->setPlayer(player2);
-        enemy = NULL;
+            enemy = static_cast<Entities::Enemy *>(pEnemyMaker->makeDogEnemy(position));
+        else if (command == "B") {
+            punkBoss = pEnemyMaker->makeBoss(position);
+            punkBoss->setProjectileMaker(projectileMaker);
+            enemy = static_cast<Entities::Enemy*>(punkBoss);
+        }
     }
-    else
-        return ;
+    if (enemy) {
+        enemy->setPlayer(player1);
+        if (player2)
+            enemy->setPlayer(player2);
+        entityList->addEntity(static_cast<Entities::Entity*>(enemy));
+
+    }
+    enemy = NULL;
+    smokerEnemy = NULL;
+    punkBoss = NULL;
+
 }
