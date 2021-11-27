@@ -6,8 +6,6 @@
 
 #include <vector>
 
-#define MENU_BACKGROUND "../assets/background.png"
-
 namespace Menus {
 
     class Menu {

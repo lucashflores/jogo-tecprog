@@ -38,7 +38,7 @@ float Smoke::getTimer(){
 void Smoke::update(float dt) {
     sprite->animationUpdate(0, false, dt);
     timer += dt;
-    if(timer>6.f) eliminate();
+    if(timer>6.f) neutralize();
 }
 
 unsigned int Smoke::getDamage() {

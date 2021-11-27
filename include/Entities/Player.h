@@ -58,8 +58,11 @@ namespace Entities {
                 if (pInputManager->wasKeyPressed(controls.at("jump")))
                     player->jump();
 
-                if (pInputManager->wasKeyPressed(controls.at("attack")))
+                if (pInputManager->wasKeyPressed(controls.at("attack"))){
                     player->setIsAttacking(true);
+                    player->attack(player->getEnemyNearby());
+                }
+
             }
 
         };
@@ -67,6 +70,7 @@ namespace Entities {
     private:
         PlayerControl* playerControl;
         bool isPlayerOne;
+        Character* enemyNearby;
 
     public:
         Player(bool isPlayerOne = true);
@@ -81,9 +85,13 @@ namespace Entities {
 
         void initializeSprite();
 
-        void update(float dt) override;
-
         void saveEntity(std::ofstream& out) const;
+
+        void setEnemyNearby(Character* enemy);
+
+        Character* getEnemyNearby();
+
+        void update(float dt) override;
 
         void reset();
     };

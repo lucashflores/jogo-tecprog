@@ -23,18 +23,21 @@ Coordinates::Vector<float> Character::getVelocity() const {
     return velocity;
 }
 
-void Character::setLife(unsigned int l) {
-    if (life <= 0)
+void Character::setLife(int l) {
+    if (l < 0)
         l = 0;
     life = l;
+
+    if(life == 0){
+        neutralize();
+    }
 }
 
 int Character::getLife() const {
     return life;
 }
 
-void Character::eliminate() {
-    life = 0;
+void Character::neutralize() {
     isAlive = false;
 }
 
@@ -54,12 +57,21 @@ void Character::setIsAttacking(bool attacking) {
     isAttacking = attacking;
 }
 
+bool Character::getIsAttacking() {
+    return isAttacking;
+}
+
+void Character::setAttackTimer(float time) {
+    attackTimer = time;
+}
+
+float Character::getAttackTimer() {
+    return attackTimer;
+}
+
 void Character::setVelocityCoefficient(float c) {
     if (c > 0.0f)
         velocityCoefficient = c;
 }
 
-bool Character::getIsAttacking() {
-    return isAttacking;
-}
 
