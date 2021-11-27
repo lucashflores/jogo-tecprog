@@ -59,3 +59,7 @@ void Character::setVelocityCoefficient(float c) {
         velocityCoefficient = c;
 }
 
+bool Character::getIsAttacking() {
+    return isAttacking;
+}
+

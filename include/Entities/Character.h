@@ -43,6 +43,8 @@ namespace Entities {
 
         void setIsAttacking(bool attacking);
 
+        bool getIsAttacking();
+
         virtual void attack(Character* pChar) = 0;
 
         virtual void update(float dt) = 0;

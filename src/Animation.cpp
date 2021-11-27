@@ -41,7 +41,7 @@ void Animation::render() {
 
 
 void Animation::centerViewHere() {
-    pGraphicM->centerView(Coordinates::Vector<float>(body.getPosition().x, body.getPosition().y) - Coordinates::Vector<float>(0.0f, 70.f));
+    pGraphicM->centerView(Coordinates::Vector<float>(body.getPosition().x, body.getPosition().y) - Coordinates::Vector<float>(0.0f, 0.f));
 }
 
 

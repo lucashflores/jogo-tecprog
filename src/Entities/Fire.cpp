@@ -2,7 +2,7 @@
 using namespace Entities;
 
 Fire::Fire(Coordinates::Vector<float> pos):
-Obstacle(Id::fire, Coordinates::Vector<float>(32.f, 32.f), pos, 5) {
+Obstacle(Id::fire, Coordinates::Vector<float>(32.f, 32.f), pos, 5), timer(0) {
     initializeSprite();
 }
 
@@ -17,8 +17,17 @@ void Fire::initializeSprite() {
     sprite->changePosition(position);
 }
 
+void Fire::setTimer(float time){
+    timer = time;
+}
+
+float Fire::getTimer(){
+    return timer;
+}
+
 void Fire::update(float dt) {
     sprite->animationUpdate(0, false ,dt);
+    timer += dt;
 }
 
 void Fire::saveEntity(std::ofstream& out) const{

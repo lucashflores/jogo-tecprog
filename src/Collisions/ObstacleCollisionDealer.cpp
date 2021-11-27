@@ -39,9 +39,17 @@ void ObstacleCollisionDealer::barrelCollision(Entities::Entity *pE1, Entities::E
 }
 
 void ObstacleCollisionDealer::fireCollision(Entities::Entity *pE1, Entities::Entity *pE2, Coordinates::Vector<float> collision) {
-    Entities::Character* pC1 =  static_cast<Entities::Character*>(pE1);
-    Entities::Obstacle* pO1 =  static_cast<Entities::Obstacle*>(pE2);
-    pC1->setLife(pC1->getLife() - pO1->getDamage());
+
+    if(pE1->getId() != Id::projectile) {
+        Entities::Character* pC1 = static_cast<Entities::Character*>(pE1);
+        Entities::Fire* pF2 = static_cast<Entities::Fire*>(pE2);
+
+        if (pF2->getTimer() > 1.0f) {
+            pC1->setLife(pC1->getLife() - pF2->getDamage());
+            pF2->setTimer(0.f);
+        }
+    }
+
 }
 
 

@@ -13,8 +13,8 @@ GraphicManager* GraphicManager::getInstance() {
 GraphicManager::GraphicManager() {
     window = new sf::RenderWindow;
     window->create(sf::VideoMode(1280, 720), "TecPunk 2021");
-    view.setCenter(sf::Vector2f(320.f, 240.f));
-    view.setSize(sf::Vector2f(640.f, 480.f));
+    view.setCenter(sf::Vector2f(280.f, 157.5f));
+    view.setSize(sf::Vector2f(560.f, 315.f));
 }
 
 GraphicManager::~GraphicManager() {

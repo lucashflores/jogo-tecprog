@@ -3,7 +3,9 @@ using namespace Entities;
 #include "Id.h"
 #include <iostream>
 
-SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::smoker, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos):
+    Enemy(Id::smoker, 15, 2, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+
     initializeSprite();
     projectileMaker = NULL;
 }
@@ -37,7 +39,7 @@ void SmokerEnemy::attack(Character* pChar) {
         if (projectileMaker) {
             projectileMaker->makeSmoke(position - Coordinates::Vector<float>(offset,0.f));
         }
-        std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
+        //std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
         pChar->eliminate();
         std::cout << "Player Eliminado" << std::endl;

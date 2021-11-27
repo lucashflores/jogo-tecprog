@@ -39,18 +39,18 @@ void Enemy::setTarget(Player* tg){
 void Enemy::chooseTarget() {
     double distP1 = 20000, distP2 = 20000;
 
-    if (player1) {
+    if (player1!=NULL) {
         distP1 = abs(sqrt(pow(player1->getPosition().getX() - getPosition().getX(), 2) +
                           pow(player1->getPosition().getY() - getPosition().getY(), 2)));
     }
 
 
-    if (player2) {
+    if (player2!=NULL) {
         distP2 = abs(sqrt(pow(player2->getPosition().getX() - getPosition().getX(), 2) +
                           pow(player2->getPosition().getY() - getPosition().getY(), 2)));
     }
 
-    if (player2){
+    if (player2!=NULL){
         if (distP1 <= distP2)
             setTarget(player1);
         else

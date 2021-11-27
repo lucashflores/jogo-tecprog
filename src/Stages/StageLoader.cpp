@@ -153,7 +153,6 @@ void StageLoader::loadObstacles(EntityList* pEL) {
 }
 
 void StageLoader::loadEnemies(EntityList* pEL, Entities::Player* player1, Entities::Player* player2) {
-
     std::ifstream file(ENEMY_SAVE_PATH);
     std::string line;
     while (std::getline(file, line)) {
