@@ -50,5 +50,5 @@ unsigned int Smoke::getDamage() {
 
 void Smoke::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
-
+    out << "\n";
 }

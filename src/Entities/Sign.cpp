@@ -17,4 +17,5 @@ void Sign::initializeSprite() {
 
 void Sign::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
+    out << "\n";
 }

@@ -7,10 +7,10 @@ SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos):
     Enemy(Id::smoker, 15, 2, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
 
     initializeSprite();
-
+    projectileMaker = NULL;
 }
 
-SmokerEnemy::~SmokerEnemy() = default;
+SmokerEnemy::~SmokerEnemy() { };
 
 void SmokerEnemy::walk(float dt) {
 
@@ -37,7 +37,7 @@ void SmokerEnemy::attack(Character* pChar) {
         float offset = 25;
         (isFacingLeft)?(offset=offset):(offset=-offset);
         if (projectileMaker) {
-            projectileMaker->makeSmoke(position- Coordinates::Vector<float>(offset,0.f));
+            projectileMaker->makeSmoke(position - Coordinates::Vector<float>(offset,0.f));
         }
         //std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
@@ -98,6 +98,9 @@ void SmokerEnemy::update(float dt){
         velocity.setY(0.f);
         setIsOnGround(false);
     }
+
+    if (getPosition().getY() > 1500.f)
+        eliminate();
 
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));

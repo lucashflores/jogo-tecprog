@@ -51,3 +51,7 @@ void NewStage2MenuState::reset() {
     updateButtons();
     render();
 }
+
+void NewStage2MenuState::back() {
+    changeState("MainMenuState");
+}

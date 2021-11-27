@@ -83,7 +83,10 @@ namespace List {
 
         while (pFirst != NULL) {
             Node<LISTTYPE>* aux = pFirst->getNext();
-            delete (aux->getInfo());
+            if (aux) {
+                if (aux->getInfo())
+                    delete (aux->getInfo());
+            }
             delete pFirst;
             pFirst = aux;
             listSize--;

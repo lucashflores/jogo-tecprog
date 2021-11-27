@@ -33,6 +33,8 @@ namespace Managers {
 
         void closeWindow();
 
+        void setViewSize(Coordinates::Vector<float> size);
+
         void centerView(Coordinates::Vector<float> pos);
 
         sf::Texture* loadTexture(std::string path);

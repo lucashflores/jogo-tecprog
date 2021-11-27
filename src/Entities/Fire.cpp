@@ -32,4 +32,5 @@ void Fire::update(float dt) {
 
 void Fire::saveEntity(std::ofstream& out) const{
     saveEntityInfo(out);
+    out << "\n";
 }

@@ -5,7 +5,7 @@
 
 class Animation {
 private:
-    Managers::GraphicManager* pGraphicM;
+    static Managers::GraphicManager* pGraphicM;
 
     sf::RectangleShape body;
     sf::Texture* texture;
@@ -24,8 +24,6 @@ public:
 
     ~Animation();
 
-    void setGraphicManager(Managers::GraphicManager* pGM);
-
     void render();
 
     void centerViewHere(); // MUDAR!!!!
@@ -34,6 +32,5 @@ public:
 
     void changePosition(Coordinates::Vector<float> position);
 
-
-
+    static void setGraphicManager(Managers::GraphicManager* pGM);
 };

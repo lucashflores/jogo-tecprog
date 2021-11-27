@@ -35,6 +35,7 @@ int Character::getLife() const {
 
 void Character::eliminate() {
     life = 0;
+    isAlive = false;
 }
 
 void Character::setIsFacingLeft(bool facingLeft) {

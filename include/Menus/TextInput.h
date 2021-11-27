@@ -1,8 +1,27 @@
-//
-// Created by Lucas on 23/11/2021.
-//
+#pragma once
+#include "Text.h"
+#include "TextControl.h"
+#include "Ent.h"
 
-#ifndef JOGO_TECPROG_TEXTINPUT_H
-#define JOGO_TECPROG_TEXTINPUT_H
+#define BUTTON_PATH "../assets/button.png"
+#define FONT_PATH "../assets/font.ttf"
 
-#endif //JOGO_TECPROG_TEXTINPUT_H
+namespace Menus {
+    class TextInput: public Ent {
+    private:
+        std::string currentText;
+        Text* text;
+        Text* label;
+        TextControl* textControl;
+        Coordinates::Vector<float> origin;
+    public:
+        TextInput(Coordinates::Vector<float> pos, std::string labelText);
+        ~TextInput();
+        std::string getCurrentText() const;
+        void initializeSprite();
+        void render();
+        void update();
+        void erase();
+        void reset();
+    };
+}

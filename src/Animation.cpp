@@ -1,5 +1,7 @@
 #include "Animation.h"
 
+Managers::GraphicManager* Animation::pGraphicM = NULL;
+
 Animation::Animation(std::string pathSpriteSheet, Coordinates::Vector<float> size, Coordinates::Vector<unsigned int> imageCnt, float switchT)
 {
     setGraphicManager(Managers::GraphicManager::getInstance());
@@ -29,7 +31,7 @@ Animation::~Animation() {
 }
 
 void Animation::setGraphicManager(Managers::GraphicManager *pGM) {
-    if (pGM)
+    if (!pGraphicM && pGM)
         pGraphicM = pGM;
 }
 

@@ -17,7 +17,9 @@ void CreatingStage1State::update(float dt) {
 void CreatingStage1State::render() {}
 
 void CreatingStage1State::reset() {
-
+    pGameStateMachine->getPLayer1()->reset();
+    if (pGameStateMachine->getTwoPlayers())
+        pGameStateMachine->getPLayer2()->reset();
 }
 
 void CreatingStage1State::exec() {

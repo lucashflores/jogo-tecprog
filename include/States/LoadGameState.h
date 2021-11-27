@@ -1,8 +1,18 @@
-//
-// Created by Lucas on 21/11/2021.
-//
+#pragma once
+#include "State.h"
 
-#ifndef JOGO_TECPROG_LOADGAMESTATE_H
-#define JOGO_TECPROG_LOADGAMESTATE_H
+namespace States {
+    class GameStateMachine;
 
-#endif //JOGO_TECPROG_LOADGAMESTATE_H
+    class LoadGameState: public State {
+    private:
+        GameStateMachine* pGameStateMachine;
+    public:
+        LoadGameState(GameStateMachine* pGM);
+        ~LoadGameState();
+        void update(float dt);
+        void render();
+        void reset();
+        void exec();
+    };
+}

@@ -2,6 +2,7 @@
 #include "Button.h"
 #include "Background.h"
 #include "MenuControl.h"
+
 #include <vector>
 
 #define MENU_BACKGROUND "../assets/background.png"
@@ -24,6 +25,7 @@ namespace Menus {
         void moveUp();
         void moveDown();
         virtual void select() = 0;
+        virtual void back() = 0;
     };
 
 }

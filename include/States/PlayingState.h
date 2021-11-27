@@ -1,6 +1,6 @@
 #pragma once
 #include "State.h"
-
+#include "Menus/Text.h"
 
 namespace States {
     class GameStateMachine;
@@ -8,6 +8,11 @@ namespace States {
     class PlayingState: public State {
     private:
         GameStateMachine* pGameStateMachine;
+        Managers::InputManager* pInputManager;
+        Menus::Text* life1;
+        Menus::Text* life2;
+        Menus::Text* score;
+
     public:
         PlayingState(GameStateMachine* pGM);
         ~PlayingState();
@@ -15,5 +20,8 @@ namespace States {
         void render();
         void reset();
         void exec();
+        void createButtons();
+        void select();
+        void back();
     };
 }
