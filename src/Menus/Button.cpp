@@ -38,7 +38,7 @@ void Button::render() {
 
 void Button::update() {
     if (getSelected())
-        text->changeColorToRed();
+        text->changeColorToOffWhite();
     else
-        text->changeColorToWhite();
+        text->changeColorToGray();
 }

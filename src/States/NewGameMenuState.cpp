@@ -15,10 +15,10 @@ NewGameMenuState::~NewGameMenuState() {
 
 void NewGameMenuState::createButtons() {
     Menus::Button* b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 230.f), "One Player");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 120.f), "One Player");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 490.f), "Two Players");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 250.f), "Two Players");
     buttons.push_back(b);
     b = NULL;
 }

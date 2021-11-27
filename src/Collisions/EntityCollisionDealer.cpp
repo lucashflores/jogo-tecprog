@@ -16,6 +16,15 @@ void EntityCollisionDealer::playerCollision(Entities::Entity *pE1, Entities::Ent
 
     if (pE1->getId() == Id::projectile)
         pE1->eliminate();
+
+    if(pE1->getId() == Id::smoker || pE1->getId() == Id::dog || pE1->getId() == Id::punk) {
+        Entities::Character* pC2 = static_cast<Entities::Character*>(pE2);
+        if(pC2->getIsAttacking()){
+            Entities::Character* pC1 = static_cast<Entities::Character*>(pE1);
+            pC2->attack(pC1);
+            std::cout << "Player Deu dano!" << std::endl << " Vida player: " << pC1->getLife() << std::endl;
+        }
+    }
 }
 
 void EntityCollisionDealer::enemyCollision(Entities::Entity *pE1, Entities::Entity *pE2,

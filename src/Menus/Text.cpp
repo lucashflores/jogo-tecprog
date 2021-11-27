@@ -21,7 +21,7 @@ Text::Text(Coordinates::Vector<float> position, std::string t) {
 
 
 
-    changeColorToWhite();
+    changeColorToOffWhite();
 }
 
 Text::~Text() {
@@ -48,6 +48,14 @@ void Text::changeColorToWhite() {
 
 void Text::changeColorToRed() {
     text->setFillColor(sf::Color::Red);
+}
+
+void Text::changeColorToOffWhite() {
+    text->setFillColor(sf::Color(175, 175, 189, 255));
+}
+
+void Text::changeColorToGray() {
+    text->setFillColor(sf::Color(22, 22, 28, 255));
 }
 
 void Text::setText(std::string t) {

@@ -4,7 +4,7 @@ using namespace States;
 EndGameMenuState::EndGameMenuState(GameStateMachine *pGM) {
     if (pGM)
         pGameStateMachine = pGM;
-        menuTitle = new Menus::Text(Coordinates::Vector<float>(640.f, 150.f), "GAME OVER");
+    menuTitle = new Menus::Text(Coordinates::Vector<float>(640.f, 150.f), "GAME OVER");
     menuTitle->setSize(100);
     createButtons();
 }

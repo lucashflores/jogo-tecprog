@@ -118,5 +118,5 @@ void PunkBoss::saveEntity(std::ofstream& out) const{
     getVelocity().getX() << " " <<
     getVelocity().getY() << " " <<
     isFacingLeft<< " " <<
-    life;
+    life << "\n";
 }
