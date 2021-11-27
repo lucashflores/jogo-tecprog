@@ -32,7 +32,6 @@ void EntityCollisionDealer::projectileCollision(Entities::Entity *pE1, Entities:
                                            Coordinates::Vector<float> collision) {
     Entities::Character* pC1 =  static_cast<Entities::Character*>(pE1);
     pC1->setLife(pC1->getLife() - pE2->getDamage());
-    std::cout << "Deu dano!" << std::endl << " Vida player: " << pC1->getLife() << std::endl;
 }
 
 void EntityCollisionDealer::smokeCollision(Entities::Entity *pE1, Entities::Entity *pE2,
@@ -45,7 +44,7 @@ void EntityCollisionDealer::smokeCollision(Entities::Entity *pE1, Entities::Enti
 
     Entities::Character* pC1 =  static_cast<Entities::Character*>(pE1);
     pC1->setLife(pC1->getLife() - pE2->getDamage());
-    std::cout << "Deu dano!" << std::endl << " Vida player: " << pC1->getLife() << std::endl;
+    //std::cout << "Smoke Deu dano!" << std::endl << " Vida player: " << pC1->getLife() << std::endl;
 
     pS2->setCooldown(0.f);
 }

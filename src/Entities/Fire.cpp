@@ -17,6 +17,10 @@ void Fire::initializeSprite() {
     sprite->changePosition(position);
 }
 
+void Fire::setTimer(float time){
+    timer = time;
+}
+
 float Fire::getTimer(){
     return timer;
 }
@@ -24,7 +28,6 @@ float Fire::getTimer(){
 void Fire::update(float dt) {
     sprite->animationUpdate(0, false ,dt);
     timer += dt;
-    if(timer>6.f) timer = 0.f;
 }
 
 void Fire::saveEntity(std::ofstream& out) const{

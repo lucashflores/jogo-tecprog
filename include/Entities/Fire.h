@@ -12,6 +12,8 @@ namespace Entities {
 
         void initializeSprite();
 
+        void setTimer(float time);
+
         float getTimer();
 
         void update(float dt);

@@ -33,7 +33,8 @@ void Projectile::update(float dt) {
     setPosition(Coordinates::Vector<float>(getPosition().getX() + velocity.getX()*dt,getPosition().getY()+ velocity.getY()*dt));
     sprite->changePosition(position);
     timer += dt;
-    if(timer>6.5f){eliminate(); std::cout << "Tchau projetil" << std::endl;}
+    if(timer>6.5f)
+        eliminate();
 }
 
 void Projectile::saveEntity(std::ofstream& out) const{
