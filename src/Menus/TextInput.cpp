@@ -8,7 +8,7 @@ TextInput::TextInput(Coordinates::Vector<float> pos, std::string labelText): Ent
     sprite->changePosition(pos);
 
     text = NULL;
-    text = new Text(pos, currentText);
+    text = new Text(Coordinates::Vector<float>(pos.getX(), pos.getY() + 100.f), currentText);
 
     label = NULL;
     label = new Text(Coordinates::Vector<float>(pos.getX() - 110.f, pos.getY() - 20.f), labelText);

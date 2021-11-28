@@ -20,6 +20,7 @@ namespace Menus {
         void changeColorToGray();
         void setText(std::string t);
         void setSize(unsigned int s);
+        void centralize();
         void render();
     };
 }

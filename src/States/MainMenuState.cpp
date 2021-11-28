@@ -5,6 +5,7 @@ MainMenuState::MainMenuState(GameStateMachine* pGM) {
     pGameStateMachine = pGM;
     createButtons();
     buttons[buttonSelected]->setSelected(true);
+    menuTitle->centralize();
 }
 
 MainMenuState::~MainMenuState() {

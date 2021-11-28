@@ -4,17 +4,20 @@ using namespace Menus;
 LeaderBoardMenu::LeaderBoardMenu(): Menu(), leaderBoard(), rankLines(), nameLines(), scoreLines() {
     menuTitle =  new Text(Coordinates::Vector<float>(640.f, 50.f), "LEADERBOARD");
     menuTitle->setSize(60);
+    menuTitle->centralize();
 
     rankTitle = new Text(Coordinates::Vector<float>(384.f, 150.f), "RANK");
     rankTitle->setSize(40);
+    rankTitle->centralize();
 
     nameTitle = new Text(Coordinates::Vector<float>(640.f, 150.f), "NAME");
     nameTitle->setSize(40);
+    nameTitle->centralize();
 
     scoreTitle = new Text(Coordinates::Vector<float>(896.f, 150.f), "SCORE");
     scoreTitle->setSize(40);
+    scoreTitle->centralize();
 
-    //buttons[buttonSelected]->setSelected(true);
 }
 
 LeaderBoardMenu::~LeaderBoardMenu() {
@@ -72,13 +75,16 @@ void LeaderBoardMenu::createLeaderBoardLine(int index, std::string name, unsigne
     else
         rank = i + "TH";
     rankLine = new Text(Coordinates::Vector<float>(384.f, positionY), rank);
+    rankLine->centralize();
     rankLines.push_back(rankLine);
 
     nameLine = new Text(Coordinates::Vector<float>(640.f, positionY), name);
+    nameLine->centralize();
     nameLines.push_back(nameLine);
 
     std::string scr = std::to_string(score);
     scoreLine = new Text(Coordinates::Vector<float>(896.f, positionY), scr);
+    scoreLine->centralize();
     scoreLines.push_back(scoreLine);
 
 }
