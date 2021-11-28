@@ -5,7 +5,6 @@ PlayingState::PlayingState(GameStateMachine* pGM) {
     if (pGM)
         pGameStateMachine = pGM;
     pInputManager = Managers::InputManager::getInstance();
-    score = new Menus::Text(Coordinates::Vector<float>(640.f, 50.f), "SCORE: 0");
 }
 
 PlayingState::~PlayingState() {
@@ -52,7 +51,7 @@ void PlayingState::exec() {
 void PlayingState::reset() {
     pGameStateMachine->setGameViewSize(Coordinates::Vector<float>(640.f, 480.f));
     pGameStateMachine->centerGameView(Coordinates::Vector<float>(320.f ,240.f));
-    pInputManager->clearKeyPressedInFrame();
+    pGameStateMachine->clearKeyPressedInFrame();
 }
 
 void PlayingState::render() {

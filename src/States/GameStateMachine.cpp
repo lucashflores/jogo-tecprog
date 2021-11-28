@@ -4,6 +4,7 @@ using namespace States;
 GameStateMachine::GameStateMachine() {
     pGraphicM = Managers::GraphicManager::getInstance();
     Animation::setGraphicManager(pGraphicM);
+    Menus::Text::setFont(pGraphicM->loadFont(FONT_PATH));
     pEventM = Managers::EventManager::getInstance();
     pInputM = Managers::InputManager::getInstance();
     pStage = NULL;
@@ -105,8 +106,10 @@ int GameStateMachine::getCurrentStage() const {
 
 
 void GameStateMachine::setStage(Stages::Stage *pS) {
-    if (pS)
+    if (pS) {
         pStage = pS;
+        pStage->setIsStageDone(false);
+    }
     setCurrentStage(pStage->getStageNumber());
 }
 

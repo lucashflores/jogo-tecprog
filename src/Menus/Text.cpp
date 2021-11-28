@@ -38,6 +38,9 @@ Coordinates::Vector<float> Text::getPosition() const {
 
 void Text::setPosition(Coordinates::Vector<float> position) {
     text->setPosition(position.getX(), position.getY());
+
+    sf::FloatRect textRect = text->getLocalBounds();
+    text->setOrigin(textRect.left + textRect.width/2.0f,textRect.top  + textRect.height/2.0f);
 }
 
 void Text::changeColorToGray() {
@@ -54,6 +57,9 @@ void Text::changeColorToOffWhite() {
 
 void Text::setText(std::string t) {
     text->setString(t);
+
+    sf::FloatRect textRect = text->getLocalBounds();
+    text->setOrigin(textRect.left + textRect.width/2.0f,textRect.top  + textRect.height/2.0f);
 }
 
 

@@ -33,7 +33,10 @@ void EndGameMenuState::reset() {
     if (pGameStateMachine->getStage()) {
         if (pGameStateMachine->getStage()->getIsStageDone())
             menuTitle->setText("VICTORY");
+        else
+            menuTitle->setText("GAME OVER");
     }
+
     pGameStateMachine->setGameViewSize(Coordinates::Vector<float>(1280.f, 720.f));
     pGameStateMachine->centerGameView(Coordinates::Vector<float>(640.f ,360.f));
     textInput->reset();

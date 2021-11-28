@@ -17,6 +17,7 @@
 #include "States/EndGameMenuState.h"
 #include "States/LeaderBoardMenuState.h"
 #include "States/SavingLeaderBoardState.h"
+#include "Menus/Text.h"
 
 namespace States {
 

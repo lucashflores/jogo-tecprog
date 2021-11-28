@@ -46,7 +46,9 @@ void NewStage2MenuState::select() {
 }
 
 void NewStage2MenuState::reset() {
+    buttons[buttonSelected]->setSelected(false);
     buttonSelected = 0;
+    buttons[buttonSelected]->setSelected(true);
     pInputManager->clearKeyPressedInFrame();
     updateButtons();
     render();
