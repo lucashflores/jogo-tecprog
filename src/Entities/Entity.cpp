@@ -15,7 +15,17 @@ void Entity::setPosition(Coordinates::Vector<float> pos) {
     position = pos;
 }
 
-void Entity::eliminate() {
+void Entity::setDamage(unsigned int dmg) {
+    if (dmg < 0)
+        dmg = 0;
+    damage = dmg;
+}
+
+unsigned int Entity::getDamage() const {
+    return damage;
+}
+
+void Entity::neutralize() {
     isAlive = false;
 }
 
@@ -31,3 +41,14 @@ const Coordinates::Vector<float> Entity::getHitBox() const {
     return hitBox;
 }
 
+void Entity::saveEntityInfo(std::ofstream& out) const {
+
+
+    out <<  (int)getId()           << " " <<
+            getPosition().getX()   << " " <<
+            getPosition().getY()   << " ";
+}
+
+void Entity::saveEntity(std::ofstream &out) const {
+
+}

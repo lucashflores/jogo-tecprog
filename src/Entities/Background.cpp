@@ -1,4 +1,4 @@
-#include "Entities/Background.h"
+#include "Background.h"
 using namespace Entities;
 
 Background::Background(Id::ids id): Ent(id) {
@@ -18,6 +18,9 @@ void Background::initializeSprite() {
     }
     else if(getId() == Id::background2) {
         sprite = new Animation(BACKGROUND2_TEXTURE_PATH, size, imageCnt, 1.f);
+    }
+    else if(getId() == Id::menuBackground) {
+        sprite = new Animation(BACKGROUND3_TEXTURE_PATH, size, imageCnt, 1.f);
     }
 
 }

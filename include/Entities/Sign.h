@@ -5,8 +5,11 @@ namespace Entities {
     class Sign: public Obstacle {
     public:
         Sign(Coordinates::Vector<float> pos);
+
         ~Sign();
-        void collide(Entity* pE, Coordinates::Vector<float> collision);
+
         void initializeSprite();
+
+        void saveEntity(std::ofstream& out) const;
     };
 }

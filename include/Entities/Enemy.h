@@ -26,6 +26,8 @@ namespace Entities {
 
         double getTargetDist();
 
-        Player* chooseTarget();
+        void chooseTarget();
+
+        virtual void saveEntity(std::ofstream& out) const = 0;
     };
 }

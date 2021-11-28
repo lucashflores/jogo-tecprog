@@ -11,9 +11,13 @@ namespace Entities {
         std::map<Id::ids, std::string> tileTextureMap;
     public:
         Tile(Id::ids tileId, Coordinates::Vector<float> pos);
+
         ~Tile();
+
         void createTileTextureMap();
+
         void collide(Entity* pE, Coordinates::Vector<float> collision);
+
         void initializeSprite();
     };
 }

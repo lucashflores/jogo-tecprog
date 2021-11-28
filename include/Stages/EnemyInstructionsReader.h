@@ -1,14 +1,18 @@
 #pragma once
-#include "EnemyFactory.h"
+#include "EnemyMaker.h"
 #include "InstructionsReader.h"
 
 namespace Stages {
 
     class EnemyInstructionsReader: public InstructionsReader {
     private:
-        EnemyFactory* pEnemyFactory;
+        EntityList* entityList;
+        EnemyMaker* pEnemyMaker;
+        ProjectileMaker* projectileMaker;
+        Entities::Player* player1;
+        Entities::Player* player2;
     public:
-        EnemyInstructionsReader(EnemyFactory* pEF);
+        EnemyInstructionsReader(EntityList *pEL, Entities::Player* p1, Entities::Player* p2, ProjectileMaker* pPM);
         ~EnemyInstructionsReader();
         void executeInstructions();
     };

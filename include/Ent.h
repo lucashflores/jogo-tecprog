@@ -2,6 +2,8 @@
 
 #include "Animation.h"
 #include "Id.h"
+#include <iostream>
+#include <fstream>
 
 class Ent {
 protected:

@@ -19,7 +19,7 @@ EventManager::~EventManager() {
 
 }
 
-void EventManager::PollEvents(sf::Event event) {
+void EventManager::pollEvents(sf::Event event) {
     while (window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             pGraphicManager->closeWindow();

@@ -12,9 +12,9 @@ GraphicManager* GraphicManager::getInstance() {
 
 GraphicManager::GraphicManager() {
     window = new sf::RenderWindow;
-    window->create(sf::VideoMode(1920, 1080), "TecPunk 2021");
-    view.setCenter(sf::Vector2f(320.f, 240.f));
-    view.setSize(sf::Vector2f(640.f, 480.f));
+    window->create(sf::VideoMode(1280, 720), "TecPunk 2021");
+    view.setCenter(sf::Vector2f(240.f, 135.f));
+    view.setSize(sf::Vector2f(480.f, 270.f));
 }
 
 GraphicManager::~GraphicManager() {
@@ -27,6 +27,10 @@ sf::RenderWindow* GraphicManager::getWindow() {
 
 void GraphicManager:: render(sf::RectangleShape* body) {
     window->draw(*body);
+}
+
+void GraphicManager::render(sf::Text* text) {
+    window->draw(*text);
 }
 
 void GraphicManager::display() {
@@ -45,6 +49,12 @@ void GraphicManager::closeWindow() {
     window->close();
 }
 
+void GraphicManager::setViewSize(Coordinates::Vector<float> size) {
+    view.setSize(sf::Vector2f(size.getX(), size.getY()));
+    view.setCenter(sf::Vector2f(size.getX()/2, size.getY()/2));
+    window->setView(view);
+}
+
 void GraphicManager::centerView(Coordinates::Vector<float> pos) {
     view.setCenter(sf::Vector2f (pos.getX(), pos.getY()));
     window->setView(view);
@@ -54,4 +64,10 @@ sf::Texture* GraphicManager::loadTexture(std::string path) {
     sf::Texture* texture = new sf::Texture();
     texture->loadFromFile(path);
     return texture;
+}
+
+sf::Font* GraphicManager::loadFont(std::string path) {
+    sf::Font* font = new sf::Font();
+    font->loadFromFile(path);
+    return font;
 }

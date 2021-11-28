@@ -8,8 +8,8 @@ namespace Entities {
     protected:
 
         Coordinates::Vector<float> velocity;
-        int life;
-        int damage;
+        float velocityCoefficient;
+        unsigned int life;
         bool isFacingLeft;
         bool isWalking;
         bool isOnGround;
@@ -21,21 +21,17 @@ namespace Entities {
 
         virtual ~Character();
 
-        void setAnimation(Animation* pAnimation);
+        void setVelocityCoefficient(float c);
 
         void setVelocity(Coordinates::Vector<float> v);
 
         Coordinates::Vector<float> getVelocity() const;
 
-        void eliminate();
+        void neutralize();
 
-        void setLife(unsigned int l);
+        void setLife(int l);
 
         int getLife() const;
-
-        void setDamage(unsigned int d);
-
-        int getDamage() const;
 
         void setIsFacingLeft(bool facingLeft);
 
@@ -45,12 +41,16 @@ namespace Entities {
 
         void setIsAttacking(bool attacking);
 
-        virtual void attack(Character* pChar) = 0;
+        bool getIsAttacking();
 
-        virtual void collide(Entity* pE, Coordinates::Vector<float> collision)=0;
+        void setAttackTimer(float time);
+
+        float getAttackTimer();
+
+        virtual void attack(Character* pChar) = 0;
 
         virtual void update(float dt) = 0;
 
-
+        virtual void saveEntity(std::ofstream& out) const = 0;
     };
 }

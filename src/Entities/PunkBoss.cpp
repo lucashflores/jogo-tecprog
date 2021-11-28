@@ -5,7 +5,7 @@
 using namespace Entities;
 
 PunkBoss::PunkBoss(Coordinates::Vector<float> pos)
-    : Enemy(Id::enemy3, 20, 5, Coordinates::Vector<float>(32.0f, 64.0f), pos, 300.0) {
+    : Enemy(Id::punk, 20, 5, Coordinates::Vector<float>(32.0f, 64.0f), pos, 600.0) {
     initializeSprite();
     attackTimer = 0;
     isAttacking = false;
@@ -27,9 +27,13 @@ void Entities::PunkBoss::attack(Character* pChar) {
 
     srand(time(NULL));
     float yrand = rand() % 30;
-    Coordinates::Vector<float> offset = (isFacingLeft)?(Coordinates::Vector<float>(35.f,0.f)):(Coordinates::Vector<float>(-35.f,yrand- 15));
-    Entities::Projectile* attackProjectile = new Entities::Projectile((position - offset), isFacingLeft);
-    bossEntityList->addEntity(attackProjectile);
+    Coordinates::Vector<float> offset = (this->isFacingLeft)?(Coordinates::Vector<float>(35.f,0.f)):(Coordinates::Vector<float>(-35.f,yrand- 15));
+    if(projectileMaker){
+        projectileMaker->makeProjectile((this->position - offset), this->isFacingLeft);
+    }
+    //Entities::Projectile* attackProjectile = new Entities::Projectile((this->position - offset), this->isFacingLeft);
+    //this->bossEntityList->addEntity(attackProjectile);
+
 }
 
 void Entities::PunkBoss::initializeSprite() {
@@ -39,41 +43,11 @@ void Entities::PunkBoss::initializeSprite() {
     sprite->changePosition(position);
 }
 
-void PunkBoss::setEntityList(EntityList* EL) {
-    if(EL)
-        bossEntityList = EL;
+void PunkBoss::setProjectileMaker(Stages::ProjectileMaker* pPM) {
+    if(pPM)
+        projectileMaker = pPM;
 }
 
-
-void Entities::PunkBoss::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-
-        // If is a tile
-        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
-            if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                setIsOnGround(true);
-            }
-            else {
-                if (getPosition().getX() < pE->getPosition().getX())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
-            }
-        }
-        else if (pE->getId() == Id::projectile){return;}
-        else
-            setIsOnGround(false);
-
-        // If is a player
-        if (pE->getId() == Id::player1 || pE->getId() == Id::player2) {
-
-        }
-    }
-}
 
 void Entities::PunkBoss::update(float dt) {
 
@@ -129,7 +103,20 @@ void Entities::PunkBoss::update(float dt) {
         setIsOnGround(false);
     }
 
+    if (getPosition().getY() > 1500.f)
+        neutralize();
+
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
+}
+
+void PunkBoss::saveEntity(std::ofstream& out) const{
+    saveEntityInfo(out);
+
+    out <<
+    getVelocity().getX() << " " <<
+    getVelocity().getY() << " " <<
+    isFacingLeft<< " " <<
+    life << "\n";
 }

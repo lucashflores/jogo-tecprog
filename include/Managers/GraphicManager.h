@@ -12,6 +12,7 @@ namespace Managers {
 
         static GraphicManager *instance;
 
+    private:
         GraphicManager();
 
     public:
@@ -23,6 +24,8 @@ namespace Managers {
 
         void render(sf::RectangleShape *body);
 
+        void render(sf::Text* text);
+
         void display();
 
         void clear();
@@ -31,9 +34,13 @@ namespace Managers {
 
         void closeWindow();
 
+        void setViewSize(Coordinates::Vector<float> size);
+
         void centerView(Coordinates::Vector<float> pos);
 
         sf::Texture* loadTexture(std::string path);
+
+        sf::Font* loadFont(std::string path);
     };
 
 }

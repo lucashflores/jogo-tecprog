@@ -1,13 +1,16 @@
 #include "Stages/ObstacleInstructionsReader.h"
 using namespace Stages;
 
-ObstacleInstructionsReader::ObstacleInstructionsReader(ObstacleFactory *pOF) {
-    if (pOF)
-        pObstacleFactory = pOF;
+ObstacleInstructionsReader::ObstacleInstructionsReader(EntityList *pEL)  {
+    if (pEL)
+        entityList = pEL;
+    pObstacleMaker = NULL;
+    pObstacleMaker = new ObstacleMaker();
 }
 
 ObstacleInstructionsReader::~ObstacleInstructionsReader() {
-    pObstacleFactory = NULL;
+    if (pObstacleMaker)
+        delete pObstacleMaker;
 }
 
 void ObstacleInstructionsReader::executeInstructions() {
@@ -15,20 +18,23 @@ void ObstacleInstructionsReader::executeInstructions() {
     float positionX = std::stof(commands[1]);
     float positionY = std::stof(commands[2]);
     int chance = (int)((std::stof(commands[3])) * 100);
-    srand(time(NULL));
     int random = rand() % 100 + 1;
     Coordinates::Vector<float> position = Coordinates::Vector<float>(positionX, positionY);
+    Entities::Entity* obstacle = NULL;
     if (random <= chance) {
         if (command == "B")
-            pObstacleFactory->makeBarrel(position);
+            obstacle = static_cast<Entities::Entity*>(pObstacleMaker->makeBarrel(position));
         else if (command == "F")
-            pObstacleFactory->makeFire(position);
+            obstacle = static_cast<Entities::Entity*>(pObstacleMaker->makeFire(position));
         else if (command == "S")
-            pObstacleFactory->makeSign(position);
+            obstacle = static_cast<Entities::Entity*>(pObstacleMaker->makeSign(position));
         else if (command == "O")
-            pObstacleFactory->makeOilTile(position);
+            obstacle = static_cast<Entities::Entity*>(pObstacleMaker->makeOilTile(position));
         else
             return;
+        if (obstacle)
+            entityList->addEntity(obstacle);
+        obstacle = NULL;
     }
     else
         return ;

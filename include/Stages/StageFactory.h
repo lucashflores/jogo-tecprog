@@ -2,20 +2,20 @@
 
 #include "Stage.h"
 #include "EntityList.h"
-#include "EnemyFactory.h"
-#include "ObstacleFactory.h"
-#include "TileFactory.h"
+#include "EnemyInstructionsReader.h"
+#include "ObstacleInstructionsReader.h"
+#include "TileInstructionsReader.h"
 #include "InstructionsReader.h"
-#include "Entities/Player.h"
 
 namespace Stages {
 
     class StageFactory {
     protected:
         EntityList* entityList;
-        EnemyFactory* enemyFactory;
-        ObstacleFactory* obstacleFactory;
-        TileFactory* tileFactory;
+        EnemyInstructionsReader* enemyInstructionsReader;
+        ObstacleInstructionsReader* obstacleInstructionsReader;
+        TileInstructionsReader* tileInstructionsReader;
+        ProjectileMaker* projectileMaker;
         int stage;
         virtual void makeStage(Entities::Player* player1, Entities::Player* player2) = 0;
         virtual void makeTiles(std::string tilesInstructionsPath) = 0;

@@ -14,10 +14,12 @@ namespace Entities {
 
         bool isAlive;
 
+        unsigned int damage;
+
     public:
         Entity(Id::ids i, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
-        virtual ~Entity();
+        virtual ~Entity() = 0;
 
         void setPosition(Coordinates::Vector<float> pos);
 
@@ -25,13 +27,19 @@ namespace Entities {
 
         const Coordinates::Vector<float> getHitBox() const;
 
-        virtual void eliminate();
+        void setDamage(unsigned int dmg);
+
+        unsigned int getDamage() const;
+
+        virtual void neutralize();
 
         bool getIsAlive();
 
-        virtual void collide(Entity* pE, Coordinates::Vector<float> collision) = 0;
-
         virtual void update(float dt) = 0;
+
+        void saveEntityInfo(std::ofstream& out) const;
+
+        virtual void saveEntity(std::ofstream& out) const = 0;
     };
 
 }

@@ -1,23 +1,25 @@
 #include "Entities/SmokerEnemy.h"
 using namespace Entities;
-
 #include "Id.h"
 #include <iostream>
 
-SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos) : Enemy(Id::enemy1, 20, 5, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+SmokerEnemy::SmokerEnemy(Coordinates::Vector<float> pos):
+    Enemy(Id::smoker, 15, 2, Coordinates::Vector<float>(16.f, 32.f), pos, 120.0) {
+
     initializeSprite();
+    projectileMaker = NULL;
 }
 
-SmokerEnemy::~SmokerEnemy() = default;
+SmokerEnemy::~SmokerEnemy() { };
 
 void SmokerEnemy::walk(float dt) {
 
     if (target->getPosition().getX() - this->getPosition().getX() >= 0){
-        velocity.setX(45.f);
+        velocity.setX(45.f * velocityCoefficient);
         setIsFacingLeft(false);
     }
     else {
-        velocity.setX(-45.0f);
+        velocity.setX(-45.0f * velocityCoefficient);
         setIsFacingLeft(true);
     }
 
@@ -31,38 +33,26 @@ void SmokerEnemy::idle(){
 void SmokerEnemy::attack(Character* pChar) {
 
     if ((pChar->getLife() - damage) > 0) {
-        pChar->setLife(pChar->getLife() - damage);
-        std::cout << "Deu dano!" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
+        //pChar->setLife(pChar->getLife() - damage);
+        float offset = 25;
+        (isFacingLeft)?(offset=offset):(offset=-offset);
+        if (projectileMaker) {
+            projectileMaker->makeSmoke(position - Coordinates::Vector<float>(offset,0.f));
+        }
+        //std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
-        pChar->eliminate();
+        pChar->neutralize();
         std::cout << "Player Eliminado" << std::endl;
     }
 
     attackTimer = 0;
 }
 
-void SmokerEnemy::collide(Entity* pE, Coordinates::Vector<float> collision) {
-    if (pE) {
-        if (pE->getId() == Id::tile1Bottom || pE->getId() == Id::tile2Bottom) {
-            if (collision.getX() > collision.getY()) {
-                if (getPosition().getY() > pE->getPosition().getY())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() + collision.getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX(), getPosition().getY() - collision.getY()));
-                setIsOnGround(true);
-            }
-            else {
-                if (getPosition().getX() < pE->getPosition().getX())
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() - collision.getX(), getPosition().getY()));
-                else
-                    setPosition(Coordinates::Vector<float>(getPosition().getX() + collision.getX(), getPosition().getY()));
-            }
-        }
-        else if (pE->getId() == Id::projectile){return;}
-        else
-            setIsOnGround(false);
-    }
+void SmokerEnemy::setProjectileMaker(Stages::ProjectileMaker* pPM) {
+    if(pPM)
+        projectileMaker = pPM;
 }
+
 
 void SmokerEnemy::initializeSprite() {
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(6, 3);
@@ -75,21 +65,18 @@ void SmokerEnemy::update(float dt){
 
     chooseTarget();
 
-    // Vai ficar andando ou parado? Seta o movimento que vai fazer
     (isCommitted) ? walk(dt): idle();
 
-    // Vai morder?
-
-    if (getTargetDist() < 30.f && attackTimer < 0.5f) {
-        attackTimer += dt;
-        if(attackTimer > 0.f)
-            setIsAttacking(true);
-
-    } else {
-
-        if(isAttacking && attackTimer > 0.5f) attack(target);
-        setIsAttacking(false);
-        attackTimer = 0;
+    if (target) {
+        if (getTargetDist() < 55.f && attackTimer < 0.5f) {
+            attackTimer += dt;
+            if(attackTimer > 0.2f)
+                setIsAttacking(true);
+        } else {
+            if (isAttacking && attackTimer > 0.5f) attack(target);
+            setIsAttacking(false);
+            attackTimer = 0;
+        }
     }
 
     if (isAttacking) {
@@ -110,7 +97,20 @@ void SmokerEnemy::update(float dt){
         setIsOnGround(false);
     }
 
+    if (getPosition().getY() > 1500.f)
+        neutralize();
+
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
+}
+
+void SmokerEnemy::saveEntity(std::ofstream& out) const{
+    saveEntityInfo(out);
+
+    out <<
+    getVelocity().getX() << " " <<
+    getVelocity().getY() << " " <<
+    isFacingLeft<< " " <<
+    life << "\n";
 }

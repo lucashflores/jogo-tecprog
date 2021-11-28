@@ -23,7 +23,6 @@ public:
     void removeAndDeleteEntity(Entities::Entity* pE);
 
     void renderAllEntities();
-    void removeNeutralizedEntities(); //REMOVER, ESTÁ NA FASE!!!!!!!!!!!
     void updateAllEntities(float dt);
 
     iterator begin();
