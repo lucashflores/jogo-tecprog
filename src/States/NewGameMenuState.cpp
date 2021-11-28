@@ -26,11 +26,23 @@ void NewGameMenuState::createButtons() {
 
 void NewGameMenuState::update(float dt) {
     updateButtons();
+    player1Sprite->animationUpdate(0, false, dt);
+    player2Sprite->animationUpdate(0, false, dt);
     render();
 }
 
 void NewGameMenuState::render() {
     renderItems();
+    if (buttonSelected == 0) {
+        player1Sprite->changePosition(Coordinates::Vector<float>(800.f, 600.f));
+        player1Sprite->render();
+    }
+    else if (buttonSelected == 1) {
+        player1Sprite->changePosition(Coordinates::Vector<float>(650.f, 600.f));
+        player1Sprite->render();
+        player2Sprite->changePosition(Coordinates::Vector<float>(950.f, 600.f));
+        player2Sprite->render();
+    }
 }
 
 void NewGameMenuState::exec() {

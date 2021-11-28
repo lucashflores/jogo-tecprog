@@ -7,7 +7,7 @@ namespace States {
 
     class GameStateMachine;
 
-    class NewStage2MenuState: public State, public Menus::Menu {
+    class NewStage2MenuState: public State, public Menus::NewStageMenu {
     private:
         GameStateMachine* pGameStateMachine;
         Managers::InputManager* pInputManager;

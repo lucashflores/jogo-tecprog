@@ -1,14 +1,14 @@
 #include "States/State.h"
 #include "Stages/StageFactory.h"
 #include "Stages/Stage1Factory.h"
-#include "Menus/Menu.h"
+#include "Menus/NewStageMenu.h"
 
 
 namespace States {
 
     class GameStateMachine;
 
-    class NewGameMenuState: public State, public Menus::Menu {
+    class NewGameMenuState: public State, public Menus::NewStageMenu {
     private:
         GameStateMachine* pGameStateMachine;
     public:
