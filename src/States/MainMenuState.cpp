@@ -52,10 +52,13 @@ void MainMenuState::reset() {
 
 void MainMenuState::render() {
     renderItems();
+    bossSprite->render();
+    menuTitle->render();
 }
 
 void MainMenuState::update(float dt) {
     updateButtons();
+    bossSprite->animationUpdate(0, false, dt);
     render();
 }
 

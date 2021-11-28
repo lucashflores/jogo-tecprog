@@ -11,7 +11,6 @@ namespace States {
     class NewGameMenuState: public State, public Menus::Menu {
     private:
         GameStateMachine* pGameStateMachine;
-        Managers::InputManager* pInputManager;
     public:
         NewGameMenuState(GameStateMachine* pGM);
 

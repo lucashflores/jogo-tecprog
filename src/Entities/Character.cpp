@@ -23,6 +23,7 @@ Coordinates::Vector<float> Character::getVelocity() const {
     return velocity;
 }
 
+
 void Character::setLife(int l) {
     if (l < 0)
         l = 0;

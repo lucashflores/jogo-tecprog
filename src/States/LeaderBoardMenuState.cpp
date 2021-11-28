@@ -17,7 +17,7 @@ void LeaderBoardMenuState::update(float dt) {
 }
 
 void LeaderBoardMenuState::render() {
-    //renderItems();
+    renderItems();
     renderLines();
     renderTitle();
 }
@@ -33,14 +33,9 @@ void LeaderBoardMenuState::reset() {
 }
 
 void LeaderBoardMenuState::exec() {
-    if (buttonSelected == 0)
-        changeState("ExitState");
-    else
-        return;
 }
 
 void LeaderBoardMenuState::select() {
-    exec();
 }
 
 void LeaderBoardMenuState::back() {

@@ -11,7 +11,7 @@ TextInput::TextInput(Coordinates::Vector<float> pos, std::string labelText): Ent
     text = new Text(pos, currentText);
 
     label = NULL;
-    label = new Text(Coordinates::Vector<float>(pos.getX() , pos.getY() - 17.f), labelText);
+    label = new Text(Coordinates::Vector<float>(pos.getX() - 110.f, pos.getY() - 20.f), labelText);
 }
 
 TextInput::~TextInput() {

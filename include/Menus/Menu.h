@@ -14,6 +14,7 @@ namespace Menus {
         Background* background;
         int buttonSelected;
         MenuControl* control;
+        Text* menuTitle;
     public:
         Menu();
         virtual ~Menu();

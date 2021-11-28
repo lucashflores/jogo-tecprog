@@ -14,7 +14,7 @@ EndGameMenuState::~EndGameMenuState() {
 }
 
 void EndGameMenuState::createButtons() {
-    textInput = new Menus::TextInput(Coordinates::Vector<float>(640.f, 480.f), "Enter your nickcname:");
+    textInput = new Menus::TextInput(Coordinates::Vector<float>(640.f, 500.f), "Enter your nickcname:");
 }
 
 void EndGameMenuState::update(float dt) {
@@ -54,5 +54,5 @@ void EndGameMenuState::select() {
 }
 
 void EndGameMenuState::back() {
-    return ;
+    changeState("MainMenuState");
 }

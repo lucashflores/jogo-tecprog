@@ -10,7 +10,6 @@ namespace Menus {
     class LeaderBoardMenu: public Menu {
     private:
         std::multimap<unsigned int, std::string, std::greater<unsigned int>> leaderBoard;
-        Text* title;
         Text* rankTitle;
         Text* nameTitle;
         Text* scoreTitle;

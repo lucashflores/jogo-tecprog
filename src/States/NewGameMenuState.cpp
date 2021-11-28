@@ -6,7 +6,7 @@ NewGameMenuState::NewGameMenuState(GameStateMachine* pGM) {
         pGameStateMachine = pGM;
     createButtons();
     buttons[buttonSelected]->setSelected(true);
-    pInputManager = Managers::InputManager::getInstance();
+    menuTitle = NULL;
 }
 
 NewGameMenuState::~NewGameMenuState() {
@@ -46,8 +46,10 @@ void NewGameMenuState::select() {
 }
 
 void NewGameMenuState::reset() {
+    buttons[buttonSelected]->setSelected(false);
     buttonSelected = 0;
-    pInputManager->clearKeyPressedInFrame();
+    buttons[buttonSelected]->setSelected(true);
+    pGameStateMachine->clearKeyPressedInFrame();
     updateButtons();
     render();
 }

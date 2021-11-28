@@ -29,6 +29,9 @@ void CreatingStage2State::exec() {
         stage = stageFactory->requestStage(pGameStateMachine->getPLayer1(), pGameStateMachine->getPLayer2());
     else
         stage = stageFactory->requestStage(pGameStateMachine->getPLayer1(), NULL);
+    pGameStateMachine->getPLayer1()->setPosition(Coordinates::Vector<float>(INITIALPOS_X, INITIALPOST_Y));
+    if (pGameStateMachine->getTwoPlayers())
+        pGameStateMachine->getPLayer2()->setPosition(Coordinates::Vector<float>(INITIALPOS_X, INITIALPOST_Y));
     pGameStateMachine->setStage(stage);
     changeState("PlayingState");
 }
