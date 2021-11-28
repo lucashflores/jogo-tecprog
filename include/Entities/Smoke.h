@@ -9,7 +9,7 @@ namespace Entities {
     private:
 
         float timer;
-        float cooldowntimer;
+        float cooldownTimer;
 
     public:
 

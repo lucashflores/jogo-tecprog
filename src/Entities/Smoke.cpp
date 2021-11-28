@@ -4,8 +4,8 @@
 using namespace Entities;
 
 Smoke::Smoke(Coordinates::Vector<float> pos): Entity(Id::smoke, Coordinates::Vector<float>(10.0f, 10.0f), pos),
-            timer(0),
-            cooldowntimer(0) {
+                                              timer(0),
+                                              cooldownTimer(0) {
 
     setDamage(1);
     initializeSprite();
@@ -24,11 +24,11 @@ void Smoke::initializeSprite(){
 }
 
 float Smoke::getCooldown(){
-    return cooldowntimer;
+    return cooldownTimer;
 }
 
 void Smoke::setCooldown(float cd){
-    cooldowntimer = cd;
+    cooldownTimer = cd;
 }
 
 float Smoke::getTimer(){
@@ -38,7 +38,7 @@ float Smoke::getTimer(){
 void Smoke::update(float dt) {
     sprite->animationUpdate(0, false, dt);
     timer += dt;
-    if(timer>6.f) neutralize();
+    if(timer>5.f) neutralize();
 }
 
 unsigned int Smoke::getDamage() {

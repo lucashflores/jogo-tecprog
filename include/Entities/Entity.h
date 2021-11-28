@@ -19,7 +19,7 @@ namespace Entities {
     public:
         Entity(Id::ids i, Coordinates::Vector<float> hit, Coordinates::Vector<float> pos);
 
-        virtual ~Entity();
+        virtual ~Entity() = 0;
 
         void setPosition(Coordinates::Vector<float> pos);
 
@@ -34,10 +34,6 @@ namespace Entities {
         virtual void neutralize();
 
         bool getIsAlive();
-
-        void save();
-
-        //virtual void collide(Entity* pE, Coordinates::Vector<float> collision) = 0;
 
         virtual void update(float dt) = 0;
 

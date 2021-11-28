@@ -23,8 +23,6 @@ namespace Entities {
 
         void setVelocityCoefficient(float c);
 
-        void setAnimation(Animation* pAnimation);
-
         void setVelocity(Coordinates::Vector<float> v);
 
         Coordinates::Vector<float> getVelocity() const;

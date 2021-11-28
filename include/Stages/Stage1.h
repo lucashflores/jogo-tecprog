@@ -10,6 +10,5 @@ namespace Stages {
     public:
         Stage1(EntityList* pEL, Entities::Player* player1, Entities::Player* player2);
         ~Stage1();
-        //int getStageNumber();
     };
 }

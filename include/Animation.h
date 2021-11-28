@@ -26,7 +26,7 @@ public:
 
     void render();
 
-    void centerViewHere(); // MUDAR!!!!
+    void centerViewHere();
 
     void animationUpdate(int row, bool facingLeft, float dt);
 
