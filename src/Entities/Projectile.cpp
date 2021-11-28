@@ -34,7 +34,7 @@ void Projectile::update(float dt) {
     sprite->changePosition(position);
     timer += dt;
     if(timer>6.5f)
-        eliminate();
+        neutralize();
 }
 
 void Projectile::saveEntity(std::ofstream& out) const{

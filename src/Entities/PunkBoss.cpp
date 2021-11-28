@@ -104,7 +104,7 @@ void Entities::PunkBoss::update(float dt) {
     }
 
     if (getPosition().getY() > 1500.f)
-        eliminate();
+        neutralize();
 
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
@@ -118,5 +118,5 @@ void PunkBoss::saveEntity(std::ofstream& out) const{
     getVelocity().getX() << " " <<
     getVelocity().getY() << " " <<
     isFacingLeft<< " " <<
-    life;
+    life << "\n";
 }

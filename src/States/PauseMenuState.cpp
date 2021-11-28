@@ -8,6 +8,7 @@ PauseMenuState::PauseMenuState(GameStateMachine *pGM) {
     buttonSelected = 0;
     createButtons();
     buttons[buttonSelected]->setSelected(true);
+    menuTitle = NULL;
 }
 
 PauseMenuState::~PauseMenuState() {

@@ -1,4 +1,4 @@
-#pragma once
+    #pragma once
 #include "Managers/InputManager.h"
 #include "TextInput.h"
 #include <map>

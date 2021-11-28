@@ -12,19 +12,19 @@ MainMenuState::~MainMenuState() {
 
 void MainMenuState::createButtons() {
     Menus::Button* b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 300.f), "New Game");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 120.f), "New Game");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 400.f), "Stage2");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 250.f), "Stage2");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 500.f), "Load Game");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 370.f), "Load Game");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 530.f), "Leaderboard");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 490.f), "Leaderboard");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(640.f, 680.f), "Exit");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 610.f), "Exit");
     buttons.push_back(b);
     b = NULL;
 }
@@ -52,10 +52,13 @@ void MainMenuState::reset() {
 
 void MainMenuState::render() {
     renderItems();
+    bossSprite->render();
+    menuTitle->render();
 }
 
 void MainMenuState::update(float dt) {
     updateButtons();
+    bossSprite->animationUpdate(0, false, dt);
     render();
 }
 

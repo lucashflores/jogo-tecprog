@@ -4,7 +4,7 @@ using namespace States;
 EndGameMenuState::EndGameMenuState(GameStateMachine *pGM) {
     if (pGM)
         pGameStateMachine = pGM;
-        menuTitle = new Menus::Text(Coordinates::Vector<float>(640.f, 150.f), "GAME OVER");
+    menuTitle = new Menus::Text(Coordinates::Vector<float>(640.f, 150.f), "GAME OVER");
     menuTitle->setSize(100);
     createButtons();
 }
@@ -14,7 +14,7 @@ EndGameMenuState::~EndGameMenuState() {
 }
 
 void EndGameMenuState::createButtons() {
-    textInput = new Menus::TextInput(Coordinates::Vector<float>(640.f, 480.f), "Enter your nickcname:");
+    textInput = new Menus::TextInput(Coordinates::Vector<float>(640.f, 500.f), "Enter your nickcname:");
 }
 
 void EndGameMenuState::update(float dt) {
@@ -54,5 +54,5 @@ void EndGameMenuState::select() {
 }
 
 void EndGameMenuState::back() {
-    return ;
+    changeState("MainMenuState");
 }

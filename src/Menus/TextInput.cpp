@@ -11,7 +11,7 @@ TextInput::TextInput(Coordinates::Vector<float> pos, std::string labelText): Ent
     text = new Text(pos, currentText);
 
     label = NULL;
-    label = new Text(Coordinates::Vector<float>(pos.getX() - 120.f, pos.getY() - 45.f), labelText);
+    label = new Text(Coordinates::Vector<float>(pos.getX() - 110.f, pos.getY() - 20.f), labelText);
 }
 
 TextInput::~TextInput() {
@@ -28,7 +28,7 @@ std::string TextInput::getCurrentText() const {
 }
 
 void TextInput::initializeSprite() {
-    Coordinates::Vector<float> size = Coordinates::Vector<float>(500.f ,100.f);
+    Coordinates::Vector<float> size = Coordinates::Vector<float>(500.f ,80.f);
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     sprite = new Animation(BUTTON_PATH, size, imageCnt, 1.f);
 }

@@ -2,3 +2,4 @@ cmake-build-debug
 .idea/codeStyles/
 assets/biker_run.psd
 .idea/codeStyles/codeStyleConfig.xml
+saves/*.txt

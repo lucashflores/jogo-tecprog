@@ -56,7 +56,7 @@ void DogEnemy::attack(Character* pChar) {
         pChar->setLife(pChar->getLife() - damage);
         std::cout << "Deu dano!" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
-        pChar->eliminate();
+        pChar->neutralize();
         std::cout << "Player Eliminado" << std::endl;
     }
 }
@@ -77,12 +77,12 @@ void DogEnemy::update(float dt){
 
     // Vai morder?
     if (target) {
-        if (getTargetDist() < 30.f && attackTimer < 1.2f) {
+        if (getTargetDist() < 30.f && attackTimer < 0.4f) {
             attackTimer = attackTimer + dt;
-            if (attackTimer > 0.2f)
+            if (attackTimer > 0.1f)
                 setIsAttacking(true);
         } else {
-            if (isAttacking && attackTimer > 1.2f) attack(target);
+            if (isAttacking && attackTimer > 0.4f) attack(target);
 
             setIsAttacking(false);
             attackTimer = 0;
@@ -109,7 +109,7 @@ void DogEnemy::update(float dt){
     }
 
     if (getPosition().getY() > 1500.f)
-        eliminate();
+        neutralize();
 
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
@@ -123,5 +123,5 @@ void DogEnemy::saveEntity(std::ofstream& out) const{
     getVelocity().getX() << " " <<
     getVelocity().getY() << " " <<
     isFacingLeft << " " <<
-    life;
+    life << "\n";
 }

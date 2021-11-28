@@ -41,7 +41,7 @@ void SmokerEnemy::attack(Character* pChar) {
         }
         //std::cout << "Fumaceou" << std::endl << " Vida player: " << pChar->getLife() << std::endl;
     } else {
-        pChar->eliminate();
+        pChar->neutralize();
         std::cout << "Player Eliminado" << std::endl;
     }
 
@@ -65,10 +65,8 @@ void SmokerEnemy::update(float dt){
 
     chooseTarget();
 
-    // Vai ficar andando ou parado? Seta o movimento que vai fazer
     (isCommitted) ? walk(dt): idle();
 
-    // Vai morder?
     if (target) {
         if (getTargetDist() < 55.f && attackTimer < 0.5f) {
             attackTimer += dt;
@@ -100,7 +98,7 @@ void SmokerEnemy::update(float dt){
     }
 
     if (getPosition().getY() > 1500.f)
-        eliminate();
+        neutralize();
 
 
     setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
@@ -114,5 +112,5 @@ void SmokerEnemy::saveEntity(std::ofstream& out) const{
     getVelocity().getX() << " " <<
     getVelocity().getY() << " " <<
     isFacingLeft<< " " <<
-    life;
+    life << "\n";
 }

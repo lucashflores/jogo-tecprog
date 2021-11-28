@@ -13,8 +13,6 @@ namespace Entities {
     class DogEnemy : public Enemy {
     private:
 
-        float idleTimer;
-
     public:
         DogEnemy(Coordinates::Vector<float> pos);
 

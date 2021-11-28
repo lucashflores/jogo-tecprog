@@ -10,7 +10,10 @@ TileCollisionDealer::~TileCollisionDealer() {}
 void TileCollisionDealer::groundCollision(Entities::Entity *pE1, Entities::Entity *pE2, Coordinates::Vector<float> collision) {
     Entities::Character* pC1 =  static_cast<Entities::Character*>(pE1);
     pC1->setIsOnGround(true);
-    pC1->setVelocityCoefficient(1.f);
+    if (pE2->getId() == Id::oilTile)
+        pC1->setVelocityCoefficient(1.2f);
+    else
+        pC1->setVelocityCoefficient(1.f);
     pC1->setPosition(Coordinates::Vector<float>(pC1->getPosition().getX(), pC1->getPosition().getY() - collision.getY()));
 
 }

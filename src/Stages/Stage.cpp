@@ -107,15 +107,17 @@ void Stage::removedNeutralizedEntities() {
         pE = entityList->operator[](i);
         if (pE) {
             if (!pE->getIsAlive()) {
-                if (pE->getId() == Id::smoker) {
-                    setScore(getScore() + 100);
-                }
-                else if (pE->getId() == Id::dog) {
-                    setScore(getScore() + 250);
-                }
-                else if (pE->getId() == Id::punk) {
-                    setScore(getScore() + 1000);
-                    setIsStageDone(true);
+                if (static_cast<Entities::Character*>(pE)->getLife() == 0) {
+                    if (pE->getId() == Id::smoker) {
+                        setScore(getScore() + 100);
+                    }
+                    else if (pE->getId() == Id::dog) {
+                        setScore(getScore() + 250);
+                    }
+                    else if (pE->getId() == Id::punk) {
+                        setScore(getScore() + 1000);
+                        setIsStageDone(true);
+                    }
                 }
                 entityList->removeAndDeleteEntity(pE);
             }
