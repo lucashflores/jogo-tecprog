@@ -15,8 +15,9 @@ namespace Menus {
         static void setFont(sf::Font* f);
         Coordinates::Vector<float> getPosition() const;
         void setPosition(Coordinates::Vector<float> position);
+        void changeColorToLightWhite();
         void changeColorToWhite();
-        void changeColorToRed();
+        void changeColorToGrey();
         void setText(std::string t);
         void setSize(unsigned int s);
         void render();

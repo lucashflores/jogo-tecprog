@@ -2,8 +2,8 @@
 using namespace Menus;
 
 LeaderBoardMenu::LeaderBoardMenu(): Menu(), leaderBoard(), rankLines(), nameLines(), scoreLines() {
-    title =  new Text(Coordinates::Vector<float>(640.f, 50.f), "LEADERBOARD");
-    title->setSize(60);
+    menuTitle =  new Text(Coordinates::Vector<float>(640.f, 50.f), "LEADERBOARD");
+    menuTitle->setSize(60);
 
     rankTitle = new Text(Coordinates::Vector<float>(384.f, 150.f), "RANK");
     rankTitle->setSize(40);
@@ -116,7 +116,7 @@ void LeaderBoardMenu::renderTitle() {
     rankTitle->render();
     scoreTitle->render();
     nameTitle->render();
-    title->render();
+    menuTitle->render();
 }
 
 void LeaderBoardMenu::resetMapAndVectors() {

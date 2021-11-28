@@ -3,13 +3,13 @@ using namespace Menus;
 
 
 Button::Button(Coordinates::Vector<float> pos, std::string t): Ent(Id::button), text() {
-    pGraphicM = Managers::GraphicManager::getInstance();
     selected = false;
     initializeSprite();
     sprite->changePosition(pos);
     Text::setFont(pGraphicM->loadFont(FONT_PATH));
     text = NULL;
-    text = new Text(Coordinates::Vector<float>(pos.getX(), pos.getY() - 15.f), t);
+    text = new Text(Coordinates::Vector<float>(pos.getX(), pos.getY() - 14.5f), t);
+    text->changeColorToGrey();
 }
 Button::~Button() {
     if (text)
@@ -38,7 +38,7 @@ void Button::render() {
 
 void Button::update() {
     if (getSelected())
-        text->changeColorToRed();
+        text->changeColorToLightWhite();
     else
-        text->changeColorToWhite();
+        text->changeColorToGrey();
 }

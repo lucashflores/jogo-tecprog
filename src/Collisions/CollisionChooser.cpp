@@ -22,10 +22,10 @@ void CollisionChooser::collisionChooser(Entities::Entity* pE1, Entities::Entity*
 {
     if (pE1->getId() == pE2->getId())
         return;
-    else if ( pE2->getId() == Id::tile1 || pE2->getId() == Id::tile2 ) {
+    else if ( pE2->getId() == Id::tile1 || pE2->getId() == Id::tile2 ||  pE2->getId() == Id::oilTile) {
         tileCollisionManager->doCollision(pE1, pE2, collision);
     }
-    else if ( ((int)pE2->getId() >= 300) && ((int)(pE2->getId()) <= 600) ){
+    else if ( ((int)pE2->getId() >= 400) && ((int)(pE2->getId()) <= 600) ){
         obstacleCollisionManager->doCollision(pE1, pE2, collision);
     }
     else if( ((int)pE2->getId() >= 1) && ((int)(pE2->getId()) <= 99) ){

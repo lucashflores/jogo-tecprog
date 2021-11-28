@@ -14,6 +14,7 @@ void EntityCollisionDealer::playerCollision(Entities::Entity *pE1, Entities::Ent
     else
         pE1->setPosition(Coordinates::Vector<float>(pE1->getPosition().getX() - collision.getX(), pE1->getPosition().getY()));
 
+
     if (pE1->getId() == Id::projectile)
         pE1->eliminate();
 }

@@ -42,12 +42,16 @@ void Text::setPosition(Coordinates::Vector<float> position) {
     text->setPosition(position.getX(), position.getY());
 }
 
-void Text::changeColorToWhite() {
-    text->setFillColor(sf::Color::White);
+void Text::changeColorToGrey() {
+    text->setFillColor(sf::Color(22, 22, 28, 255));
 }
 
-void Text::changeColorToRed() {
-    text->setFillColor(sf::Color::Red);
+void Text::changeColorToLightWhite() {
+    text->setFillColor(sf::Color(175, 175, 189, 255));
+}
+
+void Text::changeColorToWhite() {
+    text->setFillColor(sf::Color::White);
 }
 
 void Text::setText(std::string t) {
