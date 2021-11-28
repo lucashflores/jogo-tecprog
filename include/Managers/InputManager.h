@@ -17,6 +17,7 @@ namespace Managers {
         InputManager();
 
         static InputManager *instance;
+
     public:
         ~InputManager();
 

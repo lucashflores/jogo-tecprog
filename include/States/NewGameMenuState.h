@@ -13,9 +13,7 @@ namespace States {
         GameStateMachine* pGameStateMachine;
     public:
         NewGameMenuState(GameStateMachine* pGM);
-
         ~NewGameMenuState();
-
         void createButtons();
         void update(float dt);
         void render();

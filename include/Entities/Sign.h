@@ -10,10 +10,6 @@ namespace Entities {
 
         void initializeSprite();
 
-        void save();
-
-        void restore();
-
         void saveEntity(std::ofstream& out) const;
     };
 }

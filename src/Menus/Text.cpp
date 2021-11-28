@@ -19,8 +19,6 @@ Text::Text(Coordinates::Vector<float> position, std::string t) {
     sf::FloatRect textRect = text->getLocalBounds();
     text->setOrigin(textRect.left + textRect.width/2.0f,textRect.top  + textRect.height/2.0f);
 
-
-
     changeColorToOffWhite();
 }
 
@@ -47,10 +45,6 @@ void Text::setPosition(Coordinates::Vector<float> position) {
 
 void Text::changeColorToGray() {
     text->setFillColor(sf::Color(22, 22, 28, 255));
-}
-
-void Text::changeColorToLightWhite() {
-    text->setFillColor(sf::Color(175, 175, 189, 255));
 }
 
 void Text::changeColorToWhite() {
