@@ -32,8 +32,10 @@ void EndGameMenuState::render() {
 
 void EndGameMenuState::reset() {
     if (pGameStateMachine->getStage()) {
-        if (pGameStateMachine->getStage()->getIsStageDone())
+        if (pGameStateMachine->getStage()->getIsStageDone()) {
             menuTitle->setText("VICTORY");
+            menuTitle->centralize();
+        }
         else
             menuTitle->setText("GAME OVER");
     }
