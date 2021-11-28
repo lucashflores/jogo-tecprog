@@ -25,7 +25,7 @@ unsigned int Entity::getDamage() const {
     return damage;
 }
 
-void Entity::eliminate() {
+void Entity::neutralize() {
     isAlive = false;
 }
 

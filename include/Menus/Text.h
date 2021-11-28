@@ -17,7 +17,9 @@ namespace Menus {
         void setPosition(Coordinates::Vector<float> position);
         void changeColorToLightWhite();
         void changeColorToWhite();
-        void changeColorToGrey();
+        void changeColorToRed();
+        void changeColorToOffWhite();
+        void changeColorToGray();
         void setText(std::string t);
         void setSize(unsigned int s);
         void render();

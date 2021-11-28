@@ -28,7 +28,7 @@ std::string TextInput::getCurrentText() const {
 }
 
 void TextInput::initializeSprite() {
-    Coordinates::Vector<float> size = Coordinates::Vector<float>(500.f ,100.f);
+    Coordinates::Vector<float> size = Coordinates::Vector<float>(500.f ,80.f);
     Coordinates::Vector<unsigned int> imageCnt = Coordinates::Vector<unsigned int>(1, 1);
     sprite = new Animation(BUTTON_PATH, size, imageCnt, 1.f);
 }

@@ -12,19 +12,19 @@ MainMenuState::~MainMenuState() {
 
 void MainMenuState::createButtons() {
     Menus::Button* b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(200.f, 200.f), "New Game");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 120.f), "New Game");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(200.f, 300.f), "Stage2");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 250.f), "Stage2");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(200.f, 400.f), "Load Game");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 370.f), "Load Game");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(200.f, 500.f), "Leaderboard");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 490.f), "Leaderboard");
     buttons.push_back(b);
     b = NULL;
-    b = new Menus::Button(Coordinates::Vector<float>(200.f, 600.f), "Exit");
+    b = new Menus::Button(Coordinates::Vector<float>(200.f, 610.f), "Exit");
     buttons.push_back(b);
     b = NULL;
 }

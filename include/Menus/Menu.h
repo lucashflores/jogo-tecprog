@@ -2,10 +2,9 @@
 #include "Button.h"
 #include "Background.h"
 #include "MenuControl.h"
+#include "Text.h"
 
 #include <vector>
-
-#define MENU_BACKGROUND "../assets/background.png"
 
 namespace Menus {
 

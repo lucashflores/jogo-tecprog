@@ -31,7 +31,7 @@ namespace Entities {
 
         unsigned int getDamage() const;
 
-        virtual void eliminate();
+        virtual void neutralize();
 
         bool getIsAlive();
 

@@ -29,9 +29,9 @@ namespace Entities {
 
         Coordinates::Vector<float> getVelocity() const;
 
-        void eliminate();
+        void neutralize();
 
-        void setLife(unsigned int l);
+        void setLife(int l);
 
         int getLife() const;
 
@@ -44,6 +44,10 @@ namespace Entities {
         void setIsAttacking(bool attacking);
 
         bool getIsAttacking();
+
+        void setAttackTimer(float time);
+
+        float getAttackTimer();
 
         virtual void attack(Character* pChar) = 0;
 
