@@ -6,6 +6,7 @@ Stage(pEL, player1, player2)
 {
     background = new Background(Id::background2);
     Coordinates::Vector<float> initialPos = Coordinates::Vector<float>(INITIALPOS_X, INITIALPOST_Y);
+    isStageDone = false;
 }
 
 Stage2::~Stage2() {
