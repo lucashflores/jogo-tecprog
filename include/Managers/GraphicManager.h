@@ -12,6 +12,7 @@ namespace Managers {
 
         static GraphicManager *instance;
 
+    private:
         GraphicManager();
 
     public:

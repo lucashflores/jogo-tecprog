@@ -9,7 +9,7 @@ Button::Button(Coordinates::Vector<float> pos, std::string t): Ent(Id::button), 
     Text::setFont(pGraphicM->loadFont(FONT_PATH));
     text = NULL;
     text = new Text(Coordinates::Vector<float>(pos.getX(), pos.getY() - 14.5f), t);
-    text->changeColorToGrey();
+    text->changeColorToGray();
 }
 Button::~Button() {
     if (text)

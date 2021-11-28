@@ -20,8 +20,6 @@ namespace States {
         void render();
         void reset();
         void exec();
-        void createButtons();
-        void select();
         void back();
     };
 }
