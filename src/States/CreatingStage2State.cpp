@@ -1,5 +1,6 @@
 #include "States/GameStateMachine.h"
 using namespace States;
+#include "Concurrent/BossThread.h"
 
 CreatingStage2State::CreatingStage2State(GameStateMachine* pGM) {
     if (pGM)
@@ -33,6 +34,8 @@ void CreatingStage2State::exec() {
     if (pGameStateMachine->getTwoPlayers())
         pGameStateMachine->getPLayer2()->setPosition(Coordinates::Vector<float>(INITIALPOS_X, INITIALPOST_Y));
     pGameStateMachine->setStage(stage);
+    Concurrent::BossThread::unlock();
+
     changeState("PlayingState");
 }
 

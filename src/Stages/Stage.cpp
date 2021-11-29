@@ -1,5 +1,6 @@
 #include "Stages/Stage.h"
 using namespace Stages;
+#include "Concurrent/BossThread.h"
 
 Stage::Stage(EntityList *pEL):
 pGraphicManager(Managers::GraphicManager::getInstance()),
@@ -83,10 +84,13 @@ void Stage::collideEntities() {
 }
 
 void Stage::exec(float dt) {
+
+    Concurrent::BossThread::lock();
     pGraphicManager->setViewSize(Coordinates::Vector<float>(640.f, 480.f));
     removedNeutralizedEntities();
     updateEntities(dt);
     collideEntities();
+    Concurrent::BossThread::unlock();
     renderEntities();
     if (player2) {
         if (player1->getPosition().getX() >= 2650.f && player2->getPosition().getX() >= 2650.f)
@@ -98,10 +102,10 @@ void Stage::exec(float dt) {
         }
     }
 
-
 }
 
 void Stage::removedNeutralizedEntities() {
+
     Entities::Entity* pE = NULL;
     for (int i = 0; i < entityList->getSize(); i++) {
         pE = entityList->operator[](i);
@@ -115,6 +119,8 @@ void Stage::removedNeutralizedEntities() {
                         setScore(getScore() + 250);
                     }
                     else if (pE->getId() == Id::punk) {
+                        dynamic_cast<Concurrent::BossThread*>(pE)->stop();
+                        dynamic_cast<Concurrent::BossThread*>(pE)->join();
                         setScore(getScore() + 1000);
                         setIsStageDone(true);
                     }
@@ -123,6 +129,7 @@ void Stage::removedNeutralizedEntities() {
             }
         }
     }
+
 }
 
 void Stage::save() {
