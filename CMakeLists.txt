@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.20)
 project(jogo-tecprog)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -12,9 +12,10 @@ include_directories (include c:/SFML/include cmake_modules)
 set(SFML_ROOT c:/SFML)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 find_package(SFML REQUIRED system window graphics network audio)
+
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(jogo ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+    target_link_libraries(jogo ${SFML_LIBRARIES} ${SFML_DEPENDENCIES} -lpthread)
 endif()
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

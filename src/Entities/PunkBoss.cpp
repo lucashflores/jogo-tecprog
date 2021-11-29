@@ -31,8 +31,6 @@ void Entities::PunkBoss::attack(Character* pChar) {
     if(projectileMaker){
         projectileMaker->makeProjectile((this->position - offset), this->isFacingLeft);
     }
-    //Entities::Projectile* attackProjectile = new Entities::Projectile((this->position - offset), this->isFacingLeft);
-    //this->bossEntityList->addEntity(attackProjectile);
 
 }
 
@@ -53,37 +51,17 @@ void Entities::PunkBoss::update(float dt) {
 
     chooseTarget();
 
-    // Vai ficar andando ou parado? Seta o movimento que vai fazer
-    (isCommitted) ? idle(dt) : idle(dt);
+    idle(dt);
 
-    //attack(target);
-
-    /* Vai morder?
-
-    if (getTargetDist() < view_range) {
-        if (attackTimer < 1.2f){
-            attackTimer = attackTimer + dt;
-            setIsAttacking(true);
-        }
-    } else {
-        if(isAttacking) attack(target);
-        setIsAttacking(false);
-        attackTimer = 0;
-    }
-    //*/
-
-    //
     if (getTargetDist() < view_range && attackTimer < 1.8f) {
         attackTimer = attackTimer + dt;
         if(attackTimer > 0.2f)
             setIsAttacking(true);
     } else {
-        if(isAttacking && attackTimer > 1.2f) attack(target);
+        if (isAttacking && attackTimer > 1.2f) attack(target);
         setIsAttacking(false);
         attackTimer = 0;
     }
-    //*/
-
 
     if (isAttacking) {
         sprite->animationUpdate(2, isFacingLeft, dt);
@@ -96,19 +74,22 @@ void Entities::PunkBoss::update(float dt) {
         velocity.setX(velocity.getX() * 0.2f);
     }
 
-    if (!isOnGround)
+    /*if (!isOnGround)
         velocity.setY(getVelocity().getY() + (GRAVITY * dt));
     else {
         velocity.setY(0.f);
         setIsOnGround(false);
-    }
+    }*/
 
-    if (getPosition().getY() > 1500.f)
-        neutralize();
+    /*if (getPosition().getY() > 1500.f)
+        neutralize();*/
 
 
-    setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
+    //setPosition(Coordinates::Vector<float>(getPosition().getX() + getVelocity().getX()*dt, getPosition().getY() + getVelocity().getY()*dt));
     sprite->changePosition(position);
+    //printf("posicao Y: %f\n", getPosition().getY());
+
+
 }
 
 void PunkBoss::saveEntity(std::ofstream& out) const{

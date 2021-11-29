@@ -1,5 +1,6 @@
 #include "Managers/CollisionManager.h"
 using namespace Managers;
+#include "Concurrent/BossThread.h"
 
 CollisionManager* CollisionManager::instance = NULL;
 
@@ -25,6 +26,7 @@ void CollisionManager::setEntityList(EntityList *pEL) {
 }
 
 void CollisionManager::collideAllEntities() {
+
     Entities::Entity* pE = NULL;
     Entities::Entity* pE2 = NULL;
     int size = pEntityList->getSize();
@@ -55,4 +57,5 @@ void CollisionManager::collideAllEntities() {
             pE2 = NULL;
         }
     }
+
 }

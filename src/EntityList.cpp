@@ -1,5 +1,5 @@
 #include "EntityList.h"
-
+#include "Concurrent/BossThread.h"
 
 EntityList::EntityList(): entityList() {
 }
@@ -31,6 +31,7 @@ Entities::Entity* EntityList::operator[](int pos) {
 }
 
 void EntityList::renderAllEntities() {
+
     Entities::Entity* pE = NULL;
     int size = getSize();
     for (int i = size-1; i >= 0; i--) {
@@ -39,14 +40,17 @@ void EntityList::renderAllEntities() {
         pE = NULL;
     }
     pE = NULL;
+
 }
 
 
 void EntityList::updateAllEntities(float dt) {
+
+
     Entities::Entity* pE = NULL;
     int size = getSize();
     for (int i = 0; i < size; i++) {
-        if(entityList[i]->getIsAlive()) {
+        if (entityList[i]->getIsAlive()) {
             pE = entityList[i];
             pE->update(dt);
             pE = NULL;
