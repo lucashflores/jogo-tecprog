@@ -4,7 +4,7 @@ using namespace Entities;
 #include <iostream>
 
 Player::Player(bool isPlayerOne) :
-        Character(isPlayerOne ? Id::player1 : Id::player2, 50, 7,
+        Character(isPlayerOne ? Id::player1 : Id::player2, 55, 8,
                   Coordinates::Vector<float>(16.f, 32.f),
                   Coordinates::Vector<float>(150.f, 950.f)) {
     enemyNearby = NULL;
@@ -42,28 +42,16 @@ void Player::jump() {
 
 void Player::attack(Character* pChar) {
 
-    int flag = 0;
+    bool readyToAttack = false;
 
-    /* if (attackTimer < 0.5f) {
-        attackTimer = attackTimer + 0.01;
-        if (attackTimer > 0.2f)
-            isAttacking = true;
-    } else {
-        if (isAttacking && attackTimer > 0.5f)
-            flag = 1;
-
-        isAttacking = false;
-        attackTimer = 0.f;
-    } */
     if (attackTimer > 0.5f) {
         attackTimer = 0.0f;
-        flag = 1;
+        readyToAttack = true;
     }
 
-    if (pChar && flag) {
+    if (pChar && readyToAttack) {
         if ((pChar->getLife() - damage) > 0) {
             pChar->setLife(pChar->getLife() - damage);
-            std::cout << "aaaPlayer deu dano!   Vida inimigo: " << pChar->getLife() << std::endl;
         }
     }
 
@@ -136,6 +124,6 @@ void Player::update(float dt) {
 
 void Player::reset() {
     isAlive = true;
-    setLife(50);
+    setLife(55);
     setPosition(Coordinates::Vector<float>(150.f, 950.f));
 }

@@ -5,7 +5,7 @@ using namespace Entities;
 #include <iostream>
 
 DogEnemy::DogEnemy(Coordinates::Vector<float> pos)
-    : Enemy(Id::dog, 20, 5, Coordinates::Vector<float>(23.0f, 23.0f), pos, 270.0) {
+    : Enemy(Id::dog, 15, 4, Coordinates::Vector<float>(23.0f, 23.0f), pos, 270.0) {
     initializeSprite();
     attackTimer = 0;
     isAttacking = false;

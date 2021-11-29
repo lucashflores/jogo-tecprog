@@ -5,7 +5,7 @@
 using namespace Entities;
 
 PunkBoss::PunkBoss(Coordinates::Vector<float> pos)
-    : Enemy(Id::punk, 20, 5, Coordinates::Vector<float>(32.0f, 64.0f), pos, 600.0) {
+    : Enemy(Id::punk, 25, 5, Coordinates::Vector<float>(32.0f, 64.0f), pos, 600.0) {
     initializeSprite();
     attackTimer = 0;
     isAttacking = false;
