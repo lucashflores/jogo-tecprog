@@ -1,7 +1,9 @@
 #include "Stages/ProjectileMaker.h"
 using namespace Stages;
 
-ProjectileMaker::ProjectileMaker() {}
+ProjectileMaker::ProjectileMaker() {
+
+}
 
 ProjectileMaker::ProjectileMaker(EntityList* pEL) {
     if (pEL)

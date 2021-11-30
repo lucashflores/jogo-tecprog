@@ -213,7 +213,10 @@ void StageLoader::makeEnemies(EntityList* pEL, Entities::Player* player1, Entiti
         enemy = static_cast<Entities::Enemy*>(enemyMaker->makeDogEnemy(position));
     else if (static_cast<Id::ids>(std::stoi(command)) == Id::punk) {
         punk = enemyMaker->makeBoss(position);
-        //punk->setProjectileMaker();
+        if(!projectileMaker)
+            projectileMaker = new ProjectileMaker(pEL);
+
+        punk->setProjectileMaker(projectileMaker);
         enemy = static_cast<Entities::Enemy*>(punk);
     }
     else
@@ -237,7 +240,9 @@ void StageLoader::makeEnemies(EntityList* pEL, Entities::Player* player1, Entiti
 }
 
 void StageLoader::makeProjectiles(EntityList *pEL) {
-    projectileMaker = new ProjectileMaker(pEL);
+    if(!projectileMaker)
+        projectileMaker = new ProjectileMaker(pEL);
+
     std::string command = commands[0];
     float positionX = std::stof(commands[1]);
     float positionY = std::stof(commands[2]);
